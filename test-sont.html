@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Test Son Vivario</title>
+  <style>
+    body{font-family:system-ui, sans-serif; padding:16px; background:#0b1220; color:#fff}
+    .box{padding:14px;border:1px solid rgba(255,255,255,.15);border-radius:14px;background:rgba(255,255,255,.06);max-width:560px}
+    button{padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff}
+    .bar{height:12px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:10px}
+    .fill{height:100%;width:0%;background:rgba(120,160,255,.85)}
+    .muted{opacity:.75}
+    audio{width:100%; margin-top:12px}
+    code{background:rgba(0,0,0,.35);padding:2px 6px;border-radius:8px}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Test audio Vivario</h2>
+    <p class="muted">Ce test affiche si le fichier contient du son (amplitude), même si tu n’entends rien.</p>
+
+    <button id="go">▶️ Démarrer le test</button>
+
+    <div class="bar"><div id="fill" class="fill"></div></div>
+    <p id="status" class="muted">En attente…</p>
+
+    <audio id="a" controls src="ambiance.mp3"></audio>
+
+    <p class="muted">
+      Si la barre bouge = le fichier contient du son.<br>
+      Si la barre reste à 0% = le fichier est silencieux/illisible.
+    </p>
+  </div>
+
+  <script>
+    const btn = document.getElementById("go");
+    const a = document.getElementById("a");
+    const fill = document.getElementById("fill");
+    const status = document.getElementById("status");
+
+    let ctx, analyser, src, data, raf;
+
+    function stopMeter(){
+      if (raf) cancelAnimationFrame(raf);
+      raf = null;
+    }
+
+    function meter(){
+      analyser.getByteTimeDomainData(data);
+      // calcul amplitude simple (écart moyen)
+      let sum = 0;
+      for (let i=0;i<data.length;i++){
+        const v = (data[i] - 128) / 128; // -1..1
+        sum += Math.abs(v);
+      }
+      const amp = sum / data.length;       // 0..~1
+      const pct = Math.min(100, Math.round(amp * 220)); // échelle empirique
+      fill.style.width = pct + "%";
+      status.textContent = `Amplitude détectée : ${pct}% — ` + (pct > 2 ? "✅ signal présent" : "⚠️ quasi silencieux");
+      raf = requestAnimationFrame(meter);
+    }
+
+    btn.addEventListener("click", async () => {
+      try{
+        a.muted = false;
+        a.volume = 1.0;
+        await a.play();
+
+        ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+        await ctx.resume();
+
+        analyser = analyser || ctx.createAnalyser();
+        analyser.fftSize = 1024;
+
+        src = src || ctx.createMediaElementSource(a);
+        src.connect(analyser);
+        analyser.connect(ctx.destination);
+
+        data = data || new Uint8Array(analyser.fftSize);
+        stopMeter();
+        meter();
+      }catch(e){
+        status.textContent = "❌ Erreur: " + (e?.message || e);
+      }
+    });
+  </script>
+</body>
+</html>
