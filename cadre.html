@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vivario — Le cadre</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="soundToggle" type="button" aria-label="Activer ou couper l'ambiance sonore">🔇</button>
+  <div id="soundHint">Ambiance : OFF</div>
+
+  <div class="wrap">
+    <div class="top">
+      <div class="brand" aria-hidden="true">
+        <svg width="160" height="70" viewBox="0 0 240 110" xmlns="http://www.w3.org/2000/svg">
+          <text x="120" y="62" text-anchor="middle" font-size="44"
+                font-family="system-ui,-apple-system,Segoe UI,Roboto,Ubuntu"
+                font-weight="650" fill="#6FA8C6">Vivario</text>
+          <path d="M52 82 C84 72, 156 92, 188 82" fill="none"
+                stroke="#6FA8C6" stroke-width="3" stroke-linecap="round" opacity="0.72"/>
+        </svg>
+      </div>
+      <div class="pill">Le cadre</div>
+    </div>
+
+    <div class="card">
+      <h2>Le cadre de Vivario</h2>
+      <p class="small">
+        Vivario n’est pas là pour vous pousser. Il est là pour vous aider à voir clair, sans jugement.
+      </p>
+
+      <div class="sep"></div>
+
+      <div class="options">
+        <div class="opt"><div>✅ Vivario ne donne pas de conseils. Il propose des lectures possibles.</div></div>
+        <div class="opt"><div>✅ Vous pouvez répondre même si c’est flou. Il n’y a pas de bonne réponse.</div></div>
+        <div class="opt"><div>✅ Rien n’est enregistré. Aucune donnée personnelle n’est collectée.</div></div>
+        <div class="opt"><div class="small">En cas de danger immédiat, contactez les services d’urgence de votre pays.</div></div>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+        <a class="btn ghost" href="accueil.html">Retour</a>
+        <a class="btn primary" href="questionnaire.html">Commencer</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

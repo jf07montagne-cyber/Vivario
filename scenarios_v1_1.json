@@ -1,0 +1,256 @@
+{
+  "version": "vivario-1.1",
+  "language": "fr",
+  "meta": {
+    "max_sentences": 9,
+    "min_sentences": 6,
+    "notes": "Bibliothèque modulaire + 6 scénarios racines finalisés. L'assembleur choisit 1 racine dominante via Q4, ajoute modules thèmes (Q2), vécu (Q3), besoin (Q5), énergie (Q6), puis clôture. Si Q7=stop ou pas_aide => scénario 'sortie'."
+  },
+
+  "closing": [
+    "Merci d’avoir pris ce temps.",
+    "Tu peux rester avec ce qui a émergé, ou revenir plus tard. Vivario respecte ton rythme."
+  ],
+
+  "modules": {
+    "openings": {
+      "stable": [
+        "Le fait de prendre ce temps montre une attention particulière à toi-même.",
+        "Même quand tout va globalement bien, faire le point peut avoir du sens."
+      ],
+      "neutre": [
+        "Ne pas savoir exactement comment on va est déjà une information en soi.",
+        "Le simple fait d’être ici peut déjà être une manière de se recentrer."
+      ],
+      "flou": [
+        "Ne pas réussir à y voir clair peut être déstabilisant.",
+        "Le flou n’est pas un vide : c’est souvent un moment où plusieurs choses se superposent."
+      ],
+      "charge": [
+        "Ce que tu traverses semble demander de l’espace et de la considération.",
+        "Porter beaucoup de choses en même temps peut devenir lourd, même sans crise visible."
+      ],
+      "indetermine": [
+        "Parfois, le plus honnête est simplement de reconnaître qu’on ne sait pas.",
+        "On peut avancer sans tout nommer, en respectant ce qui est là."
+      ]
+    },
+
+    "themes": {
+      "travail": [
+        "Les exigences professionnelles peuvent prendre plus de place qu’on ne le réalise.",
+        "Quand le rythme extérieur s’impose, il devient difficile de souffler vraiment."
+      ],
+      "finances": [
+        "L’incertitude financière agit souvent en arrière-plan, sans jamais vraiment se taire.",
+        "La pression matérielle peut peser même quand on essaie de rester solide."
+      ],
+      "couple": [
+        "Les relations proches peuvent être à la fois un appui et une source de tension.",
+        "Quand quelque chose se joue dans le couple, cela peut colorer le reste de la vie."
+      ],
+      "famille": [
+        "Les enjeux familiaux peuvent réveiller beaucoup de choses, parfois sans bruit.",
+        "Certaines dynamiques familiales prennent de la place même quand on n’en parle pas."
+      ],
+      "enfants": [
+        "La parentalité mobilise une énergie constante, souvent sans pause réelle.",
+        "Porter la charge parentale peut laisser peu d’espace pour soi."
+      ],
+      "amis": [
+        "Se sentir seul ou peu soutenu peut rendre tout le reste plus lourd.",
+        "Le besoin de lien peut être discret, mais profondément important."
+      ],
+      "sante": [
+        "Les préoccupations liées à la santé mobilisent souvent beaucoup d’énergie intérieure.",
+        "Quand le corps ou la santé inquiètent, l’esprit reste rarement totalement au repos."
+      ],
+      "addiction": [
+        "Composer avec une habitude difficile est souvent un combat silencieux.",
+        "Entre contrôle, envie et culpabilité, on peut se sentir seul face à soi-même."
+      ],
+      "evenement": [
+        "Un événement marquant peut laisser des traces, même quand on continue à avancer.",
+        "Certaines transitions ou pertes demandent du temps pour se déposer."
+      ],
+      "multiple": [
+        "Quand plusieurs sujets se mélangent, il devient difficile de savoir par où commencer.",
+        "L’accumulation peut rendre tout plus bruyant à l’intérieur."
+      ],
+      "rien_de_precis": [
+        "Parfois, on ne vient pas parce que ça va mal, mais parce qu’on veut simplement se situer.",
+        "Faire le point peut être une façon douce de se respecter."
+      ],
+      "preferer_pas": [
+        "Tu as le droit de garder certaines choses pour toi.",
+        "Ne pas préciser n’enlève rien à ce que tu ressens."
+      ]
+    },
+
+    "vecu": {
+      "melange": [
+        "Quand tout se mélange, il devient difficile de savoir par où commencer.",
+        "Le flou peut augmenter la fatigue, même sans problème précis."
+      ],
+      "porter_seul": [
+        "Garder les choses pour soi demande parfois plus d’énergie qu’on ne le pense.",
+        "On peut porter beaucoup en silence, sans que cela se voie."
+      ],
+      "fatigue": [
+        "La fatigue accumulée peut rendre chaque chose plus lourde qu’avant.",
+        "Quand on est fatigué(e), tout demande plus d’effort, même le simple fait de réfléchir."
+      ],
+      "tenir_coute": [
+        "Tenir dans la durée peut fatiguer, même quand on y arrive.",
+        "Ce qui coûte n’est pas toujours la situation, mais l’effort intérieur constant."
+      ],
+      "mots_difficiles": [
+        "Avoir du mal à mettre des mots arrive souvent quand trop de choses se superposent.",
+        "Parfois les mots reviennent plus tard, quand la pression baisse un peu."
+      ],
+      "rien": [
+        "Il est possible que rien ne se détache nettement aujourd’hui, et c’est acceptable.",
+        "Parfois, le simple fait d’être là suffit."
+      ]
+    },
+
+    "needs": {
+      "mots": [
+        "Mettre des mots, même simples, peut déjà alléger ce qui pèse.",
+        "Nommer une partie de ce que l’on vit aide parfois à retrouver un peu d’air."
+      ],
+      "comprendre": [
+        "Comprendre n’est pas forcément trouver une solution : c’est parfois juste situer ce qui est là.",
+        "Clarifier peut être une forme de repos pour l’esprit."
+      ],
+      "moins_seul": [
+        "Se sentir moins seul(e) avec ce que l’on vit compte plus qu’on ne le croit.",
+        "Être reconnu(e) dans ce que l’on traverse peut déjà apaiser."
+      ],
+      "normaliser": [
+        "Le fait que plusieurs émotions ou sujets se mélangent est normal : la vie n’est pas linéaire.",
+        "Ce que tu ressens a le droit d’exister tel quel, sans être jugé."
+      ],
+      "recul": [
+        "Prendre du recul n’efface rien : cela permet parfois de respirer autrement.",
+        "S’accorder de la distance peut aider à retrouver un peu de stabilité."
+      ],
+      "presence": [
+        "Parfois, être simplement là, sans objectif, est déjà une forme de soin.",
+        "Tu n’as rien à prouver : ce moment peut rester simple."
+      ],
+      "indetermine": [
+        "Ne pas savoir ce qui aiderait est déjà une information : cela mérite de la douceur.",
+        "On peut avancer sans direction claire, juste en respectant le présent."
+      ]
+    },
+
+    "energy": {
+      "lecture": [
+        "Tu peux accueillir cela tranquillement, sans chercher à aller plus loin.",
+        "Aujourd’hui, lire suffit."
+      ],
+      "reflechir": [
+        "Prendre ce temps tranquillement est cohérent avec ton rythme actuel.",
+        "Tu peux laisser ces mots t’aider à mieux situer ce que tu vis."
+      ],
+      "parcourir": [
+        "Tu peux simplement parcourir, sans obligation d’approfondir.",
+        "Rester léger aujourd’hui est totalement acceptable."
+      ],
+      "faible": [
+        "Tu n’as rien à forcer aujourd’hui.",
+        "Se préserver peut être la chose la plus juste pour l’instant."
+      ],
+      "indetermine": [
+        "Tu peux avancer à ton rythme, même si ton énergie est difficile à situer.",
+        "L’essentiel est de respecter ce qui est possible aujourd’hui."
+      ]
+    }
+  },
+
+  "roots": {
+    "clarification": {
+      "id": "clarification",
+      "title": "Clarification douce",
+      "text": [
+        "Le fait de prendre ce temps montre une attention particulière à toi-même.",
+        "Même quand tout va globalement bien, s’arrêter un instant pour faire le point peut avoir du sens.",
+        "Ce que tu vis ne semble pas forcément urgent ni alarmant, mais suffisamment présent pour mériter d’être regardé.",
+        "Quand plusieurs choses coexistent — sans être lourdes — il est parfois utile de simplement les nommer, sans chercher à les résoudre.",
+        "Mettre des mots, même simples, permet souvent de mieux situer ce qui est là et ce qui ne l’est pas.",
+        "Cela peut aider à distinguer ce qui relève d’une vraie préoccupation de ce qui fait simplement partie du mouvement normal de la vie.",
+        "Tu n’as rien à changer ni à décider maintenant.",
+        "Le simple fait d’avoir pris ce moment peut déjà apporter un peu plus de clarté."
+      ]
+    },
+    "flou": {
+      "id": "flou",
+      "title": "Flou / confusion",
+      "text": [
+        "Ne pas réussir à y voir clair peut être déstabilisant.",
+        "Le flou donne parfois l’impression qu’il manque quelque chose, alors qu’en réalité, il y a simplement trop d’éléments présents en même temps.",
+        "Quand plusieurs sujets se croisent — pensées, responsabilités, émotions — il devient difficile de savoir par où commencer.",
+        "Ce n’est pas un manque de lucidité, mais souvent un signe de saturation douce.",
+        "Chercher à comprendre immédiatement n’est pas toujours nécessaire.",
+        "Prendre acte du flou, sans le forcer à se résoudre, peut déjà en réduire la pression.",
+        "Mettre des mots, même approximatifs, aide parfois à transformer ce flou en quelque chose de plus situé.",
+        "Pas pour trouver une réponse, mais pour reconnaître ce qui est réellement là."
+      ]
+    },
+    "fatigue": {
+      "id": "fatigue",
+      "title": "Fatigue accumulée",
+      "text": [
+        "Être fatigué(e) ne signifie pas être dépassé(e).",
+        "Cela signifie souvent que beaucoup de choses ont été portées, parfois longtemps, sans véritable pause.",
+        "La fatigue accumulée n’apparaît pas toujours comme un épuisement brutal.",
+        "Elle s’installe par couches successives, dans l’effort constant, l’adaptation, le fait de continuer malgré tout.",
+        "Quand cette fatigue est là, il devient plus difficile de faire la différence entre ce qui demande vraiment de l’attention et ce qui pourrait attendre.",
+        "Reconnaître cette fatigue n’est pas un aveu de faiblesse.",
+        "C’est souvent un signe de lucidité : celui de quelqu’un qui a beaucoup donné et qui commence à en ressentir le poids.",
+        "Tu n’as rien à régler ni à améliorer maintenant."
+      ]
+    },
+    "resilience": {
+      "id": "resilience",
+      "title": "Tenue / résilience",
+      "text": [
+        "Continuer à avancer quand tout n’est pas simple demande une forme de présence constante.",
+        "Ce n’est pas toujours visible de l’extérieur, mais cela mobilise une énergie réelle.",
+        "S’adapter, ajuster, trouver des équilibres provisoires fait partie de ce que tu sembles faire en ce moment.",
+        "Ce n’est ni héroïque ni banal : c’est simplement humain, et souvent exigeant.",
+        "La résilience ne consiste pas à tout supporter sans broncher.",
+        "Elle se manifeste aussi dans la capacité à reconnaître ce qui est tenable… et ce qui commence à peser.",
+        "Tu n’as rien à prouver ici.",
+        "Le fait de t’arrêter un instant pour regarder comment tu tiens est déjà une forme de justesse."
+      ]
+    },
+    "protection": {
+      "id": "protection",
+      "title": "Protection / retrait",
+      "text": [
+        "Se protéger n’est pas fuir.",
+        "C’est parfois la manière la plus juste de continuer à avancer sans s’abîmer davantage.",
+        "Quand l’envie de prendre du recul apparaît, ce n’est pas un refus de regarder les choses, mais souvent une façon de reconnaître que le rythme actuel demande trop.",
+        "Mettre une certaine distance, ralentir, ou simplement ne pas aller plus loin pour l’instant peut être une réponse saine à ce que tu vis.",
+        "Tu n’as rien à expliquer ici.",
+        "Le besoin de protection n’a pas besoin d’argument pour être légitime.",
+        "Tu peux t’arrêter là, sans perdre ce qui a été posé.",
+        "Revenir plus tard est aussi une manière de respecter ton propre rythme."
+      ]
+    },
+    "sortie": {
+      "id": "sortie",
+      "title": "Sortie neutre",
+      "text": [
+        "Vivario ne peut pas toujours aider, et c’est normal.",
+        "Le fait d’avoir pris ce temps reste valable, même si rien de particulier ne s’est dégagé pour toi aujourd’hui.",
+        "Tu n’as rien manqué, rien mal fait, et rien à poursuivre si tu n’en ressens pas le besoin.",
+        "Tu peux t’arrêter ici, ou revenir plus tard si les choses évoluent.",
+        "Merci d’être passé.",
+        "Vivario respecte ton rythme."
+      ]
+    }
+  }
+}

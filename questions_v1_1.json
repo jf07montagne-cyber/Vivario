@@ -1,0 +1,140 @@
+{
+  "version": "vivario-1.1",
+  "language": "fr",
+  "meta": {
+    "max_questions": 7,
+    "notes": "Questionnaire adaptatif. Q2 et Q4 sont multi. Q5 multi. Q6/Q7 single. Aucun choix de hiérarchisation demandé à l'utilisateur."
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "role": "tone",
+      "title": "Comment te sens-tu globalement en ce moment ?",
+      "subtitle": "Il n’y a pas de bonne ou de mauvaise réponse.",
+      "options": [
+        { "id": "stable", "label": "Plutôt bien, stable" },
+        { "id": "neutre", "label": "Neutre, sans trop savoir" },
+        { "id": "flou", "label": "Un peu perdu / confus" },
+        { "id": "charge", "label": "Chargé(e), fatigué(e) mentalement" },
+        { "id": "indetermine", "label": "Difficile à dire" }
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "role": "themes",
+      "title": "Qu’est-ce qui occupe le plus ton esprit ces temps-ci ?",
+      "subtitle": "Tu peux cocher plusieurs réponses.",
+      "options": [
+        { "id": "travail", "label": "Travail / études / pression de performance", "sensitive": false },
+        { "id": "finances", "label": "Finances / dettes / insécurité matérielle", "sensitive": true },
+        { "id": "couple", "label": "Couple / relation amoureuse", "sensitive": false },
+        { "id": "famille", "label": "Famille (parents, fratrie…)", "sensitive": false },
+        { "id": "enfants", "label": "Enfants / parentalité", "sensitive": true },
+        { "id": "amis", "label": "Amis / relations sociales / sentiment d’isolement", "sensitive": false },
+        { "id": "sante", "label": "Santé / douleurs / inquiétudes médicales", "sensitive": true },
+        { "id": "addiction", "label": "Addiction / habitude difficile à gérer", "sensitive": true },
+        { "id": "evenement", "label": "Deuil / séparation / événement récent", "sensitive": true },
+        { "id": "multiple", "label": "Plusieurs choses en même temps", "sensitive": false },
+        { "id": "rien_de_precis", "label": "Rien de précis, j’avais juste besoin de faire le point", "sensitive": false },
+        { "id": "preferer_pas", "label": "Je préfère ne pas préciser", "sensitive": false }
+      ],
+      "constraints": {
+        "min": 1,
+        "max": 6
+      }
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "role": "vecu",
+      "title": "Quand tu penses à tout ce que tu as coché, comment ça se manifeste surtout pour toi ?",
+      "subtitle": "Tu peux choisir une ou deux réponses.",
+      "options": [
+        { "id": "melange", "label": "J’ai l’impression que tout se mélange" },
+        { "id": "porter_seul", "label": "Je garde beaucoup de choses pour moi" },
+        { "id": "fatigue", "label": "Je me sens fatigué(e) par accumulation" },
+        { "id": "tenir_coute", "label": "Je gère, mais ça me coûte" },
+        { "id": "mots_difficiles", "label": "J’ai du mal à mettre des mots" },
+        { "id": "rien", "label": "Rien de tout ça précisément" }
+      ],
+      "constraints": {
+        "min": 1,
+        "max": 2
+      }
+    },
+    {
+      "id": "q4",
+      "type": "multi",
+      "role": "posture",
+      "title": "Face à tout cela, tu te situes plutôt…",
+      "subtitle": "Tu peux choisir une ou plusieurs réponses.",
+      "options": [
+        { "id": "effort", "label": "J’essaie de tenir malgré tout" },
+        { "id": "adaptation", "label": "Je fais ce que je peux avec ce que j’ai" },
+        { "id": "fatigue", "label": "Je me sens à bout par moments" },
+        { "id": "maximum", "label": "J’ai l’impression d’être au maximum" },
+        { "id": "confusion", "label": "J’ai du mal à y voir clair" },
+        { "id": "melange", "label": "Tout se mélange dans ma tête" },
+        { "id": "protection", "label": "J’essaie surtout de me préserver" },
+        { "id": "recul", "label": "Je préfère prendre du recul" },
+        { "id": "stabilite", "label": "Globalement ça va" },
+        { "id": "point", "label": "Je voulais juste faire le point" },
+        { "id": "indetermine", "label": "Difficile à dire" }
+      ],
+      "constraints": {
+        "min": 1,
+        "max": 3
+      }
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "role": "besoin",
+      "title": "Là, tout de suite, qu’est-ce qui te ferait le plus de bien ?",
+      "subtitle": "Tu peux choisir une ou plusieurs réponses.",
+      "options": [
+        { "id": "mots", "label": "Mettre des mots sur ce que je vis" },
+        { "id": "comprendre", "label": "Mieux comprendre ce qui se joue pour moi" },
+        { "id": "moins_seul", "label": "Me sentir moins seul(e) avec ça" },
+        { "id": "normaliser", "label": "Vérifier que ce que je ressens est “normal”" },
+        { "id": "recul", "label": "Prendre un peu de recul" },
+        { "id": "presence", "label": "Rien de particulier, juste être ici" },
+        { "id": "indetermine", "label": "Je ne sais pas vraiment" }
+      ],
+      "constraints": {
+        "min": 1,
+        "max": 3
+      }
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "role": "energie",
+      "title": "Aujourd’hui, ton énergie te permet plutôt de…",
+      "subtitle": "Une seule réponse suffit.",
+      "options": [
+        { "id": "lecture", "label": "Lire tranquillement et accueillir ce qui vient" },
+        { "id": "reflechir", "label": "Réfléchir un peu à ma situation" },
+        { "id": "parcourir", "label": "Juste parcourir, sans aller trop loin" },
+        { "id": "faible", "label": "Pas grand-chose en ce moment" },
+        { "id": "indetermine", "label": "Difficile à dire" }
+      ]
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "role": "sortie",
+      "title": "Après avoir répondu, tu te sens plutôt…",
+      "subtitle": "Une seule réponse suffit.",
+      "options": [
+        { "id": "clair", "label": "Un peu plus clair" },
+        { "id": "soulage", "label": "Un peu soulagé(e)" },
+        { "id": "identique", "label": "Identique à avant" },
+        { "id": "pas_aide", "label": "Pas aidé(e)" },
+        { "id": "stop", "label": "Je préfère m’arrêter là" }
+      ]
+    }
+  ]
+}

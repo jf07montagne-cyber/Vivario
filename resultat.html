@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Résultat</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);font-size:12px}
+    .hrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .section{margin-top:16px}
+    .list{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+    .item{padding:12px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10)}
+    .k{font-size:12px;opacity:.8;margin-bottom:6px}
+    .v{font-size:15px;line-height:1.35}
+    .scGrid{display:grid;gap:10px;margin-top:10px}
+    .sc{padding:14px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10)}
+    .sc h3{margin:0 0 6px;font-size:16px}
+    .sc p{margin:0;font-size:14px;line-height:1.45;opacity:.95}
+    .muted{opacity:.75}
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="hrow">
+        <h1 style="margin:0">Vivario</h1>
+        <span class="badge">v1.1</span>
+      </div>
+
+      <p class="muted" style="margin-top:10px">
+        Voici un résumé et des scénarios adaptés à ton chemin. Tu peux refaire une séance quand tu veux.
+      </p>
+
+      <div class="section">
+        <h2 style="margin:0">Résumé</h2>
+        <ul id="resumeList" class="list"></ul>
+        <p id="resumeEmpty" class="muted" style="display:none;margin-top:10px">
+          Aucun résumé à afficher. (Refais une séance.)
+        </p>
+      </div>
+
+      <div class="section">
+        <h2 style="margin:0">Scénarios</h2>
+        <div id="scenarios" class="scGrid"></div>
+        <p id="scEmpty" class="muted" style="display:none;margin-top:10px">Aucun scénario à afficher.</p>
+      </div>
+
+      <div class="btnrow">
+        <a class="btn primary" href="questionnaire.html">Refaire une séance</a>
+        <a class="btn" href="avis.html">Donner un avis</a>
+        <a class="btn ghost" href="accueil.html">← Accueil</a>
+      </div>
+
+      <div class="sep" style="margin-top:16px"></div>
+
+      <p class="small muted" style="margin:0">
+        Confidentialité : Vivario ne remplace pas un professionnel de santé.<br>
+        Si tu es en détresse ou en danger immédiat, contacte les urgences (15/112) ou un proche.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "vivario_session_v1_1";
+
+    const resumeList = document.getElementById("resumeList");
+    const resumeEmpty = document.getElementById("resumeEmpty");
+    const scWrap = document.getElementById("scenarios");
+    const scEmpty = document.getElementById("scEmpty");
+
+    function readSession(){
+      try{
+        const v = localStorage.getItem(STORAGE_KEY);
+        return v ? JSON.parse(v) : null;
+      }catch(e){ return null; }
+    }
+
+    function render(){
+      const session = readSession();
+
+      // résumé
+      resumeList.innerHTML = "";
+      if (!session || !Array.isArray(session.answers) || !session.answers.length) {
+        resumeEmpty.style.display = "block";
+      } else {
+        resumeEmpty.style.display = "none";
+        session.answers.forEach(a => {
+          const li = document.createElement("li");
+          li.className = "item";
+
+          const k = document.createElement("div");
+          k.className = "k";
+          k.textContent = a.theme || "Ton chemin";
+
+          const v = document.createElement("div");
+          v.className = "v";
+          v.textContent = a.answer || "";
+
+          li.appendChild(k);
+          li.appendChild(v);
+          resumeList.appendChild(li);
+        });
+      }
+
+      // scénarios
+      scWrap.innerHTML = "";
+      const sc = session && Array.isArray(session.scenarios) ? session.scenarios : [];
+      if (!sc.length) {
+        scEmpty.style.display = "block";
+      } else {
+        scEmpty.style.display = "none";
+        sc.forEach(s => {
+          const box = document.createElement("div");
+          box.className = "sc";
+          const h = document.createElement("h3");
+          h.textContent = s.title || "Scénario";
+          const p = document.createElement("p");
+          p.textContent = s.text || "";
+          box.appendChild(h);
+          box.appendChild(p);
+          scWrap.appendChild(box);
+        });
+      }
+    }
+
+    render();
+  </script>
+</body>
+</html>
