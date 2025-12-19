@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Questionnaire</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <div>
+          <h1 style="margin:0">Vivario</h1>
+          <div id="qProgress" class="small muted" style="margin-top:6px">Question…</div>
+        </div>
+
+        <!-- SON -->
+        <div style="display:flex;gap:10px;align-items:center">
+          <button id="soundToggle" class="btn ghost" type="button">🔊 Son : ON</button>
+        </div>
+      </div>
+
+      <!-- AUDIO -->
+      <audio id="bgAudio" loop preload="auto">
+        <source src="ambiance.mp3" type="audio/mpeg">
+      </audio>
+
+      <div class="sep"></div>
+
+      <h2 id="qTitle" style="margin:0">Question</h2>
+      <p id="qText" class="muted" style="margin-top:10px"></p>
+
+      <div id="qHint" class="small" style="display:none;margin-top:10px"></div>
+
+      <div id="options" style="margin-top:14px;display:grid;gap:10px"></div>
+
+      <div id="err" class="small" style="margin-top:12px;color:#ffb3b3"></div>
+
+      <div class="sep"></div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+        <button id="btnBack" class="btn ghost" type="button">← Retour</button>
+        <button id="btnNext" class="btn primary" type="button">Continuer</button>
+      </div>
+
+      <div class="sep" style="margin-top:16px"></div>
+
+      <p class="small muted" style="margin:0">
+        Confidentialité : Vivario ne remplace pas un professionnel de santé.<br>
+        En cas de danger immédiat : 15 / 112.
+      </p>
+    </div>
+  </div>
+
+  <script src="engine.js"></script>
+  <script src="sound.js"></script>
+</body>
+</html>
