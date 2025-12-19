@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Fin</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);font-size:12px}
+    .hrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .section{margin-top:16px}
+    .list{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+    .item{padding:12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10)}
+    .k{font-size:12px;opacity:.8;margin-bottom:6px}
+    .v{font-size:15px;line-height:1.35;white-space:pre-wrap}
+    .scGrid{display:grid;gap:10px;margin-top:10px}
+    .sc{padding:14px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10)}
+    .sc h3{margin:0 0 6px;font-size:16px}
+    .sc p{margin:0;font-size:14px;line-height:1.55;opacity:.95;white-space:pre-wrap}
+    .muted{opacity:.75}
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .hero{
+      margin-top:10px;
+      padding:14px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(120,160,255,.18), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .hero h2{margin:0 0 8px;font-size:18px}
+    .hero .msg{white-space:pre-wrap; line-height:1.6; font-size:14px}
+    /* respiration */
+    .breathWrap{
+      margin-top:12px;
+      padding:14px;
+      border-radius:18px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      display:grid;
+      gap:10px;
+    }
+    .orb{
+      width:120px;height:120px;border-radius:999px;
+      background:rgba(120,160,255,.22);
+      border:1px solid rgba(120,160,255,.35);
+      box-shadow:0 20px 40px rgba(0,0,0,.25);
+      margin:6px auto 0;
+      transform:scale(0.85);
+      transition:transform 3.8s ease-in-out;
+    }
+    .orb.inhale{ transform:scale(1.00); }
+    .orb.exhale{ transform:scale(0.82); }
+    .breathText{ text-align:center; font-size:14px; opacity:.95; white-space:pre-wrap; }
+    .breathBtns{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:12px 14px; border-radius:14px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      color:inherit; text-decoration:none; cursor:pointer;
+    }
+    .btn:hover{ background:rgba(255,255,255,.10); }
+    .primary{
+      background:rgba(120,160,255,.22);
+      border:1px solid rgba(120,160,255,.35);
+    }
+    .primary:hover{ background:rgba(120,160,255,.30); }
+    .ghost{ opacity:.9; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="hrow">
+        <h1 style="margin:0">Vivario</h1>
+        <span class="badge">v1.1</span>
+      </div>
+
+      <p class="muted" style="margin-top:10px">
+        Merci d’avoir pris ce temps. Voici quelque chose de simple, lisible, et fait pour toi.
+      </p>
+
+      <!-- Message final ultra personnalisé -->
+      <div class="hero">
+        <h2>Ton message de fin</h2>
+        <div id="finalMsg" class="msg muted"></div>
+      </div>
+
+      <!-- Respiration manuelle optionnelle -->
+      <div class="breathWrap" id="breathSection">
+        <div class="muted" style="font-size:13px">
+          Mini pause (optionnelle) — tu peux la faire, ou passer.
+        </div>
+        <div class="orb" id="orb"></div>
+        <div class="breathText" id="breathText">Appuie sur “Démarrer”.</div>
+        <div class="breathBtns">
+          <button class="btn primary" id="breathStart" type="button">Démarrer</button>
+          <button class="btn" id="breathStop" type="button">Stop</button>
+          <button class="btn ghost" id="breathSkip" type="button">Passer</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 style="margin:0">Résumé</h2>
+        <ul id="resumeList" class="list"></ul>
+        <p id="resumeEmpty" class="muted" style="display:none;margin-top:10px">
+          Aucun résumé à afficher. (Refais une séance.)
+        </p>
+      </div>
+
+      <div class="section">
+        <h2 style="margin:0">Scénarios (adaptés)</h2>
+        <div id="scenarios" class="scGrid"></div>
+        <p id="scEmpty" class="muted" style="display:none;margin-top:10px">Aucun scénario à afficher.</p>
+      </div>
+
+      <div class="btnrow">
+        <a class="btn primary" href="questionnaire.html">Refaire une séance</a>
+        <a class="btn" href="avis.html">Donner un avis</a>
+        <a class="btn ghost" href="accueil.html">← Accueil</a>
+      </div>
+
+      <div class="sep" style="margin-top:16px"></div>
+
+      <p class="small muted" style="margin:0; line-height:1.55">
+        Confidentialité : Vivario ne remplace pas un professionnel de santé.<br>
+        Si tu es en détresse ou en danger immédiat, contacte les urgences (15/112) ou un proche.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "vivario_session_v1_1";
+
+    const resumeList = document.getElementById("resumeList");
+    const resumeEmpty = document.getElementById("resumeEmpty");
+    const scWrap = document.getElementById("scenarios");
+    const scEmpty = document.getElementById("scEmpty");
+    const finalMsg = document.getElementById("finalMsg");
+
+    function readSession(){
+      try{
+        const v = localStorage.getItem(STORAGE_KEY);
+        return v ? JSON.parse(v) : null;
+      }catch(e){ return null; }
+    }
+
+    function render(){
+      const session = readSession();
+
+      // message final
+      finalMsg.textContent = (session && session.finalMessage) ? session.finalMessage : "Merci d’avoir pris ce temps.";
+
+      // résumé
+      resumeList.innerHTML = "";
+      if (!session || !Array.isArray(session.answers) || !session.answers.length) {
+        resumeEmpty.style.display = "block";
+      } else {
+        resumeEmpty.style.display = "none";
+        session.answers.forEach(a => {
+          const li = document.createElement("li");
+          li.className = "item";
+
+          const k = document.createElement("div");
+          k.className = "k";
+          k.textContent = a.question || "Ton chemin";
+
+          const v = document.createElement("div");
+          v.className = "v";
+          v.textContent = a.answer || "";
+
+          li.appendChild(k);
+          li.appendChild(v);
+          resumeList.appendChild(li);
+        });
+      }
+
+      // scénarios
+      scWrap.innerHTML = "";
+      const sc = session && Array.isArray(session.scenarios) ? session.scenarios : [];
+      if (!sc.length) {
+        scEmpty.style.display = "block";
+      } else {
+        scEmpty.style.display = "none";
+        sc.forEach(s => {
+          const box = document.createElement("div");
+          box.className = "sc";
+          const h = document.createElement("h3");
+          h.textContent = s.title || "Scénario";
+          const p = document.createElement("p");
+          p.textContent = s.text || "";
+          box.appendChild(h);
+          box.appendChild(p);
+          scWrap.appendChild(box);
+        });
+      }
+    }
+
+    render();
+
+    // respiration manuelle : cycle simple 4-2-6 (inspire / pause / expire)
+    const orb = document.getElementById("orb");
+    const breathText = document.getElementById("breathText");
+    const btnStart = document.getElementById("breathStart");
+    const btnStop = document.getElementById("breathStop");
+    const btnSkip = document.getElementById("breathSkip");
+    const breathSection = document.getElementById("breathSection");
+
+    let timer = null;
+    let running = false;
+
+    function clearTimer(){
+      if (timer) { clearTimeout(timer); timer = null; }
+    }
+
+    function setPhase(phase){
+      orb.classList.remove("inhale","exhale");
+      if (phase === "inhale") {
+        orb.classList.add("inhale");
+        breathText.textContent = "Inspire… (4)";
+      } else if (phase === "hold") {
+        breathText.textContent = "Garde… (2)";
+      } else if (phase === "exhale") {
+        orb.classList.add("exhale");
+        breathText.textContent = "Expire doucement… (6)";
+      } else {
+        breathText.textContent = "Appuie sur “Démarrer”.";
+      }
+    }
+
+    function loop(){
+      if (!running) return;
+
+      setPhase("inhale");
+      timer = setTimeout(() => {
+        if (!running) return;
+        setPhase("hold");
+        timer = setTimeout(() => {
+          if (!running) return;
+          setPhase("exhale");
+          timer = setTimeout(() => {
+            if (!running) return;
+            loop();
+          }, 6000);
+        }, 2000);
+      }, 4000);
+    }
+
+    btnStart.addEventListener("click", () => {
+      if (running) return;
+      running = true;
+      loop();
+    });
+
+    btnStop.addEventListener("click", () => {
+      running = false;
+      clearTimer();
+      setPhase("idle");
+    });
+
+    btnSkip.addEventListener("click", () => {
+      running = false;
+      clearTimer();
+      breathSection.style.display = "none";
+    });
+  </script>
+</body>
+</html>
