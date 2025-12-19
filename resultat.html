@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Fin de séance</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);font-size:12px}
+    .hrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .section{margin-top:18px}
+    .muted{opacity:.78}
+    .small{font-size:12px}
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .grid{display:grid;gap:10px;margin-top:10px}
+    .list{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+    .hero{
+      margin-top:12px;padding:16px;border-radius:18px;
+      background:linear-gradient(180deg, rgba(120,160,255,.18), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.12);
+      position:relative;overflow:hidden;
+    }
+    .hero::after{
+      content:"";position:absolute;inset:-40px -60px auto auto;
+      width:220px;height:220px;
+      background:radial-gradient(circle, rgba(120,160,255,.25), transparent 60%);
+      filter:blur(2px);opacity:.9;pointer-events:none;
+      animation:floaty 8s ease-in-out infinite;
+    }
+    @keyframes floaty{0%,100%{transform:translate(0,0)}50%{transform:translate(-18px,14px)}}
+    .big{font-size:18px;line-height:1.4;margin:0}
+    .sub{margin:8px 0 0;opacity:.88;line-height:1.55}
+    .chiprow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);opacity:.92}
+    .micro{margin-top:12px;padding:12px;border-radius:14px;background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.16);}
+    .breathRow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px;}
+    .breathWrap{width:110px;height:110px;border-radius:999px;display:grid;place-items:center;position:relative;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);overflow:hidden;}
+    .breathGlow{position:absolute;inset:-30px;background:radial-gradient(circle, rgba(120,160,255,.22), transparent 60%);opacity:.9;pointer-events:none;}
+    .breathBall{width:62px;height:62px;border-radius:999px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);transition:transform .6s ease;}
+    .breathBall.run{animation:breathCycle 12s ease-in-out infinite;}
+    @keyframes breathCycle{0%{transform:scale(1.00)}33%{transform:scale(1.36)}50%{transform:scale(1.36)}100%{transform:scale(1.00)}}
+    .breathText{display:grid;gap:6px;min-width:200px;}
+    .breathPhase{font-size:14px;opacity:.95;}
+    .breathTimer{font-size:12px;opacity:.78;}
+    .breathBtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+    .miniBtn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:inherit;text-decoration:none;font-size:14px;cursor:pointer;}
+    .miniBtn:hover{background:rgba(255,255,255,.09)}
+    .miniBtn:active{transform:scale(.99)}
+    .item{padding:12px 12px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);animation:rise .35s ease both;}
+    .k{font-size:12px;opacity:.82;margin-bottom:6px}
+    .v{font-size:15px;line-height:1.55;white-space:pre-wrap}
+    .sc{padding:14px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);animation:rise .35s ease both;}
+    .sc h3{margin:0 0 8px;font-size:16px}
+    .sc p{margin:0;font-size:14px;line-height:1.65;opacity:.96;white-space:pre-wrap}
+    .sc .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .finalNote{margin-top:14px;padding:14px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);animation:rise .45s ease both;}
+    @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:rgba(20,20,25,.92);border:1px solid rgba(255,255,255,.14);padding:10px 12px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .18s ease, transform .18s ease;z-index:9999;max-width:92vw;}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px);}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="hrow">
+        <h1 style="margin:0">Vivario</h1>
+        <span class="badge">v1.1</span>
+      </div>
+
+      <div class="hero">
+        <p class="big" id="heroTitle">Merci d’avoir pris ce temps.</p>
+        <p class="sub" id="heroText">Tu as le droit d’avancer doucement, à ton rythme.</p>
+
+        <div class="chiprow" id="tagRow" style="display:none"></div>
+
+        <div class="micro">
+          <strong>🌿 Micro-pause respiratoire (facultatif)</strong>
+          <div class="muted" style="margin-top:6px;line-height:1.55">
+            Inspire 4s… garde 2s… expire 6s. Lance l’animation si tu veux (30 secondes).
+          </div>
+
+          <div class="breathRow">
+            <div class="breathWrap" aria-hidden="true">
+              <div class="breathGlow"></div>
+              <div id="breathBall" class="breathBall"></div>
+            </div>
+            <div class="breathText">
+              <div class="breathPhase" id="breathPhase">Prêt ?</div>
+              <div class="breathTimer" id="breathTimer">30s</div>
+              <div class="breathBtns">
+                <button class="miniBtn" id="breathStart" type="button">▶️ Démarrer</button>
+                <button class="miniBtn" id="breathStop" type="button">⏸️ Stop</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 style="margin:0">Ce que tu as partagé</h2>
+        <ul id="resumeList" class="list"></ul>
+        <p id="resumeEmpty" class="muted" style="display:none;margin-top:10px">
+          Aucun résumé à afficher. (Refais une séance.)
+        </p>
+      </div>
+
+      <div class="section">
+        <h2 style="margin:0">Scénarios adaptatifs</h2>
+        <div id="scenarios" class="grid"></div>
+        <p id="scEmpty" class="muted" style="display:none;margin-top:10px">Aucun scénario à afficher.</p>
+      </div>
+
+      <div class="finalNote" id="finalNote" style="display:none">
+        <div class="k">Pour finir (juste pour toi)</div>
+        <div class="v" id="finalText"></div>
+        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="miniBtn" id="keepAll" type="button">📌 Je garde ce résultat</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 style="margin:0">Et maintenant ?</h2>
+        <p class="muted" style="margin:8px 0 0;line-height:1.6">
+          Si quelque chose résonne, garde-le. Si rien ne résonne, c’est OK aussi.
+          Tu peux revenir quand tu veux.
+        </p>
+
+        <div class="btnrow">
+          <a class="btn primary" href="questionnaire.html">Refaire une séance</a>
+          <a class="btn" id="avisBtn" href="#">Donner un avis</a>
+          <a class="btn ghost" href="accueil.html">← Accueil</a>
+        </div>
+      </div>
+
+      <div class="sep" style="margin-top:16px"></div>
+      <p class="small muted" style="margin:0;line-height:1.55">
+        Confidentialité : Vivario ne remplace pas un professionnel de santé.<br>
+        Si tu es en détresse ou en danger immédiat, contacte les urgences (15/112) ou un proche.
+      </p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const STORAGE_KEY = "vivario_session_v1_1";
+    const GOOGLE_FORMS_URL = "https://docs.google.com/forms/d/e/1FAIpQLSczOz8rRS2o4pS8mf6vH4BDMNIxgmR3dVSEgPEJt5vsEGdKPg/viewform?usp=header";
+
+    const resumeList = document.getElementById("resumeList");
+    const resumeEmpty = document.getElementById("resumeEmpty");
+    const scWrap = document.getElementById("scenarios");
+    const scEmpty = document.getElementById("scEmpty");
+    const heroTitle = document.getElementById("heroTitle");
+    const heroText = document.getElementById("heroText");
+    const tagRow = document.getElementById("tagRow");
+    const avisBtn = document.getElementById("avisBtn");
+    const toast = document.getElementById("toast");
+    const finalNote = document.getElementById("finalNote");
+    const finalText = document.getElementById("finalText");
+    const keepAll = document.getElementById("keepAll");
+
+    // respiration
+    const breathBall  = document.getElementById("breathBall");
+    const breathPhase = document.getElementById("breathPhase");
+    const breathTimer = document.getElementById("breathTimer");
+    const breathStart = document.getElementById("breathStart");
+    const breathStop  = document.getElementById("breathStop");
+
+    avisBtn.href = GOOGLE_FORMS_URL;
+    avisBtn.target = "_blank";
+    avisBtn.rel = "noopener";
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.remove("show"), 1600);
+    }
+
+    function readSession(){
+      try{
+        const v = localStorage.getItem(STORAGE_KEY);
+        return v ? JSON.parse(v) : null;
+      }catch(e){ return null; }
+    }
+
+    function renderTags(tags){
+      const t = (tags || []).slice(0, 10);
+      if (!t.length) { tagRow.style.display = "none"; return; }
+      tagRow.style.display = "flex";
+      tagRow.innerHTML = "";
+      t.forEach(x => {
+        const c = document.createElement("span");
+        c.className = "chip";
+        c.textContent = String(x);
+        tagRow.appendChild(c);
+      });
+    }
+
+    // ✅ Phrase finale 100% fiable : uniquement profile (mood/themes/needs/energy)
+    function buildFinalPhrase(profile){
+      const mood = profile?.mood || "clarification";
+      const focus = Array.isArray(profile?.focus) ? profile.focus : [];
+      const needs = Array.isArray(profile?.needs) ? profile.needs : [];
+      const energy = Array.isArray(profile?.energy) ? profile.energy : [];
+
+      const themeTxt = focus.length ? `sur ${focus.join(" et ")}` : "sur ce qui compte pour toi";
+
+      // morceaux 100% déterministes
+      const moodLine = ({
+        fatigue: "Si tu es fatigué(e), tu n’as rien à prouver. La douceur est une force.",
+        flou: "Si c’est flou, ce n’est pas un échec : c’est souvent un signe que plusieurs choses se superposent.",
+        sortie: "Si tu ne te sens pas aidé(e) aujourd’hui, c’est OK. Tu n’as rien “raté”.",
+        clarification: "Même quand tout va globalement bien, faire le point peut t’aider à respirer autrement."
+      })[mood] || "Tu peux avancer sans te brusquer.";
+
+      const needLine = needs.includes("moins_seul") ? "Tu mérites de ne pas porter ça seul(e)." :
+                      needs.includes("comprendre") ? "Clarifier n’est pas tout résoudre : c’est déjà se soutenir." :
+                      needs.includes("recul") ? "Prendre du recul, c’est parfois la réponse la plus saine." :
+                      needs.includes("presence") ? "Parfois, être simplement là suffit. Pas d’objectif, juste toi." :
+                      "Tu as le droit de prendre ce temps, juste pour toi.";
+
+      const energyLine = energy.includes("faible") ? "Aujourd’hui, fais petit. Petit, c’est parfait." :
+                        energy.includes("lecture") ? "Tu peux simplement relire ces mots plus tard, sans rien forcer." :
+                        "Va à ton rythme. C’est déjà bien.";
+
+      return `${moodLine}\n\nAujourd’hui, tu as orienté ta séance ${themeTxt}.\n\n${needLine}\n${energyLine}`;
+    }
+
+    function niceHero(profile){
+      const mood = profile?.mood || "clarification";
+      if (mood === "fatigue") {
+        heroTitle.textContent = "Tu as tenu. Et c’est déjà beaucoup.";
+        heroText.textContent = "Ici, tu peux souffler un peu. Rien à prouver. Juste te ménager.";
+        return;
+      }
+      if (mood === "flou") {
+        heroTitle.textContent = "Tu peux respirer un peu, là.";
+        heroText.textContent = "Le flou n’est pas un vide. On peut avancer sans tout comprendre d’un coup.";
+        return;
+      }
+      if (mood === "sortie") {
+        heroTitle.textContent = "Merci d’avoir essayé.";
+        heroText.textContent = "Même si Vivario ne t’aide pas aujourd’hui, ce temps reste valable. Tu peux revenir plus tard.";
+        return;
+      }
+      heroTitle.textContent = "Merci d’avoir pris ce temps.";
+      heroText.textContent = "Tu as le droit d’avancer doucement, à ton rythme.";
+    }
+
+    function makeScenarioText(s){
+      const title = s.title || "Scénario";
+      const text = s.text || "";
+      return `Vivario — ${title}\n\n${text}\n\n(À relire quand tu veux.)`;
+    }
+
+    async function copyToClipboard(str){
+      try{
+        await navigator.clipboard.writeText(str);
+        showToast("📌 Copié !");
+      }catch(e){
+        const ta = document.createElement("textarea");
+        ta.value = str;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        try{ document.execCommand("copy"); showToast("📌 Copié !"); }
+        catch(err){ showToast("Impossible de copier automatiquement."); }
+        document.body.removeChild(ta);
+      }
+    }
+
+    // ✅ respiration 30s (manuel)
+    let breathLeft = 30;
+    let breathTick = null;
+    let phaseTick = null;
+
+    function stopBreath(){
+      breathBall.classList.remove("run");
+      breathPhase.textContent = "Pause.";
+      clearInterval(breathTick); clearInterval(phaseTick);
+      breathTick = null; phaseTick = null;
+    }
+
+    function startBreath(){
+      stopBreath();
+      breathLeft = 30;
+      breathTimer.textContent = "30s";
+      breathBall.classList.add("run");
+
+      const phaseAt = (sec) => sec < 4 ? "Inspire… (4s)" : (sec < 6 ? "Garde… (2s)" : "Expire… (6s)");
+      const start = Date.now();
+      breathPhase.textContent = "Inspire… (4s)";
+
+      phaseTick = setInterval(() => {
+        const elapsed = (Date.now() - start) / 1000;
+        const inCycle = elapsed % 12;
+        breathPhase.textContent = phaseAt(inCycle);
+      }, 200);
+
+      breathTick = setInterval(() => {
+        breathLeft -= 1;
+        breathTimer.textContent = breathLeft + "s";
+        if (breathLeft <= 0){
+          stopBreath();
+          breathPhase.textContent = "Bien. Reviens doucement.";
+          showToast("🌿 Micro-pause terminée");
+        }
+      }, 1000);
+    }
+
+    breathStart.addEventListener("click", startBreath);
+    breathStop.addEventListener("click", stopBreath);
+
+    function render(){
+      const session = readSession();
+      const profile = session?.profile || {};
+      const tags = Array.isArray(profile?.tags) ? profile.tags : [];
+
+      niceHero(profile);
+      renderTags(tags);
+
+      // résumé
+      resumeList.innerHTML = "";
+      if (!session || !Array.isArray(session.answers) || !session.answers.length) {
+        resumeEmpty.style.display = "block";
+      } else {
+        resumeEmpty.style.display = "none";
+        session.answers.forEach((a, idx) => {
+          const li = document.createElement("li");
+          li.className = "item";
+          li.style.animationDelay = (idx * 25) + "ms";
+
+          const k = document.createElement("div");
+          k.className = "k";
+          k.textContent = a.question || a.theme || "Ton chemin";
+
+          const v = document.createElement("div");
+          v.className = "v";
+          v.textContent = a.answer || "";
+
+          li.appendChild(k);
+          li.appendChild(v);
+          resumeList.appendChild(li);
+        });
+      }
+
+      // scénarios adaptatifs (plusieurs)
+      scWrap.innerHTML = "";
+      const sc = session && Array.isArray(session.scenarios) ? session.scenarios : [];
+      if (!sc.length) {
+        scEmpty.style.display = "block";
+      } else {
+        scEmpty.style.display = "none";
+        sc.forEach((s, idx) => {
+          const box = document.createElement("div");
+          box.className = "sc";
+          box.style.animationDelay = (idx * 35) + "ms";
+
+          const h = document.createElement("h3");
+          h.textContent = s.title || "Scénario";
+
+          const p = document.createElement("p");
+          p.textContent = s.text || "";
+
+          const actions = document.createElement("div");
+          actions.className = "actions";
+
+          const keep = document.createElement("a");
+          keep.href = "#";
+          keep.className = "miniBtn";
+          keep.textContent = "📌 Garder ce scénario";
+          keep.addEventListener("click", (e) => {
+            e.preventDefault();
+            copyToClipboard(makeScenarioText(s));
+          });
+
+          actions.appendChild(keep);
+
+          box.appendChild(h);
+          box.appendChild(p);
+          box.appendChild(actions);
+          scWrap.appendChild(box);
+        });
+      }
+
+      // phrase finale fiable
+      const phrase = buildFinalPhrase(profile);
+      finalText.textContent = phrase;
+      finalNote.style.display = "block";
+
+      // bouton “je garde ce résultat”
+      keepAll.addEventListener("click", () => {
+        const parts = [];
+        parts.push("Vivario — Mon résultat\n");
+        if (session?.answers?.length) {
+          parts.push("Résumé :");
+          session.answers.forEach(a => parts.push(`- ${a.question || a.theme}: ${a.answer}`));
+          parts.push("");
+        }
+        if (session?.scenarios?.length) {
+          parts.push("Scénarios :");
+          session.scenarios.forEach(s => {
+            parts.push(`\n${s.title}\n${s.text}`);
+          });
+          parts.push("");
+        }
+        parts.push("Phrase finale :\n" + phrase);
+        copyToClipboard(parts.join("\n"));
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>
