@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario</title>
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="style.css?v=1" />
+
+  <style>
+    body{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .home-card{
+      max-width:420px;
+      width:100%;
+      padding:26px;
+      border-radius:22px;
+      background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(6px);
+      text-align:center;
+    }
+
+    .home-card h1{ margin-bottom:10px; }
+
+    .home-card p{
+      opacity:.85;
+      line-height:1.55;
+      margin-bottom:18px;
+    }
+
+    .btnMain{
+      display:block;
+      width:100%;
+      padding:14px;
+      margin-bottom:12px;
+      border-radius:16px;
+      font-weight:600;
+      background:linear-gradient(180deg,#6f8cff,#5a73ff);
+      color:#fff;
+      box-shadow:0 10px 30px rgba(90,115,255,.35);
+      border:none;
+      cursor:pointer;
+    }
+    .btnMain:active{ transform:scale(.98); }
+
+    .btnGhost{
+      display:block;
+      width:100%;
+      padding:12px;
+      border-radius:16px;
+      text-decoration:none;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      color:inherit;
+      cursor:pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="home-card">
+    <h1>Vivario</h1>
+
+    <p>
+      Prenez quelques minutes.<br>
+      Ici, vous pouvez simplement être.
+    </p>
+
+    <!-- ✅ Bouton (geste utilisateur => son fiable) -->
+    <button class="btnMain" id="btnStart" type="button">
+      Commencer
+    </button>
+
+    <a class="btnGhost" href="apropos.html?v=1">
+      À propos de Vivario
+    </a>
+  </div>
+
+  <!-- ✅ sound.js (doit être dispo ici aussi pour démarrer sur "Commencer") -->
+  <script src="sound.js?v=2" defer></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("btnStart");
+      if (!btn) return;
+
+      btn.addEventListener("click", async () => {
+        // Geste utilisateur => tentative audio autorisée
+        try {
+          if (window.VivarioSound && window.VivarioSound.ensureStarted) {
+            await window.VivarioSound.ensureStarted();
+          }
+        } catch (e) {
+          // pas bloquant
+        }
+
+        // Redirection après tentative audio
+        window.location.href = "questionnaire.html?v=1";
+      });
+    });
+  </script>
+
+</body>
+</html>
