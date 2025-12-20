@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario</title>
+
+  <link rel="stylesheet" href="style.css?v=3" />
+
+  <style>
+    /* Home premium (ne casse pas ton style.css) */
+    .hero{
+      display:grid;
+      gap:14px;
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:-140px;
+      background:
+        radial-gradient(closest-side, rgba(120,160,255,.20), transparent 62%),
+        radial-gradient(closest-side, rgba(120,255,210,.10), transparent 66%),
+        radial-gradient(closest-side, rgba(255,255,255,.06), transparent 70%);
+      filter: blur(18px);
+      pointer-events:none;
+      transform: translate3d(0,0,0);
+      animation: floatGlow 10s ease-in-out infinite;
+      opacity:.9;
+    }
+
+    @keyframes floatGlow{
+      0%   { transform: translate3d(0,0,0) scale(1); }
+      50%  { transform: translate3d(0,-10px,0) scale(1.02); }
+      100% { transform: translate3d(0,0,0) scale(1); }
+    }
+
+    .heroTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      position:relative;
+      z-index:1;
+    }
+
+    .pill{
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.82);
+      white-space:nowrap;
+      user-select:none;
+    }
+    .pill.on{
+      background: rgba(120,160,255,.18);
+      border-color: rgba(120,160,255,.35);
+    }
+
+    .heroTitle{
+      margin: 6px 0 0;
+      font-size: 56px;
+      letter-spacing: -0.8px;
+      line-height:1;
+      position:relative;
+      z-index:1;
+    }
+
+    .subtitle{
+      position:relative;
+      z-index:1;
+      color: rgba(234,240,255,.92);
+      font-size:18px;
+      line-height:1.55;
+      margin-top: 6px;
+      max-width: 58ch;
+    }
+
+    .microcopy{
+      position:relative;
+      z-index:1;
+      color: rgba(234,240,255,.72);
+      line-height:1.6;
+      margin: 0;
+    }
+
+    .ctaRow{
+      position:relative;
+      z-index:1;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 4px;
+    }
+
+    .noteBox{
+      position:relative;
+      z-index:1;
+      padding: 12px 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      margin-top: 8px;
+    }
+    .noteIcon{
+      font-size:18px;
+      line-height:1;
+      margin-top:2px;
+      opacity:.95;
+    }
+    .noteText{
+      margin:0;
+      font-size:13px;
+      line-height:1.5;
+      color: rgba(234,240,255,.78);
+    }
+
+    .smallLinks{
+      position:relative;
+      z-index:1;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top: 6px;
+    }
+    .smallLinks a{
+      color: rgba(234,240,255,.75);
+      text-decoration:none;
+      font-size: 13px;
+      border-bottom: 1px dashed rgba(255,255,255,.22);
+      padding-bottom: 2px;
+    }
+    .smallLinks a:hover{
+      color: rgba(234,240,255,.92);
+      border-bottom-color: rgba(255,255,255,.35);
+    }
+  </style>
+</head>
+
+<body class="page-home">
+  <main class="wrap">
+    <section class="card home-card hero">
+      <div class="heroTop">
+        <div class="pill" id="ambState">Ambiance : OFF</div>
+        <div class="pill">v1.1</div>
+      </div>
+
+      <h1 class="heroTitle">Vivario</h1>
+
+      <p class="subtitle" id="welcomeLine">
+        Un espace simple, doux et confidentiel pour faire le point.
+      </p>
+
+      <p class="microcopy">
+        2 à 4 minutes. Des questions claires. Des scénarios qui s’adaptent à tes réponses.
+      </p>
+
+      <div class="ctaRow">
+        <a class="btn primary" href="questionnaire.html?v=3">Entrer dans Vivario</a>
+        <a class="btn ghost" href="apropos.html?v=3">À propos</a>
+      </div>
+
+      <div class="noteBox">
+        <div class="noteIcon">🔒</div>
+        <p class="noteText">
+          Tes réponses restent sur <b>ton appareil</b>. Personne ne peut les voir. Pas même Vivario.<br>
+          Le bouton 🔇/🔊 en bas à droite active une ambiance <b>optionnelle</b> (OFF par défaut).
+        </p>
+      </div>
+
+      <div class="smallLinks">
+        <a href="questionnaire.html?v=3">Commencer sans réfléchir</a>
+        <a href="avis.html?v=3">Donner un avis</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ✅ IMPORTANT : même version partout -->
+  <script src="sound.js?v=7"></script>
+
+  <script>
+    function refreshAmb(){
+      const el = document.getElementById("ambState");
+      const on = window.VivarioSound?.isOn?.() === true;
+      el.textContent = "Ambiance : " + (on ? "ON" : "OFF");
+      el.classList.toggle("on", on);
+    }
+
+    // Petite phrase d’accueil “vivante” (pas de déduction, juste une rotation douce)
+    const lines = [
+      "Un espace simple, doux et confidentiel pour faire le point.",
+      "Tu peux venir même si “ça va”, juste pour te situer.",
+      "Ici, tu n’as rien à prouver. Juste à respirer un peu."
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      refreshAmb();
+
+      const el = document.getElementById("welcomeLine");
+      if (el) {
+        const pick = lines[Math.floor(Math.random() * lines.length)];
+        el.textContent = pick;
+      }
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") refreshAmb();
+      });
+
+      window.addEventListener("pointerdown", () => {
+        setTimeout(refreshAmb, 80);
+      }, { passive:true });
+    });
+  </script>
+</body>
+</html>
