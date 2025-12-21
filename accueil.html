@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario</title>
+  <link rel="stylesheet" href="style.css?v=110" />
+</head>
+
+<body class="page-home">
+  <main class="wrap">
+    <section class="card home-card">
+      <div class="home-badge" id="ambState">Ambiance : OFF</div>
+
+      <h1 class="brand big">Vivario</h1>
+      <p class="lead">Quand une décision pèse, prendre un moment peut aider.</p>
+      <p class="muted">Il n’y a pas de bonne ou de mauvaise réponse.</p>
+
+      <div class="home-actions">
+        <a class="btn primary" href="questionnaire.html?v=110">Entrer dans Vivario</a>
+        <a class="btn ghost" href="apropos.html?v=110">À propos</a>
+      </div>
+
+      <div class="sep"></div>
+
+      <p class="tiny muted">
+        Vos réponses restent sur votre appareil. Personne ne peut les voir. Pas même Vivario.<br>
+        Bouton 🔇/🔊 en bas à droite : ambiance optionnelle (OFF par défaut).
+      </p>
+    </section>
+  </main>
+
+  <script src="sound.js?v=110"></script>
+  <script>
+    function refreshAmb(){
+      const el = document.getElementById("ambState");
+      const on = window.VivarioSound?.isOn?.() === true;
+      el.textContent = "Ambiance : " + (on ? "ON" : "OFF");
+      el.classList.toggle("on", on);
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      refreshAmb();
+      setInterval(refreshAmb, 500);
+    });
+  </script>
+</body>
+</html>
