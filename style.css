@@ -1,0 +1,404 @@
+:root{
+  --bg1:#0b1220;
+  --bg2:#0f1b33;
+
+  --card: rgba(255,255,255,.06);
+  --border: rgba(255,255,255,.10);
+
+  --text:#eaf0ff;
+  --muted: rgba(234,240,255,.70);
+
+  --shadow: 0 18px 60px rgba(0,0,0,.35);
+
+  --accent: rgba(120,160,255,.28);
+  --accentBorder: rgba(120,160,255,.38);
+
+  --radius: 22px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 700px at 20% 10%, #1a2f63 0%, transparent 60%),
+    radial-gradient(900px 600px at 80% 20%, #1f4d6a 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
+}
+
+/* -------------------------
+   Layout / typographie
+------------------------- */
+.wrap{
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 18px 14px 44px;
+}
+
+.top{ margin: 8px 0 16px; }
+
+.brand{
+  margin: 0;
+  font-size: 40px;
+  letter-spacing: .3px;
+}
+
+.brand.big{
+  font-size: 54px;
+  letter-spacing: -0.6px;
+  margin-top: 10px;
+}
+
+h1,h2,h3,h4{ margin:0; }
+
+.muted{ color: var(--muted); margin: 6px 0 0; }
+.tiny{ font-size: 12px; line-height: 1.35; }
+.small{ font-size: 12px; }
+.lead{
+  font-size: 18px;
+  line-height: 1.55;
+  margin: 10px 0 14px;
+  opacity: .95;
+}
+
+.center{ text-align:center; }
+
+/* séparateur */
+.sep{
+  height: 1px;
+  width: 100%;
+  background: rgba(255,255,255,.10);
+  margin: 14px 0;
+  border-radius: 999px;
+}
+
+/* -------------------------
+   Cards
+------------------------- */
+.card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: 16px;
+  backdrop-filter: blur(10px);
+  margin: 14px 0;
+}
+
+.result-block p{ margin: 10px 0; line-height: 1.55; }
+
+/* -------------------------
+   Buttons
+------------------------- */
+.actions,
+.home-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top: 14px;
+}
+
+.btn{
+  appearance:none;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.10);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 650;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn:hover{ background: rgba(255,255,255,.13); }
+.btn:active{ transform: scale(.98); }
+
+.btn.ghost{ background: transparent; }
+.btn.ghost:hover{ background: rgba(255,255,255,.06); }
+
+.btn.primary{
+  background: var(--accent);
+  border-color: var(--accentBorder);
+}
+.btn.primary:hover{ background: rgba(120,160,255,.34); }
+.btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
+
+/* -------------------------
+   HOME (accueil.html)
+------------------------- */
+.page-home .wrap{
+  max-width: 860px;
+  padding-top: 26px;
+}
+
+.home-card{
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 26px 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* glow doux derrière la carte */
+.home-card::before{
+  content:"";
+  position:absolute;
+  inset:-130px;
+  background:
+    radial-gradient(closest-side, rgba(120,160,255,.18), transparent 65%),
+    radial-gradient(closest-side, rgba(120,255,210,.10), transparent 65%);
+  filter: blur(14px);
+  pointer-events:none;
+}
+
+/* badge ambiance (si présent sur accueil.html) */
+.home-badge{
+  position:absolute;
+  top: 14px;
+  right: 14px; /* ✅ badge à droite pour ne jamais toucher le logo */
+  left: auto;
+  font-size: 12px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  color: rgba(255,255,255,.82);
+}
+
+.home-badge.on{
+  background: rgba(120,160,255,.18);
+  border-color: rgba(120,160,255,.35);
+}
+
+/* -------------------------
+   RESULT (resultat.html)
+------------------------- */
+.page-result .wrap{ max-width: 860px; }
+
+/* Scénarios */
+.scenario{
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.10);
+}
+.scenario h4{ margin: 0 0 6px; }
+.scenario-text{
+  color: rgba(234,240,255,.85);
+  line-height: 1.55;
+}
+
+/* -------------------------
+   Orbe décoratif (générique)
+------------------------- */
+.breathe-card,
+.breath-card{
+  position: relative;
+  overflow: hidden;
+}
+
+/* orb en haut droite */
+.breathe-orb{
+  position:absolute;
+  right: -90px;
+  top: -90px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%,
+    rgba(120,210,255,.85),
+    rgba(70,110,255,.20) 55%,
+    transparent 70%);
+  filter: blur(.2px);
+  opacity: .55;
+  transform: scale(.9);
+  pointer-events:none;
+}
+
+/* -------------------------
+   RESPIRATION PRO (respiration.html)
+------------------------- */
+.page-breath .wrap{ max-width: 860px; }
+
+.breath-card{ padding: 16px; }
+
+.breath-stage{
+  --bscale: 0.96;
+  --bglow: 0.45;
+
+  margin-top: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  box-shadow: 0 16px 50px rgba(0,0,0,.25);
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+  min-height: 210px;
+}
+
+/* Le visuel (poumons) est AU PREMIER PLAN dans la zone */
+.lungs{
+  position: absolute;
+  inset: 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  z-index: 1; /* ✅ visible */
+}
+
+.lungs-svg{
+  width: min(520px, 92%);
+  height: auto;
+  opacity: 0.92;
+  transform-origin: 50% 55%;
+  transform: scale(var(--bscale));
+  filter: drop-shadow(0 18px 40px rgba(0,0,0,.22));
+}
+
+/* Poumons = plus “vivants” */
+.lung{
+  transform-origin: 50% 60%;
+  opacity: calc(0.75 + (var(--bglow) * 0.25));
+}
+.alveoli{
+  opacity: calc(0.35 + (var(--bglow) * 0.25));
+}
+
+/* HUD texte AU-DESSUS des poumons */
+.breath-hud{
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 18px 10px 10px;
+}
+
+.breath-label{
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.breath-timer{
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 750;
+  color: rgba(234,240,255,.88);
+}
+
+.breath-sub{
+  margin-top: 8px;
+  font-size: 14px;
+  color: rgba(234,240,255,.72);
+}
+
+/* Animations visuelles en cours */
+body.breath-running .breath-stage{
+  border-color: rgba(120,210,255,.20);
+  box-shadow: 0 22px 80px rgba(0,0,0,.40);
+}
+
+/* un petit halo vivant */
+.breath-stage::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width: 180px;
+  height: 180px;
+  transform: translate(-50%,-50%);
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%,
+    rgba(255,255,255,.12),
+    rgba(120,160,255,.10),
+    rgba(0,0,0,0));
+  opacity: var(--bglow);
+  pointer-events:none;
+  z-index: 0;
+}
+
+/* Petites teintes selon phase */
+body.breath-inhale .breath-label{ color: rgba(235,245,255,.98); }
+body.breath-exhale .breath-label{ color: rgba(220,240,255,.95); }
+body.breath-hold .breath-label{ color: rgba(240,240,255,.92); }
+
+/* Actions respiration */
+.breath-actions{ margin-top: 14px; }
+
+/* Réglages */
+.settings-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  margin-top: 8px;
+}
+
+.set{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  min-width: 180px;
+  flex: 1;
+}
+
+.set-title{
+  font-size: 12px;
+  color: rgba(234,240,255,.72);
+}
+
+.select{
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(10,14,24,.22);
+  color: rgba(234,240,255,.92);
+  padding: 10px 12px;
+  outline: none;
+}
+
+.toggle{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  user-select:none;
+}
+.toggle input{ transform: translateY(1px); }
+
+/* -------------------------
+   AVIS (avis.html)
+------------------------- */
+.page-avis .wrap{
+  max-width: 720px;
+  padding-top: 40px;
+}
+
+.avis-card{ text-align: center; }
+.avis-card .actions{ justify-content: center; }
+
+/* -------------------------
+   Responsive (mobile)
+------------------------- */
+@media (max-width: 520px){
+  .brand{ font-size: 34px; }
+  .brand.big{ font-size: 44px; }
+  .card{ padding: 14px; border-radius: 18px; }
+  .btn{ width: 100%; }
+  .home-actions, .actions{ gap: 8px; }
+
+  .breath-label{ font-size: 26px; }
+  .breath-timer{ font-size: 20px; }
+  .lungs-svg{ width: min(520px, 100%); }
+}
