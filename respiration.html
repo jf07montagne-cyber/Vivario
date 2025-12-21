@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Respiration</title>
+  <link rel="stylesheet" href="style.css?v=7" />
+</head>
+
+<body class="page-breath">
+  <main class="wrap">
+    <header class="top">
+      <h1 class="brand">Vivario</h1>
+      <p class="muted">Exercice guidé de respiration.</p>
+    </header>
+
+    <section class="card breathe-card breath-stage" id="breathCard">
+      <!-- Orbe visuel (au 1er plan grâce au CSS z-index) -->
+      <div class="breathe-orb" aria-hidden="true"></div>
+      <div class="breathe-center" aria-hidden="true"></div>
+
+      <h2 style="margin:0 0 8px;">Respiration 4–0–6</h2>
+      <p class="muted" style="line-height:1.55; margin-top:0;">
+        Inspire 4s • expire 6s. Tu peux t’arrêter quand tu veux.
+      </p>
+
+      <!-- UI guidage -->
+      <div class="breath-ui">
+        <div id="breathLabel" class="breath-phase">Prêt ?</div>
+        <div id="breathTimer" class="breath-timer">4–6</div>
+        <div id="breathSub" class="breath-sub">Appuie sur “Démarrer”.</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" id="btnBreathStart">▶ Démarrer</button>
+        <button class="btn ghost" id="btnBreathStop" disabled>⏸ Stop</button>
+        <a class="btn ghost" href="accueil.html?v=7">↩ Retour</a>
+      </div>
+
+      <p class="tiny muted" style="margin-top:12px;">
+        Si tu te sens mal à l’aise, stoppe l’exercice et reviens à un souffle naturel.
+      </p>
+    </section>
+  </main>
+
+  <script src="sound.js?v=7"></script>
+  <script src="respiration.js?v=7"></script>
+</body>
+</html>
