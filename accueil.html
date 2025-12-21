@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Accueil</title>
+  <link rel="stylesheet" href="style.css?v=1000" />
+</head>
+<body class="page-home">
+
+  <main class="wrap">
+    <section class="card home-card">
+      <div class="home-badge" id="ambState">Ambiance : OFF</div>
+
+      <h1 class="brand big">Vivario</h1>
+      <p class="lead">Prenez quelques minutes. Ici, vous pouvez simplement être.</p>
+      <p class="muted">Réponses locales • aucune donnée envoyée.</p>
+
+      <div class="home-actions">
+        <a class="btn primary" href="questionnaire.html?v=1000">Commencer</a>
+        <a class="btn ghost" href="apropos.html?v=1000">À propos</a>
+        <a class="btn ghost" href="index.html?v=1000">↩ Retour</a>
+      </div>
+
+      <div class="sep"></div>
+
+      <p class="tiny muted">
+        Bouton 🔇/🔊 en bas à droite : ambiance optionnelle (OFF par défaut).
+      </p>
+    </section>
+  </main>
+
+  <script src="sound.js?v=1000"></script>
+  <script>
+    function refreshAmb(){
+      const el = document.getElementById("ambState");
+      const on = window.VivarioSound?.isOn?.() === true;
+      el.textContent = "Ambiance : " + (on ? "ON" : "OFF");
+      el.classList.toggle("on", on);
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      refreshAmb();
+      setInterval(refreshAmb, 400);
+    });
+  </script>
+</body>
+</html>
