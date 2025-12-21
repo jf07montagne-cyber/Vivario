@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario</title>
+
+  <!-- ✅ Cache-bust -->
+  <link rel="stylesheet" href="style.css?v=300" />
+
+  <!-- ✅ Redirection propre vers accueil -->
+  <meta http-equiv="refresh" content="0;url=accueil.html?v=300">
+</head>
+<body class="page-home">
+
+  <!-- Fallback visuel si le refresh est bloqué -->
+  <main class="wrap">
+    <section class="card home-card center">
+      <h1 class="brand big">Vivario</h1>
+      <p class="muted" style="margin-top:10px; line-height:1.5;">
+        Redirection vers l’accueil…
+      </p>
+
+      <div class="actions" style="justify-content:center;">
+        <a class="btn primary" href="accueil.html?v=300">Ouvrir l’accueil</a>
+      </div>
+
+      <p class="tiny muted" style="margin-top:12px;">
+        Si rien ne se passe, utilise le bouton ci-dessus.
+      </p>
+    </section>
+  </main>
+
+  <!-- ✅ Sound system (optionnel, mais OK ici) -->
+  <script src="sound.js?v=300"></script>
+
+  <!-- ✅ Redirection JS (fallback plus fiable que meta refresh sur certains mobiles) -->
+  <script>
+    setTimeout(() => {
+      if (!location.pathname.endsWith("accueil.html")) {
+        location.replace("accueil.html?v=300");
+      }
+    }, 50);
+  </script>
+</body>
+</html>
