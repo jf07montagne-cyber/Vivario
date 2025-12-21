@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Résultat</title>
+  <link rel="stylesheet" href="style.css?v=101" />
+</head>
+<body class="page-result">
+
+  <main class="wrap">
+    <header class="top">
+      <h1 class="brand">Vivario</h1>
+      <p class="muted">Merci. Prends une seconde…</p>
+    </header>
+
+    <!-- ✅ Carte résultat (sans respiration dedans) -->
+    <section class="card" id="resultCard">
+      <h2 id="resultTitle">Ton résultat</h2>
+      <p class="muted" id="resultMeta"></p>
+
+      <div class="result-block" id="finalMessage"></div>
+
+      <div class="actions">
+        <a class="btn primary" href="respiration.html?v=101">🫁 Faire la respiration guidée</a>
+        <a class="btn ghost" href="accueil.html?v=101">↩ Accueil</a>
+      </div>
+
+      <p class="tiny muted" style="margin-top:10px">
+        Confidentialité : Vivario ne remplace pas un professionnel de santé.
+        Si danger immédiat : 15 / 112.
+      </p>
+    </section>
+
+    <!-- ✅ Carte avis (sans auto-redirect) -->
+    <section class="card feedback-card">
+      <h3 style="margin:0 0 6px;">Un avis rapide ?</h3>
+      <p class="muted" style="margin:0 0 12px; line-height:1.45;">
+        Ça t’aide ? Une idée d’amélioration ? Ton retour m’aide à rendre Vivario plus utile.
+      </p>
+      <div class="actions" style="margin-top:0;">
+        <a class="btn primary" href="avis.html?v=101">✍️ Donner un avis</a>
+        <a class="btn ghost" href="questionnaire.html?v=101">↻ Refaire le questionnaire</a>
+      </div>
+    </section>
+
+    <section class="card" id="scenarios"></section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "vivario_session_v1_1";
+
+    function esc(s){
+      return String(s ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[c]));
+    }
+
+    function render() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const finalEl = document.getElementById("finalMessage");
+      const metaEl = document.getElementById("resultMeta");
+      const scEl = document.getElementById("scenarios");
+
+      if (!raw) {
+        finalEl.textContent = "Session introuvable. Reviens au questionnaire.";
+        metaEl.textContent = "";
+        scEl.innerHTML = "";
+        return;
+      }
+
+      const session = JSON.parse(raw);
+
+      metaEl.textContent =
+        `Version ${session.version} • ${new Date(session.createdAt).toLocaleString("fr-FR")}`;
+
+      finalEl.innerHTML =
+        "<p>" + esc(session.finalMessage).replace(/\n\n/g, "</p><p>") + "</p>";
+
+      const scenarios = Array.isArray(session.scenarios) ? session.scenarios : [];
+      if (!scenarios.length) {
+        scEl.innerHTML = "<h3>Scénarios</h3><p class='muted'>Aucun scénario disponible.</p>";
+        return;
+      }
+
+      scEl.innerHTML = "<h3>Scénarios</h3>" + scenarios.map(s => `
+        <div class="scenario">
+          <h4>${esc(s.title)}</h4>
+          <div class="scenario-text">${esc(s.text).replace(/\n\n/g,"<br><br>")}</div>
+        </div>
+      `).join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", render);
+  </script>
+</body>
+</html>

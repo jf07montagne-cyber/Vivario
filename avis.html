@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vivario — Donner un avis</title>
+  <link rel="stylesheet" href="style.css?v=101">
+</head>
+
+<body class="page-avis">
+  <div class="wrap">
+    <div class="card avis-card center">
+      <h2>Donner un avis</h2>
+      <p class="muted" style="margin-top:8px; line-height:1.45">
+        Ton retour m’aide à améliorer Vivario.
+      </p>
+
+      <div class="sep"></div>
+
+      <p class="small muted" id="avisCountdown">Ouverture du formulaire dans 3s…</p>
+
+      <div style="margin-top:14px" class="actions">
+        <a class="btn primary" target="_blank" rel="noopener"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSczOz8rRS2o4pS8mf6vH4BDMNIxgmR3dVSEgPEJt5vsEGdKPg/viewform">
+          Ouvrir le formulaire
+        </a>
+        <a class="btn ghost" href="resultat.html?v=101">↩ Retour</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const url = "https://docs.google.com/forms/d/e/1FAIpQLSczOz8rRS2o4pS8mf6vH4BDMNIxgmR3dVSEgPEJt5vsEGdKPg/viewform";
+    let t = 3;
+    const el = document.getElementById("avisCountdown");
+
+    const it = setInterval(() => {
+      t -= 1;
+      if (t <= 0) {
+        clearInterval(it);
+        el.textContent = "Ouverture…";
+        // ✅ laisse le temps de cliquer, puis redirige
+        setTimeout(() => (window.location.href = url), 300);
+      } else {
+        el.textContent = `Ouverture du formulaire dans ${t}s…`;
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
