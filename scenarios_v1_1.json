@@ -1,0 +1,270 @@
+{
+  "meta": {
+    "min_sentences": 7,
+    "max_sentences": 12,
+    "notes": "Vivario v1.1 - Bibliothèque modulaire enrichie + variantes par onglets. Les variantes ont leurs propres blocs pour garantir des textes différents."
+  },
+
+  "roots": {
+    "clarification": {
+      "title": "Juste pour toi",
+      "text": [
+        "Merci d’avoir pris ce moment.",
+        "On peut avancer sans forcer, avec ce qui est là."
+      ]
+    },
+    "fatigue": {
+      "title": "Juste pour toi",
+      "text": [
+        "Merci d’avoir pris ce moment.",
+        "Quand la fatigue est là, le but n’est pas de faire plus : c’est de te préserver."
+      ]
+    },
+    "flou": {
+      "title": "Juste pour toi",
+      "text": [
+        "Merci d’avoir pris ce moment.",
+        "Le flou n’est pas un échec : c’est souvent un signe qu’il y a beaucoup à porter."
+      ]
+    },
+    "protection": {
+      "title": "Juste pour toi",
+      "text": [
+        "Merci d’avoir pris ce moment.",
+        "Se protéger, prendre du recul : c’est une réponse saine quand c’est trop."
+      ]
+    },
+    "resilience": {
+      "title": "Juste pour toi",
+      "text": [
+        "Merci d’avoir pris ce moment.",
+        "Tenir et t’adapter, ça demande de l’énergie. Ça compte."
+      ]
+    },
+    "sortie": {
+      "title": "Sortie douce",
+      "text": [
+        "Tu as le droit de t’arrêter ici.",
+        "Si tu veux, reviens plus tard, ou choisis un soutien plus adapté. Tu n’as rien à prouver."
+      ]
+    }
+  },
+
+  "modules": {
+    "openings": {
+      "stable": [
+        "Tu sembles plutôt stable aujourd’hui — et c’est précieux.",
+        "Même quand ça va “globalement”, ça vaut le coup de se situer.",
+        "Tu as une base stable, et c’est un bon point d’appui."
+      ],
+      "neutre": [
+        "Tu es dans un entre-deux, sans forcément tout nommer.",
+        "Tu n’as pas besoin d’une réponse parfaite : juste d’un point de repère.",
+        "Ce moment peut servir de “pause” avant de repartir."
+      ],
+      "flou": [
+        "Il y a du flou, et c’est ok : tu n’as pas à forcer une explication.",
+        "Parfois, le flou est déjà une information : ça fait beaucoup à traiter.",
+        "Le flou n’empêche pas d’avancer : il demande juste plus de douceur."
+      ],
+      "charge": [
+        "Tu portes beaucoup en ce moment — le reconnaître, c’est déjà important.",
+        "Quand c’est chargé, le plus utile est souvent de ralentir un peu.",
+        "Tu n’as pas à tenir “au max” en continu : personne ne peut."
+      ],
+      "indetermine": [
+        "Tu avances même sans tout définir, et c’est déjà une forme de justesse.",
+        "Ne pas savoir exactement, c’est déjà une vérité du moment.",
+        "Tu peux commencer petit : te situer suffit."
+      ]
+    },
+
+    "themes": {
+      "travail": [
+        "Le travail/les études peuvent coloniser l’esprit, même en dehors des horaires.",
+        "La pression de performance peut épuiser sans qu’on s’en rende compte.",
+        "Quand le mental reste “en mode tâches”, le repos devient difficile."
+      ],
+      "finances": [
+        "Les finances peuvent créer une tension de fond très usante.",
+        "Quand la sécurité matérielle vacille, le corps reste souvent en alerte.",
+        "C’est normal que ça prenne de la place : c’est concret, quotidien."
+      ],
+      "couple": [
+        "Le couple peut être une source de réconfort… ou de charge quand quelque chose se déplace.",
+        "Une relation qui questionne prend souvent beaucoup de place intérieurement.",
+        "Quand c’est sensible, le non-dit fatigue vite."
+      ],
+      "famille": [
+        "La famille peut réveiller des émotions anciennes, parfois sans prévenir.",
+        "Les liens familiaux demandent souvent de l’énergie, même quand on aime.",
+        "Les attentes implicites de la famille peuvent peser sans qu’on le voie."
+      ],
+      "enfants": [
+        "La parentalité peut laisser très peu de place pour soi.",
+        "S’occuper des enfants tout en tenant le reste peut être lourd, même quand on fait de son mieux.",
+        "On peut aimer fort et être épuisé(e) : les deux coexistent."
+      ],
+      "amis": [
+        "Le lien social compte : l’isolement fatigue souvent plus qu’on ne le pense.",
+        "Se sentir moins compris(e) peut amplifier ce que l’on traverse.",
+        "Même une présence minimale (un message) peut changer l’état intérieur."
+      ],
+      "sante": [
+        "Quand la santé inquiète, l’esprit peut tourner en boucle sans pause.",
+        "Le corps et l’émotion se répondent : l’inquiétude peut prendre beaucoup de place.",
+        "Ta charge est réelle : le corps le rappelle parfois."
+      ],
+      "addiction": [
+        "Une habitude difficile peut être un combat silencieux.",
+        "On peut vouloir arrêter et pourtant se sentir pris(e) : c’est fréquent.",
+        "La honte isole, mais le fait est simple : c’est une difficulté humaine."
+      ],
+      "evenement": [
+        "Un événement récent (deuil, séparation…) peut laisser une trace plus longue qu’on ne croit.",
+        "Même si “c’est passé”, l’intérieur peut encore être en mouvement.",
+        "Ton système digère à son rythme : ce n’est pas linéaire."
+      ],
+      "multiple": [
+        "Quand plusieurs choses s’empilent, le système se met vite en surcharge.",
+        "Ce n’est pas “toi” le problème : c’est trop de choses en même temps.",
+        "Quand tout arrive ensemble, le cerveau perd ses priorités."
+      ],
+      "rien_de_precis": [
+        "Faire le point sans raison précise est parfois exactement ce qu’il faut.",
+        "Prendre ce recul, même sans objectif clair, peut déjà apaiser.",
+        "Le simple fait de se situer peut éviter l’accumulation."
+      ],
+      "preferer_pas": [
+        "Tu as le droit de garder certaines choses pour toi.",
+        "On peut avancer même sans tout dire — avec respect et douceur.",
+        "La confidentialité intérieure, c’est aussi une protection."
+      ]
+    },
+
+    "vecu": {
+      "melange": [
+        "Quand tout se mélange, la priorité peut être de simplifier : une chose à la fois.",
+        "Ce mélange intérieur peut être le signe que tu as porté trop longtemps sans pause.",
+        "Si tout se superpose, c’est normal de ne plus savoir par où commencer."
+      ],
+      "porter_seul": [
+        "Porter seul(e) fatigue : être reconnu(e) peut déjà alléger un peu.",
+        "Garder pour soi protège parfois… mais ça peut aussi isoler.",
+        "Tu n’as pas besoin de porter tout ça sans témoin."
+      ],
+      "fatigue": [
+        "L’accumulation finit par se faire sentir dans le corps et la tête.",
+        "La fatigue n’est pas un manque de volonté : c’est un signal.",
+        "Quand on tire sur la corde trop longtemps, le système se met en économie."
+      ],
+      "tenir_coute": [
+        "Tenir en continu coûte cher : ce coût mérite d’être vu.",
+        "Tu fais ce que tu peux — et ça compte, même si ça ne se voit pas.",
+        "Même quand tu “gères”, ton corps peut dire : stop, j’en peux plus."
+      ],
+      "mots_difficiles": [
+        "Ne pas trouver les mots est normal quand c’est trop dense.",
+        "On peut commencer par quelque chose de très simple : “c’est lourd” ou “c’est flou”.",
+        "Les mots viennent souvent après l’apaisement, pas avant."
+      ],
+      "rien": [
+        "Même sans signe précis, ton ressenti a le droit d’exister.",
+        "Tu n’as pas besoin de “cocher” quelque chose de parfait pour que ce soit réel.",
+        "Parfois le corps sait avant le mental."
+      ]
+    },
+
+    "needs": {
+      "mots": [
+        "Tu avais besoin de mettre des mots : choisis une phrase simple et vraie, rien de plus.",
+        "Mettre des mots n’efface pas le problème, mais ça redonne du contrôle.",
+        "Une phrase claire vaut mieux qu’un grand discours flou."
+      ],
+      "comprendre": [
+        "Tu voulais comprendre : vise une petite clarté, pas une solution parfaite.",
+        "Comprendre peut commencer par repérer ce qui te pèse le plus aujourd’hui.",
+        "Chercher du sens est humain : fais-le sans te juger."
+      ],
+      "moins_seul": [
+        "Tu avais besoin de te sentir moins seul(e) : ce que tu vis mérite d’être reconnu.",
+        "Se sentir accompagné(e), même un peu, change beaucoup.",
+        "Le fait d’être vu(e) diminue souvent la charge."
+      ],
+      "normaliser": [
+        "Tu voulais vérifier que c’est “normal” : oui, ton ressenti a le droit d’exister tel quel.",
+        "Beaucoup de gens vivent ça sans le dire : tu n’es pas “anormal(e)”.",
+        "Ce que tu ressens est cohérent avec ce que tu traverses."
+      ],
+      "recul": [
+        "Tu avais besoin de recul : un pas en arrière peut être un vrai soin.",
+        "Le recul n’est pas de la fuite : c’est parfois une stratégie de survie.",
+        "Le recul aide à retrouver de l’air."
+      ],
+      "presence": [
+        "Tu voulais juste être ici : ce moment simple a de la valeur.",
+        "Être là, sans performance, c’est déjà réparateur.",
+        "Ce moment n’a rien à prouver."
+      ],
+      "indetermine": [
+        "Ne pas savoir exactement est déjà une info : ton système demande de la douceur.",
+        "On peut commencer par apaiser, puis seulement ensuite comprendre.",
+        "Tu n’as pas besoin de décider maintenant."
+      ]
+    },
+
+    "energy": {
+      "lecture": [
+        "Aujourd’hui, garde ça léger : lire et accueillir suffit.",
+        "Si tu lis, fais-le lentement : une phrase à la fois."
+      ],
+      "reflechir": [
+        "Tu peux réfléchir un peu, mais sans te juger.",
+        "Réfléchir oui — ruminer non : choisis une question simple."
+      ],
+      "parcourir": [
+        "Tu peux juste parcourir : pas besoin d’aller loin.",
+        "Survoler, c’est déjà bien si c’est ce que tu peux."
+      ],
+      "faible": [
+        "Si ton énergie est basse, l’objectif est simple : te préserver.",
+        "Avec peu d’énergie, le meilleur choix est souvent la simplicité."
+      ],
+      "indetermine": [
+        "Avance au rythme du jour, sans te forcer.",
+        "Tu peux adapter : aujourd’hui peut être “petit”."
+      ]
+    },
+
+    "variants": {
+      "step": [
+        "Un pas concret (tout petit) : choisis une action de 2 minutes, pas plus.",
+        "Choisis UNE chose utile, minuscule, fais-la, puis stop. Ça suffit.",
+        "Si c’est trop : ton pas concret peut être juste boire de l’eau ou t’asseoir 30 secondes.",
+        "Un pas concret : écris une phrase (une seule) sur ce qui te pèse le plus."
+      ],
+      "calm": [
+        "Reviens au souffle : inspire doucement, puis expire plus longuement.",
+        "Relâche les épaules. Laisse la mâchoire se desserrer.",
+        "Pose une main sur le ventre : sens juste le mouvement, sans contrôler.",
+        "Si tu veux : 3 cycles respiration et tu t’arrêtes. Simple."
+      ],
+      "norm": [
+        "Ce que tu ressens est plus courant que tu ne le crois — et ça ne dit rien de ta valeur.",
+        "Ton système réagit à une charge réelle. Ce n’est pas “être faible”.",
+        "Beaucoup de gens font semblant d’aller bien. Tu as le droit d’être vrai(e).",
+        "Ce n’est pas toi qui es “trop” : c’est la somme qui est trop."
+      ]
+    },
+
+    "closings": {
+      "soft": [
+        "Tu n’as pas besoin de tout régler maintenant.",
+        "Garde juste une petite chose : une respiration, une phrase, un pas minuscule.",
+        "Si ça devient trop, fais simple : reviens au souffle.",
+        "Tu peux revenir ici quand tu veux.",
+        "Tu as déjà fait quelque chose d’important : t’arrêter et regarder."
+      ]
+    }
+  }
+}
