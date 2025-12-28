@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario</title>
+  <meta http-equiv="refresh" content="0;url=accueil.html" />
+</head>
+<body>
+  <script>
+    // redirect JS (garde query/hash)
+    const target = "accueil.html" + (location.search || "") + (location.hash || "");
+    location.replace(target);
+  </script>
+</body>
+</html>
