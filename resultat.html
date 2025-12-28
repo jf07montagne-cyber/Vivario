@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Résultat</title>
+  <link rel="stylesheet" href="style.css?v=600" />
+</head>
+
+<body class="page-result">
+  <main class="wrap">
+
+    <header class="top">
+      <h1 class="brand">Vivario</h1>
+      <p class="muted">Merci. Prends une seconde…</p>
+    </header>
+
+    <!-- HERO apaisant + “waouh” -->
+    <section class="card hero-card">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-row">
+        <div class="hero-left">
+          <div class="pill" id="kpiPill">Tu as fait le point ✅</div>
+
+          <h2 class="hero-title">Tu peux souffler.</h2>
+          <p class="muted hero-sub">
+            Ces textes s’adaptent à tes réponses. Rien n’est envoyé : tout reste sur ton appareil.
+          </p>
+
+          <div class="chips" id="chips"></div>
+
+          <div class="kpis" id="kpis" aria-label="Résumé rapide"></div>
+
+          <div class="actions hero-actions">
+            <a class="btn primary" href="respiration.html?v=600">🫁 Respiration guidée</a>
+            <a class="btn ghost" href="questionnaire.html?v=600">↻ Refaire le questionnaire</a>
+            <a class="btn ghost" href="accueil.html?v=600">↩ Accueil</a>
+          </div>
+        </div>
+
+        <div class="hero-orb" aria-hidden="true"></div>
+      </div>
+
+      <!-- Rétention : streak + comparaison -->
+      <div class="sep"></div>
+
+      <div class="retention">
+        <div class="retention-left">
+          <h3 class="ret-title">Revenir demain</h3>
+          <p class="muted ret-sub" id="streakLine">Streak : 0 jour</p>
+        </div>
+
+        <div class="retention-right">
+          <button class="btn ghost" id="btnCompare" type="button">🗓️ Comparer à hier</button>
+          <button class="btn ghost" id="btnCopySummary" type="button">📋 Copier le résumé</button>
+        </div>
+      </div>
+
+      <div class="compare card soft" id="compareBox" style="display:none;">
+        <h4 style="margin:0 0 8px;">Comparaison</h4>
+        <div class="compare-grid" id="compareGrid"></div>
+        <p class="tiny muted" style="margin:10px 0 0; line-height:1.45;">
+          Comparaison stockée localement sur ton appareil.
+        </p>
+      </div>
+    </section>
+
+    <!-- Message final (court + impact) -->
+    <section class="card breathe-card">
+      <div class="breathe-orb" aria-hidden="true"></div>
+      <div class="breathe-center" aria-hidden="true"></div>
+
+      <h2 style="margin:0;">Ton résultat</h2>
+      <p class="muted" id="resultMeta" style="margin-top:6px;"></p>
+
+      <div class="result-block bigtext" id="finalMessage"></div>
+    </section>
+
+    <!-- Onglets scénarios -->
+    <section class="card" id="scenariosCard">
+      <div class="section-head">
+        <div>
+          <h2 style="margin:0;">Scénarios</h2>
+          <p class="muted" style="margin:6px 0 0; line-height:1.45;">
+            4 lectures différentes d’un même moment : tu peux choisir celle qui te fait le plus de bien.
+          </p>
+        </div>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Scénarios Vivario">
+        <button class="tab active" role="tab" aria-selected="true" data-tab="main">Juste pour toi</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="step">Un pas concret</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="calm">Apaisement</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="norm">Normalisation</button>
+      </div>
+
+      <div class="tabpanes">
+        <div class="pane active" role="tabpanel" id="pane-main"></div>
+        <div class="pane" role="tabpanel" id="pane-step"></div>
+        <div class="pane" role="tabpanel" id="pane-calm"></div>
+        <div class="pane" role="tabpanel" id="pane-norm"></div>
+      </div>
+    </section>
+
+    <!-- Carte avis -->
+    <section class="card feedback-card">
+      <h3 style="margin:0 0 6px;">Un avis rapide ?</h3>
+      <p class="muted" style="margin:0 0 12px; line-height:1.45;">
+        Ton retour m’aide à rendre Vivario plus utile.
+      </p>
+      <div class="actions" style="margin-top:0;">
+        <a class="btn primary" href="avis.html?v=600">✍️ Donner un avis</a>
+        <a class="btn ghost" href="questionnaire.html?v=600">↻ Refaire le questionnaire</a>
+      </div>
+    </section>
+
+    <p class="tiny muted" style="margin:8px 2px 0; line-height:1.45;">
+      Confidentialité : Vivario ne remplace pas un professionnel de santé. Si danger immédiat : 15 / 112.
+    </p>
+  </main>
+
+  <script src="sound.js?v=600"></script>
+
+  <script>
+    const STORAGE_KEY = "vivario_session_v1_1";
+    const SNAP_KEY = "vivario_last_snapshot_v1_1";
+    const STREAK_KEY = "vivario_streak_v1_1";
+    const STREAK_DATE_KEY = "vivario_streak_date_v1_1";
+
+    function esc(s){
+      return String(s ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[c]));
+    }
+
+    function renderParagraphs(text){
+      return "<p>" + esc(text).replace(/\n\n/g, "</p><p>") + "</p>";
+    }
+
+    function setActiveTab(key){
+      document.querySelectorAll(".tab").forEach(btn => {
+        const on = btn.dataset.tab === key;
+        btn.classList.toggle("active", on);
+        btn.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      document.querySelectorAll(".pane").forEach(p => {
+        p.classList.toggle("active", p.id === "pane-" + key);
+      });
+    }
+
+    // Labels
+    function toneLabel(id){
+      const map = {
+        stable: "Stable",
+        neutre: "Neutre",
+        flou: "Flou",
+        charge: "Chargé(e)",
+        indetermine: "Indéterminé"
+      };
+      return map[id] || id;
+    }
+    function energyLabel(id){
+      const map = {
+        lecture: "Lecture",
+        reflechir: "Réfléchir",
+        parcourir: "Parcourir",
+        faible: "Faible",
+        indetermine: "Indéterminé"
+      };
+      return map[id] || id;
+    }
+    function sortieLabel(id){
+      const map = {
+        clair: "Plus clair",
+        soulage: "Soulagé(e)",
+        identique: "Identique",
+        pas_aide: "Pas aidé(e)",
+        stop: "Stop"
+      };
+      return map[id] || id;
+    }
+    function themeLabel(id){
+      const map = {
+        travail: "Travail",
+        finances: "Finances",
+        couple: "Couple",
+        famille: "Famille",
+        enfants: "Enfants",
+        amis: "Lien social",
+        sante: "Santé",
+        addiction: "Habitude",
+        evenement: "Événement",
+        multiple: "Multiple",
+        rien_de_precis: "Faire le point",
+        preferer_pas: "Discret"
+      };
+      return map[id] || id;
+    }
+
+    function chip(text){
+      const span = document.createElement("span");
+      span.className = "chip";
+      span.textContent = text;
+      return span;
+    }
+
+    function kpi(label, value){
+      const div = document.createElement("div");
+      div.className = "kpi";
+      div.innerHTML = `<div class="kpi-l">${esc(label)}</div><div class="kpi-v">${esc(value)}</div>`;
+      return div;
+    }
+
+    function safeArr(x){ return Array.isArray(x) ? x : []; }
+
+    function renderChipsAndKpis(session){
+      const el = document.getElementById("chips");
+      const k = document.getElementById("kpis");
+      if (el) el.innerHTML = "";
+      if (k) k.innerHTML = "";
+
+      const p = session.profile || {};
+      const focus = safeArr(p.focus);
+      const themes = safeArr(p.themes);
+
+      // Chips (max 5)
+      if (el){
+        if (p.tone) el.appendChild(chip(`État : ${toneLabel(p.tone)}`));
+        focus.slice(0, 2).forEach(t => el.appendChild(chip(`Focus : ${themeLabel(t)}`)));
+        if (p.energie) el.appendChild(chip(`Énergie : ${energyLabel(p.energie)}`));
+        if (p.sortie) el.appendChild(chip(`Après : ${sortieLabel(p.sortie)}`));
+      }
+
+      // KPIs (plus lisible)
+      if (k){
+        if (p.root) k.appendChild(kpi("Lecture", String(p.root)));
+        if (themes.length) k.appendChild(kpi("Thèmes", themes.slice(0,3).map(themeLabel).join(" • ")));
+        if (p.besoin?.length) k.appendChild(kpi("Besoin", safeArr(p.besoin).slice(0,2).join(" • ")));
+      }
+    }
+
+    // ---- Streak (local)
+    function ymd(d){
+      const z = (n) => String(n).padStart(2, "0");
+      return `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}`;
+    }
+
+    function updateStreak(createdAtISO){
+      const today = new Date();
+      const todayKey = ymd(today);
+
+      const lastKey = localStorage.getItem(STREAK_DATE_KEY) || "";
+      let streak = parseInt(localStorage.getItem(STREAK_KEY) || "0", 10);
+      if (!Number.isFinite(streak) || streak < 0) streak = 0;
+
+      // Si on a déjà compté aujourd’hui → rien
+      if (lastKey === todayKey) return streak;
+
+      // Si la session est “aujourd’hui” (elle l’est), on incrémente
+      // Bonus: si lastKey était hier → streak++, sinon streak=1
+      const yesterday = new Date(today);
+      yesterday.setDate(today.getDate() - 1);
+      const yKey = ymd(yesterday);
+
+      if (lastKey === yKey) streak = streak + 1;
+      else streak = 1;
+
+      localStorage.setItem(STREAK_KEY, String(streak));
+      localStorage.setItem(STREAK_DATE_KEY, todayKey);
+      return streak;
+    }
+
+    function setStreakUI(streak){
+      const line = document.getElementById("streakLine");
+      if (!line) return;
+      if (streak <= 1) line.textContent = `Streak : ${streak} jour`;
+      else line.textContent = `Streak : ${streak} jours`;
+    }
+
+    // ---- Compare
+    function buildSnapshot(session){
+      const p = session.profile || {};
+      return {
+        createdAt: session.createdAt || new Date().toISOString(),
+        version: session.version || "1.1",
+        tone: p.tone || "",
+        energie: p.energie || "",
+        sortie: p.sortie || "",
+        focus: safeArr(p.focus),
+        themes: safeArr(p.themes),
+        root: p.root || "",
+        summary: session.finalMessage ? String(session.finalMessage).slice(0, 600) : ""
+      };
+    }
+
+    function renderCompare(prev, curr){
+      const box = document.getElementById("compareBox");
+      const grid = document.getElementById("compareGrid");
+      if (!box || !grid) return;
+
+      const row = (title, a, b) => {
+        const div = document.createElement("div");
+        div.className = "compare-row";
+        div.innerHTML = `
+          <div class="compare-k">${esc(title)}</div>
+          <div class="compare-a">${esc(a || "—")}</div>
+          <div class="compare-b">${esc(b || "—")}</div>
+        `;
+        return div;
+      };
+
+      const prevDate = prev?.createdAt ? new Date(prev.createdAt).toLocaleString("fr-FR") : "";
+      const currDate = curr?.createdAt ? new Date(curr.createdAt).toLocaleString("fr-FR") : "";
+
+      grid.innerHTML = "";
+      grid.appendChild(row("Date", prevDate, currDate));
+      grid.appendChild(row("État", toneLabel(prev.tone), toneLabel(curr.tone)));
+      grid.appendChild(row("Énergie", energyLabel(prev.energie), energyLabel(curr.energie)));
+      grid.appendChild(row("Après", sortieLabel(prev.sortie), sortieLabel(curr.sortie)));
+      grid.appendChild(row("Focus", safeArr(prev.focus).slice(0,2).map(themeLabel).join(" • "), safeArr(curr.focus).slice(0,2).map(themeLabel).join(" • ")));
+      grid.appendChild(row("Lecture", prev.root || "—", curr.root || "—"));
+
+      box.style.display = "block";
+    }
+
+    // ---- Copy
+    async function copyText(txt){
+      try{
+        await navigator.clipboard.writeText(txt);
+        return true;
+      }catch{
+        return false;
+      }
+    }
+
+    function render() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+
+      const finalEl = document.getElementById("finalMessage");
+      const metaEl = document.getElementById("resultMeta");
+
+      if (!raw) {
+        finalEl.textContent = "Session introuvable. Reviens au questionnaire.";
+        metaEl.textContent = "";
+        return;
+      }
+
+      const session = JSON.parse(raw);
+
+      metaEl.textContent =
+        `Version ${session.version} • ${new Date(session.createdAt).toLocaleString("fr-FR")}`;
+
+      renderChipsAndKpis(session);
+
+      finalEl.innerHTML = renderParagraphs(session.finalMessage || "");
+
+      // Scénarios
+      const scenarios = Array.isArray(session.scenarios) ? session.scenarios : [];
+      if (!scenarios.length) {
+        document.getElementById("pane-main").innerHTML =
+          "<h3 style='margin:0 0 6px;'>Scénarios</h3><p class='muted'>Aucun scénario disponible.</p>";
+      } else {
+        const map = {};
+        scenarios.forEach(s => { if (s && s.key) map[s.key] = s; });
+
+        function fillPane(key, fallbackTitle){
+          const pane = document.getElementById("pane-" + key);
+          const s = map[key];
+          if (!pane) return;
+
+          const title = esc(s?.title || fallbackTitle);
+          const text = s?.text ? renderParagraphs(s.text) : "<p class='muted'>Indisponible.</p>";
+
+          pane.innerHTML = `
+            <div class="pane-wrap">
+              <h3 class="pane-title">${title}</h3>
+              <div class="scenario-text">${text}</div>
+              <div class="fade-bottom" aria-hidden="true"></div>
+              <div class="actions pane-actions">
+                <a class="btn primary" href="respiration.html?v=600">🫁 2 min respiration</a>
+                <button class="btn ghost btn-copy-s" data-copy="${esc(s?.text || "")}" type="button">📋 Copier</button>
+              </div>
+            </div>
+          `;
+        }
+
+        fillPane("main", "Juste pour toi");
+        fillPane("step", "Un pas concret");
+        fillPane("calm", "Apaisement");
+        fillPane("norm", "Normalisation");
+
+        const mainTitle = map.main?.title;
+        if (mainTitle) {
+          const btnMain = document.querySelector('.tab[data-tab="main"]');
+          if (btnMain) btnMain.textContent = mainTitle;
+        }
+      }
+
+      // Rétention + compare
+      const streak = updateStreak(session.createdAt);
+      setStreakUI(streak);
+
+      // snapshot
+      const currSnap = buildSnapshot(session);
+      let prevSnap = null;
+      try { prevSnap = JSON.parse(localStorage.getItem(SNAP_KEY) || "null"); } catch {}
+
+      // bouton compare
+      const btnCompare = document.getElementById("btnCompare");
+      const box = document.getElementById("compareBox");
+      if (btnCompare){
+        btnCompare.addEventListener("click", () => {
+          if (!prevSnap){
+            if (box){
+              box.style.display = "block";
+              document.getElementById("compareGrid").innerHTML =
+                `<div class="muted" style="line-height:1.55;">Pas encore d’historique. Refais un test demain, puis compare.</div>`;
+            }
+            return;
+          }
+          renderCompare(prevSnap, currSnap);
+        });
+      }
+
+      // Copier résumé
+      const btnCopySummary = document.getElementById("btnCopySummary");
+      if (btnCopySummary){
+        btnCopySummary.addEventListener("click", async () => {
+          const ok = await copyText(session.finalMessage || "");
+          const old = btnCopySummary.textContent;
+          btnCopySummary.textContent = ok ? "Copié ✅" : "Copie impossible";
+          setTimeout(() => btnCopySummary.textContent = old, 1200);
+        });
+      }
+
+      // Copier scénario (par onglet)
+      document.querySelectorAll(".btn-copy-s").forEach(b => {
+        b.addEventListener("click", async () => {
+          const txt = b.getAttribute("data-copy") || "";
+          const ok = await copyText(txt);
+          const old = b.textContent;
+          b.textContent = ok ? "Copié ✅" : "Copie impossible";
+          setTimeout(() => b.textContent = old, 1200);
+        });
+      });
+
+      // Sauvegarde snapshot (après rendu) — garde uniquement le dernier
+      localStorage.setItem(SNAP_KEY, JSON.stringify(currSnap));
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      render();
+      document.querySelectorAll(".tab").forEach(btn => {
+        btn.addEventListener("click", () => setActiveTab(btn.dataset.tab));
+      });
+      setActiveTab("main");
+    });
+  </script>
+</body>
+</html>
