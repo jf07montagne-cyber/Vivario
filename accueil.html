@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Accueil</title>
+  <link rel="stylesheet" href="style.css?v=900" />
+</head>
+<body class="page-home">
+
+  <main class="wrap">
+    <header class="top">
+      <h1 class="brand">Vivario</h1>
+      <p class="muted">Quand une décision pèse, prendre un moment peut aider.</p>
+    </header>
+
+    <section class="card">
+      <p class="muted" style="margin-top:0; line-height:1.6;">
+        Il n’y a pas de bonne ou de mauvaise réponse.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="questionnaire.html?v=900">Commencer</a>
+        <a class="btn ghost" href="apropos.html?v=900">À propos</a>
+      </div>
+
+      <div class="sep"></div>
+      <p class="tiny muted" style="margin:0;">
+        Bouton en bas à droite : ambiance optionnelle (OFF par défaut).
+      </p>
+    </section>
+  </main>
+
+  <!-- ✅ Bouton Ambiance UNIQUE -->
+  <button
+    id="vivarioAmbienceBtn"
+    class="btn ghost ambience-toggle"
+    data-ambience-toggle="1"
+    aria-pressed="false">
+    🔇 Ambiance
+  </button>
+
+  <script src="sound.js?v=900"></script>
+  <script src="ambiance.js?v=900"></script>
+</body>
+</html>
