@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario</title>
+  <link rel="stylesheet" href="style.css?v=1101" />
+</head>
+
+<body class="page-index">
+  <main class="wrap">
+    <header class="top center">
+      <h1 class="brand">Vivario</h1>
+      <p class="muted">Prendre un moment. Reprendre de l’air.</p>
+    </header>
+
+    <section class="card hero-card" style="margin-top:10px;">
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+        <div style="flex:1 1 320px; min-width:260px;">
+          <h2 class="hero-title" style="margin-bottom:6px;">Bienvenue.</h2>
+          <p class="muted hero-sub" style="max-width:560px;">
+            Questionnaire + scénarios personnalisés. Rien n’est envoyé : tout reste sur ton appareil.
+          </p>
+
+          <div class="actions" style="margin-top:14px;">
+            <a class="btn primary" href="accueil.html?v=1101">Commencer</a>
+            <a class="btn ghost" href="respiration.html?v=1101">🫁 Respiration guidée</a>
+          </div>
+
+          <div class="sep"></div>
+          <p class="tiny muted" style="margin:0;">
+            Ambiance optionnelle : bouton en bas à droite (OFF par défaut).
+          </p>
+        </div>
+
+        <div aria-hidden="true" style="flex:0 0 auto;">
+          <div class="hero-orb" style="width:160px;height:160px;"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Audio (bouton unique géré par sound.js) -->
+  <script src="sound.js?v=1101"></script>
+  <script src="ambiance.js?v=1101"></script>
+
+  <script>
+    // micro animation “entrée” douce
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("page-ready");
+    });
+  </script>
+</body>
+</html>

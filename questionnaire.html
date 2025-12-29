@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Questionnaire</title>
+  <link rel="stylesheet" href="style.css?v=1101" />
+</head>
+
+<body class="page-questionnaire">
+  <main class="wrap">
+    <header class="top">
+      <h1 class="brand">Vivario</h1>
+      <p class="muted" id="qCounter">Questionnaire v1.1</p>
+    </header>
+
+    <section class="card">
+      <h2 id="qTitle" style="margin:0 0 8px;"></h2>
+      <p class="muted" id="qSubtitle" style="margin:0 0 12px; line-height:1.55;"></p>
+
+      <p class="tiny muted" id="qHint" style="display:none; margin:0 0 10px;"></p>
+
+      <div id="options"></div>
+
+      <!-- Coach switch -->
+      <div class="card" style="margin:14px 0 0; padding:12px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+          <div>
+            <div style="font-weight:800;">Ton des scénarios</div>
+            <div class="tiny muted" style="margin-top:4px; line-height:1.35;">
+              Coach doux = plus enveloppant. Neutre = plus direct mais gentil.
+            </div>
+          </div>
+          <label style="display:flex; align-items:center; gap:10px; font-weight:800;">
+            <input type="checkbox" id="coachSoftToggle" />
+            Coach doux
+          </label>
+        </div>
+      </div>
+
+      <p id="err" class="tiny" style="color:rgba(255,180,180,.95); margin:12px 0 0;"></p>
+
+      <div class="actions">
+        <button class="btn ghost" id="btnBack">← Retour</button>
+        <button class="btn primary" id="btnNext">Continuer →</button>
+        <a class="btn ghost" href="accueil.html?v=1101">Quitter</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Audio (bouton unique géré par sound.js) -->
+  <script src="sound.js?v=1101"></script>
+  <script src="ambiance.js?v=1101"></script>
+
+  <!-- Engine -->
+  <script src="engine.js?v=1101"></script>
+
+  <script>
+    // Coach doux persistant
+    const KEY_COACH = "vivario_coach_soft";
+    document.addEventListener("DOMContentLoaded", () => {
+      const t = document.getElementById("coachSoftToggle");
+      if (!t) return;
+      t.checked = (localStorage.getItem(KEY_COACH) === "1");
+      t.addEventListener("change", () => {
+        localStorage.setItem(KEY_COACH, t.checked ? "1" : "0");
+      });
+    });
+  </script>
+</body>
+</html>
