@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Accueil</title>
+  <link rel="stylesheet" href="style.css?v=15" />
+  <meta name="theme-color" content="#071125" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <h1 class="brand">Vivario</h1>
+      <p class="muted">Quand une décision pèse, prendre un moment peut aider.</p>
+    </header>
+
+    <section class="card hero-card">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-row">
+        <div style="flex:1 1 auto;">
+          <h2 class="hero-title">Bienvenue.</h2>
+          <p class="hero-sub muted">
+            Questionnaire v1.1 + scénarios personnalisés.
+            Rien n’est envoyé : tout reste sur ton appareil.
+          </p>
+
+          <div class="hero-tools">
+            <a class="btn primary" href="questionnaire.html?v=15">Commencer</a>
+            <a class="btn ghost" href="respiration.html?v=15">🫁 Respiration guidée</a>
+            <a class="btn ghost" href="apropos.html?v=15">ℹ️ À propos</a>
+          </div>
+
+          <div class="sep"></div>
+          <p class="tiny muted">Bouton en bas à droite : ambiance optionnelle (OFF par défaut).</p>
+        </div>
+
+        <div class="hero-orb" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 style="margin-bottom:6px;">Raccourcis</h3>
+      <p class="muted" style="margin:0 0 12px;">
+        Tu peux aussi revoir ton dernier résultat.
+      </p>
+      <div class="actions">
+        <a class="btn ghost" href="resultat.html?v=15">📌 Ouvrir le dernier résultat</a>
+      </div>
+    </section>
+  </div>
+
+  <script src="sound.js?v=15"></script>
+  <script src="ambiance.js?v=15"></script>
+  <script src="ui.js?v=15"></script>
+
+  <script>
+    (function(){
+      function unlock(){
+        try { window.VivarioSound?.setMood?.("calm"); } catch {}
+        try { window.VivarioSound?.startBreathing?.({ affectBreath:false, muteAmbienceWhileBreath:false }); } catch {}
+        try { window.VivarioSound?.stopBreathing?.(); } catch {}
+        window.removeEventListener("pointerdown", unlock);
+        window.removeEventListener("touchstart", unlock);
+      }
+      window.addEventListener("pointerdown", unlock, { once:true, passive:true });
+      window.addEventListener("touchstart", unlock, { once:true, passive:true });
+    })();
+  </script>
+</body>
+</html>

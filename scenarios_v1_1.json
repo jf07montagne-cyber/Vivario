@@ -1,0 +1,333 @@
+{
+  "version": "vivario-scenarios-1.1-enriched-15",
+  "meta": {
+    "min_sentences": 7,
+    "max_sentences": 11,
+    "variants": {
+      "main": { "min_sentences": 8, "max_sentences": 11 },
+      "step": { "min_sentences": 8, "max_sentences": 11 },
+      "calm": { "min_sentences": 7, "max_sentences": 10 },
+      "norm": { "min_sentences": 8, "max_sentences": 11 }
+    }
+  },
+  "roots": {
+    "clarification": {
+      "title": "Juste pour toi",
+      "intro": [
+        { "text": "Tu n’as pas besoin de tout résoudre maintenant : clarifier un peu, c’est déjà beaucoup.", "weight": 3, "tags": ["soft"] },
+        { "text": "Le simple fait d’avoir regardé ça en face mérite du respect.", "weight": 2, "tags": ["soft"] },
+        { "text": "On peut chercher une direction sans chercher une certitude. Une direction suffit.", "weight": 2, "tags": ["neutral"] },
+        { "text": "Tu n’es pas en retard : tu es en train de te retrouver.", "weight": 2, "tags": ["soft"] }
+      ]
+    },
+    "fatigue": {
+      "title": "Préserver ton énergie",
+      "intro": [
+        { "text": "Quand l’énergie est basse, la priorité devient simple : se préserver.", "weight": 3, "tags": ["soft","micro"] },
+        { "text": "Tu n’as pas à te battre contre toi-même. On peut alléger avant de réparer.", "weight": 2, "tags": ["soft"] },
+        { "text": "Si tu es à bout, c’est un signal. Pas une preuve que tu es “faible”.", "weight": 2, "tags": ["soft"] },
+        { "text": "Aujourd’hui, le bon objectif peut être : faire moins, mais mieux pour toi.", "weight": 2, "tags": ["neutral"] }
+      ]
+    },
+    "flou": {
+      "title": "Retrouver un peu de clarté",
+      "intro": [
+        { "text": "Le flou n’est pas un échec : c’est souvent un signe que trop de choses s’empilent.", "weight": 3, "tags": ["soft"] },
+        { "text": "Quand tout se mélange, on peut revenir à un repère : une chose à la fois.", "weight": 3, "tags": ["soft"] },
+        { "text": "Le cerveau déteste l’incertitude : ça fatigue. On peut lui rendre de l’air.", "weight": 2, "tags": ["soft"] },
+        { "text": "On ne cherche pas une réponse parfaite : on cherche une première étape claire.", "weight": 2, "tags": ["neutral"] }
+      ]
+    },
+    "protection": {
+      "title": "Te protéger sans t’isoler",
+      "intro": [
+        { "text": "Se protéger peut être une sagesse : tu as le droit de ralentir.", "weight": 3, "tags": ["soft"] },
+        { "text": "Prendre du recul peut être un soin. Ça ne veut pas dire abandonner {theme1}.", "weight": 3, "tags": ["soft"] },
+        { "text": "Mettre une limite n’est pas être dur : c’est être clair.", "weight": 2, "tags": ["neutral"] },
+        { "text": "Tu peux te protéger sans fermer la porte à tout le monde.", "weight": 2, "tags": ["soft"] }
+      ]
+    },
+    "resilience": {
+      "title": "Reconnaître ta force",
+      "intro": [
+        { "text": "Ce que tu fais déjà compte, même si personne ne le voit.", "weight": 3, "tags": ["soft"] },
+        { "text": "Tenir face à {theme1} demande une énergie invisible. Tu as le droit d’en être fatigué(e).", "weight": 3, "tags": ["soft"] },
+        { "text": "Tu as encaissé beaucoup. Et pourtant tu es encore là : ça dit quelque chose de toi.", "weight": 2, "tags": ["soft"] },
+        { "text": "Version neutre : on part de ce qui fonctionne déjà, même un peu.", "weight": 2, "requires": { "coach": "neutral" } }
+      ]
+    },
+    "sortie": {
+      "title": "Te respecter",
+      "intro": [
+        { "text": "Si tu veux t’arrêter là, c’est ok. Se respecter est une décision saine.", "weight": 4, "requires": { "sortie": "stop" }, "tags": ["soft"] },
+        { "text": "Si ça ne t’a pas aidé, tu n’as rien raté. Tu peux chercher un autre soutien plus adapté.", "weight": 4, "requires": { "sortie": "pas_aide" }, "tags": ["soft"] },
+        { "text": "Tu as le droit de dire “stop”. Ça ne supprime pas le problème, mais ça te protège.", "weight": 2, "requires": { "sortie": "stop" }, "tags": ["soft"] }
+      ]
+    }
+  },
+  "modules": {
+    "openings": {
+      "stable": [
+        { "text": "Tu sembles {tone} aujourd’hui — et c’est précieux de le remarquer.", "weight": 3 },
+        { "text": "Coach doux : tu peux être fier(ère) de cette stabilité, même si tout n’est pas parfait.", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : on peut consolider ce qui tient déjà, sans urgence.", "weight": 3, "requires": { "coach": "neutral" } },
+        { "text": "Aujourd’hui, tu tiens debout. C’est déjà une donnée importante.", "weight": 2 },
+        { "text": "Tu as assez de base pour avancer sans te brusquer.", "weight": 2, "tags": ["soft"] }
+      ],
+      "neutre": [
+        { "text": "Tu es {tone} — ni bien ni mal, juste “entre”. C’est une vraie information.", "weight": 3 },
+        { "text": "Coach doux : cet entre-deux est souvent un signe de fatigue. Tu peux te ménager.", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : tu n’as pas à trancher. Observe et ajuste petit à petit.", "weight": 3, "requires": { "coach": "neutral" } },
+        { "text": "Tu peux avancer sans grande motivation. Juste avec une petite intention.", "weight": 2, "tags": ["soft"] },
+        { "text": "Si tu ne sens rien de clair, on peut quand même trouver un repère simple.", "weight": 2 }
+      ],
+      "flou": [
+        { "text": "Tu es {tone}. Ici, on ne force pas la clarté — on la laisse venir.", "weight": 3 },
+        { "text": "Coach doux : le flou est une zone fragile. On y marche lentement, et c’est ok.", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : on revient à une chose à la fois, puis la suivante.", "weight": 3, "requires": { "coach": "neutral" } },
+        { "text": "Le flou, c’est souvent “trop d’infos” plutôt que “pas assez”.", "weight": 2, "tags": ["soft"] },
+        { "text": "On va réduire le bruit, pas te forcer à décider tout de suite.", "weight": 2 }
+      ],
+      "charge": [
+        { "text": "Tu es {tone}. Rien d’étonnant si ton système est en “mode surcharge”.", "weight": 3 },
+        { "text": "Coach doux : tu n’as pas à porter ça tout seul(e). Tu peux te traiter avec tendresse.", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : priorité = réduire la pression, pas ajouter des tâches.", "weight": 3, "requires": { "coach": "neutral" } },
+        { "text": "Quand ça déborde, revenir au corps est souvent plus utile que réfléchir encore.", "weight": 2, "tags": ["soft"] },
+        { "text": "On va chercher la prochaine petite marche, pas l’escalier entier.", "weight": 2, "tags": ["micro"] }
+      ],
+      "indetermine": [
+        { "text": "Difficile à nommer, et pourtant tu es là : c’est déjà une forme de justesse.", "weight": 3 },
+        { "text": "Coach doux : même sans mots, ton ressenti mérite une place et du respect.", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : on avance avec ce qu’on a aujourd’hui, sans se juger.", "weight": 3, "requires": { "coach": "neutral" } },
+        { "text": "Tu n’as pas besoin d’être “sûr(e)” pour prendre soin de toi.", "weight": 2, "tags": ["soft"] },
+        { "text": "On peut partir d’une simple question : qu’est-ce qui pèse le plus aujourd’hui ?", "weight": 2, "tags": ["micro"] }
+      ]
+    },
+
+    "bridges": [
+      { "text": "Tu peux lire ça comme une main posée sur ton épaule — pas comme une injonction.", "weight": 3, "tags": ["soft"] },
+      { "text": "On va rester simple : une idée, puis une autre, sans te submerger.", "weight": 2 },
+      { "text": "Si une phrase ne te parle pas, tu as le droit de la laisser passer.", "weight": 2, "tags": ["soft"] },
+      { "text": "On cherche ce qui aide, pas ce qui juge.", "weight": 2, "tags": ["soft"] },
+      { "text": "Version neutre : on vise l’utile. Le reste peut attendre.", "weight": 2, "requires": { "coach": "neutral" } }
+    ],
+
+    "themes": {
+      "travail": [
+        { "text": "Quand {theme1} prend trop de place, le cerveau reste en alerte — même au repos.", "weight": 3 },
+        { "text": "Sur {theme1}, l’enjeu est de retrouver une marge, pas d’être parfait(e).", "weight": 3 },
+        { "text": "Un tout petit “non” peut parfois sauver beaucoup d’énergie.", "weight": 2, "tags": ["micro","soft"] },
+        { "text": "Version neutre : clarifie la prochaine contrainte prioritaire, pas tout le plan.", "weight": 2, "requires": { "coach": "neutral" } }
+      ],
+      "finances": [
+        { "text": "Quand {theme1} pèse, l’esprit tourne en boucle. Ça n’est pas un manque de volonté.", "weight": 3, "tags": ["soft"] },
+        { "text": "Version neutre : une seule action utile : lister 3 chiffres clés (revenus, charges, marge).", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] },
+        { "text": "Coach doux : ce stress est légitime. Tu as le droit de te rassurer par petites étapes.", "weight": 2, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Même une micro-clarification sur {theme1} peut réduire l’angoisse.", "weight": 2, "tags": ["micro"] }
+      ],
+      "couple": [
+        { "text": "Sur {theme1}, il y a souvent ce qui est dit… et ce qui n’est pas dit.", "weight": 3 },
+        { "text": "Coach doux : tu as le droit de vouloir du lien et du respect en même temps.", "weight": 2, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : une conversation = un sujet. Pas tout en une fois.", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] },
+        { "text": "Tu peux chercher une phrase simple : “J’ai besoin qu’on parle de X sans se blesser.”", "weight": 2, "tags": ["micro"] }
+      ],
+      "famille": [
+        { "text": "Avec {theme1}, il y a souvent des attentes, des non-dits… ça pèse.", "weight": 3 },
+        { "text": "Coach doux : tu as le droit d’avoir besoin d’air, même si tu aimes les tiens.", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : mets une limite claire, même petite, plutôt qu’une limite floue.", "weight": 2, "requires": { "coach": "neutral" } },
+        { "text": "Parfois, se protéger c’est dire : “pas maintenant”.", "weight": 2, "tags": ["micro"] }
+      ],
+      "enfants": [
+        { "text": "Avec {theme1}, la charge est souvent continue : même quand on “se repose”, ça reste en fond.", "weight": 3 },
+        { "text": "Coach doux : tu as le droit d’être fatigué(e). Ça ne dit rien de ton amour.", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : vise une aide concrète (10 minutes, une tâche, une personne).", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] },
+        { "text": "Un tout petit temps seul(e) peut changer beaucoup.", "weight": 2, "tags": ["micro","soft"] }
+      ],
+      "amis": [
+        { "text": "Quand {theme1} bouge, on peut se sentir seul(e) même entouré(e).", "weight": 3, "tags": ["soft"] },
+        { "text": "Version neutre : un message court suffit. Pas besoin d’expliquer tout.", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] },
+        { "text": "Coach doux : tu mérites un lien sûr. Même un petit.", "weight": 2, "requires": { "coach": "soft" }, "tags": ["soft"] }
+      ],
+      "sante": [
+        { "text": "Quand {theme1} inquiète, le mental essaie de contrôler. C’est une réaction normale.", "weight": 3, "tags": ["soft"] },
+        { "text": "Version neutre : une action utile = noter symptômes/questions pour le prochain rendez-vous.", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] },
+        { "text": "Coach doux : tu peux te rassurer par des gestes simples (eau, repos, souffle).", "weight": 2, "requires": { "coach": "soft" }, "tags": ["soft","micro"] }
+      ],
+      "addiction": [
+        { "text": "Quand une habitude accroche, ce n’est pas “faible” : c’est un système qui cherche à apaiser.", "weight": 3, "tags": ["soft"] },
+        { "text": "Version neutre : vise “réduire” plutôt que “tout arrêter d’un coup”, si c’est plus tenable.", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] },
+        { "text": "Coach doux : un pas suffit. Même un petit pas.", "weight": 2, "requires": { "coach": "soft" }, "tags": ["soft","micro"] }
+      ],
+      "evenement": [
+        { "text": "Après {theme1}, le corps peut rester en alerte : c’est fréquent.", "weight": 3, "tags": ["soft"] },
+        { "text": "Version neutre : donne-toi un repère de sécurité (lieu, personne, routine).", "weight": 2, "requires": { "coach": "neutral" } },
+        { "text": "Coach doux : tu n’as pas à “aller bien” vite. Tu as le droit de digérer.", "weight": 2, "requires": { "coach": "soft" }, "tags": ["soft"] }
+      ],
+      "multiple": [
+        { "text": "Quand c’est plusieurs choses en même temps, ce n’est pas “toi” qui es trop : c’est vraiment beaucoup.", "weight": 4, "tags": ["soft"] },
+        { "text": "Version neutre : choisis UNE priorité de 24h. Pas une priorité de vie.", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] },
+        { "text": "Coach doux : dans le multiple, l’objectif est souvent : tenir et te protéger.", "weight": 2, "requires": { "coach": "soft" }, "tags": ["soft"] }
+      ],
+      "rien_de_precis": [
+        { "text": "Faire le point sans raison précise est une bonne raison : ton ressenti compte.", "weight": 4, "tags": ["soft"] },
+        { "text": "Version neutre : c’est un check-in. Pas un jugement.", "weight": 2, "requires": { "coach": "neutral" } },
+        { "text": "Coach doux : tu t’écoutes. C’est une compétence.", "weight": 2, "requires": { "coach": "soft" }, "tags": ["soft"] }
+      ],
+      "preferer_pas": [
+        { "text": "Tu peux garder une partie pour toi. La pudeur peut être une protection saine.", "weight": 3, "tags": ["soft"] },
+        { "text": "Version neutre : pas besoin de tout dire pour avancer.", "weight": 2, "requires": { "coach": "neutral" } }
+      ]
+    },
+
+    "vecu": {
+      "melange": [
+        { "text": "Quand tout se mélange, reviens à une seule question : “qu’est-ce qui pèse le plus aujourd’hui ?”.", "weight": 3, "tags": ["micro"] },
+        { "text": "Tu peux noter 3 mots (pas plus). Ça suffit pour clarifier.", "weight": 2, "tags": ["micro"] }
+      ],
+      "fatigue": [
+        { "text": "L’accumulation crée une fatigue qui n’est pas “juste du sommeil”.", "weight": 3, "tags": ["soft"] },
+        { "text": "Si tu sens l’irritabilité monter, c’est parfois juste un signal de surcharge.", "weight": 2, "tags": ["soft"] }
+      ],
+      "blocage": [
+        { "text": "Le blocage n’est pas un mur : souvent c’est un système de protection.", "weight": 2, "tags": ["soft"] },
+        { "text": "Version neutre : si tu bloques, réduis la taille de l’étape.", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] }
+      ]
+    },
+
+    "posture": {
+      "maximum": [
+        { "text": "Être au maximum n’est pas soutenable longtemps : tu as le droit de ralentir maintenant.", "weight": 3, "tags": ["soft"] },
+        { "text": "Version neutre : enlève une contrainte aujourd’hui. Une seule.", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] }
+      ],
+      "fatigue": [
+        { "text": "Se sentir à bout par moments est un signal : pas un défaut.", "weight": 3, "tags": ["soft"] },
+        { "text": "Coach doux : si ton corps dit stop, on l’écoute.", "weight": 2, "requires": { "coach": "soft" }, "tags": ["soft"] }
+      ],
+      "effort": [
+        { "text": "Le fait que tu essaies de tenir montre une force réelle — mais elle a besoin de relais.", "weight": 3 },
+        { "text": "Version neutre : cherche un appui concret, pas une motivation magique.", "weight": 2, "requires": { "coach": "neutral" } }
+      ],
+      "recul": [
+        { "text": "Tu as besoin de recul : ça peut être un geste intelligent.", "weight": 2, "tags": ["soft"] },
+        { "text": "Prendre de la distance, c’est parfois la façon la plus rapide de se retrouver.", "weight": 2 }
+      ],
+      "confusion": [
+        { "text": "La confusion arrive quand trop de choses se contredisent. Ça se comprend.", "weight": 2, "tags": ["soft"] },
+        { "text": "Version neutre : écris 2 colonnes : “ce que je sais” / “ce que j’imagine”.", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] }
+      ]
+    },
+
+    "needs": {
+      "mots": [
+        { "text": "Si ton besoin est {need1}, choisis une seule phrase vraie et garde-la pour toi aujourd’hui.", "weight": 3, "tags": ["micro"] },
+        { "text": "Tu peux écrire une phrase sans solution. Juste une phrase honnête.", "weight": 2, "tags": ["micro","soft"] }
+      ],
+      "comprendre": [
+        { "text": "Si tu veux {need1}, vise une cause principale, pas toutes les causes.", "weight": 2 },
+        { "text": "Version neutre : le but n’est pas “pourquoi toute ma vie”, mais “pourquoi maintenant”.", "weight": 2, "requires": { "coach": "neutral" } }
+      ],
+      "moins_seul": [
+        { "text": "Coach doux : tu mérites du soutien. Même un petit lien peut aider.", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : pense à une personne sûre. Un message bref suffit.", "weight": 3, "requires": { "coach": "neutral" }, "tags": ["micro"] },
+        { "text": "Parfois il suffit de dire : “Tu peux juste m’écouter 2 minutes ?”.", "weight": 2, "tags": ["micro"] }
+      ],
+      "normaliser": [
+        { "text": "Tu réagis à ce que tu vis. Ce n’est pas “trop”. C’est humain.", "weight": 3, "tags": ["soft"] },
+        { "text": "Version neutre : ton ressenti est une donnée. Pas un verdict.", "weight": 2, "requires": { "coach": "neutral" } }
+      ],
+      "recul": [
+        { "text": "Pour {need1}, choisis un moment court (5 minutes) sans écran.", "weight": 2, "tags": ["micro"] },
+        { "text": "Coach doux : pose une main sur toi et respire avant de replonger.", "weight": 2, "requires": { "coach": "soft" }, "tags": ["soft","micro"] }
+      ],
+      "presence": [
+        { "text": "Coach doux : être là suffit. Respire, et laisse-toi juste exister.", "weight": 4, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : pas d’objectif. Juste rester au souffle.", "weight": 3, "requires": { "coach": "neutral" }, "tags": ["soft"] },
+        { "text": "Tu peux juste sentir l’air qui entre et qui sort. Rien d’autre.", "weight": 2, "tags": ["soft"] }
+      ],
+      "indetermine": [
+        { "text": "Même si tu ne sais pas, tu peux te donner un peu de douceur.", "weight": 2, "tags": ["soft"] }
+      ]
+    },
+
+    "energy": {
+      "faible": [
+        { "text": "Avec énergie basse, on vise micro : un souffle, puis un autre.", "weight": 4, "tags": ["micro","soft"] },
+        { "text": "Version neutre : fais la plus petite action possible. Même 30 secondes.", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] }
+      ],
+      "lecture": [
+        { "text": "Avec {energy}, tu peux juste accueillir : tu n’as rien à prouver.", "weight": 3, "tags": ["soft"] },
+        { "text": "Version neutre : lis, garde une phrase utile, et stop.", "weight": 2, "requires": { "coach": "neutral" } }
+      ],
+      "reflechir": [
+        { "text": "Avec {energy}, tu peux réfléchir, mais sans t’épuiser : 1 question, 1 réponse provisoire.", "weight": 2, "tags": ["micro"] }
+      ],
+      "parcourir": [
+        { "text": "Avec {energy}, tu peux parcourir sans effort : prends seulement ce qui t’aide.", "weight": 2, "tags": ["soft"] }
+      ],
+      "indetermine": [
+        { "text": "Tu peux avancer au rythme du jour, sans pression.", "weight": 3, "tags": ["soft"] }
+      ]
+    },
+
+    "normalisation": [
+      { "text": "Plusieurs émotions à la fois, c’est humain : ton cerveau essaie de protéger ce qui compte.", "weight": 3, "tags": ["soft"] },
+      { "text": "Le flou et la fatigue sont des réactions fréquentes quand la charge monte.", "weight": 3, "tags": ["soft"] },
+      { "text": "Tu n’es pas “cassé(e)”. Tu es probablement surchargé(e).", "weight": 2, "tags": ["soft"] },
+      { "text": "Version neutre : ce que tu ressens est cohérent avec ce que tu traverses.", "weight": 2, "requires": { "coach": "neutral" } }
+    ],
+
+    "variants": {
+      "main": [
+        { "text": "Coach doux : si tu ne gardes qu’une intention, que ce soit la douceur envers toi.", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : garde une intention simple et tenable pour aujourd’hui.", "weight": 3, "requires": { "coach": "neutral" } },
+        { "text": "Tu n’as pas besoin d’aller vite. Tu as besoin d’être un peu plus stable.", "weight": 2, "tags": ["soft"] },
+        { "text": "Si tu sens une micro-clarité apparaître, garde-la. C’est ton repère.", "weight": 2, "tags": ["micro"] }
+      ],
+      "step": [
+        { "text": "Un pas concret (micro) : une action de 2 minutes (eau, fenêtre, étirement, message bref).", "weight": 3, "tags": ["micro"] },
+        { "text": "Coach doux : si c’est trop, choisis juste “moins” : une contrainte en moins.", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft","micro"] },
+        { "text": "Version neutre : choisis une action vérifiable (tu peux dire “fait”).", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] },
+        { "text": "Mini-pas : range une surface, ou note une phrase, puis stop.", "weight": 2, "tags": ["micro"] }
+      ],
+      "calm": [
+        { "text": "Apaisement : relâche les épaules, desserre la mâchoire, puis fais 3 souffles lents.", "weight": 3, "tags": ["soft","micro"] },
+        { "text": "Coach doux : une main sur la poitrine, et répète : “je m’accompagne”.", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : 4 secondes inspire, 6 secondes expire, 3 fois.", "weight": 2, "requires": { "coach": "neutral" }, "tags": ["micro"] },
+        { "text": "Regarde un point fixe 10 secondes, puis respire. Ça calme le système.", "weight": 2, "tags": ["micro"] }
+      ],
+      "norm": [
+        { "text": "Normaliser ne minimise pas : ça remet ton ressenti à sa place, légitime.", "weight": 3, "tags": ["soft"] },
+        { "text": "Coach doux : tu n’as pas à être “plus fort(e)” — tu as juste à être humain(e).", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : ton ressenti est une réaction, pas une identité.", "weight": 2, "requires": { "coach": "neutral" } },
+        { "text": "Si tu te sens sensible, c’est peut-être parce que tu as tenu trop longtemps.", "weight": 2, "tags": ["soft"] }
+      ]
+    },
+
+    "variant_closings": {
+      "main": [
+        { "text": "Coach doux : garde une phrase qui te fait du bien, et repose le reste.", "weight": 3, "requires": { "coach": "soft" }, "tags": ["soft"] },
+        { "text": "Version neutre : garde une idée utile, et laisse le reste.", "weight": 3, "requires": { "coach": "neutral" } },
+        { "text": "Si tu veux, reviens demain : pas pour “refaire”, juste pour te retrouver.", "weight": 2, "tags": ["soft"] }
+      ],
+      "step": [
+        { "text": "Choisis un seul pas. Le deuxième viendra plus tard.", "weight": 3, "tags": ["soft"] },
+        { "text": "Version neutre : une action = un petit point d’appui. C’est suffisant.", "weight": 2, "requires": { "coach": "neutral" } }
+      ],
+      "calm": [
+        { "text": "Si tu veux, retourne à la respiration guidée : c’est une base sûre.", "weight": 3, "tags": ["soft"] },
+        { "text": "Tu peux faire ça 1 minute seulement. Ça compte déjà.", "weight": 2, "tags": ["micro","soft"] }
+      ],
+      "norm": [
+        { "text": "Tu as le droit d’être comme tu es aujourd’hui. Point.", "weight": 3, "tags": ["soft"] },
+        { "text": "Version neutre : tu n’as pas à te juger pour avancer.", "weight": 2, "requires": { "coach": "neutral" } }
+      ]
+    },
+
+    "closings": [
+      { "text": "Merci d’avoir pris ce temps.", "weight": 4, "tags": ["soft"] },
+      { "text": "Tu peux t’arrêter ici, ou revenir plus tard : Vivario respecte ton rythme.", "weight": 3, "tags": ["soft"] },
+      { "text": "Si tu sens un peu plus d’air, garde juste ça. C’est déjà une victoire.", "weight": 2, "tags": ["soft"] },
+      { "text": "Version neutre : prends ce qui est utile, et passe à autre chose.", "weight": 2, "requires": { "coach": "neutral" } }
+    ]
+  }
+}
