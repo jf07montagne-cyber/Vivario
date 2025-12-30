@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — À propos</title>
+  <link rel="stylesheet" href="style.css?v=14" />
+  <meta name="theme-color" content="#071125" />
+  <style>
+    /* Petit badge en haut à gauche (évite le “carré blanc” sur certains navigateurs) */
+    .top-badge{
+      position: fixed;
+      left: 10px;
+      top: 10px;
+      z-index: 9998;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(8px);
+      font-size: 12px;
+      color: rgba(234,240,255,.88);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-badge">Vivario</div>
+
+  <div class="wrap">
+    <header class="top">
+      <h1 class="brand">À propos</h1>
+      <p class="muted">Un endroit calme, sans jugement, pour remettre de l’air dans la tête.</p>
+    </header>
+
+    <section class="card">
+      <h2 style="margin-bottom:10px;">À propos de Vivario</h2>
+
+      <p class="bigtext muted" style="margin-top:0;">
+        Vivario part d’un constat simple : certaines décisions pèsent tellement qu’elles nous épuisent
+        <b>avant même</b> d’être prises.
+      </p>
+
+      <p class="bigtext muted">
+        Quand plusieurs choses se croisent — fatigue, enfants, finances, relation, santé, usure du temps —
+        il devient difficile d’y voir clair. Pas par manque de volonté, mais parce que la réalité est complexe.
+      </p>
+
+      <p class="bigtext muted">
+        Ici, on ne “répare” pas en force : on <b>clarifie</b>, on <b>normalise</b>, on propose un <b>pas concret</b>,
+        et on respecte ton rythme.
+      </p>
+
+      <div class="sep"></div>
+
+      <p class="tiny muted" style="margin:0;">
+        Vivario ne remplace pas un professionnel de santé, ni un accompagnement juridique/financier/social.
+        Aucun diagnostic n’est établi.
+      </p>
+
+      <div class="actions" style="margin-top:14px;">
+        <a class="btn ghost" href="accueil.html?v=14">← Retour</a>
+        <a class="btn primary" href="questionnaire.html?v=14">Commencer</a>
+      </div>
+    </section>
+  </div>
+
+  <script src="sound.js?v=14"></script>
+  <script src="ambiance.js?v=14"></script>
+
+  <script>
+    // ✅ Déblocage audio mobile
+    (function(){
+      function unlock(){
+        try { window.VivarioSound?.setMood?.("calm"); } catch {}
+        try { window.VivarioSound?.startBreathing?.({ affectBreath:false, muteAmbienceWhileBreath:false }); } catch {}
+        try { window.VivarioSound?.stopBreathing?.(); } catch {}
+        window.removeEventListener("pointerdown", unlock);
+        window.removeEventListener("touchstart", unlock);
+      }
+      window.addEventListener("pointerdown", unlock, { once:true, passive:true });
+      window.addEventListener("touchstart", unlock, { once:true, passive:true });
+    })();
+  </script>
+</body>
+</html>
