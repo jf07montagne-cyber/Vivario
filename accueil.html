@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Accueil</title>
+  <link rel="stylesheet" href="style.css?v=16" />
+  <meta name="theme-color" content="#071125" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top top-hero">
+      <div>
+        <h1 class="brand">Vivario</h1>
+        <p class="muted">Quand une décision pèse, prendre un moment peut aider.</p>
+      </div>
+    </header>
+
+    <section class="card hero-card">
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <div class="hero-row">
+        <div style="flex:1 1 auto;">
+          <h2 class="hero-title">Bienvenue.</h2>
+          <p class="hero-sub muted">
+            Questionnaire v1.1 + scénarios personnalisés.
+            <br><b>Rien n’est envoyé</b> : tout reste sur ton appareil.
+          </p>
+
+          <div class="hero-tools">
+            <a class="btn primary" href="questionnaire.html?v=16">Commencer</a>
+            <a class="btn ghost" href="respiration.html?v=16">🫁 Respiration guidée</a>
+            <a class="btn ghost" href="apropos.html?v=16">ℹ️ À propos</a>
+          </div>
+
+          <div class="sep"></div>
+          <p class="tiny muted">Ambiance en bas à droite (OFF par défaut). Appui long = changer.</p>
+        </div>
+
+        <div class="hero-orb" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 style="margin:0 0 6px;">Raccourcis</h3>
+      <p class="muted" style="margin:0 0 12px;">Tu peux aussi revoir ton dernier résultat.</p>
+      <div class="actions">
+        <a class="btn ghost" href="resultat.html?v=16">📌 Ouvrir le dernier résultat</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="sound.js?v=16"></script>
+  <script src="ambiance.js?v=16"></script>
+  <script src="ui.js?v=16"></script>
+</body>
+</html>
