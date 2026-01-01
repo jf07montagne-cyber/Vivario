@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Respiration</title>
+  <link rel="stylesheet" href="style.css?v=17" />
+  <meta name="theme-color" content="#071125" />
+</head>
+
+<body class="page-breath">
+  <main class="wrap">
+    <header class="top">
+      <h1 class="brand">Respiration guidée</h1>
+      <p class="muted" style="margin:6px 0 0;">
+        Inspire • (bloque) • expire. La voix te guide et le décompte reste synchronisé.
+      </p>
+    </header>
+
+    <section class="card hero-card breath-card">
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <div class="breath-top">
+        <div class="breath-status">
+          <div class="breath-stage" id="stageLabel">Prêt</div>
+          <div class="breath-sec" id="secLabel">—</div>
+          <div class="breath-coach" id="coachLine">Tu peux démarrer quand tu veux.</div>
+        </div>
+
+        <div class="lungs-wrap" aria-hidden="true">
+          <!-- SVG poumons plus réalistes + flux d’air -->
+          <svg class="lungs lungs-pro" viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Poumons">
+            <defs>
+              <radialGradient id="lungGlow" cx="50%" cy="35%" r="70%">
+                <stop offset="0%" stop-color="rgba(120,160,255,.55)"/>
+                <stop offset="55%" stop-color="rgba(120,160,255,.10)"/>
+                <stop offset="100%" stop-color="rgba(120,160,255,0)"/>
+              </radialGradient>
+
+              <linearGradient id="lungFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(120,160,255,.55)"/>
+                <stop offset="60%" stop-color="rgba(120,160,255,.18)"/>
+                <stop offset="100%" stop-color="rgba(120,160,255,.08)"/>
+              </linearGradient>
+
+              <filter id="softShadow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
+                <feOffset dy="10" result="off"/>
+                <feColorMatrix in="off" type="matrix"
+                  values="0 0 0 0 0
+                          0 0 0 0 0
+                          0 0 0 0 0
+                          0 0 0 .35 0" result="shadow"/>
+                <feMerge>
+                  <feMergeNode in="shadow"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+
+              <filter id="innerGlow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="2.4" result="g"/>
+                <feColorMatrix in="g" type="matrix"
+                  values="0 0 0 0 0.47
+                          0 0 0 0 0.65
+                          0 0 0 0 1
+                          0 0 0 .35 0" result="c"/>
+                <feMerge>
+                  <feMergeNode in="c"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+
+              <!-- trajet airflow -->
+              <path id="airPathL" d="M260 62 C252 84 236 98 220 116 C202 138 188 164 182 190" />
+              <path id="airPathR" d="M260 62 C268 84 284 98 300 116 C318 138 332 164 338 190" />
+            </defs>
+
+            <g filter="url(#softShadow)" class="lungs-group">
+              <!-- glow derrière -->
+              <circle cx="260" cy="190" r="190" fill="url(#lungGlow)" opacity=".55" />
+
+              <!-- trachée -->
+              <path class="tube" d="M260 42 C260 58 260 74 260 90" />
+              <path class="tube tube-fat" d="M260 48 C260 62 260 76 260 90" />
+
+              <!-- bronches principales -->
+              <path class="tube" d="M260 92 C252 108 236 118 220 132" />
+              <path class="tube" d="M260 92 C268 108 284 118 300 132" />
+
+              <!-- bronches secondaires -->
+              <path class="branch" d="M220 132 C204 150 192 170 188 192" />
+              <path class="branch" d="M220 132 C206 158 205 180 210 204" />
+              <path class="branch" d="M300 132 C316 150 328 170 332 192" />
+              <path class="branch" d="M300 132 C314 158 315 180 310 204" />
+
+              <!-- contours poumons -->
+              <path class="lung-outline" d="M240 138
+                  C208 126 172 148 158 182
+                  C140 226 144 268 160 305
+                  C176 343 206 368 242 374
+                  C266 378 276 360 276 340
+                  C276 286 276 236 276 190
+                  C276 166 262 148 240 138 Z"/>
+              <path class="lung-outline" d="M280 138
+                  C312 126 348 148 362 182
+                  C380 226 376 268 360 305
+                  C344 343 314 368 278 374
+                  C254 378 244 360 244 340
+                  C244 286 244 236 244 190
+                  C244 166 258 148 280 138 Z"/>
+
+              <!-- remplissage "air" -->
+              <g class="lung-fill" filter="url(#innerGlow)">
+                <path class="lung-fill-shape" d="M240 144
+                    C210 134 178 154 166 184
+                    C150 224 154 264 168 298
+                    C182 330 206 352 236 356
+                    C252 358 258 346 258 332
+                    C258 286 258 238 258 196
+                    C258 172 252 152 240 144 Z" fill="url(#lungFill)"/>
+                <path class="lung-fill-shape" d="M280 144
+                    C310 134 342 154 354 184
+                    C370 224 366 264 352 298
+                    C338 330 314 352 284 356
+                    C268 358 262 346 262 332
+                    C262 286 262 238 262 196
+                    C262 172 268 152 280 144 Z" fill="url(#lungFill)"/>
+              </g>
+
+              <!-- flux d’air en pointillés -->
+              <path class="air" d="M260 62 C252 84 236 98 220 116 C202 138 188 164 182 190" />
+              <path class="air" d="M260 62 C268 84 284 98 300 116 C318 138 332 164 338 190" />
+
+              <!-- particules d’air (plus visibles) -->
+              <circle r="3.2" class="air-dot">
+                <animateMotion dur="1.2s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#airPathL"></mpath>
+                </animateMotion>
+              </circle>
+              <circle r="2.6" class="air-dot air-dot2">
+                <animateMotion dur="1.35s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#airPathR"></mpath>
+                </animateMotion>
+              </circle>
+              <circle r="2.2" class="air-dot air-dot3">
+                <animateMotion dur="1.6s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#airPathL"></mpath>
+                </animateMotion>
+              </circle>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="breath-actions">
+        <button class="btn primary" id="btnStart" type="button">▶ Démarrer</button>
+        <button class="btn ghost" id="btnPause" type="button">⏸ Pause</button>
+        <button class="btn ghost" id="btnStop" type="button">⏹ Stop</button>
+        <a class="btn ghost" href="accueil.html?v=17">↩ Retour</a>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="breath-settings">
+        <div class="row">
+          <label class="muted" for="selRhythm">Rythme</label>
+          <select id="selRhythm">
+            <option value="4-0-6">4–0–6 (calme)</option>
+            <option value="4-2-6">4–2–6 (équilibré)</option>
+            <option value="5-0-7">5–0–7 (apaisant)</option>
+            <option value="4-4-6">4–4–6 (ancrage)</option>
+          </select>
+
+          <label class="muted" for="selDuration">Durée</label>
+          <select id="selDuration">
+            <option value="infinite">Infini</option>
+            <option value="60">1 min</option>
+            <option value="120">2 min</option>
+            <option value="180">3 min</option>
+          </select>
+        </div>
+
+        <div class="row checks">
+          <label><input type="checkbox" id="chkVoice" checked> Guide vocal</label>
+          <label><input type="checkbox" id="chkSoft" checked> Coach doux (voix)</label>
+          <label><input type="checkbox" id="chkMuteAmb" checked> Couper l’ambiance pendant l’exercice</label>
+          <label><input type="checkbox" id="chkVibe" checked> Vibration</label>
+          <label><input type="checkbox" id="chkTick" checked> Petit “tick”</label>
+        </div>
+
+        <p class="tiny muted" style="margin:10px 0 0;">
+          Si tu te sens mal à l’aise : stoppe l’exercice et reviens à un souffle naturel.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="sound.js?v=17"></script>
+  <script src="ambiance.js?v=17"></script>
+  <script src="ui.js?v=17"></script>
+  <script src="respiration.js?v=17"></script>
+</body>
+</html>
