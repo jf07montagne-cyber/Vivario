@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Questionnaire</title>
+  <link rel="stylesheet" href="style.css?v=17" />
+  <meta name="theme-color" content="#071125" />
+</head>
+
+<body class="has-bottom-bar">
+  <main class="wrap">
+    <header class="top">
+      <h1 class="brand">Vivario</h1>
+      <p class="muted" id="qHint">✅ Tu peux cocher plusieurs réponses.</p>
+    </header>
+
+    <section class="card hero-card q-card">
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <div class="hero-row" style="align-items:flex-start;">
+        <div style="flex:1 1 auto;">
+          <h2 id="qTitle" class="q-title">Question</h2>
+          <p class="muted" id="qSubtitle" style="margin:0; line-height:1.6;"></p>
+          <p class="tiny muted" id="qCounter" style="margin:10px 0 0;">Question 1 / 7</p>
+        </div>
+        <div class="hero-orb" aria-hidden="true"></div>
+      </div>
+
+      <div class="sep"></div>
+
+      <div id="options" aria-label="Options"></div>
+
+      <p id="err" class="err" style="margin:12px 0 0;"></p>
+
+      <div class="bottom-spacer"></div>
+    </section>
+  </main>
+
+  <div class="bottom-bar">
+    <div class="inner">
+      <div class="left">
+        <label class="coach-switch" style="margin:0;">
+          <input type="checkbox" id="coachSoft" checked />
+          <span class="coach-pill"><span class="coach-dot"></span> Coach doux</span>
+        </label>
+
+        <button class="btn ghost small" id="btnBack" type="button">← Retour</button>
+        <button class="btn ghost small" id="btnQuit" type="button">↩ Quitter</button>
+      </div>
+
+      <div class="right">
+        <button class="btn primary" id="btnNext" type="button">Continuer →</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="sound.js?v=17"></script>
+  <script src="ambiance.js?v=17"></script>
+  <script src="ui.js?v=17"></script>
+  <script src="engine.js?v=17"></script>
+</body>
+</html>
