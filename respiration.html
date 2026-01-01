@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Vivario — Respiration</title>
+  <link rel="stylesheet" href="style.css?v=18"/>
+</head>
+<body class="page-breath">
+  <div class="wrap">
+    <div class="top">
+      <h1 class="brand">Vivario</h1>
+      <p class="muted">Exercice guidé de respiration — voix, poumons, rythme.</p>
+    </div>
+
+    <div class="card breath-card" id="breathCard">
+      <h2>Respiration guidée</h2>
+      <p class="muted">Inspire • (bloque) • expire. La voix te guide et le décompte reste synchronisé.</p>
+
+      <div class="lungs-wrap" aria-hidden="true">
+        <!-- ✅ SVG Poumons (bronches + flux d’air) -->
+        <svg class="lungs" viewBox="0 0 800 520" role="img">
+          <!-- trachée -->
+          <path d="M395 40 C395 90 395 110 400 145 C405 110 405 90 405 40"
+                fill="none" stroke="rgba(234,240,255,.55)" stroke-width="14" stroke-linecap="round"/>
+
+          <!-- bronches principales -->
+          <path class="air" d="M400 145 C360 170 335 210 320 250"
+                fill="none" stroke="rgba(120,160,255,.85)" stroke-width="6" stroke-linecap="round"/>
+          <path class="air" d="M400 145 C440 170 465 210 480 250"
+                fill="none" stroke="rgba(120,160,255,.85)" stroke-width="6" stroke-linecap="round"/>
+
+          <!-- bronches secondaires -->
+          <path class="air" d="M320 250 C280 270 250 310 240 350"
+                fill="none" stroke="rgba(120,255,210,.70)" stroke-width="5" stroke-linecap="round"/>
+          <path class="air" d="M320 250 C300 295 305 335 315 380"
+                fill="none" stroke="rgba(120,255,210,.70)" stroke-width="5" stroke-linecap="round"/>
+          <path class="air" d="M480 250 C520 270 550 310 560 350"
+                fill="none" stroke="rgba(120,255,210,.70)" stroke-width="5" stroke-linecap="round"/>
+          <path class="air" d="M480 250 C500 295 495 335 485 380"
+                fill="none" stroke="rgba(120,255,210,.70)" stroke-width="5" stroke-linecap="round"/>
+
+          <!-- poumon gauche contour -->
+          <path d="M315 170
+                   C220 180 160 260 150 350
+                   C140 440 200 490 290 490
+                   C350 490 360 430 360 380
+                   C360 310 350 260 320 220
+                   C310 205 310 190 315 170 Z"
+                fill="rgba(255,255,255,.05)" stroke="rgba(234,240,255,.30)" stroke-width="3"/>
+
+          <!-- poumon droit contour -->
+          <path d="M485 170
+                   C580 180 640 260 650 350
+                   C660 440 600 490 510 490
+                   C450 490 440 430 440 380
+                   C440 310 450 260 480 220
+                   C490 205 490 190 485 170 Z"
+                fill="rgba(255,255,255,.05)" stroke="rgba(234,240,255,.30)" stroke-width="3"/>
+
+          <!-- remplissage (gonfle/dégonfle) -->
+          <path class="lung-fill" d="M315 178
+                   C235 190 185 265 175 350
+                   C165 430 215 470 290 470
+                   C335 470 342 420 342 380
+                   C342 318 334 270 312 238
+                   C303 224 305 205 315 178 Z"
+                fill="rgba(120,160,255,.35)"/>
+
+          <path class="lung-fill" d="M485 178
+                   C565 190 615 265 625 350
+                   C635 430 585 470 510 470
+                   C465 470 458 420 458 380
+                   C458 318 466 270 488 238
+                   C497 224 495 205 485 178 Z"
+                fill="rgba(120,160,255,.35)"/>
+        </svg>
+      </div>
+
+      <div class="breath-stage" id="stage">
+        <div class="breath-hud">
+          <div class="breath-label" id="label">Prêt</div>
+          <div class="breath-timer" id="timer">—</div>
+          <div class="breath-sub" id="sub">Tu peux arrêter quand tu veux.</div>
+        </div>
+
+        <div class="actions breath-actions">
+          <button class="btn primary" id="btnStart">▶ Démarrer</button>
+          <button class="btn" id="btnPause">⏸ Pause</button>
+          <button class="btn" id="btnStop">⏹ Stop</button>
+          <a class="btn ghost" href="accueil.html?v=18">↩ Retour</a>
+        </div>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="card" style="margin:0; background:rgba(0,0,0,.10)">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <label class="muted">Rythme&nbsp;
+            <select id="rhythm">
+              <option value="4-0-6" selected>4–0–6 (calme)</option>
+              <option value="4-2-6">4–2–6 (ancrage)</option>
+              <option value="5-0-7">5–0–7 (profond)</option>
+            </select>
+          </label>
+
+          <label class="muted">Durée&nbsp;
+            <select id="duration">
+              <option value="infini" selected>Infini</option>
+              <option value="3">3 minutes</option>
+              <option value="5">5 minutes</option>
+            </select>
+          </label>
+        </div>
+
+        <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+          <label class="coach-switch">
+            <input type="checkbox" id="voiceOn" checked>
+            <span class="coach-pill"><span class="coach-dot"></span> Guide vocal</span>
+          </label>
+
+          <label class="coach-switch">
+            <input type="checkbox" id="coachSoftVoice" checked>
+            <span class="coach-pill"><span class="coach-dot"></span> Coach doux (voix)</span>
+          </label>
+
+          <label class="coach-switch">
+            <input type="checkbox" id="cutAmbiance" checked>
+            <span class="coach-pill"><span class="coach-dot"></span> Couper l’ambiance pendant l’exercice</span>
+          </label>
+        </div>
+
+        <p class="tiny muted" style="margin-top:10px;">
+          Si tu te sens mal à l’aise : stoppe l’exercice et reviens à un souffle naturel.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="ambiance.js?v=18"></script>
+  <script src="respiration.js?v=18"></script>
+</body>
+</html>

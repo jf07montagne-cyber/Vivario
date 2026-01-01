@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Résultat</title>
+  <link rel="stylesheet" href="style.css?v=18" />
+  <meta name="theme-color" content="#071125" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1 class="brand">Vivario</h1>
+      <p class="muted">Ton résultat — prends ce qui te parle, laisse le reste.</p>
+    </header>
+
+    <section class="card hero-card hero-index">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-row">
+        <div style="flex:1 1 auto;">
+          <h2 class="hero-title" id="resTitle">Résultat</h2>
+          <p class="hero-sub" id="resSub">Un message arrive ici.</p>
+
+          <div class="hero-tools">
+            <button class="btn primary" id="btnCopy" type="button">📋 Copier</button>
+            <button class="btn ghost" id="btnSaveToday" type="button">💾 Sauver pour aujourd’hui</button>
+            <a class="btn ghost" href="accueil.html?v=18">↩ Retour</a>
+          </div>
+
+          <div class="chips" id="resChips"></div>
+        </div>
+
+        <div class="hero-orb hero-orb-big" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-pane="main">Préserver ton énergie</button>
+        <button class="tab" data-pane="step">Un pas concret</button>
+        <button class="tab" data-pane="calm">Apaisement</button>
+        <button class="tab" data-pane="norm">Normalisation</button>
+      </div>
+
+      <div id="pane-main" class="pane active scenario-text"></div>
+      <div id="pane-step" class="pane scenario-text"></div>
+      <div id="pane-calm" class="pane scenario-text"></div>
+      <div id="pane-norm" class="pane scenario-text"></div>
+    </section>
+
+    <section class="card">
+      <h3 style="margin:0 0 6px;">Ton avis</h3>
+      <p class="muted" style="margin:0 0 12px; line-height:1.5;">
+        30 secondes : ça m’aide à améliorer Vivario.
+      </p>
+      <a class="btn primary" href="avis.html?v=18">⭐ Donner un avis</a>
+    </section>
+
+    <section class="card">
+      <h3 style="margin:0 0 8px;">Historique</h3>
+      <div id="history"></div>
+    </section>
+  </main>
+
+  <script src="sound.js?v=18"></script>
+  <script src="ambiance.js?v=18"></script>
+  <script src="ui.js?v=18"></script>
+  <script src="resultat.js?v=18"></script>
+</body>
+</html>
