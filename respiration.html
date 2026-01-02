@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Respiration</title>
+  <link rel="stylesheet" href="style.css?v=17" />
+  <meta name="theme-color" content="#071125" />
+</head>
+
+<body class="page-breath">
+  <main class="wrap">
+    <header class="top">
+      <h1 class="brand">Respiration guidée</h1>
+      <p class="muted" style="line-height:1.55;">
+        Inspire • (bloque) • expire. Tout est synchronisé : visuel, compteur et voix.
+      </p>
+    </header>
+
+    <section class="card hero-card breath-card">
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <div class="breath-grid">
+        <div class="breath-visual">
+          <div class="lungs-wrap">
+            <!-- SVG “poumons” plus gros + bronches + flux -->
+            <svg class="lungs lungs-pro" viewBox="0 0 520 420" role="img" aria-label="Poumons animés">
+              <defs>
+                <radialGradient id="lungFillGrad" cx="50%" cy="45%" r="70%">
+                  <stop offset="0%" stop-color="rgba(180,220,255,.55)"/>
+                  <stop offset="55%" stop-color="rgba(120,160,255,.22)"/>
+                  <stop offset="100%" stop-color="rgba(255,255,255,.03)"/>
+                </radialGradient>
+                <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+                  <feGaussianBlur stdDeviation="3.2" result="b"/>
+                  <feMerge>
+                    <feMergeNode in="b"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <!-- trachée -->
+              <path class="tube-fat" d="M260 42 C260 62 260 72 260 88" />
+              <path class="tube" d="M260 42 C260 62 260 72 260 88" />
+
+              <!-- carène -->
+              <path class="tube-fat" d="M260 88 C245 110 230 120 214 134" />
+              <path class="tube-fat" d="M260 88 C275 110 290 120 306 134" />
+              <path class="tube" d="M260 88 C245 110 230 120 214 134" />
+              <path class="tube" d="M260 88 C275 110 290 120 306 134" />
+
+              <!-- bronches principales -->
+              <path class="branch" d="M214 134 C190 150 176 172 168 192" />
+              <path class="branch" d="M214 134 C200 160 198 190 202 214" />
+              <path class="branch" d="M306 134 C330 150 344 172 352 192" />
+              <path class="branch" d="M306 134 C320 160 322 190 318 214" />
+
+              <!-- bronchioles (gauche) -->
+              <path class="branch" d="M170 195 C155 212 148 232 146 254" />
+              <path class="branch" d="M176 214 C160 232 156 252 160 274" />
+              <path class="branch" d="M205 218 C190 238 186 262 190 286" />
+              <path class="branch" d="M198 192 C182 206 174 224 172 244" />
+
+              <!-- bronchioles (droite) -->
+              <path class="branch" d="M350 195 C365 212 372 232 374 254" />
+              <path class="branch" d="M344 214 C360 232 364 252 360 274" />
+              <path class="branch" d="M315 218 C330 238 334 262 330 286" />
+              <path class="branch" d="M322 192 C338 206 346 224 348 244" />
+
+              <!-- contours poumons (un peu plus “réalistes”) -->
+              <path class="lung-outline" d="M214 140
+                C176 150 140 182 128 232
+                C116 282 128 334 164 358
+                C188 374 214 372 236 360
+                C256 349 254 320 252 294
+                C250 260 246 220 228 182
+                C222 170 220 156 214 140 Z" />
+
+              <path class="lung-outline" d="M306 140
+                C344 150 380 182 392 232
+                C404 282 392 334 356 358
+                C332 374 306 372 284 360
+                C264 349 266 320 268 294
+                C270 260 274 220 292 182
+                C298 170 300 156 306 140 Z" />
+
+              <!-- remplissage (animé via --breath) -->
+              <path class="lung-fill" filter="url(#softGlow)" fill="url(#lungFillGrad)"
+                d="M214 150
+                C182 160 152 188 142 232
+                C132 276 142 322 172 342
+                C192 356 214 354 232 344
+                C248 335 246 312 244 292
+                C242 260 238 224 224 192
+                C220 182 218 162 214 150 Z" />
+
+              <path class="lung-fill" filter="url(#softGlow)" fill="url(#lungFillGrad)"
+                d="M306 150
+                C338 160 368 188 378 232
+                C388 276 378 322 348 342
+                C328 356 306 354 288 344
+                C272 335 274 312 276 292
+                C278 260 282 224 296 192
+                C300 182 302 162 306 150 Z" />
+
+              <!-- flux d’air (dash + points) -->
+              <path class="air" d="M260 52 C260 72 260 84 260 94 C260 104 252 116 238 126 C224 136 206 150 190 170 C176 186 170 206 170 228" />
+              <path class="air" d="M260 52 C260 72 260 84 260 94 C260 104 268 116 282 126 C296 136 314 150 330 170 C344 186 350 206 350 228" />
+
+              <circle class="air-dot air-dot1" cx="260" cy="66" r="3.6"></circle>
+              <circle class="air-dot air-dot2" cx="250" cy="110" r="3.2"></circle>
+              <circle class="air-dot air-dot3" cx="270" cy="110" r="3.0"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <div class="breath-side">
+          <div class="breath-status">
+            <div class="breath-stage" id="stageLabel">Prêt</div>
+            <div class="breath-sec" id="secLabel">—</div>
+            <div class="breath-coach" id="coachLine">Quand tu veux. Appuie sur Démarrer.</div>
+          </div>
+
+          <div class="breath-actions">
+            <button class="btn primary" id="btnStart" type="button">▶ Démarrer</button>
+            <button class="btn ghost" id="btnPause" type="button">⏸ Pause</button>
+            <button class="btn ghost" id="btnStop" type="button">⏹ Stop</button>
+            <a class="btn ghost" href="accueil.html?v=17">↩ Retour</a>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="breath-settings">
+            <div class="row">
+              <label class="muted" style="font-weight:800;">Rythme</label>
+              <select id="selRhythm">
+                <option value="4-0-6" selected>4–0–6 (calme)</option>
+                <option value="4-2-6">4–2–6 (classique)</option>
+                <option value="4-4-6">4–4–6 (ancrage)</option>
+                <option value="4-0-8">4–0–8 (plus profond)</option>
+                <option value="5-0-5">5–0–5 (équilibré)</option>
+                <option value="4-4-4-4">Box 4–4–4–4</option>
+              </select>
+
+              <label class="muted" style="font-weight:800;">Durée</label>
+              <select id="selDuration">
+                <option value="120">2 min</option>
+                <option value="300">5 min</option>
+                <option value="600">10 min</option>
+                <option value="inf" selected>Infini</option>
+              </select>
+            </div>
+
+            <div class="checks" style="display:flex; flex-direction:column;">
+              <label>
+                <input type="checkbox" id="chkVoice" checked />
+                <span>Guide vocal</span>
+              </label>
+              <label>
+                <input type="checkbox" id="chkCoachSoft" checked />
+                <span>Coach doux (voix)</span>
+              </label>
+              <label>
+                <input type="checkbox" id="chkCutAmb" checked />
+                <span>Couper l’ambiance pendant l’exercice</span>
+              </label>
+            </div>
+
+            <p class="tiny muted" style="margin-top:10px;">
+              Si tu te sens mal à l’aise : stoppe l’exercice et reviens à un souffle naturel.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="sound.js?v=17"></script>
+  <script src="ambiance.js?v=17"></script>
+  <script src="ui.js?v=17"></script>
+  <script src="respiration.js?v=17"></script>
+</body>
+</html>
