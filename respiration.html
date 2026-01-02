@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Respiration</title>
+  <link rel="stylesheet" href="style.css?v=17" />
+  <meta name="theme-color" content="#071125" />
+</head>
+
+<body class="page-breath">
+  <main class="wrap">
+    <header class="top">
+      <h1 class="brand">Vivario</h1>
+      <p class="muted">Respiration guidée — un rythme simple, un souffle à la fois.</p>
+    </header>
+
+    <section class="card breath-card">
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <div class="breath-grid">
+        <!-- VISUEL -->
+        <div class="breath-visual">
+          <div class="lungs-wrap" aria-hidden="true">
+            <!-- SVG poumons “pseudo-3D” -->
+            <svg class="lungs-pro lungs-3d" viewBox="0 0 520 520" role="img" aria-label="Poumons animés">
+              <defs>
+                <radialGradient id="lg" cx="45%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="rgba(180,220,255,.50)"/>
+                  <stop offset="55%" stop-color="rgba(120,160,255,.22)"/>
+                  <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                </radialGradient>
+
+                <radialGradient id="fillL" cx="40%" cy="35%" r="70%">
+                  <stop offset="0%" stop-color="rgba(190,235,255,.80)"/>
+                  <stop offset="55%" stop-color="rgba(120,170,255,.30)"/>
+                  <stop offset="100%" stop-color="rgba(120,170,255,.08)"/>
+                </radialGradient>
+
+                <radialGradient id="fillR" cx="60%" cy="35%" r="70%">
+                  <stop offset="0%" stop-color="rgba(190,235,255,.80)"/>
+                  <stop offset="55%" stop-color="rgba(120,170,255,.30)"/>
+                  <stop offset="100%" stop-color="rgba(120,170,255,.08)"/>
+                </radialGradient>
+
+                <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="6" result="b"/>
+                  <feColorMatrix in="b" type="matrix"
+                    values="1 0 0 0 0
+                            0 1 0 0 0
+                            0 0 1 0 0
+                            0 0 0 0.55 0" result="g"/>
+                  <feMerge>
+                    <feMergeNode in="g"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+
+                <filter id="inner" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="2" result="b2"/>
+                  <feComposite in="b2" in2="SourceAlpha" operator="in" result="inb"/>
+                  <feColorMatrix in="inb" type="matrix"
+                    values="1 0 0 0 0
+                            0 1 0 0 0
+                            0 0 1 0 0
+                            0 0 0 0.35 0" result="shadow"/>
+                  <feMerge>
+                    <feMergeNode in="shadow"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <!-- halo -->
+              <circle cx="260" cy="250" r="210" fill="url(#lg)" opacity=".55"/>
+
+              <!-- trachée + bronches -->
+              <g filter="url(#softGlow)">
+                <path class="tube-fat" d="M260 78 C260 120 260 135 260 160" />
+                <path class="tube" d="M260 78 C260 120 260 135 260 160" />
+
+                <path class="tube-fat" d="M260 160 C240 175 218 195 200 220" />
+                <path class="tube" d="M260 160 C240 175 218 195 200 220" />
+
+                <path class="tube-fat" d="M260 160 C280 175 302 195 320 220" />
+                <path class="tube" d="M260 160 C280 175 302 195 320 220" />
+
+                <!-- branches -->
+                <path class="branch" d="M205 228 C185 250 170 275 160 305" />
+                <path class="branch" d="M215 240 C200 268 195 290 190 318" />
+                <path class="branch" d="M225 255 C216 285 214 308 214 334" />
+
+                <path class="branch" d="M315 228 C335 250 350 275 360 305" />
+                <path class="branch" d="M305 240 C320 268 325 290 330 318" />
+                <path class="branch" d="M295 255 C304 285 306 308 306 334" />
+              </g>
+
+              <!-- poumons -->
+              <g class="lung-fill" filter="url(#inner)">
+                <path class="lung-left" fill="url(#fillL)" d="M230 210
+                  C195 205 160 240 152 290
+                  C140 360 168 420 220 442
+                  C255 456 264 426 262 402
+                  C258 355 248 310 240 280
+                  C234 255 236 230 230 210 Z" />
+
+                <path class="lung-right" fill="url(#fillR)" d="M290 210
+                  C325 205 360 240 368 290
+                  C380 360 352 420 300 442
+                  C265 456 256 426 258 402
+                  C262 355 272 310 280 280
+                  C286 255 284 230 290 210 Z" />
+              </g>
+
+              <!-- contours -->
+              <g filter="url(#softGlow)">
+                <path class="lung-outline" d="M230 210
+                  C195 205 160 240 152 290
+                  C140 360 168 420 220 442
+                  C255 456 264 426 262 402
+                  C258 355 248 310 240 280
+                  C234 255 236 230 230 210 Z" />
+                <path class="lung-outline" d="M290 210
+                  C325 205 360 240 368 290
+                  C380 360 352 420 300 442
+                  C265 456 256 426 258 402
+                  C262 355 272 310 280 280
+                  C286 255 284 230 290 210 Z" />
+              </g>
+
+              <!-- flux d'air -->
+              <path class="air" d="M260 95 C260 135 260 160 260 160
+                C245 170 226 185 210 210
+                C198 230 190 250 184 275" />
+              <path class="air" d="M260 95 C260 135 260 160 260 160
+                C275 170 294 185 310 210
+                C322 230 330 250 336 275" />
+
+              <circle class="air-dot air-dot1" cx="260" cy="125" r="5"/>
+              <circle class="air-dot air-dot2" cx="260" cy="150" r="4"/>
+              <circle class="air-dot air-dot3" cx="260" cy="178" r="3"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- CONTROLES -->
+        <aside class="breath-side">
+          <div class="breath-status">
+            <div id="breathStage" class="breath-stage">Prêt</div>
+            <div id="breathSec" class="breath-sec">—</div>
+            <div id="breathCoach" class="breath-coach">
+              Appuie sur <b>Démarrer</b>. Laisse juste ton souffle suivre le rythme.
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="breath-settings">
+            <div class="row" style="margin-bottom:10px;">
+              <label class="muted" for="rhythmSel" style="min-width:110px;">Rythme</label>
+              <select id="rhythmSel">
+                <option value="4-2-6">4 • 2 • 6 (calme)</option>
+                <option value="4-0-6">4 • 0 • 6</option>
+                <option value="5-0-5">5 • 0 • 5</option>
+                <option value="4-4-4">4 • 4 • 4 (box)</option>
+              </select>
+            </div>
+
+            <div class="checks" style="display:flex; flex-direction:column;">
+              <label><input id="optVoice" type="checkbox" checked> Voix</label>
+              <label><input id="optCount" type="checkbox" checked> Décompte</label>
+              <label><input id="optTick" type="checkbox" checked> Tick</label>
+              <label><input id="optVibrate" type="checkbox"> Vibration</label>
+              <label><input id="optCoachSoft" type="checkbox" checked> Coach doux</label>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="breath-actions">
+            <button class="btn primary" id="btnStart" type="button">▶ Démarrer</button>
+            <button class="btn ghost" id="btnStop" type="button">■ Stop</button>
+          </div>
+
+          <p class="tiny muted" style="margin-top:10px;">
+            Astuce Android : si la voix ne part pas au 1er essai, retape “Démarrer” (restriction navigateur).
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="actions">
+        <a class="btn ghost" href="accueil.html?v=17">↩ Retour</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="sound.js?v=17"></script>
+  <script src="ambiance.js?v=17"></script>
+  <script src="ui.js?v=17"></script>
+  <script src="respiration.js?v=17"></script>
+</body>
+</html>
