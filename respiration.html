@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Respiration</title>
+  <!-- ✅ bump version pour forcer le navigateur à recharger -->
+  <link rel="stylesheet" href="style.css?v=22" />
+  <meta name="theme-color" content="#071125" />
+</head>
+
+<body class="page-breath">
+  <main class="wrap">
+    <header class="top">
+      <h1 class="brand">Vivario</h1>
+      <p class="muted">Respiration guidée — 1 minute pour revenir au calme.</p>
+    </header>
+
+    <section class="card breath-card">
+      <div class="breath-grid">
+        <div class="breath-visual">
+          <!-- ✅ WebGL (profondeur + lumière) -->
+          <canvas id="glCanvas" aria-hidden="true"></canvas>
+          <!-- ✅ Particules 2D (par-dessus) -->
+          <canvas id="airCanvas" aria-hidden="true"></canvas>
+
+          <!-- ✅ IMPORTANT : SVG retiré pour éviter toute superposition -->
+        </div>
+
+        <div class="breath-side">
+          <div class="breath-status">
+            <div class="breath-stage" id="stageLabel">Prêt</div>
+            <div class="breath-sec" id="secLabel">—</div>
+            <div class="breath-coach" id="coachText">
+              Inspire par le nez… puis expire lentement.
+            </div>
+
+            <!-- ✅ boutons sous les instructions (validé) -->
+            <div class="breath-actions">
+              <button class="btn primary" id="btnStart" type="button">▶ Démarrer</button>
+              <button class="btn ghost" id="btnStop" type="button">⏹ Stop</button>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="breath-settings">
+            <div class="row">
+              <label class="muted" for="selRhythm" style="margin:0;">Rythme</label>
+              <select id="selRhythm">
+                <option value="4-0-6">4 • 0 • 6 (calme)</option>
+                <option value="4-4-6">4 • 4 • 6 (focus)</option>
+                <option value="5-2-7">5 • 2 • 7 (profond)</option>
+                <option value="6-2-8">6 • 2 • 8 (relax)</option>
+              </select>
+            </div>
+
+            <div class="checks" style="display:flex; flex-wrap:wrap;">
+              <label><input type="checkbox" id="optVoice" checked> Voix</label>
+              <label><input type="checkbox" id="optCountdown" checked> Décompte</label>
+              <label><input type="checkbox" id="optTick" checked> Tick</label>
+              <label><input type="checkbox" id="optVibrate"> Vibration</label>
+              <label><input type="checkbox" id="optCoach" checked> Coach doux</label>
+            </div>
+
+            <p class="tiny muted" style="margin:10px 0 0; line-height:1.45;">
+              Astuce Android : si la voix ne part pas, touche l’écran une fois puis relance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="sound.js?v=19"></script>
+  <script src="ambiance.js?v=18"></script>
+  <script src="ui.js?v=18"></script>
+  <!-- ✅ bump version pour forcer rechargement du JS v22 -->
+  <script src="respiration.js?v=22"></script>
+</body>
+</html>
