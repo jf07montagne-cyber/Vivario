@@ -1,0 +1,228 @@
+{
+  "version": "vivario-pro-q-0.1",
+  "language": "fr",
+  "meta": {
+    "notes": "Questionnaire PRO: tronc commun + thèmes + sous-questionnaires par thème sélectionné.",
+    "max_estimated_minutes": 12
+  },
+  "blocks": [
+    {
+      "id": "core_1_state",
+      "title": "D’abord: ton état aujourd’hui",
+      "questions": [
+        {
+          "id": "c1_tone",
+          "type": "single",
+          "role": "tone",
+          "title": "Comment te sens-tu globalement en ce moment ?",
+          "options": [
+            { "id": "stable", "label": "Plutôt stable" },
+            { "id": "neutre", "label": "Neutre / entre-deux" },
+            { "id": "flou", "label": "Flou / confus" },
+            { "id": "charge", "label": "Surchargé(e) / épuisé(e)" },
+            { "id": "dur", "label": "Difficile / en lutte" }
+          ]
+        },
+        {
+          "id": "c1_energy",
+          "type": "single",
+          "role": "energie",
+          "title": "Aujourd’hui, ton énergie te permet plutôt de…",
+          "options": [
+            { "id": "low", "label": "Très peu (mode survie)" },
+            { "id": "mid", "label": "Un petit effort (simple et guidé)" },
+            { "id": "ok", "label": "Réfléchir et agir (plan possible)" }
+          ]
+        },
+        {
+          "id": "c1_intent",
+          "type": "multi",
+          "role": "intent",
+          "title": "Qu’est-ce que tu attends de Vivario PRO aujourd’hui ?",
+          "subtitle": "Choisis 1 à 3.",
+          "constraints": { "min": 1, "max": 3 },
+          "options": [
+            { "id": "relief", "label": "Me soulager rapidement" },
+            { "id": "clarity", "label": "Comprendre ce qui se joue" },
+            { "id": "plan", "label": "Avoir un plan concret" },
+            { "id": "support", "label": "Me sentir accompagné(e)" },
+            { "id": "habits", "label": "Changer une habitude" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "core_2_themes",
+      "title": "Tes thèmes (tout ce qui compte)",
+      "questions": [
+        {
+          "id": "c2_themes",
+          "type": "multi",
+          "role": "themes",
+          "title": "Quels sujets pèsent sur toi en ce moment ?",
+          "subtitle": "Tu peux tout cocher. Ensuite, on fera un mini-bloc par thème.",
+          "constraints": { "min": 1, "max": 8 },
+          "options": [
+            { "id": "travail", "label": "Travail / études / performance" },
+            { "id": "finances", "label": "Finances / dettes / précarité" },
+            { "id": "couple", "label": "Couple / relation / séparation" },
+            { "id": "famille", "label": "Famille" },
+            { "id": "parentalite", "label": "Parentalité / charge mentale" },
+            { "id": "social", "label": "Isolement / social / anxiété sociale" },
+            { "id": "sante", "label": "Santé / douleur / inquiétudes" },
+            { "id": "sommeil", "label": "Sommeil / fatigue" },
+            { "id": "anxiete", "label": "Anxiété / ruminations / panique" },
+            { "id": "humeur", "label": "Tristesse / déprime" },
+            { "id": "trauma", "label": "Deuil / choc / trauma" },
+            { "id": "addictions", "label": "Addictions / compulsions (alcool, drogues, sexe, jeux, écrans…)" },
+            { "id": "tca", "label": "Rapport à l’alimentation / au corps" },
+            { "id": "colere", "label": "Colère / impulsivité" },
+            { "id": "organisation", "label": "Procrastination / surcharge / organisation" },
+            { "id": "estime", "label": "Estime / auto-critique" }
+          ]
+        },
+        {
+          "id": "c2_priority_mode",
+          "type": "single",
+          "role": "priority_mode",
+          "title": "Pour gérer tout ça, tu préfères…",
+          "options": [
+            { "id": "one_by_one", "label": "Traiter 1 thème à la fois" },
+            { "id": "balanced", "label": "Un peu de chaque, équilibré" },
+            { "id": "relief_first", "label": "Soulager d’abord (apaisement), puis travailler le fond" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "core_3_safety",
+      "title": "Sécurité (rapide)",
+      "questions": [
+        {
+          "id": "c3_safety",
+          "type": "single",
+          "role": "safety",
+          "title": "En ce moment, te sens-tu en danger (toi ou quelqu’un d’autre) ?",
+          "options": [
+            { "id": "no", "label": "Non" },
+            { "id": "maybe", "label": "Je ne sais pas / peut-être" },
+            { "id": "yes", "label": "Oui" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "theme_travail",
+      "title": "Travail / études",
+      "questions": [
+        {
+          "id": "t_work_load",
+          "type": "single",
+          "role": "work_load",
+          "title": "La charge est plutôt…",
+          "options": [
+            { "id": "ok", "label": "Gérable" },
+            { "id": "high", "label": "Trop haute" },
+            { "id": "critical", "label": "Je suis au maximum / risque craquage" }
+          ]
+        },
+        {
+          "id": "t_work_pattern",
+          "type": "multi",
+          "role": "work_pattern",
+          "title": "Ce qui te coûte le plus au travail, c’est…",
+          "constraints": { "min": 1, "max": 3 },
+          "options": [
+            { "id": "overload", "label": "Trop de tâches / délais" },
+            { "id": "pressure", "label": "Pression / peur de mal faire" },
+            { "id": "conflict", "label": "Conflits / management" },
+            { "id": "harassment", "label": "Harcèlement / humiliation" },
+            { "id": "meaning", "label": "Perte de sens" },
+            { "id": "boundaries", "label": "Je n’arrive pas à dire non" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "theme_finances",
+      "title": "Finances",
+      "questions": [
+        {
+          "id": "t_finance_pressure",
+          "type": "single",
+          "role": "finance_pressure",
+          "title": "La pression financière est…",
+          "options": [
+            { "id": "low", "label": "Faible" },
+            { "id": "mid", "label": "Présente" },
+            { "id": "high", "label": "Très forte" }
+          ]
+        },
+        {
+          "id": "t_finance_avoid",
+          "type": "single",
+          "role": "finance_avoid",
+          "title": "Tu as tendance à…",
+          "options": [
+            { "id": "look", "label": "Regarder les chiffres" },
+            { "id": "avoid", "label": "Éviter de regarder" },
+            { "id": "loop", "label": "Y penser en boucle sans agir" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "theme_addictions",
+      "title": "Addictions / compulsions",
+      "questions": [
+        {
+          "id": "t_add_type",
+          "type": "multi",
+          "role": "add_type",
+          "title": "Sur quoi ça se joue le plus ?",
+          "constraints": { "min": 1, "max": 4 },
+          "options": [
+            { "id": "alcool", "label": "Alcool" },
+            { "id": "tabac", "label": "Tabac / nicotine" },
+            { "id": "drogues", "label": "Substances" },
+            { "id": "jeu", "label": "Jeux / paris" },
+            { "id": "ecrans", "label": "Écrans / réseaux / scroll" },
+            { "id": "porno", "label": "Porno" },
+            { "id": "sexe", "label": "Sexe compulsif" },
+            { "id": "shopping", "label": "Achats compulsifs" },
+            { "id": "nourriture", "label": "Compulsions alimentaires" }
+          ]
+        },
+        {
+          "id": "t_add_urge",
+          "type": "single",
+          "role": "add_urge",
+          "title": "Les envies (cravings) sont…",
+          "options": [
+            { "id": "rare", "label": "Rares" },
+            { "id": "often", "label": "Fréquentes" },
+            { "id": "daily", "label": "Quotidiennes / difficiles" }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "rules": [
+    { "show_block": "theme_travail", "if": { "includes": ["c2_themes", "travail"] } },
+    { "show_block": "theme_finances", "if": { "includes": ["c2_themes", "finances"] } },
+    { "show_block": "theme_addictions", "if": { "includes": ["c2_themes", "addictions"] } }
+  ],
+
+  "safety_rules": [
+    {
+      "if": { "equals": ["c3_safety", "yes"] },
+      "action": "show_safety_screen"
+    }
+  ]
+}

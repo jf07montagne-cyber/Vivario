@@ -1,0 +1,295 @@
+{
+  "version": "vivario-pro-modules-1.0",
+  "packs": {
+    "core": {
+      "label": "Fondations",
+      "modules": [
+        {
+          "id": "core_breath_1",
+          "domain": "core",
+          "type": "exercise",
+          "title": "Respiration 4–6 (calmer le système)",
+          "duration_min": 3,
+          "intensity": "low",
+          "tags": ["apaisement","anxiete","sommeil"],
+          "text": [
+            "Assieds-toi. Épaules relâchées.",
+            "Inspire 4 secondes. Expire 6 secondes.",
+            "Répète 6 fois. Si c’est inconfortable : 3 fois suffit.",
+            "Objectif : baisser la tension de 10%, pas “tout régler”."
+          ]
+        },
+        {
+          "id": "core_micro_step",
+          "domain": "core",
+          "type": "micro_action",
+          "title": "Plan 2 minutes (anti-spirale)",
+          "duration_min": 2,
+          "intensity": "low",
+          "tags": ["action","clarte"],
+          "text": [
+            "Bois un verre d’eau.",
+            "Ouvre une fenêtre 10 secondes.",
+            "Range une surface (une seule).",
+            "Puis stop. Une action faite = un point d’appui."
+          ]
+        },
+        {
+          "id": "core_journal_1",
+          "domain": "core",
+          "type": "writing",
+          "title": "Écrire 1 phrase vraie",
+          "duration_min": 4,
+          "intensity": "low",
+          "tags": ["clarte","humeur","estime"],
+          "text": [
+            "Écris une seule phrase vraie sur ta situation.",
+            "Pas de solution. Juste une phrase honnête.",
+            "Ex : “Aujourd’hui je porte trop, et j’ai besoin d’air.”"
+          ]
+        }
+      ]
+    },
+
+    "couple": {
+      "label": "Couple / relation",
+      "modules": [
+        {
+          "id": "couple_comm_1",
+          "domain": "couple",
+          "type": "communication",
+          "title": "Conversation = 1 sujet",
+          "duration_min": 10,
+          "intensity": "medium",
+          "tags": ["relation","limite"],
+          "requires": { "themes_any": ["couple"] },
+          "text": [
+            "Choisis UN sujet (pas tout).",
+            "Ouvre avec : “Je veux qu’on se comprenne, pas qu’on se blesse.”",
+            "Dis 1 fait + 1 ressenti + 1 demande.",
+            "Si ça monte : pause 20 minutes, puis reprise."
+          ]
+        },
+        {
+          "id": "couple_limit_1",
+          "domain": "couple",
+          "type": "communication",
+          "title": "Limiter le ton (limite douce)",
+          "duration_min": 6,
+          "intensity": "low",
+          "tags": ["relation","limite"],
+          "text": [
+            "Phrase prête : “Je te réponds, mais pas sur ce ton.”",
+            "Répète une seule fois. Puis arrête la discussion.",
+            "Reviens plus tard : objectif = calme, pas victoire."
+          ]
+        }
+      ]
+    },
+
+    "sommeil": {
+      "label": "Sommeil",
+      "modules": [
+        {
+          "id": "sleep_routine_1",
+          "domain": "sommeil",
+          "type": "habit",
+          "title": "Routine 15 minutes (réparer)",
+          "duration_min": 15,
+          "intensity": "low",
+          "tags": ["sommeil"],
+          "text": [
+            "15 min avant : lumière basse + pas d’écran.",
+            "Une action : douche tiède OU lecture simple OU respiration 4–6.",
+            "Si pensées : note 3 mots, puis “demain”."
+          ]
+        },
+        {
+          "id": "sleep_wake_1",
+          "domain": "sommeil",
+          "type": "habit",
+          "title": "Réveils nocturnes (protocole 90 secondes)",
+          "duration_min": 2,
+          "intensity": "low",
+          "tags": ["sommeil","anxiete"],
+          "text": [
+            "Ne lutte pas. Reviens au corps.",
+            "3 expirations longues. Épaules relâchées.",
+            "Si tu rumines : “je note demain” (mentalement)."
+          ]
+        }
+      ]
+    },
+
+    "anxiete": {
+      "label": "Anxiété",
+      "modules": [
+        {
+          "id": "anx_rum_1",
+          "domain": "anxiete",
+          "type": "cognitive",
+          "title": "Stop rumination (2 colonnes)",
+          "duration_min": 7,
+          "intensity": "low",
+          "tags": ["anxiete","clarte"],
+          "text": [
+            "Écris : “Ce que je SAIS” / “Ce que j’IMAGINE”.",
+            "Remplis 3 lignes max.",
+            "Objectif : réduire le brouillard, pas tout résoudre."
+          ]
+        },
+        {
+          "id": "anx_panic_1",
+          "domain": "anxiete",
+          "type": "exercise",
+          "title": "Anti-panique (ancrage 3-2-1)",
+          "duration_min": 3,
+          "intensity": "low",
+          "tags": ["anxiete"],
+          "text": [
+            "Regarde 3 choses. Écoute 2 sons. Sens 1 sensation.",
+            "Puis 4–6 (3 cycles).",
+            "Dis-toi : “c’est une vague, pas un danger immédiat”."
+          ]
+        }
+      ]
+    },
+
+    "humeur": {
+      "label": "Humeur / moral",
+      "modules": [
+        {
+          "id": "mood_activate_1",
+          "domain": "humeur",
+          "type": "behavioral",
+          "title": "Activation douce (5 minutes)",
+          "duration_min": 5,
+          "intensity": "low",
+          "tags": ["humeur","action"],
+          "text": [
+            "Choisis une action très petite : marche 3 minutes, douche, ranger 1 surface.",
+            "Objectif : “mettre du mouvement”, pas motivation parfaite."
+          ]
+        }
+      ]
+    },
+
+    "organisation": {
+      "label": "Organisation",
+      "modules": [
+        {
+          "id": "org_24h_1",
+          "domain": "organisation",
+          "type": "planning",
+          "title": "Priorité 24h (pas priorité de vie)",
+          "duration_min": 6,
+          "intensity": "low",
+          "tags": ["clarte","action"],
+          "text": [
+            "Écris 1 priorité de 24h.",
+            "Écris 2 micro-étapes.",
+            "Stop. Le reste attend."
+          ]
+        }
+      ]
+    },
+
+    "estime": {
+      "label": "Estime",
+      "modules": [
+        {
+          "id": "esteem_comp_1",
+          "domain": "estime",
+          "type": "self_compassion",
+          "title": "Se parler comme à un ami",
+          "duration_min": 6,
+          "intensity": "low",
+          "tags": ["estime","apaisement"],
+          "text": [
+            "Écris : “Si un ami vivait ça, je lui dirais…”",
+            "Puis : “Je peux me dire la même chose en version courte.”"
+          ]
+        }
+      ]
+    },
+
+    "social": {
+      "label": "Social",
+      "modules": [
+        {
+          "id": "social_msg_1",
+          "domain": "social",
+          "type": "micro_action",
+          "title": "Mini-message (sans explication)",
+          "duration_min": 2,
+          "intensity": "low",
+          "tags": ["social","moins_seul"],
+          "text": [
+            "Message prêt : “Salut, tu es dispo 2 minutes cette semaine ?”",
+            "Pas besoin d’expliquer tout. Juste ouvrir un lien sûr."
+          ]
+        }
+      ]
+    },
+
+    "trauma": {
+      "label": "Trauma (doux)",
+      "modules": [
+        {
+          "id": "trauma_safe_1",
+          "domain": "trauma",
+          "type": "safety",
+          "title": "Créer un repère de sécurité",
+          "duration_min": 8,
+          "intensity": "low",
+          "tags": ["trauma","apaisement"],
+          "text": [
+            "Choisis 1 lieu + 1 objet + 1 personne (même en pensée).",
+            "Associe-les à une respiration lente 4–6.",
+            "Objectif : que ton système sente “ici et maintenant”."
+          ]
+        }
+      ]
+    },
+
+    "tca": {
+      "label": "TCA (prudence)",
+      "modules": [
+        {
+          "id": "tca_ground_1",
+          "domain": "tca",
+          "type": "grounding",
+          "title": "Avant une envie / une crise : 90 secondes",
+          "duration_min": 2,
+          "intensity": "low",
+          "tags": ["tca","apaisement"],
+          "text": [
+            "Pause 90 secondes. Main sur poitrine.",
+            "Nommer : “c’est une envie / une peur”.",
+            "Respirer 3 cycles. Puis choisir une action sûre."
+          ]
+        }
+      ]
+    },
+
+    "addictions": {
+      "label": "Addictions / compulsions",
+      "modules": [
+        {
+          "id": "add_urge_1",
+          "domain": "addictions",
+          "type": "urge",
+          "title": "Surf de l’envie (3 minutes)",
+          "duration_min": 3,
+          "intensity": "low",
+          "tags": ["addictions","apaisement"],
+          "text": [
+            "Observe l’envie comme une vague : montée → pic → descente.",
+            "Respire long (4–6) 6 cycles.",
+            "Objectif : retarder 5 minutes. Pas “arrêter pour toujours”."
+          ]
+        }
+      ]
+    }
+  }
+}

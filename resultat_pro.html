@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario PRO — Diagnostic</title>
+  <meta name="theme-color" content="#071125" />
+
+  <!-- On réutilise ton style global SANS modifier les pages gratuites -->
+  <link rel="stylesheet" href="style.css?v=18" />
+
+  <!-- ✅ Style PRO (inline, scope page uniquement) -->
+  <style>
+    body.page-pro-result{
+      background:
+        radial-gradient(1200px 760px at 16% 10%, rgba(165,120,255,.20) 0%, transparent 64%),
+        radial-gradient(900px 680px at 88% 14%, rgba(35,150,170,.20) 0%, transparent 58%),
+        radial-gradient(1000px 760px at 50% 95%, rgba(255,210,120,.10) 0%, transparent 60%),
+        linear-gradient(180deg, #060f22, #0b1c3a);
+    }
+
+    .page-pro-result .wrap{ padding-top: 18px; }
+
+    .pro-badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      font-weight: 900;
+      letter-spacing: .12px;
+      font-size: 12px;
+      color: rgba(234,240,255,.92);
+      user-select:none;
+      max-width: 100%;
+    }
+    .pro-dot{
+      width: 9px; height: 9px; border-radius: 999px;
+      background: rgba(180,120,255,.95);
+      box-shadow: 0 0 0 4px rgba(180,120,255,.15);
+      flex: 0 0 auto;
+    }
+
+    /* HERO PRO */
+    .pro-hero{
+      background:
+        radial-gradient(980px 380px at 18% 18%, rgba(180,120,255,.22), transparent 62%),
+        radial-gradient(820px 360px at 82% 55%, rgba(35,150,170,.14), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.045));
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .pro-hero .row{
+      display:flex; gap:14px; align-items:stretch;
+    }
+    .pro-hero .left{ flex: 1 1 auto; min-width: 0; }
+    .pro-hero .right{
+      flex: 0 0 160px;
+      display:flex; justify-content:center; align-items:center;
+      position: relative;
+    }
+
+    .pro-title{
+      margin: 10px 0 6px;
+      font-size: clamp(26px, 5.6vw, 44px);
+      font-weight: 1000;
+      letter-spacing: .25px;
+      line-height: 1.06;
+    }
+    .pro-sub{
+      margin: 0;
+      color: rgba(234,240,255,.86);
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+
+    .pro-orb{
+      width: 118px; height: 118px; border-radius: 999px;
+      background:
+        radial-gradient(closest-side, rgba(255,255,255,.22), transparent 62%),
+        radial-gradient(closest-side at 30% 30%, rgba(180,120,255,.40), transparent 62%),
+        radial-gradient(closest-side at 70% 70%, rgba(35,150,170,.34), transparent 62%);
+      filter: drop-shadow(0 22px 66px rgba(0,0,0,.34));
+      opacity: .9;
+    }
+
+    .pro-tools{
+      margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .pro-tools .btn{ width:auto; min-width: 160px; }
+    .pro-tools .btn.primary{
+      background: rgba(180,120,255,.26);
+      border-color: rgba(180,120,255,.38);
+    }
+    .pro-tools .btn.primary:hover{ background: rgba(180,120,255,.34); }
+
+    /* CHIPS (scores / repères) */
+    .pro-chips{
+      margin-top: 12px;
+      display:flex; flex-wrap:wrap; gap:8px;
+    }
+    .pro-chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      color: rgba(234,240,255,.92);
+      font-weight: 900;
+      font-size: 12.5px;
+      letter-spacing: .1px;
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      user-select:none;
+    }
+    .pro-chip b{ font-weight: 1000; }
+
+    /* Blocks */
+    .pro-block{
+      background: rgba(0,0,0,.16);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .pro-block h3{
+      margin:0 0 10px;
+      font-size: 16px;
+      letter-spacing:.15px;
+      font-weight: 1000;
+    }
+    .pro-block p{
+      margin:0 0 10px;
+      line-height: 1.7;
+      color: rgba(234,240,255,.92);
+      font-size: 15.5px;
+    }
+    .pro-block p:last-child{ margin-bottom: 0; }
+
+    .pro-list{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(234,240,255,.90);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+    .pro-list li{ margin: 6px 0; }
+
+    /* Plan */
+    .plan-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .plan-step{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.045);
+      padding: 14px;
+      box-shadow: 0 16px 46px rgba(0,0,0,.18);
+    }
+    .plan-head{
+      display:flex; gap:10px; align-items:flex-start; justify-content:space-between;
+    }
+    .plan-title{
+      margin:0;
+      font-weight: 1000;
+      letter-spacing:.15px;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+    .plan-meta{
+      margin: 6px 0 0;
+      color: rgba(234,240,255,.76);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing:.1px;
+    }
+    .plan-tags{
+      margin-top: 10px;
+      display:flex; flex-wrap:wrap; gap:8px;
+    }
+    .tag{
+      padding: 6px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      font-size: 12px;
+      font-weight: 900;
+      color: rgba(234,240,255,.90);
+    }
+
+    .plan-actions{
+      margin-top: 10px;
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+
+    /* Check-in */
+    .checkin{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 10px;
+      align-items:center;
+    }
+    .checkin label{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color: rgba(234,240,255,.92);
+      font-weight: 900;
+    }
+    .checkin input{
+      width: 18px; height: 18px;
+      accent-color: rgba(180,120,255,.95);
+    }
+
+    /* Progress bar */
+    .bar{
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+      margin-top: 10px;
+    }
+    .bar > i{
+      display:block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(180,120,255,.55), rgba(35,150,170,.45));
+      border-radius: 999px;
+    }
+
+    /* History */
+    .hist-row{
+      display:flex; gap:10px; justify-content:space-between; align-items:center;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      margin: 8px 0;
+    }
+    .hist-left{
+      min-width: 0;
+      display:flex; flex-direction:column; gap:3px;
+    }
+    .hist-date{
+      font-weight: 1000;
+      letter-spacing:.12px;
+      font-size: 13px;
+    }
+    .hist-note{
+      font-size: 13px;
+      color: rgba(234,240,255,.78);
+      line-height: 1.35;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      max-width: 52ch;
+    }
+    .hist-pill{
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 1000;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      color: rgba(234,240,255,.92);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 520px){
+      .pro-hero .row{ flex-direction: column; }
+      .pro-hero .right{ display:none; }
+      .pro-tools{ flex-direction: column; align-items: stretch; }
+      .pro-tools .btn{ width: 100%; min-width: unset; }
+    }
+  </style>
+</head>
+
+<body class="page-pro-result">
+  <main class="wrap">
+    <header class="top">
+      <h1 class="brand" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+        Vivario
+        <span class="pro-badge"><span class="pro-dot"></span>PRO · Diagnostic</span>
+      </h1>
+      <p class="muted">Un diagnostic structuré + un plan du jour + un suivi simple. Tu gardes ce qui t’aide.</p>
+    </header>
+
+    <section class="card pro-hero hero-card">
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <div class="row">
+        <div class="left">
+          <h2 class="pro-title" id="proTitle">Vivario PRO</h2>
+          <p class="pro-sub" id="proSub">Chargement du diagnostic…</p>
+
+          <div class="pro-tools">
+            <button class="btn primary" id="btnCopyAll" type="button">📋 Copier tout</button>
+            <button class="btn ghost" id="btnExportToday" type="button">💾 Sauver aujourd’hui</button>
+            <a class="btn ghost" href="accueil.html?v=18">↩ Retour</a>
+          </div>
+
+          <div class="pro-chips" id="proChips" aria-label="Scores et repères"></div>
+        </div>
+
+        <div class="right" aria-hidden="true">
+          <div class="pro-orb hero-orb"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pro-block">
+        <h3>🧭 Diagnostic</h3>
+        <p id="diagSummary">—</p>
+        <ul class="pro-list" id="diagBullets"></ul>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="pro-block">
+        <h3>🎯 Plan du jour</h3>
+        <p id="planIntro">—</p>
+
+        <div class="plan-grid" id="planGrid"></div>
+
+        <div class="sep"></div>
+
+        <p id="planOutro" style="margin:0;">—</p>
+
+        <div class="checkin">
+          <label><input id="ckDone" type="checkbox" /> Aujourd’hui, j’ai fait au moins 1 étape</label>
+          <button class="btn primary" id="btnSaveCheckin" type="button">✅ Enregistrer mon suivi</button>
+        </div>
+
+        <div class="bar" aria-label="Progression 14 jours">
+          <i id="barFill"></i>
+        </div>
+        <p class="muted" id="adhText" style="margin:10px 0 0;">—</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 style="margin:0 0 8px;">📅 Historique PRO</h3>
+      <p class="muted" style="margin:0 0 12px; line-height:1.5;">
+        Tes enregistrements de suivi (14 derniers jours).
+      </p>
+      <div id="proHistory"></div>
+    </section>
+  </main>
+
+  <!-- Tu peux garder tes scripts globaux (safe). -->
+  <script src="sound.js?v=18"></script>
+  <script src="ambiance.js?v=18"></script>
+  <script src="ui.js?v=18"></script>
+
+  <!-- PRO -->
+  <script src="pro_logic.js?v=1"></script>
+  <script src="resultat_pro.js?v=1"></script>
+</body>
+</html>

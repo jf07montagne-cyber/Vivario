@@ -1,0 +1,633 @@
+{
+  "version": "vivario-pro-1.0",
+  "language": "fr",
+  "meta": {
+    "max_depth_default": 3,
+    "energy_limits": {
+      "faible": { "max_depth": 1, "max_est_sec": 240 },
+      "parcourir": { "max_depth": 2, "max_est_sec": 420 },
+      "lecture": { "max_depth": 3, "max_est_sec": 600 },
+      "reflechir": { "max_depth": 3, "max_est_sec": 780 },
+      "indetermine": { "max_depth": 2, "max_est_sec": 420 }
+    },
+    "themes": [
+      "travail","finances","couple","parentalite","sante","sommeil","anxiete","humeur",
+      "trauma","tca","organisation","estime","social","addictions"
+    ]
+  },
+  "blocks": [
+    {
+      "id": "p0_intro",
+      "type": "info",
+      "title": "Avant de commencer",
+      "subtitle": "On va personnaliser sans te submerger.",
+      "text": "Réponds simplement. Le questionnaire s’adapte à tes thèmes et à ton énergie.",
+      "depth": 0,
+      "est_sec": 10
+    },
+
+    {
+      "id": "p1_energy",
+      "type": "single",
+      "role": "energie",
+      "title": "Aujourd’hui, ton énergie te permet plutôt de…",
+      "subtitle": "Ça sert à doser la longueur du PRO.",
+      "options": [
+        { "id": "reflechir", "label": "Aller au fond (diagnostic plus précis)" },
+        { "id": "lecture", "label": "Répondre tranquillement" },
+        { "id": "parcourir", "label": "Rester simple, sans trop détailler" },
+        { "id": "faible", "label": "Très peu (mode ultra-court)" },
+        { "id": "indetermine", "label": "Difficile à dire" }
+      ],
+      "score": { "global.energy_weight": { "reflechir": 1.0, "lecture": 0.85, "parcourir": 0.65, "faible": 0.45, "indetermine": 0.65 } },
+      "depth": 0,
+      "est_sec": 15
+    },
+
+    {
+      "id": "p2_tone",
+      "type": "single",
+      "role": "tone",
+      "title": "Comment tu te sens globalement en ce moment ?",
+      "subtitle": "On calibre la tonalité et le plan.",
+      "options": [
+        { "id": "stable", "label": "Plutôt stable" },
+        { "id": "neutre", "label": "Entre-deux" },
+        { "id": "flou", "label": "Flou / confus" },
+        { "id": "charge", "label": "Surcharge / épuisement mental" },
+        { "id": "indetermine", "label": "Difficile à dire" }
+      ],
+      "score": {
+        "global.distress": { "stable": 0, "neutre": 1, "flou": 2, "charge": 3, "indetermine": 1 }
+      },
+      "depth": 0,
+      "est_sec": 15
+    },
+
+    {
+      "id": "p3_themes",
+      "type": "multi",
+      "role": "themes",
+      "title": "Quels thèmes veux-tu traiter aujourd’hui ?",
+      "subtitle": "Tu peux tout cocher. Ensuite, on affiche les sous-questionnaires adaptés.",
+      "constraints": { "min": 1, "max": 8 },
+      "options": [
+        { "id": "travail", "label": "Travail / études / performance" },
+        { "id": "finances", "label": "Finances / sécurité matérielle" },
+        { "id": "couple", "label": "Couple / relation" },
+        { "id": "parentalite", "label": "Parentalité / enfants" },
+        { "id": "sante", "label": "Santé / douleurs / suivi médical" },
+        { "id": "sommeil", "label": "Sommeil / fatigue" },
+        { "id": "anxiete", "label": "Anxiété / stress / panique" },
+        { "id": "humeur", "label": "Humeur / moral / motivation" },
+        { "id": "trauma", "label": "Trauma / événement / déclencheurs" },
+        { "id": "tca", "label": "Rapport à l’alimentation (TCA)" },
+        { "id": "organisation", "label": "Organisation / procrastination / charge mentale" },
+        { "id": "estime", "label": "Estime de soi / confiance" },
+        { "id": "social", "label": "Social / isolement / relations" },
+        { "id": "addictions", "label": "Addictions / compulsions (alcool, drogue, sexe, jeux, écran…)" }
+      ],
+      "score": {
+        "global.themecount": { "travail": 1, "finances": 1, "couple": 1, "parentalite": 1, "sante": 1, "sommeil": 1, "anxiete": 1, "humeur": 1, "trauma": 1, "tca": 1, "organisation": 1, "estime": 1, "social": 1, "addictions": 1 }
+      },
+      "depth": 0,
+      "est_sec": 25
+    },
+
+    {
+      "id": "p4_goal",
+      "type": "multi",
+      "role": "goals",
+      "title": "Objectif principal aujourd’hui ?",
+      "subtitle": "On s’en sert pour choisir les exercices et le plan.",
+      "constraints": { "min": 1, "max": 3 },
+      "options": [
+        { "id": "clarte", "label": "Plus de clarté / structure" },
+        { "id": "apaisement", "label": "Apaisement / calmer le système" },
+        { "id": "action", "label": "Action concrète / avancer" },
+        { "id": "relation", "label": "Mieux communiquer / poser une limite" },
+        { "id": "sommeil", "label": "Mieux dormir / récupérer" },
+        { "id": "habitudes", "label": "Reprendre de bonnes habitudes" }
+      ],
+      "score": { "global.goalset": { "clarte": 1, "apaisement": 1, "action": 1, "relation": 1, "sommeil": 1, "habitudes": 1 } },
+      "depth": 0,
+      "est_sec": 20
+    },
+
+    /* =========================
+       COUPLE
+       ========================= */
+    {
+      "id": "c0_couple_state",
+      "type": "single",
+      "role": "couple.state",
+      "title": "Côté relation : c’est surtout…",
+      "subtitle": "On cherche le type de difficulté.",
+      "show_if": { "themes_any": ["couple"] },
+      "options": [
+        { "id": "tension", "label": "Tension / disputes" },
+        { "id": "distance", "label": "Distance / froid / évitement" },
+        { "id": "confiance", "label": "Confiance fragilisée (jalousie, mensonges…)" },
+        { "id": "charge", "label": "Charge mentale / répartition injuste" },
+        { "id": "intimite", "label": "Intimité / sexualité difficile" },
+        { "id": "separation", "label": "Rupture / séparation / incertitude" }
+      ],
+      "score": { "couple.severity": { "tension": 2, "distance": 2, "confiance": 3, "charge": 2, "intimite": 2, "separation": 3 } },
+      "depth": 1,
+      "est_sec": 20
+    },
+    {
+      "id": "c1_couple_impact",
+      "type": "single",
+      "role": "couple.impact",
+      "title": "Impact sur toi (0–3) ?",
+      "subtitle": "0 = gérable / 3 = ça déborde.",
+      "show_if": { "themes_any": ["couple"] },
+      "options": [
+        { "id": "0", "label": "0 — gérable" },
+        { "id": "1", "label": "1 — inconfort" },
+        { "id": "2", "label": "2 — pèse souvent" },
+        { "id": "3", "label": "3 — déborde" }
+      ],
+      "score": { "couple.severity": { "0": 0, "1": 1, "2": 2, "3": 3 } },
+      "depth": 1,
+      "est_sec": 15
+    },
+    {
+      "id": "c2_couple_need",
+      "type": "multi",
+      "role": "couple.need",
+      "title": "Tu aurais surtout besoin de…",
+      "subtitle": "On choisit un module de communication adapté.",
+      "show_if": { "themes_any": ["couple"] },
+      "constraints": { "min": 1, "max": 2 },
+      "options": [
+        { "id": "dire", "label": "Dire quelque chose sans déclencher une guerre" },
+        { "id": "limite", "label": "Poser une limite claire" },
+        { "id": "reparer", "label": "Réparer / apaiser" },
+        { "id": "decider", "label": "Clarifier une décision" }
+      ],
+      "score": { "couple.need_flags": { "dire": 1, "limite": 1, "reparer": 1, "decider": 1 } },
+      "depth": 2,
+      "est_sec": 20
+    },
+
+    /* =========================
+       PARENTALITÉ
+       ========================= */
+    {
+      "id": "p0_parent_state",
+      "type": "multi",
+      "role": "parent.state",
+      "title": "Parentalité : qu’est-ce qui est le plus difficile ?",
+      "subtitle": "On cible la charge principale.",
+      "show_if": { "themes_any": ["parentalite"] },
+      "constraints": { "min": 1, "max": 3 },
+      "options": [
+        { "id": "fatigue", "label": "Fatigue / manque de relais" },
+        { "id": "colere", "label": "Irritabilité / colère" },
+        { "id": "culpabilite", "label": "Culpabilité / impression de mal faire" },
+        { "id": "temps", "label": "Manque de temps / surcharge" },
+        { "id": "conflits", "label": "Conflits autour de l’éducation" },
+        { "id": "crises", "label": "Crises / comportements difficiles" }
+      ],
+      "score": { "parent.severity": { "fatigue": 2, "colere": 2, "culpabilite": 2, "temps": 2, "conflits": 2, "crises": 3 } },
+      "depth": 1,
+      "est_sec": 25
+    },
+    {
+      "id": "p1_parent_relais",
+      "type": "single",
+      "role": "parent.relais",
+      "title": "As-tu un relais régulier ?",
+      "subtitle": "Même petit (10–20 min) compte.",
+      "show_if": { "themes_any": ["parentalite"] },
+      "options": [
+        { "id": "oui", "label": "Oui" },
+        { "id": "petit", "label": "Très limité" },
+        { "id": "non", "label": "Non" }
+      ],
+      "score": { "parent.risk": { "oui": 0, "petit": 1, "non": 2 } },
+      "depth": 1,
+      "est_sec": 15
+    },
+
+    /* =========================
+       SANTÉ
+       ========================= */
+    {
+      "id": "s0_health_type",
+      "type": "multi",
+      "role": "health.type",
+      "title": "Santé : c’est plutôt…",
+      "subtitle": "On adapte le plan (repos / suivi / gestes simples).",
+      "show_if": { "themes_any": ["sante"] },
+      "constraints": { "min": 1, "max": 3 },
+      "options": [
+        { "id": "douleur", "label": "Douleurs / inconfort" },
+        { "id": "inquietude", "label": "Inquiétude médicale / peur" },
+        { "id": "chrono", "label": "Problème chronique / au long cours" },
+        { "id": "suivi", "label": "Suivi / examens / rendez-vous" },
+        { "id": "energie", "label": "Fatigue physique / manque d’énergie" }
+      ],
+      "score": { "health.severity": { "douleur": 2, "inquietude": 2, "chrono": 2, "suivi": 1, "energie": 2 } },
+      "depth": 1,
+      "est_sec": 25
+    },
+    {
+      "id": "s1_health_rdv",
+      "type": "single",
+      "role": "health.followup",
+      "title": "As-tu un suivi médical en place ?",
+      "subtitle": "On ajuste la proposition (préparer questions, symptômes, etc.).",
+      "show_if": { "themes_any": ["sante"] },
+      "options": [
+        { "id": "oui", "label": "Oui" },
+        { "id": "en_cours", "label": "En cours de mise en place" },
+        { "id": "non", "label": "Non" }
+      ],
+      "score": { "health.risk": { "oui": 0, "en_cours": 1, "non": 2 } },
+      "depth": 2,
+      "est_sec": 15
+    },
+
+    /* =========================
+       SOMMEIL
+       ========================= */
+    {
+      "id": "sl0_sleep_issue",
+      "type": "multi",
+      "role": "sleep.issue",
+      "title": "Sommeil : le problème principal ?",
+      "subtitle": "On cible la bonne stratégie.",
+      "show_if": { "themes_any": ["sommeil"] },
+      "constraints": { "min": 1, "max": 2 },
+      "options": [
+        { "id": "endormir", "label": "Difficulté à m’endormir" },
+        { "id": "reveille", "label": "Réveils nocturnes" },
+        { "id": "trop_tot", "label": "Réveil trop tôt" },
+        { "id": "qualite", "label": "Sommeil non réparateur" },
+        { "id": "rythme", "label": "Rythme irrégulier" }
+      ],
+      "score": { "sleep.severity": { "endormir": 2, "reveille": 2, "trop_tot": 2, "qualite": 2, "rythme": 1 } },
+      "depth": 1,
+      "est_sec": 20
+    },
+    {
+      "id": "sl1_sleep_duration",
+      "type": "single",
+      "role": "sleep.duration",
+      "title": "En moyenne, tu dors…",
+      "subtitle": "Approximation OK.",
+      "show_if": { "themes_any": ["sommeil"] },
+      "options": [
+        { "id": "lt5", "label": "Moins de 5h" },
+        { "id": "5-6", "label": "5–6h" },
+        { "id": "6-7", "label": "6–7h" },
+        { "id": "7-8", "label": "7–8h" },
+        { "id": "8p", "label": "8h+" }
+      ],
+      "score": { "sleep.severity": { "lt5": 3, "5-6": 2, "6-7": 1, "7-8": 0, "8p": 0 } },
+      "depth": 2,
+      "est_sec": 15
+    },
+
+    /* =========================
+       ANXIÉTÉ
+       ========================= */
+    {
+      "id": "a0_anx_level",
+      "type": "single",
+      "role": "anx.level",
+      "title": "Anxiété : intensité (0–3) ?",
+      "subtitle": "0 = rare / 3 = fréquent, envahissant.",
+      "show_if": { "themes_any": ["anxiete"] },
+      "options": [
+        { "id": "0", "label": "0 — rare" },
+        { "id": "1", "label": "1 — parfois" },
+        { "id": "2", "label": "2 — souvent" },
+        { "id": "3", "label": "3 — envahissant" }
+      ],
+      "score": { "anx.severity": { "0": 0, "1": 1, "2": 2, "3": 3 } },
+      "depth": 1,
+      "est_sec": 15
+    },
+    {
+      "id": "a1_anx_form",
+      "type": "multi",
+      "role": "anx.form",
+      "title": "Ça ressemble plutôt à…",
+      "subtitle": "On choisit les exercices (respiration, cognition, exposition douce).",
+      "show_if": { "themes_any": ["anxiete"] },
+      "constraints": { "min": 1, "max": 3 },
+      "options": [
+        { "id": "rumination", "label": "Ruminations / scénarios" },
+        { "id": "corps", "label": "Symptômes physiques (coeur, souffle…)" },
+        { "id": "panique", "label": "Crises / panique" },
+        { "id": "evitement", "label": "Évitement (je fuis certaines situations)" },
+        { "id": "controle", "label": "Besoin de contrôler / vérifier" }
+      ],
+      "score": { "anx.severity": { "rumination": 1, "corps": 1, "panique": 2, "evitement": 2, "controle": 1 } },
+      "depth": 2,
+      "est_sec": 22
+    },
+
+    /* =========================
+       HUMEUR
+       ========================= */
+    {
+      "id": "h0_mood_level",
+      "type": "single",
+      "role": "mood.level",
+      "title": "Humeur : ton moral est plutôt…",
+      "subtitle": "On dose motivation et plan.",
+      "show_if": { "themes_any": ["humeur"] },
+      "options": [
+        { "id": "ok", "label": "Plutôt OK" },
+        { "id": "bas", "label": "Bas / triste" },
+        { "id": "vide", "label": "Vide / émoussé" },
+        { "id": "irritable", "label": "Irritable" },
+        { "id": "instable", "label": "Instable (hauts/bas)" }
+      ],
+      "score": { "mood.severity": { "ok": 0, "bas": 2, "vide": 2, "irritable": 1, "instable": 2 } },
+      "depth": 1,
+      "est_sec": 18
+    },
+    {
+      "id": "h1_mood_anhedonia",
+      "type": "single",
+      "role": "mood.anhedonia",
+      "title": "Plaisir / intérêt :",
+      "subtitle": "Sur les derniers jours.",
+      "show_if": { "themes_any": ["humeur"], "depth_min": 2 },
+      "options": [
+        { "id": "normal", "label": "Plutôt présent" },
+        { "id": "reduit", "label": "Réduit" },
+        { "id": "quasi", "label": "Quasi absent" }
+      ],
+      "score": { "mood.severity": { "normal": 0, "reduit": 1, "quasi": 2 } },
+      "depth": 2,
+      "est_sec": 15
+    },
+
+    /* =========================
+       TRAUMA
+       ========================= */
+    {
+      "id": "t0_trauma_present",
+      "type": "single",
+      "role": "trauma.present",
+      "title": "Trauma / événement : est-ce que ça te “revient” ?",
+      "subtitle": "On choisit une approche douce et sécurisée.",
+      "show_if": { "themes_any": ["trauma"] },
+      "options": [
+        { "id": "non", "label": "Non / pas vraiment" },
+        { "id": "parfois", "label": "Parfois" },
+        { "id": "souvent", "label": "Souvent" }
+      ],
+      "score": { "trauma.severity": { "non": 0, "parfois": 2, "souvent": 3 } },
+      "depth": 1,
+      "est_sec": 15
+    },
+    {
+      "id": "t1_trauma_triggers",
+      "type": "multi",
+      "role": "trauma.triggers",
+      "title": "Sous quelle forme ?",
+      "subtitle": "Tu peux cocher 1–3.",
+      "show_if": { "themes_any": ["trauma"], "depth_min": 2 },
+      "constraints": { "min": 1, "max": 3 },
+      "options": [
+        { "id": "flash", "label": "Images / flashbacks" },
+        { "id": "cauchemars", "label": "Cauchemars" },
+        { "id": "hypervigilance", "label": "Hypervigilance / sursaut" },
+        { "id": "evitement", "label": "Évitement" },
+        { "id": "engourdi", "label": "Engourdissement / déconnexion" }
+      ],
+      "score": { "trauma.severity": { "flash": 2, "cauchemars": 2, "hypervigilance": 2, "evitement": 2, "engourdi": 2 } },
+      "depth": 2,
+      "est_sec": 22
+    },
+
+    /* =========================
+       TCA
+       ========================= */
+    {
+      "id": "e0_tca_type",
+      "type": "multi",
+      "role": "tca.type",
+      "title": "Rapport à l’alimentation : c’est plutôt…",
+      "subtitle": "Tu peux cocher 1–3.",
+      "show_if": { "themes_any": ["tca"] },
+      "constraints": { "min": 1, "max": 3 },
+      "options": [
+        { "id": "restriction", "label": "Restriction / contrôle" },
+        { "id": "compulsions", "label": "Compulsions / crises" },
+        { "id": "culpabilite", "label": "Culpabilité / honte" },
+        { "id": "image", "label": "Image corporelle difficile" },
+        { "id": "rituels", "label": "Rituels / règles rigides" }
+      ],
+      "score": { "tca.severity": { "restriction": 2, "compulsions": 3, "culpabilite": 2, "image": 2, "rituels": 2 } },
+      "depth": 1,
+      "est_sec": 22
+    },
+    {
+      "id": "e1_tca_risk",
+      "type": "single",
+      "role": "tca.risk",
+      "title": "Est-ce que ça te met en danger (physique) ?",
+      "subtitle": "Réponse prudente : on adapte la recommandation.",
+      "show_if": { "themes_any": ["tca"], "depth_min": 2 },
+      "options": [
+        { "id": "non", "label": "Non" },
+        { "id": "possible", "label": "Possible / je ne sais pas" },
+        { "id": "oui", "label": "Oui" }
+      ],
+      "score": { "tca.risk": { "non": 0, "possible": 2, "oui": 3 } },
+      "depth": 2,
+      "est_sec": 14
+    },
+
+    /* =========================
+       ORGANISATION
+       ========================= */
+    {
+      "id": "o0_org_main",
+      "type": "multi",
+      "role": "org.main",
+      "title": "Organisation : c’est surtout…",
+      "subtitle": "Tu peux cocher 1–3.",
+      "show_if": { "themes_any": ["organisation"] },
+      "constraints": { "min": 1, "max": 3 },
+      "options": [
+        { "id": "procrast", "label": "Procrastination" },
+        { "id": "charge", "label": "Charge mentale" },
+        { "id": "priorites", "label": "Priorités floues" },
+        { "id": "temps", "label": "Gestion du temps" },
+        { "id": "distraction", "label": "Distraction / écran" }
+      ],
+      "score": { "org.severity": { "procrast": 2, "charge": 2, "priorites": 2, "temps": 2, "distraction": 1 } },
+      "depth": 1,
+      "est_sec": 22
+    },
+    {
+      "id": "o1_org_energy",
+      "type": "single",
+      "role": "org.capacity",
+      "title": "Ton niveau de capacité aujourd’hui ?",
+      "subtitle": "Pour choisir un plan simple ou plus structuré.",
+      "show_if": { "themes_any": ["organisation"] },
+      "options": [
+        { "id": "mini", "label": "Mini (micro-pas)" },
+        { "id": "simple", "label": "Simple (1–2 choses)" },
+        { "id": "structure", "label": "Structuré (plan clair)" }
+      ],
+      "score": { "org.plan_depth": { "mini": 0, "simple": 1, "structure": 2 } },
+      "depth": 1,
+      "est_sec": 14
+    },
+
+    /* =========================
+       ESTIME
+       ========================= */
+    {
+      "id": "k0_selfworth",
+      "type": "single",
+      "role": "esteem.level",
+      "title": "Estime de soi : tu te parles plutôt…",
+      "subtitle": "On choisit le bon module (auto-compassion / preuves / limites).",
+      "show_if": { "themes_any": ["estime"] },
+      "options": [
+        { "id": "ok", "label": "Plutôt correctement" },
+        { "id": "dur", "label": "Dur / jugeant" },
+        { "id": "tres_dur", "label": "Très dur / dévalorisation" },
+        { "id": "variable", "label": "Variable selon les jours" }
+      ],
+      "score": { "esteem.severity": { "ok": 0, "dur": 2, "tres_dur": 3, "variable": 1 } },
+      "depth": 1,
+      "est_sec": 16
+    },
+    {
+      "id": "k1_esteem_driver",
+      "type": "multi",
+      "role": "esteem.driver",
+      "title": "Qu’est-ce qui abîme le plus ton estime ?",
+      "subtitle": "1–2 choix.",
+      "show_if": { "themes_any": ["estime"], "depth_min": 2 },
+      "constraints": { "min": 1, "max": 2 },
+      "options": [
+        { "id": "comparaison", "label": "Comparaison aux autres" },
+        { "id": "erreurs", "label": "Erreurs / honte" },
+        { "id": "corps", "label": "Image corporelle" },
+        { "id": "relation", "label": "Relation(s) difficiles" },
+        { "id": "travail", "label": "Performance / travail" }
+      ],
+      "score": { "esteem.severity": { "comparaison": 1, "erreurs": 2, "corps": 2, "relation": 1, "travail": 1 } },
+      "depth": 2,
+      "est_sec": 18
+    },
+
+    /* =========================
+       SOCIAL
+       ========================= */
+    {
+      "id": "so0_social_state",
+      "type": "multi",
+      "role": "social.state",
+      "title": "Social : c’est plutôt…",
+      "subtitle": "1–3 choix.",
+      "show_if": { "themes_any": ["social"] },
+      "constraints": { "min": 1, "max": 3 },
+      "options": [
+        { "id": "isolement", "label": "Isolement / retrait" },
+        { "id": "peur", "label": "Peur du jugement" },
+        { "id": "epuisant", "label": "Social épuisant" },
+        { "id": "conflits", "label": "Conflits / liens instables" },
+        { "id": "manque", "label": "Manque de personnes sûres" }
+      ],
+      "score": { "social.severity": { "isolement": 2, "peur": 2, "epuisant": 1, "conflits": 2, "manque": 2 } },
+      "depth": 1,
+      "est_sec": 22
+    },
+    {
+      "id": "so1_social_action",
+      "type": "single",
+      "role": "social.action",
+      "title": "Aujourd’hui, tu peux faire quoi ?",
+      "subtitle": "On propose une action réaliste.",
+      "show_if": { "themes_any": ["social"] },
+      "options": [
+        { "id": "none", "label": "Rien (trop dur)" },
+        { "id": "mini", "label": "Un mini-message" },
+        { "id": "call", "label": "Un appel / échange" },
+        { "id": "see", "label": "Voir quelqu’un" }
+      ],
+      "score": { "social.risk": { "none": 2, "mini": 1, "call": 0, "see": 0 } },
+      "depth": 1,
+      "est_sec": 14
+    },
+
+    /* =========================
+       ADDICTIONS / COMPULSIONS
+       ========================= */
+    {
+      "id": "ad0_add_type",
+      "type": "multi",
+      "role": "add.type",
+      "title": "Addictions / compulsions : c’est surtout…",
+      "subtitle": "Tu peux cocher 1–3.",
+      "show_if": { "themes_any": ["addictions"] },
+      "constraints": { "min": 1, "max": 3 },
+      "options": [
+        { "id": "alcool", "label": "Alcool" },
+        { "id": "drogue", "label": "Drogues" },
+        { "id": "sexe", "label": "Sexe / porno" },
+        { "id": "jeux", "label": "Jeux / paris" },
+        { "id": "ecran", "label": "Écrans / réseaux" },
+        { "id": "nourriture", "label": "Nourriture / grignotage compulsif" },
+        { "id": "autre", "label": "Autre" }
+      ],
+      "score": { "add.severity": { "alcool": 3, "drogue": 3, "sexe": 2, "jeux": 3, "ecran": 2, "nourriture": 2, "autre": 2 } },
+      "depth": 1,
+      "est_sec": 22
+    },
+    {
+      "id": "ad1_add_pattern",
+      "type": "single",
+      "role": "add.pattern",
+      "title": "Ça arrive surtout quand…",
+      "subtitle": "On choisit une stratégie de prévention.",
+      "show_if": { "themes_any": ["addictions"], "depth_min": 2 },
+      "options": [
+        { "id": "stress", "label": "Stress / anxiété" },
+        { "id": "solitude", "label": "Solitude / vide" },
+        { "id": "fatigue", "label": "Fatigue" },
+        { "id": "conflit", "label": "Conflit / émotion forte" },
+        { "id": "habitude", "label": "Automatique / habitude" }
+      ],
+      "score": { "add.severity": { "stress": 1, "solitude": 1, "fatigue": 1, "conflit": 1, "habitude": 1 } },
+      "depth": 2,
+      "est_sec": 15
+    },
+
+    /* =========================
+       FIN (global)
+       ========================= */
+    {
+      "id": "z0_feedback",
+      "type": "single",
+      "role": "end.feel",
+      "title": "Après ces réponses, tu te sens…",
+      "subtitle": "Ça ajuste la conclusion + le plan.",
+      "options": [
+        { "id": "clair", "label": "Un peu plus clair" },
+        { "id": "apaise", "label": "Un peu apaisé(e)" },
+        { "id": "identique", "label": "Identique" },
+        { "id": "lourd", "label": "Plus lourd / remué" }
+      ],
+      "score": { "global.distress": { "clair": -1, "apaise": -1, "identique": 0, "lourd": 1 } },
+      "depth": 0,
+      "est_sec": 12
+    }
+  ]
+}
