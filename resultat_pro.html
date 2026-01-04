@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario PRO — Résultat</title>
+
+  <!-- ⚠️ Ne touche pas au style.css du gratuit : PRO a son CSS séparé -->
+  <link rel="stylesheet" href="pro_style.css?v=1" />
+
+  <meta name="theme-color" content="#070a12" />
+</head>
+<body class="page-pro-result">
+  <main class="pro-wrap">
+    <header class="pro-top">
+      <div class="pro-brandRow">
+        <div>
+          <div class="pro-brand">Vivario <span class="pro-badge">PRO</span></div>
+          <p class="pro-muted" id="proSubtitle">Diagnostic + plan + suivi — calibré sur toi.</p>
+        </div>
+
+        <div class="pro-topActions">
+          <button class="pro-btn pro-btnPrimary" id="btnCopy" type="button">📋 Copier</button>
+          <button class="pro-btn pro-btnGhost" id="btnSaveToday" type="button">💾 Sauver</button>
+          <a class="pro-btn pro-btnGhost" href="accueil.html?v=18">↩ Retour</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="pro-hero">
+      <div class="pro-heroGlow" aria-hidden="true"></div>
+
+      <div class="pro-heroGrid">
+        <div>
+          <h1 class="pro-title" id="diagTitle">Résultat PRO</h1>
+          <p class="pro-lead" id="diagSummary">—</p>
+
+          <div class="pro-miniCards" id="miniCards"></div>
+
+          <div class="pro-chips" id="proChips" aria-label="Repères"></div>
+        </div>
+
+        <div class="pro-scoreCard" aria-label="Scores">
+          <div class="pro-scoreHead">
+            <div class="pro-scoreLabel">Synthèse</div>
+            <div class="pro-scoreDate" id="proDate">—</div>
+          </div>
+          <div class="pro-scoreBig">
+            <div class="pro-scoreNum" id="primaryScore">—</div>
+            <div class="pro-scoreTxt" id="primaryDomain">Domaine principal</div>
+          </div>
+
+          <div class="pro-scoreList" id="scoreList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABS -->
+    <section class="pro-card">
+      <div class="pro-tabs" id="tabs">
+        <button class="pro-tab active" data-pane="diagnostic">Diagnostic</button>
+        <button class="pro-tab" data-pane="plan">Plan</button>
+        <button class="pro-tab" data-pane="suivi">Suivi</button>
+      </div>
+
+      <!-- PANES -->
+      <div id="pane-diagnostic" class="pro-pane active"></div>
+      <div id="pane-plan" class="pro-pane"></div>
+      <div id="pane-suivi" class="pro-pane"></div>
+    </section>
+
+    <!-- Historique PRO -->
+    <section class="pro-card">
+      <div class="pro-cardHead">
+        <h3 class="pro-h3">Historique</h3>
+        <p class="pro-muted">Tes sauvegardes PRO récentes.</p>
+      </div>
+      <div id="history"></div>
+    </section>
+  </main>
+
+  <!-- (Optionnel) tu peux garder ambiance/ui si tu veux des micro-anim globales,
+       mais ce n'est pas obligatoire. Je laisse PRO autonome. -->
+
+  <!-- IMPORTANT: pro_logic.js doit déjà être chargé dans le flow PRO -->
+  <script src="pro_logic.js?v=1"></script>
+  <script src="resultat_pro.js?v=1"></script>
+</body>
+</html>
