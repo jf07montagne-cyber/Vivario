@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Accueil</title>
+  <link rel="stylesheet" href="style.css?v=18" />
+  <meta name="theme-color" content="#071125" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top top-hero">
+      <div class="top-left">
+        <h1 class="brand">Vivario</h1>
+        <p class="muted">Quand une décision pèse, prendre un moment peut aider.</p>
+      </div>
+      <div class="top-right">
+        <span class="pill muted">v1.1</span>
+      </div>
+    </header>
+
+    <section class="card hero-card">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-row">
+        <div style="flex:1 1 auto;">
+          <h2 class="hero-title">Bienvenue.</h2>
+          <p class="hero-sub muted">
+            Questionnaire + scénarios personnalisés : <b>préserver ton énergie</b>, <b>un pas concret</b>, <b>apaisement</b>, <b>normalisation</b>.
+            Rien n’est envoyé : tout reste sur ton appareil.
+          </p>
+
+          <div class="hero-tools">
+            <a class="btn primary" href="questionnaire.html?v=18">Commencer</a>
+            <a class="btn ghost" href="respiration.html?v=18">🫁 Respiration guidée</a>
+            <a class="btn ghost" href="apropos.html?v=18">ℹ️ À propos</a>
+          </div>
+
+          <div class="sep"></div>
+          <div class="mini-grid">
+            <div class="mini-card">
+              <div class="mini-title">🧠 Simple</div>
+              <div class="mini-sub muted">7 questions, pas de blabla.</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">🔒 Privé</div>
+              <div class="mini-sub muted">localStorage uniquement.</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">🎧 Ambiance</div>
+              <div class="mini-sub muted">Bouton discret fixe en haut à droite.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-orb hero-orb-big" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 style="margin-bottom:6px;">Raccourcis</h3>
+      <p class="muted" style="margin:0 0 12px;">
+        Tu peux aussi revoir ton dernier résultat.
+      </p>
+      <div class="actions">
+        <a class="btn ghost" href="resultat.html?v=18">📌 Ouvrir le dernier résultat</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="sound.js?v=18"></script>
+  <script src="ambiance.js?v=18"></script>
+  <script src="ui.js?v=18"></script>
+</body>
+</html>
