@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Bande annonce</title>
+  <meta name="theme-color" content="#071125" />
+  <link rel="stylesheet" href="trailer.css?v=1" />
+</head>
+
+<body class="page-trailer">
+  <main class="trailer">
+    <div class="film-grain" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="trailer-top">
+      <div class="brand">
+        <span class="logo">Vivario</span>
+        <span class="pill">Bande annonce</span>
+      </div>
+
+      <div class="top-actions">
+        <button class="tbtn ghost" id="btnSound" type="button" aria-label="Activer/Désactiver le son">
+          🔈 Son : OFF
+        </button>
+        <button class="tbtn ghost" id="btnSkip" type="button">
+          Passer
+        </button>
+        <a class="tbtn primary" id="btnEnter" href="index_main.html?v=18">
+          ✨ Entrer
+        </a>
+      </div>
+    </header>
+
+    <section class="stage" aria-label="Bande annonce Vivario">
+      <div class="glow" aria-hidden="true"></div>
+      <div class="orb orb-a" aria-hidden="true"></div>
+      <div class="orb orb-b" aria-hidden="true"></div>
+
+      <!-- SCÈNES -->
+      <div class="scene active" data-scene="0">
+        <div class="tag">✨ Espace calme • 1–2 minutes</div>
+        <h1>Quand une décision pèse.</h1>
+        <p>
+          On ne force pas la clarté — on la laisse venir.
+        </p>
+      </div>
+
+      <div class="scene" data-scene="1">
+        <div class="tag">🧠 Coach doux</div>
+        <h2>Ton énergie compte.</h2>
+        <p>
+          Petit. Sûr. Réaliste. Même quand tu es fatigué(e).
+        </p>
+      </div>
+
+      <div class="scene" data-scene="2">
+        <div class="tag">🧭 Questionnaire</div>
+        <h2>Tu réponds. Vivario s’adapte.</h2>
+        <p>
+          Pas un test générique : une lecture structurée + un pas concret.
+        </p>
+      </div>
+
+      <div class="scene" data-scene="3">
+        <div class="tag">🫁 Respiration guidée</div>
+        <h2>On baisse la pression.</h2>
+        <p>
+          Cohérence cardiaque, respiration, ancrage… sans surcharge.
+        </p>
+      </div>
+
+      <div class="scene" data-scene="4">
+        <div class="tag">🔒 Privé</div>
+        <h2>Rien n’est envoyé.</h2>
+        <p>
+          Tout reste sur ton appareil. Zéro compte. Zéro tracking.
+        </p>
+      </div>
+
+      <div class="scene" data-scene="5">
+        <div class="tag">🚀 Vivario PRO</div>
+        <h2>Diagnostic + modules + plan.</h2>
+        <p>
+          Multi-thèmes adaptatif → recommandations guidées + suivi.
+        </p>
+
+        <div class="cta-row">
+          <a class="tbtn primary" href="accueil_pro.html?v=18">🚀 Ouvrir Vivario PRO</a>
+          <a class="tbtn ghost" href="index_main.html?v=18">✨ Version gratuite</a>
+        </div>
+      </div>
+
+      <!-- “montage cards” -->
+      <div class="montage" aria-hidden="true">
+        <div class="mcard">
+          <div class="mk">🧩 Modules</div>
+          <div class="mv">Stress • Sommeil • Addictions • Relation…</div>
+        </div>
+        <div class="mcard">
+          <div class="mk">🎯 Diagnostic</div>
+          <div class="mv">Priorités • Intensité • Rythme</div>
+        </div>
+        <div class="mcard">
+          <div class="mk">📅 Suivi</div>
+          <div class="mv">Historique • Progression • Plans</div>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress">
+        <i id="bar"></i>
+      </div>
+
+      <p class="hint" id="hint">
+        Astuce : touche “Son” si tu veux l’ambiance.
+      </p>
+
+      <!-- AUDIO (optionnel) : utilise tes MP3 existants -->
+      <audio id="trailerAudio" preload="auto" loop>
+        <source src="ambiance_deep.mp3" type="audio/mpeg" />
+      </audio>
+    </section>
+  </main>
+
+  <script src="trailer.js?v=1"></script>
+</body>
+</html>
