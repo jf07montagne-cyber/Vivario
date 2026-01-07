@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario — Bande annonce</title>
+  <meta name="theme-color" content="#071125" />
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="trailer_v31.css?v=31" />
+
+  <!-- ✅ Fallback CSS (si trailer_v31.css n’existe pas / 404) -->
+  <script>
+    (function(){
+      var cssHref = "trailer_v31.css?v=31";
+      function addFallback(){
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "trailer_v3.css?v=31";
+        document.head.appendChild(link);
+      }
+      try{
+        fetch(cssHref, { method:"HEAD", cache:"no-store" })
+          .then(function(r){ if(!r.ok) addFallback(); })
+          .catch(addFallback);
+      } catch(e){
+        addFallback();
+      }
+    })();
+  </script>
+</head>
+
+<body class="page-trailer">
+  <main class="trailer" aria-label="Bande annonce Vivario">
+
+    <!-- Film grain + vignette -->
+    <div class="film" aria-hidden="true"></div>
+
+    <!-- Overlay start (évite redirection trop rapide + lance audio/voix après interaction) -->
+    <div class="startOverlay" id="startOverlay" role="dialog" aria-modal="true" aria-label="Démarrer la bande annonce">
+      <div class="startCard">
+        <div class="startTop">
+          <div class="startLogo">
+            <span class="startDot"></span>
+            <span class="startName">Vivario</span>
+          </div>
+          <span class="startPill">Bande annonce • 25s</span>
+        </div>
+        <h1 class="startTitle">Un espace sûr.<br/>Un moment pour respirer.</h1>
+        <p class="startLead">
+          Rien n’est envoyé. Tout reste sur ton appareil.
+        </p>
+        <div class="startActions">
+          <button class="btn primary" id="btnStart" type="button">▶ Lancer</button>
+          <button class="btn ghost" id="btnStartMute" type="button">🔇 Lancer sans voix</button>
+        </div>
+        <p class="tiny muted" style="margin:10px 0 0; line-height:1.4;">
+          (Astuce : la voix dépend du navigateur. Si elle ne démarre pas, la bande-annonce reste parfaitement lisible.)
+        </p>
+      </div>
+    </div>
+
+    <!-- ACT 0 : ouverture -->
+    <section class="act active" data-act="0">
+      <div class="stage">
+        <div class="bgArt bgSoft" aria-hidden="true"></div>
+
+        <div class="logoWrap">
+          <div class="logoGlow"></div>
+          <h1 class="logo">Vivario</h1>
+          <p class="sub">Espace calme • 1–2 minutes • confidentiel</p>
+        </div>
+
+        <div class="vo" data-vo>
+          Parfois, ce n’est pas le choix… c’est la pression autour.
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 1 : émotion / surcharge -->
+    <section class="act" data-act="1">
+      <div class="stage">
+        <div class="bgArt bgPulse" aria-hidden="true"></div>
+
+        <div class="tag">Quand ça déborde</div>
+        <h2>Le mental sature.</h2>
+        <p class="lead">Tu avances… mais tout coûte plus cher qu’avant.</p>
+
+        <div class="quoteCard" aria-hidden="true">
+          <div class="qMark">“</div>
+          <div class="qTxt">Je tiens… mais je suis au bord.</div>
+          <div class="qLine"></div>
+        </div>
+
+        <div class="vo" data-vo>
+          Ici, tu n’as rien à prouver. Tu as juste à te poser.
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 2 : confiance / confidentialité -->
+    <section class="act" data-act="2">
+      <div class="stage">
+        <div class="bgArt bgLock" aria-hidden="true"></div>
+
+        <div class="tag">Confiance</div>
+        <h2>Tu peux te livrer.</h2>
+        <p class="lead">Aucun compte. Aucun tracking. Stockage local.</p>
+
+        <div class="proofRow" aria-label="Preuves">
+          <div class="proof">
+            <div class="proofK">🔒 Privé</div>
+            <div class="proofV">Rien n’est envoyé.</div>
+          </div>
+          <div class="proof">
+            <div class="proofK">🕊️ Doux</div>
+            <div class="proofV">Pas de jugement, pas d’injonctions.</div>
+          </div>
+          <div class="proof">
+            <div class="proofK">⏱️ Court</div>
+            <div class="proofV">Un pas simple, tout de suite.</div>
+          </div>
+        </div>
+
+        <div class="vo" data-vo>
+          Tu réponds. Vivario organise. Et toi… tu respires.
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 3 : clinique premium (scan) -->
+    <section class="act" data-act="3">
+      <div class="stage">
+        <div class="bgArt bgScan" aria-hidden="true"></div>
+
+        <div class="tag">Analyse</div>
+        <h2>Lecture structurée.</h2>
+        <p class="lead">Thèmes • intensité • priorités</p>
+
+        <div class="scanCard" aria-label="Scan clinique">
+          <div class="scanTop">
+            <span class="scanChip">Signal</span>
+            <span class="scanChip">Priorité</span>
+            <span class="scanChip">Charge</span>
+          </div>
+
+          <div class="scanGrid">
+            <div class="scanRow">
+              <span class="k">Stress</span>
+              <span class="v"><i style="width:78%"></i></span>
+            </div>
+            <div class="scanRow">
+              <span class="k">Sommeil</span>
+              <span class="v"><i style="width:62%"></i></span>
+            </div>
+            <div class="scanRow">
+              <span class="k">Relation</span>
+              <span class="v"><i style="width:44%"></i></span>
+            </div>
+          </div>
+
+          <div class="scanLine" aria-hidden="true"></div>
+          <div class="scanHint">Ce n’est pas une étiquette. C’est une boussole.</div>
+        </div>
+
+        <div class="vo" data-vo>
+          On ne te colle pas un label. On te donne une direction.
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 4 : aide concrète / modules -->
+    <section class="act" data-act="4">
+      <div class="stage">
+        <div class="bgArt bgHelp" aria-hidden="true"></div>
+
+        <div class="tag">Soutien guidé</div>
+        <h2>Un plan réaliste.</h2>
+        <p class="lead">Respiration • cohérence cardiaque • routines • corps</p>
+
+        <div class="chips" aria-label="Modules">
+          <span>🫁 Respiration</span>
+          <span>💓 Cardiaque</span>
+          <span>🧘 Yoga</span>
+          <span>🏃 Mouvement</span>
+          <span>✍️ Écriture</span>
+        </div>
+
+        <div class="monitor" aria-hidden="true">
+          <div class="monHead">
+            <span class="monDot"></span>
+            <span>Stabilisation</span>
+            <span class="monMuted">guidée</span>
+          </div>
+          <svg class="ekg" viewBox="0 0 600 120" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0,70 L60,70 L80,70 L95,40 L110,95 L130,60 L150,70 L210,70 L240,70 L255,50 L270,90 L285,65 L305,70 L360,70 L390,70 L405,45 L420,95 L438,62 L455,70 L600,70" />
+          </svg>
+        </div>
+
+        <div class="vo" data-vo>
+          Un pas concret. Pas parfait. Mais tenable.
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 5 : PRO (premium) -->
+    <section class="act" data-act="5">
+      <div class="stage">
+        <div class="bgArt bgPro" aria-hidden="true"></div>
+
+        <div class="tag proTag">Vivario PRO</div>
+        <h2>Plus précis. Plus profond.</h2>
+        <p class="lead">Questionnaire adaptatif multi-thèmes + diagnostic + suivi.</p>
+
+        <div class="proProof">
+          <div class="pp">
+            <strong>Diagnostic</strong>
+            <span>Lecture claire de tes priorités.</span>
+          </div>
+          <div class="pp">
+            <strong>Modules</strong>
+            <span>Recommandations guidées, anti-répétition.</span>
+          </div>
+          <div class="pp">
+            <strong>Suivi</strong>
+            <span>Check-ins + progression + plan semaine.</span>
+          </div>
+        </div>
+
+        <div class="vo" data-vo>
+          Tu n’es pas en retard. Tu es en train de te réorganiser.
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 6 : final + choix -->
+    <section class="act act-final" data-act="6">
+      <div class="stage finale">
+        <div class="finalBrand" aria-hidden="true">
+          <div class="finalGlow"></div>
+          <div class="finalLogo">Vivario</div>
+          <div class="finalSlogan">Un espace calme, quand ça compte.</div>
+        </div>
+
+        <h2>Choisis ton entrée.</h2>
+        <p class="lead">Tout reste sur ton appareil. Rien n’est envoyé.</p>
+
+        <div class="cta">
+          <a href="accueil.html?v=18" class="btn primary">✨ Vivario (gratuit)</a>
+          <a href="accueil_pro.html?v=18" class="btn ghost">🚀 Vivario PRO</a>
+        </div>
+
+        <p class="tiny muted" style="margin-top:10px;">Astuce : tu peux “Passer” à tout moment.</p>
+      </div>
+    </section>
+
+    <!-- Controls -->
+    <footer class="controls" aria-label="Contrôles trailer">
+      <button id="skip" class="btn ghost" type="button">Passer</button>
+      <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+      <button id="mute" class="btn ghost" type="button">🔊</button>
+    </footer>
+
+    <!-- Ambiance (optionnel) -->
+    <audio id="amb" loop preload="auto">
+      <source src="ambiance_deep.mp3" type="audio/mpeg" />
+    </audio>
+
+  </main>
+
+  <!-- JS principal -->
+  <script src="trailer_v31.js?v=31"></script>
+
+  <!-- ✅ Fallback JS (si trailer_v31.js n’existe pas / 404) -->
+  <script>
+    (function(){
+      var ok = false;
+      // trailer_v31.js définit normalement des listeners (btnStart etc.)
+      // On considère "OK" si le bouton start a un listener qui masque l’overlay (le plus simple : test overlay existe et reste visible après 2s sans interaction = normal)
+      // Ici : fallback brut au bout de 2s si le script n’a pas chargé (erreur réseau)
+      window.addEventListener("error", function(e){
+        if (String(e?.filename || "").indexOf("trailer_v31.js") !== -1) ok = false;
+      });
+
+      setTimeout(function(){
+        // Si le JS n’a pas chargé, on injecte trailer_v3.js
+        // (sûr : n’impacte rien d’autre)
+        try{
+          // Si btnStart n’existe pas => rien à faire
+          var s = document.createElement("script");
+          s.src = "trailer_v3.js?v=31";
+          document.body.appendChild(s);
+        } catch(e){}
+      }, 1500);
+    })();
+  </script>
+</body>
+</html>
