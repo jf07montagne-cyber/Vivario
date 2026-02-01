@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario PRO</title>
+  <link rel="stylesheet" href="pro_style.css?v=1" />
+  <meta name="theme-color" content="#070a12" />
+</head>
+
+<body class="pro-page">
+  <main class="pro-wrap">
+    <!-- TOP BAR -->
+    <header class="pro-top">
+      <div class="pro-brandRow">
+        <div>
+          <h1 class="pro-brand">Vivario <span class="pro-badge">PRO</span></h1>
+          <p class="pro-muted">
+            Diagnostic • Modules • Plan • Suivi — tout reste sur ton appareil. Rien n’est envoyé.
+          </p>
+        </div>
+
+        <div class="pro-topActions">
+          <a class="pro-btn pro-btnGhost" href="index.html?v=18">↩ Retour</a>
+          <a class="pro-btn pro-btnGhost" href="accueil.html?v=18">✨ Gratuit</a>
+          <a class="pro-btn" href="resultat_pro.html?v=1">📄 Résultat</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="pro-hero">
+      <div class="pro-heroGlow" aria-hidden="true"></div>
+
+      <div class="pro-heroGrid">
+        <!-- LEFT -->
+        <div>
+          <h2 class="pro-title">Ton espace PRO</h2>
+          <p class="pro-lead">
+            Un parcours plus complet, mais <b>sans surcharge</b>.
+            Vivario ajuste la profondeur selon ton énergie et te propose un plan réaliste.
+          </p>
+
+          <div class="pro-chips" aria-label="Points forts">
+            <span class="pro-chip">Multi-thèmes</span>
+            <span class="pro-chip">Adaptatif</span>
+            <span class="pro-chip">Anti-répétition</span>
+            <span class="pro-chip">Progression</span>
+            <span class="pro-chip">Sans tracking</span>
+          </div>
+
+          <!-- PRIMARY CTAs (clean hierarchy) -->
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="pro-btn pro-btnPrimary" href="onboarding_pro.html?v=1">✨ Démarrer (Onboarding PRO)</a>
+            <a class="pro-btn" href="questionnaire_pro.html?v=1">🚀 Aller au questionnaire</a>
+          </div>
+
+          <p class="pro-muted" style="margin-top:10px;">
+            Conseil : si tu ne sais pas par où commencer, fais l’onboarding — c’est court et ça cadre ton parcours.
+          </p>
+
+          <!-- MINI VALUE CARDS (less “foutoir”, 4 max) -->
+          <div class="pro-miniCards" style="margin-top:14px;">
+            <div class="pro-mini">
+              <div class="k">🎯 Diagnostic</div>
+              <p class="v">Lecture claire des priorités (scores + signaux).</p>
+            </div>
+            <div class="pro-mini">
+              <div class="k">🧩 Modules</div>
+              <p class="v">Exercices guidés (respiration, ancrage, écriture, mouvement…).</p>
+            </div>
+            <div class="pro-mini">
+              <div class="k">📅 Plan</div>
+              <p class="v">Plan du jour (bientôt plan semaine) + ajustement selon ton rythme.</p>
+            </div>
+            <div class="pro-mini">
+              <div class="k">🛡️ Confidentialité</div>
+              <p class="v">Stockage local. Pas de compte obligatoire. Tu gardes le contrôle.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT : STATUS CARD -->
+        <aside class="pro-scoreCard" aria-label="État PRO">
+          <div class="pro-scoreHead">
+            <div class="pro-scoreLabel">Dernier diagnostic</div>
+            <div class="pro-scoreDate" id="proLastDate">—</div>
+          </div>
+
+          <div class="pro-scoreBig">
+            <div class="pro-scoreNum" id="proTopScore">—</div>
+            <div class="pro-scoreTxt" id="proTopLabel">Aucun résultat</div>
+          </div>
+
+          <div class="pro-scoreList" id="proTopDomains">
+            <div class="pro-scoreRow">
+              <div class="name">Aucun résultat enregistré</div>
+              <div class="pro-bar" aria-hidden="true"><i style="width:0%"></i></div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="pro-btn pro-btnPrimary" href="resultat_pro.html?v=1">Ouvrir</a>
+            <button class="pro-btn pro-btnGhost" id="btnClearPro" type="button">Réinitialiser</button>
+          </div>
+
+          <p class="pro-muted" style="margin-top:10px;">
+            Réinitialiser efface uniquement le stockage local sur cet appareil.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PARCOURS CLAIR -->
+    <section class="pro-card">
+      <div class="pro-cardHead">
+        <h3 class="pro-h3">Parcours recommandé</h3>
+        <p class="pro-muted" style="margin:0;">Un chemin simple : cadrer → analyser → agir → suivre.</p>
+      </div>
+
+      <div class="pro-planGrid">
+        <div class="pro-step">
+          <div class="pro-stepHead">
+            <div>
+              <p class="pro-stepTitle">1) ✨ Onboarding PRO</p>
+              <p class="pro-muted" style="margin:6px 0 0;">On te cadre le parcours en 60–90 secondes.</p>
+            </div>
+            <div class="pro-stepMeta">Recommandé</div>
+          </div>
+          <a class="pro-btn pro-btnPrimary" href="onboarding_pro.html?v=1">Démarrer</a>
+        </div>
+
+        <div class="pro-step">
+          <div class="pro-stepHead">
+            <div>
+              <p class="pro-stepTitle">2) 🚀 Questionnaire adaptatif</p>
+              <p class="pro-muted" style="margin:6px 0 0;">Multi-thèmes + sous-questionnaires selon tes choix.</p>
+            </div>
+            <div class="pro-stepMeta">Adaptatif</div>
+          </div>
+          <a class="pro-btn" href="questionnaire_pro.html?v=1">Ouvrir le questionnaire</a>
+        </div>
+
+        <div class="pro-step">
+          <div class="pro-stepHead">
+            <div>
+              <p class="pro-stepTitle">3) 📄 Diagnostic + Plan</p>
+              <p class="pro-muted" style="margin:6px 0 0;">Diagnostic + plan du jour généré automatiquement.</p>
+            </div>
+            <div class="pro-stepMeta">Automatique</div>
+          </div>
+          <a class="pro-btn" href="resultat_pro.html?v=1">Voir mon résultat</a>
+        </div>
+
+        <div class="pro-step">
+          <div class="pro-stepHead">
+            <div>
+              <p class="pro-stepTitle">4) 📅 Suivi</p>
+              <p class="pro-muted" style="margin:6px 0 0;">Bientôt : check-ins, calendrier, stats, plan semaine.</p>
+            </div>
+            <div class="pro-stepMeta">Bientôt</div>
+          </div>
+          <button class="pro-btn pro-btnGhost" type="button" disabled aria-disabled="true">À venir</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMENT ÇA MARCHE (TABS conservés) -->
+    <section class="pro-card">
+      <div class="pro-cardHead">
+        <h3 class="pro-h3">Comment ça marche</h3>
+        <p class="pro-muted" style="margin:0;">Comprendre → stabiliser → avancer → suivre.</p>
+      </div>
+
+      <div class="pro-tabs" id="proTabs">
+        <button class="pro-tab active" data-pane="diag" type="button">Diagnostic</button>
+        <button class="pro-tab" data-pane="plan" type="button">Plan</button>
+        <button class="pro-tab" data-pane="suivi" type="button">Suivi</button>
+        <button class="pro-tab" data-pane="privacy" type="button">Données</button>
+      </div>
+
+      <div class="pro-pane active" id="pane-diag">
+        <p><b>Diagnostic</b> : Vivario agrège tes réponses en domaines (scores 0–100), puis extrait les priorités.</p>
+        <p>Si ton énergie est basse, le parcours devient plus court et évite les blocs “long/deep”.</p>
+      </div>
+
+      <div class="pro-pane" id="pane-plan">
+        <p><b>Plan du jour</b> : sélection de modules adaptés à tes priorités, ton énergie, et ton rythme récent.</p>
+        <p>La sélection vise la simplicité : 1 à 3 modules max (plus tard : plan semaine).</p>
+      </div>
+
+      <div class="pro-pane" id="pane-suivi">
+        <p><b>Suivi</b> : tu coches ce qui est fait, Vivario estime ton adhérence et ajuste la difficulté.</p>
+        <p>Prochaine étape : une page “Suivi PRO” dédiée (calendrier + stats + historique check-ins).</p>
+      </div>
+
+      <div class="pro-pane" id="pane-privacy">
+        <p><b>Confidentialité</b> : aucun envoi, aucun tracking. Stockage local uniquement.</p>
+        <p>Tu peux réinitialiser quand tu veux depuis cette page.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function(){
+      const PRO_RESULT_KEY = "vivario_pro_result_v1";
+
+      function escapeHTML(str){
+        return String(str || "").replace(/[&<>"']/g, (m) => ({
+          "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+        }[m]));
+      }
+
+      function prettyDate(iso){
+        try{
+          const d = new Date(iso);
+          return d.toLocaleString(undefined, { year:"numeric", month:"short", day:"2-digit", hour:"2-digit", minute:"2-digit" });
+        }catch{ return "—"; }
+      }
+
+      function severityLabel(score){
+        if (score >= 75) return "Élevé";
+        if (score >= 45) return "Modéré";
+        if (score >= 20) return "Léger";
+        return "Faible";
+      }
+
+      function topDomains(scores, n){
+        const entries = Object.entries(scores || {});
+        entries.sort((a,b) => (b[1]||0) - (a[1]||0));
+        return entries.slice(0, n).filter(e => (e[1]||0) > 0);
+      }
+
+      function render(){
+        let data = null;
+        try { data = JSON.parse(localStorage.getItem(PRO_RESULT_KEY) || "null"); } catch {}
+
+        const elDate = document.getElementById("proLastDate");
+        const elTopScore = document.getElementById("proTopScore");
+        const elTopLabel = document.getElementById("proTopLabel");
+        const elList = document.getElementById("proTopDomains");
+
+        if (!data){
+          elDate.textContent = "—";
+          elTopScore.textContent = "—";
+          elTopLabel.textContent = "Aucun résultat";
+          elList.innerHTML = `
+            <div class="pro-scoreRow">
+              <div class="name">Aucun résultat enregistré</div>
+              <div class="pro-bar" aria-hidden="true"><i style="width:0%"></i></div>
+            </div>`;
+          return;
+        }
+
+        elDate.textContent = prettyDate(data.created_at);
+        const scores = data.scores || {};
+        const tops = topDomains(scores, 4);
+        const first = tops[0] || ["global", 0];
+
+        elTopScore.textContent = String(first[1] || 0);
+        elTopLabel.textContent = `${escapeHTML(first[0])} • ${severityLabel(first[1] || 0)}`;
+
+        if (!tops.length){
+          elList.innerHTML = `
+            <div class="pro-scoreRow">
+              <div class="name">Scores non disponibles</div>
+              <div class="pro-bar" aria-hidden="true"><i style="width:0%"></i></div>
+            </div>`;
+          return;
+        }
+
+        elList.innerHTML = tops.map(([name, val]) => {
+          const w = Math.max(0, Math.min(100, Number(val || 0)));
+          return `
+            <div class="pro-scoreRow">
+              <div class="name">${escapeHTML(name)} • ${severityLabel(w)}</div>
+              <div class="pro-bar" aria-hidden="true"><i style="width:${w}%"></i></div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      // Tabs
+      const tabs = document.querySelectorAll(".pro-tab");
+      tabs.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const key = btn.getAttribute("data-pane");
+          tabs.forEach(b => b.classList.toggle("active", b === btn));
+          ["diag","plan","suivi","privacy"].forEach(k => {
+            const pane = document.getElementById("pane-" + k);
+            if (pane) pane.classList.toggle("active", k === key);
+          });
+        });
+      });
+
+      // Reset
+      const btnClear = document.getElementById("btnClearPro");
+      btnClear?.addEventListener("click", () => {
+        if (!confirm("Réinitialiser Vivario PRO sur cet appareil ?")) return;
+        try { localStorage.removeItem(PRO_RESULT_KEY); } catch {}
+        render();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
