@@ -1,0 +1,1093 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
+  <title>Vivario PRO — Onboarding</title>
+  <meta name="theme-color" content="#070a12" />
+
+  <style>
+    :root{
+      --bg1:#071125;
+      --bg2:#0c1f3f;
+
+      --ink:#eef2ff;
+      --muted: rgba(238,242,255,.72);
+
+      --card: rgba(255,255,255,.07);
+      --card2: rgba(255,255,255,.05);
+      --border: rgba(255,255,255,.12);
+
+      --accent: rgba(140,180,255,.28);
+      --accent2: rgba(35,240,215,.22);
+      --accentBorder: rgba(140,180,255,.42);
+
+      --shadow: 0 22px 70px rgba(0,0,0,.44);
+      --radius: 22px;
+
+      --pill: rgba(0,0,0,.16);
+      --pillBorder: rgba(255,255,255,.12);
+
+      --stickyH: 104px; /* hauteur barre bas (approx) */
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+
+      background:
+        radial-gradient(1200px 700px at 18% 10%, rgba(70,120,240,.46) 0%, transparent 62%),
+        radial-gradient(1000px 650px at 85% 18%, rgba(35,200,190,.22) 0%, transparent 58%),
+        radial-gradient(900px 600px at 50% 90%, rgba(160,170,255,.14) 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* fond “ciné” doux (grain + vignette) */
+    .film{
+      position:fixed; inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(1200px 800px at 50% 50%, transparent 55%, rgba(0,0,0,.34) 100%),
+        repeating-linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.04) 1px, transparent 2px, transparent 4px);
+      opacity:.13;
+      mix-blend-mode: overlay;
+      filter: blur(.2px);
+      z-index: 1;
+    }
+
+    .wrap{
+      position:relative;
+      z-index: 2;
+      width:min(980px, 96vw);
+      margin: 0 auto;
+      padding: max(14px, env(safe-area-inset-top)) 0 calc(var(--stickyH) + 28px + env(safe-area-inset-bottom));
+      /* ✅ important : réserve en bas pour éviter que la barre recouvre le texte */
+    }
+
+    .stage{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(900px 360px at 18% 18%, rgba(140,180,255,.16), transparent 62%),
+        radial-gradient(760px 340px at 82% 55%, rgba(35,240,215,.10), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      padding: 16px;
+    }
+
+    /* Header */
+    .top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+      padding: 8px 4px 14px;
+    }
+    .brandRow{
+      display:flex;
+      align-items:baseline;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .brand{
+      margin:0;
+      font-weight: 950;
+      letter-spacing: .2px;
+      font-size: clamp(34px, 6.8vw, 54px);
+      line-height: 1.05;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.20);
+      font-weight: 950;
+      font-size: 12px;
+      letter-spacing:.15px;
+      transform: translateY(-2px);
+    }
+    .muted{
+      margin: 8px 0 0;
+      color: rgba(238,242,255,.78);
+      line-height: 1.5;
+      max-width: 70ch;
+    }
+
+    .topBtns{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      appearance:none;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.10);
+      color: var(--ink);
+      padding: 11px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 900;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover{ background: rgba(255,255,255,.13); }
+    .btn:active{ transform: scale(.985); }
+    .btn.ghost{ background: transparent; }
+    .btn.ghost:hover{ background: rgba(255,255,255,.06); }
+    .btn.primary{
+      background: var(--accent);
+      border-color: var(--accentBorder);
+    }
+    .btn.primary:hover{ background: rgba(140,180,255,.34); }
+
+    .btn.wide{ width: 100%; }
+
+    /* Stepper */
+    .stepCard{
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.14);
+    }
+    .stepRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing:.12px;
+      cursor:pointer;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease, opacity .2s ease;
+    }
+    .pill:active{ transform: scale(.985); }
+    .dot{
+      width: 12px; height: 12px; border-radius: 999px;
+      border: 2px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 0 0 5px rgba(140,180,255,.08);
+    }
+    .pill.active{
+      border-color: rgba(140,180,255,.35);
+      background: rgba(140,180,255,.10);
+    }
+    .pill.active .dot{
+      border-color: rgba(140,180,255,.65);
+      background: rgba(140,180,255,.55);
+      box-shadow: 0 0 0 6px rgba(140,180,255,.12);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%{ transform: scale(1); opacity:.95; }
+      50%{ transform: scale(1.08); opacity:1; }
+      100%{ transform: scale(1); opacity:.95; }
+    }
+
+    .progress{
+      margin-top: 12px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .progress i{
+      display:block;
+      height:100%;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(140,180,255,.65), rgba(35,240,215,.28));
+      transition: width .45s ease;
+    }
+
+    /* Panes */
+    .paneWrap{
+      margin-top: 14px;
+    }
+
+    .paneTitle{
+      margin: 0 0 8px;
+      font-size: clamp(34px, 6vw, 54px);
+      font-weight: 950;
+      letter-spacing: .2px;
+    }
+    .paneLead{
+      margin: 0;
+      color: rgba(238,242,255,.86);
+      line-height:1.6;
+      font-size: 18px;
+      max-width: 75ch;
+    }
+
+    .infoGrid{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media(min-width:860px){
+      .infoGrid{ grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .card{
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .card .k{
+      font-weight: 950;
+      margin-bottom: 6px;
+      opacity:.96;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .card .v{
+      margin:0;
+      color: var(--muted);
+      line-height:1.55;
+    }
+
+    /* ✅ Fix important : pane active doit être visible même après animation */
+    .onb-pane{
+      display:none;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    .onb-pane.active{
+      display:block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .onb-pane.is-enter{
+      animation: paneIn .42s ease both;
+    }
+    @keyframes paneIn{
+      from{ opacity:0; transform: translateY(12px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    /* Themes */
+    .themesTop{
+      margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .search{
+      flex: 1 1 260px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 12px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+    }
+    .search input{
+      width:100%;
+      border:0;
+      outline:0;
+      background: transparent;
+      color: var(--ink);
+      font-weight: 850;
+      font-size: 14px;
+    }
+    .search input::placeholder{ color: rgba(238,242,255,.55); }
+
+    .themesCount{
+      white-space:nowrap;
+      font-weight: 900;
+      color: rgba(238,242,255,.86);
+      opacity:.95;
+    }
+
+    .chips{
+      margin-top: 12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      font-weight: 900;
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease, opacity .2s ease;
+    }
+    .chip:active{ transform: scale(.985); }
+    .chip.sel{
+      border-color: rgba(140,180,255,.38);
+      background: rgba(140,180,255,.12);
+    }
+    .chip small{
+      font-weight: 950;
+      opacity:.8;
+    }
+
+    .themesHint{
+      margin-top: 10px;
+      color: rgba(238,242,255,.78);
+      line-height: 1.55;
+      font-weight: 850;
+    }
+
+    /* Radios */
+    .radioGrid{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+    @media(min-width:860px){
+      .radioGrid{ grid-template-columns: repeat(2, 1fr); }
+    }
+    .radio{
+      display:flex;
+      gap:12px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      cursor:pointer;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+    }
+    .radio:active{ transform: scale(.995); }
+    .radio input{ margin-top: 3px; }
+    .radio .rt{
+      font-weight: 950;
+      margin: 0;
+    }
+    .radio .rd{
+      margin: 4px 0 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-weight: 800;
+    }
+    .radio.on{
+      border-color: rgba(140,180,255,.35);
+      background: rgba(140,180,255,.10);
+    }
+
+    /* Summary */
+    .summary{
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.14);
+    }
+    .summaryHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 10px;
+    }
+    .summaryHead h3{
+      margin:0;
+      font-size: 22px;
+      font-weight: 950;
+      letter-spacing:.12px;
+    }
+    .summaryHead .date{
+      color: rgba(238,242,255,.72);
+      font-weight: 850;
+      white-space:nowrap;
+    }
+    .miniRow{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+    .miniBox{
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .miniBox .k{
+      font-weight: 950;
+      opacity:.92;
+      margin-bottom: 6px;
+    }
+    .miniBox .v{
+      color: rgba(238,242,255,.90);
+      font-weight: 900;
+      line-height: 1.55;
+      word-break: break-word;
+    }
+
+    /* Sticky bottom controls */
+    .sticky{
+      position:fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 50;
+      padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(5,10,25,.62) 35%, rgba(5,10,25,.90));
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .stickyInner{
+      width:min(980px, 96vw);
+      margin: 0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .row2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .row2 .btn{ width:100%; }
+    .row2b{
+      display:grid;
+      grid-template-columns: 1fr 2fr;
+      gap:10px;
+    }
+    .row2b .btn{ width:100%; }
+
+    /* Scroll to top */
+    .toTop{
+      position:fixed;
+      right: 16px;
+      bottom: calc(var(--stickyH) + 16px + env(safe-area-inset-bottom));
+      z-index: 60;
+      width: 54px; height: 54px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.10);
+      color: var(--ink);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 950;
+      cursor:pointer;
+      backdrop-filter: blur(10px);
+      opacity: .0;
+      transform: translateY(8px);
+      transition: opacity .25s ease, transform .25s ease;
+    }
+    .toTop.on{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media(max-width:520px){
+      .topBtns .btn{ width:100%; }
+      .pill{ width: 100%; justify-content:flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="film" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <section class="stage" aria-label="Onboarding Vivario PRO">
+      <header class="top">
+        <div>
+          <div class="brandRow">
+            <h1 class="brand">Vivario</h1>
+            <span class="badge">PRO</span>
+          </div>
+          <p class="muted">
+            Onboarding — on prépare ton parcours (thèmes, énergie, rythme). Rien n’est envoyé.
+          </p>
+        </div>
+
+        <div class="topBtns">
+          <a class="btn ghost" href="accueil_pro.html?v=1">↩ Retour</a>
+          <a class="btn ghost" href="accueil.html?v=18">✨ Gratuit</a>
+          <a class="btn" href="questionnaire_pro.html?v=1">Passer → questionnaire</a>
+        </div>
+      </header>
+
+      <div class="stepCard" aria-label="Étapes">
+        <div class="stepRow" id="stepRow">
+          <div class="pill active" data-step="0"><span class="dot"></span> 1 · Cadre</div>
+          <div class="pill" data-step="1"><span class="dot"></span> 2 · Thèmes</div>
+          <div class="pill" data-step="2"><span class="dot"></span> 3 · Énergie</div>
+          <div class="pill" data-step="3"><span class="dot"></span> 4 · Rythme</div>
+          <div class="pill" data-step="4"><span class="dot"></span> 5 · Validation</div>
+        </div>
+        <div class="progress" aria-hidden="true"><i id="progBar"></i></div>
+      </div>
+
+      <div class="paneWrap">
+        <!-- 1) Cadre -->
+        <section class="onb-pane active" id="pane-0">
+          <h2 class="paneTitle">On va faire simple.</h2>
+          <p class="paneLead">
+            Tu choisis ce qui compte maintenant. Vivario PRO adaptera la profondeur en fonction de ton énergie
+            (et évitera les blocs trop longs si tu es “en bas”).
+          </p>
+
+          <div class="infoGrid">
+            <div class="card">
+              <div class="k">🔒 Confidentialité</div>
+              <p class="v">Aucun compte. Stockage local uniquement.</p>
+            </div>
+            <div class="card">
+              <div class="k">🧭 Objectif</div>
+              <p class="v">Comprendre → stabiliser → avancer → suivre.</p>
+            </div>
+            <div class="card">
+              <div class="k">⚖️ Sans surcharge</div>
+              <p class="v">Tu gardes le contrôle : on vise le minimum utile.</p>
+            </div>
+            <div class="card">
+              <div class="k">🧩 Modules</div>
+              <p class="v">Respiration, ancrage, écriture, mouvement… adaptés.</p>
+            </div>
+          </div>
+
+          <div class="radioGrid" aria-label="Intention et style">
+            <label class="radio" id="intent-stabiliser">
+              <input type="radio" name="intent" value="stabiliser" />
+              <div>
+                <p class="rt">🎯 Stabiliser <small style="opacity:.7; font-weight:950;">(optionnel)</small></p>
+                <p class="rd">Revenir au calme, réduire la charge, tenir aujourd’hui.</p>
+              </div>
+            </label>
+
+            <label class="radio" id="intent-comprendre">
+              <input type="radio" name="intent" value="comprendre" />
+              <div>
+                <p class="rt">🧠 Comprendre <small style="opacity:.7; font-weight:950;">(optionnel)</small></p>
+                <p class="rd">Mettre de l’ordre : thèmes, intensité, priorités.</p>
+              </div>
+            </label>
+
+            <label class="radio" id="intent-avancer">
+              <input type="radio" name="intent" value="avancer" />
+              <div>
+                <p class="rt">🚀 Avancer <small style="opacity:.7; font-weight:950;">(optionnel)</small></p>
+                <p class="rd">Un plan concret, petit et tenable, avec progression.</p>
+              </div>
+            </label>
+
+            <label class="radio" id="style-doux">
+              <input type="radio" name="style" value="doux" />
+              <div>
+                <p class="rt">🕊️ Doux / rassurant <small style="opacity:.7; font-weight:950;">(optionnel)</small></p>
+                <p class="rd">Plus humain, plus calmant.</p>
+              </div>
+            </label>
+
+            <label class="radio" id="style-clinique">
+              <input type="radio" name="style" value="clinique" />
+              <div>
+                <p class="rt">🧪 Clinique / précis <small style="opacity:.7; font-weight:950;">(optionnel)</small></p>
+                <p class="rd">Plus direct, structuré, sans blabla.</p>
+              </div>
+            </label>
+          </div>
+
+          <p class="themesHint" style="margin-top:14px;">
+            Tu peux tout modifier plus tard. Là, on prépare juste la meilleure entrée.
+          </p>
+        </section>
+
+        <!-- 2) Thèmes -->
+        <section class="onb-pane" id="pane-1">
+          <h2 class="paneTitle">Choisis tes thèmes.</h2>
+          <p class="paneLead">
+            Sélectionne <b>tout</b> ce qui te ressemble. Aucun quota : tu peux en choisir autant que nécessaire.
+          </p>
+
+          <div class="themesTop">
+            <div class="search" role="search">
+              <span style="opacity:.85; font-weight:950;">🔎</span>
+              <input id="themeSearch" type="text" placeholder="Rechercher un thème (ex : anxiété, couple, burnout…)" />
+            </div>
+            <div class="themesCount" id="themesCount">0 sélectionné(s)</div>
+          </div>
+
+          <div class="chips" id="themesChips" aria-label="Liste des thèmes"></div>
+
+          <p class="themesHint" id="themesHint">
+            Astuce : si tu ne sais pas quoi choisir, commence par 3 thèmes — tu pourras compléter ensuite.
+          </p>
+        </section>
+
+        <!-- 3) Énergie -->
+        <section class="onb-pane" id="pane-2">
+          <h2 class="paneTitle">Ton énergie.</h2>
+          <p class="paneLead">
+            Vivario PRO adapte la longueur : si ton énergie est basse, on passe en mode court.
+          </p>
+
+          <div class="radioGrid" aria-label="Niveau d'énergie">
+            <label class="radio" id="energy-basse">
+              <input type="radio" name="energy" value="basse" />
+              <div>
+                <p class="rt">🪫 Basse (mode court)</p>
+                <p class="rd">On va à l’essentiel. 1–2 actions max. Pas de blocs “deep”.</p>
+              </div>
+            </label>
+
+            <label class="radio" id="energy-moyenne">
+              <input type="radio" name="energy" value="moyenne" />
+              <div>
+                <p class="rt">🔋 Moyenne</p>
+                <p class="rd">Rythme standard. 2–3 actions. Un peu d’analyse si tu veux.</p>
+              </div>
+            </label>
+
+            <label class="radio" id="energy-haute">
+              <input type="radio" name="energy" value="haute" />
+              <div>
+                <p class="rt">⚡ Haute</p>
+                <p class="rd">On peut aller plus loin : diagnostic plus précis + plan guidé.</p>
+              </div>
+            </label>
+          </div>
+        </section>
+
+        <!-- 4) Rythme -->
+        <section class="onb-pane" id="pane-3">
+          <h2 class="paneTitle">Ton rythme.</h2>
+          <p class="paneLead">
+            Choisis un rythme réaliste. Le but : tenir, pas performer.
+          </p>
+
+          <div class="radioGrid" aria-label="Rythme">
+            <label class="radio" id="rythme-2min">
+              <input type="radio" name="rythme" value="2min" />
+              <div>
+                <p class="rt">⏱️ 1–2 minutes</p>
+                <p class="rd">Ultra simple : un module rapide, sans friction.</p>
+              </div>
+            </label>
+
+            <label class="radio" id="rythme-5min">
+              <input type="radio" name="rythme" value="5min" />
+              <div>
+                <p class="rt">🕔 5 minutes</p>
+                <p class="rd">Le “sweet spot” : respiration + mini plan concret.</p>
+              </div>
+            </label>
+
+            <label class="radio" id="rythme-10min">
+              <input type="radio" name="rythme" value="10min" />
+              <div>
+                <p class="rt">🧠 10 minutes</p>
+                <p class="rd">Plus complet : 2 modules + une petite relecture.</p>
+              </div>
+            </label>
+
+            <label class="radio" id="rythme-flex">
+              <input type="radio" name="rythme" value="flex" />
+              <div>
+                <p class="rt">🧩 Flexible</p>
+                <p class="rd">Tu choisis selon tes journées. Vivario s’adapte.</p>
+              </div>
+            </label>
+          </div>
+        </section>
+
+        <!-- 5) Validation -->
+        <section class="onb-pane" id="pane-4">
+          <h2 class="paneTitle">On valide.</h2>
+          <p class="paneLead">
+            Résumé de ton entrée. Tu peux charger ce profil plus tard, ou réinitialiser.
+          </p>
+
+          <div class="summary" aria-label="Résumé">
+            <div class="summaryHead">
+              <h3>Résumé</h3>
+              <div class="date" id="sumDate">—</div>
+            </div>
+
+            <div class="miniRow">
+              <div class="miniBox">
+                <div class="k">Thèmes</div>
+                <div class="v" id="sumThemes">—</div>
+              </div>
+
+              <div class="miniBox">
+                <div class="k">Énergie</div>
+                <div class="v" id="sumEnergy">—</div>
+              </div>
+
+              <div class="miniBox">
+                <div class="k">Rythme</div>
+                <div class="v" id="sumRythme">—</div>
+              </div>
+
+              <div class="miniBox">
+                <div class="k">Option</div>
+                <div class="v" id="sumIntentStyle">—</div>
+              </div>
+            </div>
+
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="btn wide" id="btnLoad" type="button">↩ Charger</button>
+              <button class="btn ghost wide" id="btnReset" type="button">↻ Réinitialiser</button>
+            </div>
+
+            <p class="themesHint" style="margin:10px 0 0;">
+              Réinitialiser efface uniquement ce stockage local sur cet appareil.
+            </p>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky bottom controls -->
+  <div class="sticky" role="navigation" aria-label="Contrôles onboarding">
+    <div class="stickyInner">
+      <div class="row2">
+        <button class="btn ghost" id="btnBack" type="button">← Retour</button>
+        <button class="btn" id="btnNext" type="button">Continuer →</button>
+      </div>
+      <div class="row2b">
+        <a class="btn ghost" href="accueil_pro.html?v=1">Quitter</a>
+        <a class="btn primary" href="questionnaire_pro.html?v=1">🚀 Questionnaire PRO</a>
+      </div>
+    </div>
+  </div>
+
+  <button class="toTop" id="toTop" type="button" aria-label="Remonter">^</button>
+
+  <script>
+    (function(){
+      const KEY = "vivario_onboarding_pro_v1";
+
+      const panes = Array.from(document.querySelectorAll(".onb-pane"));
+      const pills = Array.from(document.querySelectorAll(".pill"));
+      const progBar = document.getElementById("progBar");
+
+      const btnBack = document.getElementById("btnBack");
+      const btnNext = document.getElementById("btnNext");
+
+      const themeSearch = document.getElementById("themeSearch");
+      const themesChips = document.getElementById("themesChips");
+      const themesCount = document.getElementById("themesCount");
+
+      const sumDate = document.getElementById("sumDate");
+      const sumThemes = document.getElementById("sumThemes");
+      const sumEnergy = document.getElementById("sumEnergy");
+      const sumRythme = document.getElementById("sumRythme");
+      const sumIntentStyle = document.getElementById("sumIntentStyle");
+
+      const btnLoad = document.getElementById("btnLoad");
+      const btnReset = document.getElementById("btnReset");
+
+      const toTop = document.getElementById("toTop");
+
+      const ALL_THEMES = [
+        // émotion / mental
+        "Anxiété", "Stress", "Burnout", "Dépression", "Humeur", "Ruminations", "Angoisses", "Crises de panique",
+        "Confiance", "Estime de soi", "Culpabilité", "Honte", "Colère", "Irritabilité", "Hypersensibilité",
+        "Solitude", "Tristesse", "Trauma", "Deuil",
+
+        // sommeil / énergie
+        "Sommeil", "Insomnie", "Fatigue", "Épuisement", "Récupération", "Rythme de vie",
+
+        // corps / santé
+        "Santé", "Douleurs", "Tensions", "Respiration", "Cohérence cardiaque", "Maux de tête",
+        "Alimentation", "Compulsions", "Grignotage", "Sport / mouvement",
+
+        // travail / pression
+        "Travail", "Pression", "Surcharge", "Organisation", "Procrastination", "Motivation",
+        "Performance", "Décisions", "Concentration", "Productivité", "Changements",
+
+        // relations
+        "Couple", "Rupture", "Communication", "Conflits", "Famille", "Enfants", "Parentalité",
+        "Amitiés", "Relations sociales", "Limites / dire non",
+
+        // vie / sens
+        "Sens", "Valeurs", "Objectifs", "Habitudes", "Routine", "Discipline", "Identité", "Transitions",
+        "Confiance en l’avenir", "Incertitude", "Peurs",
+
+        // dépendances / comportements
+        "Addictions", "Écrans", "Dopamine", "Alcool", "Tabac", "Jeux", "Impulsivité",
+
+        // finances / quotidien
+        "Argent", "Finances", "Dettes", "Achats impulsifs", "Budget", "Charge mentale",
+
+        // anxiété sociale / image
+        "Anxiété sociale", "Regard des autres", "Perfectionnisme", "Auto-critique",
+
+        // autres
+        "Spiritualité", "Méditation", "Ancrage", "Écriture", "Apaisement"
+      ];
+
+      function uniq(arr){
+        return Array.from(new Set(arr));
+      }
+
+      function nowLabel(){
+        try{
+          const d = new Date();
+          return d.toLocaleString(undefined, { day:"2-digit", month:"short", hour:"2-digit", minute:"2-digit" });
+        }catch{ return "—"; }
+      }
+
+      function loadState(){
+        try{
+          const raw = localStorage.getItem(KEY);
+          if (!raw) return {
+            step: 0,
+            themes: [],
+            energy: "",
+            rythme: "",
+            intent: "",
+            style: "",
+            updated_at: ""
+          };
+          const s = JSON.parse(raw);
+          return {
+            step: Number(s.step || 0),
+            themes: Array.isArray(s.themes) ? s.themes : [],
+            energy: s.energy || "",
+            rythme: s.rythme || "",
+            intent: s.intent || "",
+            style: s.style || "",
+            updated_at: s.updated_at || ""
+          };
+        }catch{
+          return { step:0, themes:[], energy:"", rythme:"", intent:"", style:"", updated_at:"" };
+        }
+      }
+
+      function saveState(partial){
+        state = { ...state, ...partial, updated_at: nowLabel() };
+        try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch{}
+        renderSummary();
+      }
+
+      function setActive(step){
+        step = Math.max(0, Math.min(panes.length - 1, step));
+        state.step = step;
+        saveState({ step });
+
+        panes.forEach((p,i) => {
+          const isOn = i === step;
+          p.classList.toggle("active", isOn);
+          if (isOn){
+            // animation entrée (sans casser la visibilité)
+            p.classList.remove("is-enter");
+            requestAnimationFrame(() => {
+              p.classList.add("is-enter");
+              setTimeout(() => p.classList.remove("is-enter"), 430);
+            });
+          }
+        });
+
+        pills.forEach((pl,i) => pl.classList.toggle("active", i === step));
+
+        const pct = Math.round((step / (panes.length - 1)) * 100);
+        progBar.style.width = pct + "%";
+
+        // libellé bouton
+        if (step === panes.length - 1){
+          btnNext.textContent = "Lancer → Questionnaire";
+        }else{
+          btnNext.textContent = "Continuer →";
+        }
+
+        // scroll léger vers le haut du contenu
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function renderRadios(){
+        // intent
+        document.querySelectorAll('input[name="intent"]').forEach(inp => {
+          inp.checked = (inp.value === state.intent);
+          inp.closest(".radio")?.classList.toggle("on", inp.checked);
+        });
+        // style
+        document.querySelectorAll('input[name="style"]').forEach(inp => {
+          inp.checked = (inp.value === state.style);
+          inp.closest(".radio")?.classList.toggle("on", inp.checked);
+        });
+        // energy
+        document.querySelectorAll('input[name="energy"]').forEach(inp => {
+          inp.checked = (inp.value === state.energy);
+          inp.closest(".radio")?.classList.toggle("on", inp.checked);
+        });
+        // rythme
+        document.querySelectorAll('input[name="rythme"]').forEach(inp => {
+          inp.checked = (inp.value === state.rythme);
+          inp.closest(".radio")?.classList.toggle("on", inp.checked);
+        });
+      }
+
+      function renderThemes(){
+        const q = (themeSearch?.value || "").trim().toLowerCase();
+        const list = ALL_THEMES.filter(t => t.toLowerCase().includes(q));
+        themesChips.innerHTML = list.map(t => {
+          const sel = state.themes.includes(t);
+          return `<div class="chip ${sel ? "sel":""}" data-theme="${encodeURIComponent(t)}">
+            ${t}
+            ${sel ? '<small>✓</small>' : ''}
+          </div>`;
+        }).join("");
+
+        themesCount.textContent = `${state.themes.length} sélectionné(s)`;
+      }
+
+      function renderSummary(){
+        if (sumDate) sumDate.textContent = state.updated_at || "—";
+        if (sumThemes) sumThemes.textContent = state.themes.length ? state.themes.join(", ") : "—";
+
+        const energyLabel =
+          state.energy === "basse" ? "Basse (mode court)" :
+          state.energy === "moyenne" ? "Moyenne" :
+          state.energy === "haute" ? "Haute" : "—";
+        if (sumEnergy) sumEnergy.textContent = energyLabel;
+
+        const rythmeLabel =
+          state.rythme === "2min" ? "1–2 minutes" :
+          state.rythme === "5min" ? "5 minutes" :
+          state.rythme === "10min" ? "10 minutes" :
+          state.rythme === "flex" ? "Flexible" : "—";
+        if (sumRythme) sumRythme.textContent = rythmeLabel;
+
+        const intentLabel =
+          state.intent === "stabiliser" ? "Stabiliser" :
+          state.intent === "comprendre" ? "Comprendre" :
+          state.intent === "avancer" ? "Avancer" : "";
+        const styleLabel =
+          state.style === "doux" ? "Doux / rassurant" :
+          state.style === "clinique" ? "Clinique / précis" : "";
+
+        const both = [intentLabel, styleLabel].filter(Boolean).join(" • ");
+        if (sumIntentStyle) sumIntentStyle.textContent = both || "—";
+      }
+
+      // --- EVENTS ---
+      let state = loadState();
+
+      // Step pills click
+      pills.forEach(pl => {
+        pl.addEventListener("click", () => {
+          const step = Number(pl.getAttribute("data-step") || 0);
+          setActive(step);
+        });
+      });
+
+      // Back / Next
+      btnBack.addEventListener("click", () => setActive(state.step - 1));
+      btnNext.addEventListener("click", () => {
+        if (state.step >= panes.length - 1){
+          // dernière étape -> questionnaire
+          window.location.href = "questionnaire_pro.html?v=1";
+          return;
+        }
+        setActive(state.step + 1);
+      });
+
+      // Themes click
+      themesChips.addEventListener("click", (e) => {
+        const el = e.target.closest(".chip");
+        if (!el) return;
+        const theme = decodeURIComponent(el.getAttribute("data-theme") || "");
+        if (!theme) return;
+
+        const has = state.themes.includes(theme);
+        const next = has ? state.themes.filter(t => t !== theme) : uniq([...state.themes, theme]);
+        saveState({ themes: next });
+        renderThemes();
+      });
+
+      themeSearch?.addEventListener("input", renderThemes);
+
+      // Radios
+      function bindRadio(name, key){
+        document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
+          inp.addEventListener("change", () => {
+            saveState({ [key]: inp.value });
+            renderRadios();
+          });
+        });
+      }
+      bindRadio("intent","intent");
+      bindRadio("style","style");
+      bindRadio("energy","energy");
+      bindRadio("rythme","rythme");
+
+      // Load/reset
+      btnLoad?.addEventListener("click", () => {
+        // “charger” ici = garder et revenir à la première étape (pratique)
+        alert("Profil chargé (stockage local). Tu peux continuer ou lancer le questionnaire.");
+        setActive(0);
+      });
+
+      btnReset?.addEventListener("click", () => {
+        if (!confirm("Réinitialiser l’onboarding PRO sur cet appareil ?")) return;
+        state = { step:0, themes:[], energy:"", rythme:"", intent:"", style:"", updated_at: nowLabel() };
+        try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch{}
+        themeSearch.value = "";
+        renderThemes();
+        renderRadios();
+        renderSummary();
+        setActive(0);
+      });
+
+      // Scroll to top button
+      function onScroll(){
+        const y = window.scrollY || 0;
+        toTop.classList.toggle("on", y > 240);
+      }
+      window.addEventListener("scroll", onScroll, { passive:true });
+      toTop.addEventListener("click", () => window.scrollTo({ top:0, behavior:"smooth" }));
+
+      // --- INIT ---
+      renderRadios();
+      renderThemes();
+      renderSummary();
+      setActive(state.step || 0);
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
