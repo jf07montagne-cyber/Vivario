@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario PRO — Résultat</title>
+
+  <!-- ⚠️ Ne touche pas au style.css du gratuit : PRO a son CSS séparé -->
+  <link rel="stylesheet" href="pro_style.css?v=1" />
+
+  <meta name="theme-color" content="#070a12" />
+
+  <style>
+    /* Mini patch ultra safe — CTA Suivi depuis résultat */
+    .pro-result-ctaRow{
+      margin-top: 12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .pro-result-ctaCard{
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      box-shadow: 0 12px 32px rgba(0,0,0,.14);
+    }
+    .pro-result-ctaCardHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:8px;
+    }
+    .pro-result-ctaCardTitle{
+      margin:0;
+      font-weight:900;
+      letter-spacing:.15px;
+      color: rgba(234,240,255,.95);
+    }
+    .pro-result-ctaCardMeta{
+      font-size:12px;
+      color: rgba(234,240,255,.72);
+      font-weight:800;
+    }
+    .pro-result-ctaCard p{
+      margin:0;
+      color: rgba(234,240,255,.85);
+      line-height:1.45;
+    }
+
+    @media (max-width: 640px){
+      .pro-topActions{ width:100%; }
+      .pro-topActions .pro-btn{ flex:1 1 auto; }
+      .pro-result-ctaRow .pro-btn{ flex:1 1 auto; }
+    }
+  </style>
+</head>
+<body class="page-pro-result">
+  <main class="pro-wrap">
+    <header class="pro-top">
+      <div class="pro-brandRow">
+        <div>
+          <div class="pro-brand">Vivario <span class="pro-badge">PRO</span></div>
+          <p class="pro-muted" id="proSubtitle">Diagnostic + plan + suivi — calibré sur toi.</p>
+        </div>
+
+        <div class="pro-topActions">
+          <button class="pro-btn pro-btnPrimary" id="btnCopy" type="button">📋 Copier</button>
+          <button class="pro-btn pro-btnGhost" id="btnSaveToday" type="button">💾 Sauver</button>
+          <a class="pro-btn pro-btnGhost" href="suivi_pro.html?v=1">📈 Suivi PRO</a>
+          <a class="pro-btn pro-btnGhost" href="accueil.html?v=18">↩ Retour</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="pro-hero">
+      <div class="pro-heroGlow" aria-hidden="true"></div>
+
+      <div class="pro-heroGrid">
+        <div>
+          <h1 class="pro-title" id="diagTitle">Résultat PRO</h1>
+          <p class="pro-lead" id="diagSummary">—</p>
+
+          <div class="pro-miniCards" id="miniCards"></div>
+
+          <div class="pro-chips" id="proChips" aria-label="Repères"></div>
+        </div>
+
+        <div class="pro-scoreCard" aria-label="Scores">
+          <div class="pro-scoreHead">
+            <div class="pro-scoreLabel">Synthèse</div>
+            <div class="pro-scoreDate" id="proDate">—</div>
+          </div>
+          <div class="pro-scoreBig">
+            <div class="pro-scoreNum" id="primaryScore">—</div>
+            <div class="pro-scoreTxt" id="primaryDomain">Domaine principal</div>
+          </div>
+
+          <div class="pro-scoreList" id="scoreList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABS -->
+    <section class="pro-card">
+      <div class="pro-tabs" id="tabs">
+        <button class="pro-tab active" data-pane="diagnostic">Diagnostic</button>
+        <button class="pro-tab" data-pane="plan">Plan</button>
+        <button class="pro-tab" data-pane="suivi">Suivi</button>
+      </div>
+
+      <!-- PANES -->
+      <div id="pane-diagnostic" class="pro-pane active"></div>
+      <div id="pane-plan" class="pro-pane"></div>
+      <div id="pane-suivi" class="pro-pane"></div>
+
+      <!-- CTA Suivi PRO (ultra safe, indépendant de resultat_pro.js) -->
+      <div class="pro-result-ctaCard" aria-label="Accès au suivi">
+        <div class="pro-result-ctaCardHead">
+          <p class="pro-result-ctaCardTitle">Continuer avec le Suivi PRO</p>
+          <span class="pro-result-ctaCardMeta">Local • progression</span>
+        </div>
+
+        <p>
+          Ouvre la page de suivi pour voir ta timeline locale, ton streak, le plan du jour (0/3),
+          les stats 7 jours et le calendrier mensuel.
+        </p>
+
+        <div class="pro-result-ctaRow">
+          <a class="pro-btn pro-btnPrimary" href="suivi_pro.html?v=1">📈 Ouvrir Suivi PRO</a>
+          <a class="pro-btn" href="accueil_pro.html?v=1">🏠 Accueil PRO</a>
+          <a class="pro-btn pro-btnGhost" href="questionnaire_pro.html?v=1">🚀 Refaire un check-in</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Historique PRO -->
+    <section class="pro-card">
+      <div class="pro-cardHead">
+        <h3 class="pro-h3">Historique</h3>
+        <p class="pro-muted">Tes sauvegardes PRO récentes.</p>
+      </div>
+      <div id="history"></div>
+    </section>
+  </main>
+
+  <!-- IMPORTANT: pro_logic.js doit déjà être chargé dans le flow PRO -->
+  <script src="pro_logic.js?v=1"></script>
+  <script src="resultat_pro.js?v=1"></script>
+
+  <script>
+    // Mini tracking ultra safe (si la clé activité existe)
+    (function(){
+      const PRO_ACTIVITY_KEY = "vivario_pro_activity_v1";
+      const PRO_RESULT_KEY = "vivario_pro_result_v1";
+
+      function getJson(key){
+        try { return JSON.parse(localStorage.getItem(key) || "null"); } catch { return null; }
+      }
+      function setJson(key, value){
+        try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
+      }
+      function topDomains(scores, n){
+        const entries = Object.entries(scores || {});
+        entries.sort((a,b) => (b[1]||0) - (a[1]||0));
+        return entries.slice(0, n).filter(e => (e[1]||0) > 0);
+      }
+      function currentTopScore(){
+        const data = getJson(PRO_RESULT_KEY);
+        if (!data) return null;
+        return (topDomains(data.scores || {}, 1)[0] || [null, null])[1];
+      }
+      function pushActivity(type, meta){
+        const list = getJson(PRO_ACTIVITY_KEY) || [];
+        list.unshift({ type: type || "action", at: new Date().toISOString(), meta: meta || {} });
+        setJson(PRO_ACTIVITY_KEY, list.slice(0, 20));
+      }
+
+      document.querySelectorAll('a[href="suivi_pro.html?v=1"]').forEach(a => {
+        a.addEventListener("click", () => {
+          try{
+            pushActivity("home", { label:"Ouverture du Suivi PRO depuis Résultat", topScore: currentTopScore() });
+          }catch{}
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
