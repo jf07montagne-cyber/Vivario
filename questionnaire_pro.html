@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivario PRO — Diagnostic</title>
+  <link rel="stylesheet" href="pro_style.css?v=1" />
+  <meta name="theme-color" content="#050A18" />
+
+  <!-- ✅ PATCH (1/2) : ajoute ton CSS patch (si tu crées le fichier) -->
+  <link rel="stylesheet" href="questionnaire_pro_patch.css?v=1" />
+
+  <!-- ✅ FALLBACK inline ultra safe (si tu n’as pas encore créé le fichier CSS)
+       -> n'écrase rien, ajoute juste toast/bar + confort mobile -->
+  <style>
+    :root{
+      --qpInk: rgba(238,242,255,.96);
+      --qpMuted: rgba(238,242,255,.74);
+      --qpBorder: rgba(255,255,255,.12);
+      --qpShadow2: 0 10px 26px rgba(0,0,0,.18);
+      --qpAccent: rgba(120,160,255,.18);
+      --qpAccentBd: rgba(120,160,255,.26);
+      --qpR: 16px;
+    }
+    html{ scroll-behavior:smooth; }
+    button, a, input, select, textarea{ touch-action: manipulation; }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(120,160,255,.12);
+      border-color: rgba(120,160,255,.28) !important;
+    }
+
+    .qp-reveal{
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .qp-reveal.is-in{ opacity:1; transform: translateY(0); }
+
+    .qp-toast{
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      top: calc(12px + env(safe-area-inset-top));
+      z-index: 9999;
+      display:none;
+      padding: 10px 12px;
+      border-radius: var(--qpR);
+      border: 1px solid var(--qpBorder);
+      background: rgba(8,14,28,.86);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 18px 44px rgba(0,0,0,.30);
+    }
+    .qp-toast.is-on{ display:block; animation: qpToastIn .22s ease both; }
+    @keyframes qpToastIn{ from{opacity:0; transform: translateY(-8px);} to{opacity:1; transform: translateY(0);} }
+    .qp-toast .row{ display:flex; gap:10px; align-items:center; justify-content:space-between; }
+    .qp-toast .msg{ min-width:0; }
+    .qp-toast .msg strong{ display:block; font-weight:900; font-size:13px; color: var(--qpInk); }
+    .qp-toast .msg span{ display:block; margin-top:2px; font-size:12px; color: var(--qpMuted); }
+    .qp-toast .btns{ display:flex; gap:8px; flex:0 0 auto; }
+
+    .qp-pillBtn{
+      appearance:none;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--qpInk);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 12px;
+      cursor:pointer;
+      box-shadow: var(--qpShadow2);
+      white-space: nowrap;
+    }
+    .qp-pillBtn:hover{ background: rgba(255,255,255,.09); }
+    .qp-pillBtn.primary{
+      background: var(--qpAccent);
+      border-color: var(--qpAccentBd);
+    }
+    .qp-pillBtn.primary:hover{
+      background: rgba(120,160,255,.24);
+      border-color: rgba(120,160,255,.34);
+    }
+    .qp-pillBtn.ghost{ background: transparent; box-shadow:none; }
+
+    .qp-bottomBar{
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      z-index: 9999;
+      display: none;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(800px 240px at 50% 0%, rgba(120,160,255,.12), transparent 65%),
+        rgba(8,14,28,.86);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 18px 44px rgba(0,0,0,.30);
+    }
+    .qp-bottomBar .txt{ min-width:0; line-height:1.25; }
+    .qp-bottomBar .txt strong{ display:block; font-weight:900; color: var(--qpInk); font-size:13px; }
+    .qp-bottomBar .txt span{ display:block; margin-top:2px; color: var(--qpMuted); font-size:12px; }
+    .qp-bottomBar .actions{ display:flex; gap:8px; flex:0 0 auto; align-items:center; }
+
+    @media (max-width: 640px){
+      .qp-bottomBar{ display:flex; }
+      body{ padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+    }
+  </style>
+</head>
+
+<body class="page-pro">
+  <main class="pro-wrap">
+    <header class="pro-top">
+      <div class="pro-brand">
+        <div class="logo-dot" aria-hidden="true"></div>
+        <div>
+          <h1 class="brand">Vivario <span class="pro-badge">PRO</span></h1>
+          <p class="muted">Questionnaire intelligent • multi-thèmes • diagnostic + plan personnalisé</p>
+        </div>
+      </div>
+
+      <div class="pro-top-right">
+        <button class="btn ghost" id="btnMode" type="button" title="Mode express">⚡ Mode express</button>
+        <button class="btn ghost" id="btnReset" type="button" title="Recommencer">↻ Refaire</button>
+      </div>
+    </header>
+
+    <section class="pro-shell">
+      <aside class="pro-side card">
+        <div class="side-block">
+          <div class="side-title">Progression</div>
+          <div class="progress">
+            <div class="bar" id="bar"></div>
+          </div>
+          <div class="side-meta">
+            <span id="counter">—</span>
+            <span class="dotsep">•</span>
+            <span id="eta">—</span>
+          </div>
+        </div>
+
+        <div class="side-block">
+          <div class="side-title">Repères</div>
+          <div class="chips" id="chips"></div>
+          <p class="tiny muted" style="margin:10px 0 0;">
+            Ces repères servent à personnaliser le diagnostic et à éviter les répétitions.
+          </p>
+        </div>
+
+        <div class="side-block">
+          <div class="side-title">Sécurité</div>
+          <p class="tiny muted" style="margin:0; line-height:1.5;">
+            Vivario PRO n’est pas un service d’urgence.  
+            Si tu te sens en danger immédiat, contacte les urgences / un proche / un professionnel.
+          </p>
+        </div>
+      </aside>
+
+      <section class="pro-main">
+        <section class="card pro-card" id="cardQuestion">
+          <div class="q-head">
+            <div class="q-kicker" id="qKicker">Question</div>
+            <div class="q-title" id="qTitle">—</div>
+            <div class="q-sub" id="qSub">—</div>
+          </div>
+
+          <div class="q-hint" id="qHint" style="display:none;"></div>
+          <div class="err" id="err"></div>
+
+          <div class="options" id="options"></div>
+
+          <div class="pro-actions">
+            <button class="btn ghost" id="btnBack" type="button">← Retour</button>
+            <button class="btn primary" id="btnNext" type="button">Continuer →</button>
+          </div>
+
+          <div class="tiny muted" id="qFoot" style="margin-top:10px;">
+            Tu peux répondre honnêtement : la qualité du plan dépend surtout de la précision, pas de la “bonne réponse”.
+          </div>
+        </section>
+
+        <section class="card pro-card" id="cardResult" style="display:none;">
+          <div class="result-head">
+            <div>
+              <h2 class="result-title" id="resTitle">Ton diagnostic PRO</h2>
+              <p class="muted" id="resSub">—</p>
+            </div>
+            <div class="result-actions">
+              <button class="btn ghost" id="btnCopy" type="button">📋 Copier</button>
+              <button class="btn ghost" id="btnSave" type="button">💾 Sauver</button>
+              <button class="btn primary" id="btnPlan" type="button">🧭 Voir le plan</button>
+            </div>
+          </div>
+
+          <div class="result-grid">
+            <div class="card inner">
+              <div class="inner-title">Résumé</div>
+              <div class="inner-text" id="resSummary"></div>
+            </div>
+            <div class="card inner">
+              <div class="inner-title">Points clés</div>
+              <ul class="bullets" id="resBullets"></ul>
+            </div>
+            <div class="card inner">
+              <div class="inner-title">Risques / vigilance</div>
+              <ul class="bullets" id="resRisks"></ul>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="card inner" id="planBox" style="display:none;">
+            <div class="inner-title">Plan personnalisé (7 jours)</div>
+            <div class="plan-grid" id="planGrid"></div>
+            <p class="tiny muted" style="margin:12px 0 0;">
+              Le plan s’ajuste selon ton historique (adhérence) et tes thèmes.
+            </p>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="card inner">
+            <div class="inner-title">Historique PRO</div>
+            <div id="history"></div>
+          </div>
+
+          <div class="pro-actions" style="margin-top:14px;">
+            <button class="btn ghost" id="btnRestart" type="button">↻ Refaire maintenant</button>
+            <a class="btn ghost" href="accueil.html?v=18">↩ Retour (gratuit)</a>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <!-- UI “reprise” (toast + barre mobile) -->
+  <div class="qp-toast" id="qpToast" aria-live="polite">
+    <div class="row">
+      <div class="msg">
+        <strong id="qpToastTitle">Reprendre ta session ?</strong>
+        <span id="qpToastMeta">Brouillon détecté</span>
+      </div>
+      <div class="btns">
+        <button class="qp-pillBtn ghost" id="qpToastDismiss" type="button">Plus tard</button>
+        <button class="qp-pillBtn primary" id="qpToastResume" type="button">Reprendre</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="qp-bottomBar" id="qpBottomBar">
+    <div class="txt">
+      <strong id="qpBarTitle">Reprise PRO</strong>
+      <span id="qpBarMeta">Autosave local</span>
+    </div>
+    <div class="actions">
+      <button class="qp-pillBtn ghost" id="qpBarReset" type="button">Recommencer</button>
+      <button class="qp-pillBtn primary" id="qpBarResume" type="button">Continuer</button>
+    </div>
+  </div>
+
+  <script src="pro_logic.js?v=1"></script>
+  <script src="questionnaire_pro.js?v=1"></script>
+
+  <!-- ✅ PATCH (2/2) : ajoute ton JS patch (si tu crées le fichier) -->
+  <script src="questionnaire_pro_patch.js?v=1"></script>
+
+  <!-- ✅ FALLBACK inline ULTRA SAFE :
+       - autosave champs + scroll
+       - sauvegarde step active (via #counter et #qTitle)
+       - reprise : restaure champs + scroll + tente de revenir à Qxx si possible
+       - n’écrase pas questionnaire_pro.js -->
+  <script>
+    (function(){
+      // Si un fichier externe définit ce flag, on ne double pas.
+      if (window.__QP_PATCH_LOADED) return;
+      window.__QP_PATCH_LOADED = true;
+
+      const KEY_DRAFT = "vivario_pro_questionnaire_draft_v1";
+      const KEY_META  = "vivario_pro_questionnaire_draft_meta_v1";
+      const KEY_STEP  = "vivario_pro_questionnaire_step_v1";
+
+      const $ = (sel, root=document) => root.querySelector(sel);
+      const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+      function getJson(k){ try { return JSON.parse(localStorage.getItem(k) || "null"); } catch { return null; } }
+      function setJson(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+      function nowIso(){ return new Date().toISOString(); }
+
+      function humanTimeAgo(iso){
+        if (!iso) return "il y a un moment";
+        try{
+          const d = new Date(iso);
+          const diff = Date.now() - d.getTime();
+          if (!isFinite(diff) || diff < 0) return "récemment";
+          const min = Math.floor(diff/60000);
+          const h = Math.floor(diff/3600000);
+          const day = Math.floor(diff/86400000);
+          if (min < 1) return "à l’instant";
+          if (min < 60) return `il y a ${min} min`;
+          if (h < 24) return h === 1 ? "il y a 1h" : `il y a ${h}h`;
+          if (day === 1) return "hier";
+          if (day < 7) return `il y a ${day} jours`;
+          return "il y a quelques jours";
+        } catch { return "il y a un moment"; }
+      }
+
+      function fieldKey(el){
+        const n = el.getAttribute("name");
+        if (n) return `name:${n}`;
+        const id = el.getAttribute("id");
+        if (id) return `id:${id}`;
+        return null;
+      }
+
+      function readStepFromUI(){
+        const counter = $("#counter")?.textContent || "";
+        // accepte "12/40" ou "12 • ..." ou "Q12"
+        const m = counter.match(/(\d{1,3})/);
+        const stepNum = m ? parseInt(m[1], 10) : null;
+
+        const title = ($("#qTitle")?.textContent || "").trim();
+        return { stepNum, counterText: counter.trim(), title };
+      }
+
+      function collectDraft(){
+        const data = {};
+        const fields = $$("input, textarea, select")
+          .filter(el => !el.disabled)
+          .filter(el => {
+            const type = (el.getAttribute("type") || "").toLowerCase();
+            if (type === "password" || type === "file") return false;
+            return true;
+          });
+
+        fields.forEach(el => {
+          const k = fieldKey(el);
+          if (!k) return;
+          const tag = (el.tagName || "").toLowerCase();
+          const type = (el.getAttribute("type") || "").toLowerCase();
+
+          if (type === "checkbox"){
+            data[k] = !!el.checked;
+          } else if (type === "radio"){
+            if (el.checked) data[k] = el.value ?? true;
+            else if (data[k] == null) data[k] = null;
+          } else if (tag === "select"){
+            data[k] = el.value;
+          } else {
+            data[k] = el.value;
+          }
+        });
+
+        const scrollY = Math.max(0, Math.round(window.scrollY || 0));
+        const st = readStepFromUI();
+
+        setJson(KEY_DRAFT, data);
+        setJson(KEY_META, {
+          updated_at: nowIso(),
+          scrollY,
+          counterText: st.counterText || "",
+          title: st.title || ""
+        });
+
+        // step séparé (pour reprise “où tu t’es arrêté”)
+        setJson(KEY_STEP, {
+          updated_at: nowIso(),
+          stepNum: st.stepNum,
+          counterText: st.counterText || "",
+          title: st.title || ""
+        });
+      }
+
+      function restoreDraft(){
+        const data = getJson(KEY_DRAFT);
+        if (!data || typeof data !== "object") return false;
+
+        const fields = $$("input, textarea, select").filter(el => !el.disabled);
+        let restoredAny = false;
+
+        fields.forEach(el => {
+          const k = fieldKey(el);
+          if (!k || !(k in data)) return;
+
+          const tag = (el.tagName || "").toLowerCase();
+          const type = (el.getAttribute("type") || "").toLowerCase();
+          const val = data[k];
+
+          try{
+            if (type === "checkbox"){
+              el.checked = !!val;
+              restoredAny = true;
+              el.dispatchEvent(new Event("change", { bubbles:true }));
+            } else if (type === "radio"){
+              if (val == null) return;
+              if (String(el.value) === String(val)){
+                el.checked = true;
+                restoredAny = true;
+                el.dispatchEvent(new Event("change", { bubbles:true }));
+              }
+            } else if (tag === "select"){
+              el.value = String(val ?? "");
+              restoredAny = true;
+              el.dispatchEvent(new Event("change", { bubbles:true }));
+            } else {
+              el.value = String(val ?? "");
+              restoredAny = true;
+              el.dispatchEvent(new Event("input", { bubbles:true }));
+            }
+          } catch {}
+        });
+
+        const meta = getJson(KEY_META);
+        if (meta && typeof meta.scrollY === "number"){
+          setTimeout(() => {
+            try { window.scrollTo({ top: meta.scrollY, behavior: "smooth" }); } catch {}
+          }, 150);
+        }
+
+        return restoredAny;
+      }
+
+      function clearDraft(){
+        try { localStorage.removeItem(KEY_DRAFT); } catch {}
+        try { localStorage.removeItem(KEY_META); } catch {}
+        try { localStorage.removeItem(KEY_STEP); } catch {}
+      }
+
+      function hasDraft(){
+        const data = getJson(KEY_DRAFT);
+        if (!data || typeof data !== "object") return false;
+        return Object.keys(data).some(k => {
+          const v = data[k];
+          if (v === true) return true;
+          if (typeof v === "string" && v.trim().length) return true;
+          if (typeof v === "number" && isFinite(v)) return true;
+          return false;
+        });
+      }
+
+      function updateResumeUI(){
+        const meta = getJson(KEY_META);
+        const step = getJson(KEY_STEP);
+
+        const when = meta?.updated_at ? `Dernière saisie ${humanTimeAgo(meta.updated_at)} • local` : "Brouillon local";
+        const where = (step?.stepNum ? ` • Q${step.stepNum}` : "");
+        const title = (step?.title ? ` • ${step.title}` : "");
+
+        const tMeta = $("#qpToastMeta");
+        const bMeta = $("#qpBarMeta");
+        if (tMeta) tMeta.textContent = when + where;
+        if (bMeta) bMeta.textContent = when + where;
+
+        const toastTitle = $("#qpToastTitle");
+        const barTitle = $("#qpBarTitle");
+        if (toastTitle){
+          toastTitle.textContent = step?.stepNum ? `Reprendre où tu t’es arrêté (Q${step.stepNum}) ?` : "Reprendre ta session ?";
+        }
+        if (barTitle){
+          barTitle.textContent = step?.stepNum ? `Reprise (Q${step.stepNum})` : "Reprise PRO";
+        }
+
+        const show = hasDraft();
+        const toast = $("#qpToast");
+        const bar = $("#qpBottomBar");
+
+        if (toast){
+          if (show) toast.classList.add("is-on");
+          else toast.classList.remove("is-on");
+        }
+        if (bar){
+          // visible seulement en mobile via CSS, mais on peut le masquer si aucun brouillon
+          bar.style.display = show ? "" : "none";
+        }
+      }
+
+      // Tentative ultra safe de reprise “Qxx” :
+      // - si l’app peut avancer (bouton Next cliquable), on clique jusqu’à atteindre le compteur
+      // - sinon, on stoppe proprement
+      async function tryResumeStep(){
+        const saved = getJson(KEY_STEP);
+        if (!saved || !saved.stepNum) return;
+
+        const target = Number(saved.stepNum);
+        if (!isFinite(target) || target <= 1) return;
+
+        const btnNext = $("#btnNext");
+        const counterEl = $("#counter");
+        if (!btnNext || !counterEl) return;
+
+        // on lit le step actuel
+        const cur = readStepFromUI().stepNum || 1;
+        if (cur >= target) return;
+
+        // limite anti-bug
+        const maxClicks = Math.min(120, target - cur);
+        let clicks = 0;
+
+        function wait(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+        // On essaie d'avancer "gentiment" : si ça ne bouge pas, on stoppe.
+        while (clicks < maxClicks){
+          const before = readStepFromUI().stepNum || 1;
+
+          // si une erreur visible existe, on stoppe (l’utilisateur doit répondre)
+          const errTxt = ($("#err")?.textContent || "").trim();
+          if (errTxt.length) break;
+
+          // click
+          try { btnNext.click(); } catch { break; }
+          clicks++;
+
+          // attend un peu que questionnaire_pro.js rende
+          await wait(260);
+
+          const after = readStepFromUI().stepNum || before;
+          if (after === before){
+            // pas bougé -> stoppe proprement
+            break;
+          }
+          if (after >= target) break;
+        }
+      }
+
+      function wireAutosave(){
+        let t = null;
+        function schedule(){
+          clearTimeout(t);
+          t = setTimeout(() => {
+            collectDraft();
+            updateResumeUI();
+          }, 220);
+        }
+
+        document.addEventListener("input", (e) => {
+          const el = e.target;
+          if (!el || !(el instanceof HTMLElement)) return;
+          if (!["INPUT","TEXTAREA","SELECT"].includes(el.tagName)) return;
+          schedule();
+        }, { passive:true });
+
+        document.addEventListener("change", (e) => {
+          const el = e.target;
+          if (!el || !(el instanceof HTMLElement)) return;
+          if (!["INPUT","TEXTAREA","SELECT"].includes(el.tagName)) return;
+          schedule();
+        }, { passive:true });
+
+        // Sauvegarde step à chaque navigation
+        ["btnNext","btnBack","btnMode","btnReset","btnRestart"].forEach(id => {
+          const b = document.getElementById(id);
+          if (!b) return;
+          b.addEventListener("click", () => {
+            try{
+              // on laisse le JS existant faire son travail, et on capture juste après
+              setTimeout(() => { collectDraft(); updateResumeUI(); }, 180);
+            } catch {}
+          }, { passive:true });
+        });
+
+        // MutationObserver sur le titre/counter => step “active”
+        const watchTargets = [$("#qTitle"), $("#counter")].filter(Boolean);
+        if (watchTargets.length && "MutationObserver" in window){
+          const mo = new MutationObserver(() => {
+            try{
+              collectDraft();
+              updateResumeUI();
+            }catch{}
+          });
+          watchTargets.forEach(el => {
+            try { mo.observe(el, { childList:true, characterData:true, subtree:true }); } catch {}
+          });
+        }
+
+        window.addEventListener("beforeunload", () => {
+          try { collectDraft(); } catch {}
+        });
+      }
+
+      function applyReveal(){
+        const candidates = [".pro-top", ".pro-shell", ".pro-side", ".pro-main", ".pro-card", ".card"];
+        const els = [];
+        candidates.forEach(sel => $$(sel).forEach(el => els.push(el)));
+        const uniq = Array.from(new Set(els)).filter(el => el && el.classList);
+
+        uniq.forEach(el => el.classList.add("qp-reveal"));
+
+        if (!uniq.length) return;
+        if (!("IntersectionObserver" in window)){
+          uniq.forEach((el,i) => setTimeout(() => el.classList.add("is-in"), 40*i));
+          return;
+        }
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting){
+              e.target.classList.add("is-in");
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.08 });
+        uniq.forEach((el,i) => {
+          el.style.transitionDelay = (i * 40) + "ms";
+          io.observe(el);
+        });
+      }
+
+      function init(){
+        // Buttons UI
+        $("#qpToastDismiss")?.addEventListener("click", () => $("#qpToast")?.classList.remove("is-on"));
+        $("#qpToastResume")?.addEventListener("click", async () => {
+          $("#qpToast")?.classList.remove("is-on");
+          restoreDraft();
+          // tente la reprise Qxx sans casser (si possible)
+          setTimeout(() => { tryResumeStep(); }, 260);
+        });
+
+        $("#qpBarResume")?.addEventListener("click", async () => {
+          restoreDraft();
+          setTimeout(() => { tryResumeStep(); }, 260);
+        });
+
+        $("#qpBarReset")?.addEventListener("click", () => {
+          if (!confirm("Réinitialiser la reprise (brouillon local) ?")) return;
+          clearDraft();
+          updateResumeUI();
+          try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch {}
+        });
+
+        applyReveal();
+        wireAutosave();
+
+        // 1ère capture
+        try { collectDraft(); } catch {}
+        updateResumeUI();
+
+        // Si tu veux auto-restore silencieux : décommente
+        // if (hasDraft()) { restoreDraft(); setTimeout(() => tryResumeStep(), 260); }
+      }
+
+      if (document.readyState === "loading"){
+        document.addEventListener("DOMContentLoaded", init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

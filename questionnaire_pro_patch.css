@@ -1,0 +1,191 @@
+/* questionnaire_pro_patch.css — Vivario PRO (UX polish ultra safe) v1
+   - confort mobile
+   - micro transitions
+   - “Reprise session” UI
+   - ne dépend d’aucune structure spécifique
+*/
+
+:root{
+  --qpInk: rgba(238,242,255,.96);
+  --qpMuted: rgba(238,242,255,.74);
+  --qpCard: rgba(255,255,255,.035);
+  --qpBorder: rgba(255,255,255,.10);
+  --qpShadow: 0 14px 36px rgba(0,0,0,.16);
+  --qpShadow2: 0 10px 26px rgba(0,0,0,.18);
+
+  --qpAccent: rgba(120,160,255,.18);
+  --qpAccentBd: rgba(120,160,255,.26);
+
+  --qpGood: rgba(35,240,215,.10);
+  --qpGoodBd: rgba(35,240,215,.22);
+
+  --qpWarn: rgba(255,200,90,.10);
+  --qpWarnBd: rgba(255,200,90,.22);
+
+  --qpAlert: rgba(255,120,150,.10);
+  --qpAlertBd: rgba(255,120,150,.22);
+
+  --qpR: 16px;
+  --qpR2: 14px;
+}
+
+html{ scroll-behavior:smooth; }
+
+/* micro readability */
+body{
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tap targets + focus visible */
+button, a, input, select, textarea{
+  touch-action: manipulation;
+}
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(120,160,255,.12);
+  border-color: rgba(120,160,255,.28) !important;
+}
+
+/* Inputs a bit more premium (safe) */
+input, select, textarea{
+  border-radius: 12px;
+}
+
+/* soften big blocks if they exist */
+.pro-card, .card, .question-card, fieldset, .panel, .step, .section, .box{
+  border-color: var(--qpBorder);
+}
+
+/* ============ Reveal micro transitions ============ */
+.qp-reveal{
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.qp-reveal.is-in{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ Sticky bottom comfort bar (mobile only) ============ */
+.qp-bottomBar{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  z-index: 9999;
+  display: none;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background:
+    radial-gradient(800px 240px at 50% 0%, rgba(120,160,255,.12), transparent 65%),
+    rgba(8,14,28,.86);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 44px rgba(0,0,0,.30);
+}
+.qp-bottomBar .txt{
+  min-width:0;
+  line-height:1.25;
+}
+.qp-bottomBar .txt strong{
+  display:block;
+  font-weight: 900;
+  color: var(--qpInk);
+  font-size: 13px;
+}
+.qp-bottomBar .txt span{
+  display:block;
+  margin-top: 2px;
+  color: var(--qpMuted);
+  font-size: 12px;
+}
+.qp-bottomBar .actions{
+  display:flex;
+  gap:8px;
+  flex: 0 0 auto;
+  align-items:center;
+}
+.qp-pillBtn{
+  appearance:none;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: var(--qpInk);
+  padding: 10px 12px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 12px;
+  cursor:pointer;
+  box-shadow: var(--qpShadow2);
+  white-space: nowrap;
+}
+.qp-pillBtn:hover{ background: rgba(255,255,255,.09); }
+.qp-pillBtn.primary{
+  background: var(--qpAccent);
+  border-color: var(--qpAccentBd);
+}
+.qp-pillBtn.primary:hover{
+  background: rgba(120,160,255,.24);
+  border-color: rgba(120,160,255,.34);
+}
+.qp-pillBtn.ghost{
+  background: transparent;
+  box-shadow: none;
+}
+
+@media (max-width: 640px){
+  .qp-bottomBar{ display:flex; }
+  /* laisse de la place en bas sans toucher au layout existant */
+  body{ padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+}
+
+/* ============ “Resume toast” top ============ */
+.qp-toast{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  top: calc(12px + env(safe-area-inset-top));
+  z-index: 9999;
+  display:none;
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(8,14,28,.86);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 44px rgba(0,0,0,.30);
+}
+.qp-toast.is-on{ display:block; animation: qpToastIn .22s ease both; }
+@keyframes qpToastIn{
+  from{ opacity:0; transform: translateY(-8px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+.qp-toast .row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+}
+.qp-toast .msg{
+  min-width:0;
+}
+.qp-toast .msg strong{
+  display:block;
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--qpInk);
+}
+.qp-toast .msg span{
+  display:block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--qpMuted);
+}
+.qp-toast .btns{
+  display:flex;
+  gap:8px;
+  flex: 0 0 auto;
+}
