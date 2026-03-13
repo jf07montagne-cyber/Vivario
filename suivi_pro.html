@@ -2142,5 +2142,49 @@
   window.addEventListener("focus", () => { try{ mount(); }catch{} });
 })();
 </script>
+  <script>
+/* PATCH ultra safe — retour vers questionnaire avec proposition reprise */
+(function(){
+  const LASTQ_KEY = "vivario_pro_last_question_meta_v1";
+  const DRAFT_KEY = "vivario_pro_questionnaire_draft_v1";
+
+  function getJson(k){ try{ return JSON.parse(localStorage.getItem(k)||"null"); }catch{ return null; } }
+
+  function hasDraft(){
+    const d = getJson(DRAFT_KEY);
+    if (!d || typeof d !== "object") return false;
+    return Object.keys(d).some(k => {
+      const v = d[k];
+      if (v === true) return true;
+      if (typeof v === "string" && v.trim()) return true;
+      if (typeof v === "number" && isFinite(v)) return true;
+      return false;
+    });
+  }
+
+  const meta = getJson(LASTQ_KEY);
+  if (!meta) return;
+
+  const title = (meta.title || "Question en cours").trim();
+  const qLabel = (meta.qLabel || "Q—").trim();
+
+  if (hasDraft()){
+    // 1) Header : remplace le lien questionnaire par “Reprendre”
+    document.querySelectorAll('a[href="questionnaire_pro.html?v=1"]').forEach(a => {
+      a.textContent = `↩ Reprendre (${qLabel})`;
+      a.title = `Reprendre : ${qLabel} — ${title}`;
+      a.href = "questionnaire_pro.html?v=1&from=suivi";
+    });
+
+    // 2) CTA smart (si présent)
+    const smart = document.getElementById("svSmartCta");
+    if (smart){
+      smart.textContent = `↩ Reprendre (${qLabel})`;
+      smart.href = "questionnaire_pro.html?v=1&from=suivi";
+      smart.title = `Reprendre : ${qLabel} — ${title}`;
+    }
+  }
+})();
+  </script>
 </body>
 </html>
