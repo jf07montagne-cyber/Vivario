@@ -2755,5 +2755,134 @@
   }
 })();
   </script>
+  <script>
+(function(){
+  const STATE_KEY = "vivario_pro_state_v1";
+  const DRAFT_KEY = "vivario_pro_questionnaire_draft_v1";
+  const RESUME_KEY = "vivario_pro_questionnaire_resume_v1";
+
+  const INDEX_KEY      = "vivario_pro_questionnaire_index_v1";
+  const INDEX_META_KEY = "vivario_pro_questionnaire_index_meta_v1";
+  const INDEX_TTL_DAYS = 7;
+
+  const TARGET = "questionnaire_pro.html?v=1&resume=1&from=accueil";
+
+  function getJson(k){ try { return JSON.parse(localStorage.getItem(k)||"null"); } catch { return null; } }
+  function setJson(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+
+  function cacheFresh(meta){
+    if (!meta?.updated_at) return false;
+    try{
+      const ageDays = (Date.now() - new Date(meta.updated_at).getTime()) / 86400000;
+      return isFinite(ageDays) && ageDays <= INDEX_TTL_DAYS;
+    }catch{ return false; }
+  }
+
+  async function loadIndex(){
+    const cached = getJson(INDEX_KEY);
+    const meta = getJson(INDEX_META_KEY);
+    if (cached && typeof cached === "object" && cacheFresh(meta)) return cached;
+
+    try{
+      const res = await fetch("questionnaire_pro.json", { cache: "force-cache" });
+      if (!res.ok) throw new Error("http");
+      const json = await res.json();
+      const blocks = Array.isArray(json?.blocks) ? json.blocks : [];
+      const idx = {};
+      blocks.forEach(b => {
+        if (!b || !b.id) return;
+        idx[String(b.id)] = { title: String(b.title || "").trim() || null };
+      });
+      setJson(INDEX_KEY, idx);
+      setJson(INDEX_META_KEY, { updated_at: new Date().toISOString(), size: blocks.length });
+      return idx;
+    }catch{
+      return null;
+    }
+  }
+
+  function hasDraftLike(){
+    const d = getJson(DRAFT_KEY);
+    if (d && typeof d === "object"){
+      const ok = Object.keys(d).some(k => {
+        const v = d[k];
+        if (v === true) return true;
+        if (typeof v === "string" && v.trim().length) return true;
+        if (typeof v === "number" && isFinite(v)) return true;
+        return false;
+      });
+      if (ok) return true;
+    }
+    const r = getJson(RESUME_KEY);
+    if (r && typeof r === "object" && !r.finished && (r.currentBlockId || r.currentStep)) return true;
+    return false;
+  }
+
+  function getQxx(){
+    const st = getJson(STATE_KEY);
+    const shown = Array.isArray(st?.shownBlocks) ? st.shownBlocks : [];
+    return shown.length ? shown.length : null;
+  }
+  function getCurrentBlockId(){
+    const r = getJson(RESUME_KEY);
+    if (r?.currentBlockId) return String(r.currentBlockId);
+    const st = getJson(STATE_KEY);
+    const cur = st?.currentBlockId || st?.currentBlock || st?.current;
+    return cur ? String(cur) : null;
+  }
+
+  function cleanTitle(t){
+    const s = String(t||"").trim();
+    if (!s) return null;
+    return s.length > 60 ? (s.slice(0,57) + "…") : s;
+  }
+
+  async function patch(){
+    const ok = hasDraftLike() || !!getQxx();
+    if (!ok) return;
+
+    const q = getQxx();
+    const blockId = getCurrentBlockId();
+    let title = null;
+
+    try{
+      const idx = await loadIndex();
+      if (idx && blockId && idx[blockId]?.title){
+        title = cleanTitle(idx[blockId].title);
+      }
+    }catch{}
+
+    const label = title
+      ? (q ? `🧩 Continuer (Q${q} — ${title})` : `🧩 Continuer (${title})`)
+      : (q ? `🧩 Continuer (Q${q})` : "🧩 Continuer");
+
+    // 1) CTA principal si présent
+    const primary =
+      document.getElementById("smartPrimaryCta") ||
+      document.getElementById("proMainCta") ||
+      document.querySelector('a.pro-btnPrimary[href^="questionnaire_pro.html"]');
+
+    if (primary && primary.tagName === "A"){
+      primary.href = TARGET;
+      primary.textContent = label;
+      primary.title = "Reprendre ta session questionnaire";
+    }
+
+    // 2) patch tous les liens questionnaire (en mode safe)
+    document.querySelectorAll('a[href^="questionnaire_pro.html"]').forEach(a => {
+      a.href = TARGET;
+      const fbtn = a.querySelector(".fbtn");
+      if (fbtn) fbtn.textContent = "🧩 Continuer";
+    });
+  }
+
+  if (document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", () => setTimeout(patch, 20));
+  } else {
+    setTimeout(patch, 20);
+  }
+  window.addEventListener("focus", () => { try { patch(); } catch {} });
+})();
+  </script>
 </body>
 </html>
