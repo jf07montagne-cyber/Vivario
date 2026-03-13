@@ -2187,5 +2187,58 @@
 })();
   </script>
   <script src="pro_resume_badge_patch.js?v=1"></script>
+  <script>
+(function(){
+  const NAV_HINT_KEY = "vivario_pro_nav_hint_v1";
+  const DRAFT_KEY = "vivario_pro_questionnaire_draft_v1";
+
+  function getJson(k){ try { return JSON.parse(localStorage.getItem(k) || "null"); } catch { return null; } }
+
+  function hasDraft(){
+    const data = getJson(DRAFT_KEY);
+    if (!data || typeof data !== "object") return false;
+    return Object.keys(data).some(k => {
+      const v = data[k];
+      if (v === true) return true;
+      if (typeof v === "string" && v.trim().length) return true;
+      if (typeof v === "number" && isFinite(v)) return true;
+      return false;
+    });
+  }
+
+  function patchCtas(){
+    if (!hasDraft()) return;
+
+    const hint = getJson(NAV_HINT_KEY);
+    const label = (hint && hint.label) ? hint.label : "Questionnaire en cours";
+
+    // CTA principal dans Suivi
+    const primary = document.getElementById("svSmartCta");
+    const note = document.getElementById("svSmartNote");
+
+    if (primary){
+      primary.href = "questionnaire_pro.html?v=1&resume=1&from=suivi";
+      primary.textContent = "🧩 Continuer le questionnaire";
+    }
+    if (note){
+      note.textContent = `Session en cours détectée : ${label}. Clique pour reprendre (proposition Reprendre, sans auto-restore).`;
+    }
+
+    // Bouton mobile “🚀 PRO” → le faire pointer vers reprise
+    document.querySelectorAll('a[href^="questionnaire_pro.html?v=1"]').forEach(a => {
+      try{
+        if (a.href.includes("resume=1")) return;
+        a.href = "questionnaire_pro.html?v=1&resume=1&from=suivi";
+      }catch{}
+    });
+  }
+
+  if (document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", patchCtas);
+  } else {
+    patchCtas();
+  }
+})();
+  </script>
 </body>
 </html>
