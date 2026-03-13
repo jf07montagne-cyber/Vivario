@@ -2693,5 +2693,67 @@
 })();
   </script>
   <script src="pro_resume_badge_patch.js?v=1"></script>
+  <script>
+(function(){
+  const NAV_HINT_KEY = "vivario_pro_nav_hint_v1";
+  const DRAFT_KEY = "vivario_pro_questionnaire_draft_v1";
+
+  function getJson(k){ try { return JSON.parse(localStorage.getItem(k) || "null"); } catch { return null; } }
+
+  function hasDraft(){
+    const data = getJson(DRAFT_KEY);
+    if (!data || typeof data !== "object") return false;
+    return Object.keys(data).some(k => {
+      const v = data[k];
+      if (v === true) return true;
+      if (typeof v === "string" && v.trim().length) return true;
+      if (typeof v === "number" && isFinite(v)) return true;
+      return false;
+    });
+  }
+
+  function patchCtas(){
+    const hint = getJson(NAV_HINT_KEY);
+    if (!hasDraft()) return;
+
+    // label: "Q12 — Titre" si dispo
+    const label = (hint && hint.label) ? hint.label : "Questionnaire en cours";
+
+    // 1) Smart CTA principal (si présent)
+    const primary = document.getElementById("smartPrimaryCta");
+    const txt = document.getElementById("smartCtaText");
+    const sub = document.getElementById("smartCtaSub");
+    const badge = document.getElementById("smartBadge");
+    const badgeText = document.getElementById("smartBadgeText");
+
+    if (primary){
+      primary.href = "questionnaire_pro.html?v=1&resume=1";
+      primary.textContent = "🧩 Continuer le questionnaire";
+      primary.classList.add("cta-glow-warn");
+    }
+    if (txt) txt.textContent = `Tu as une session en cours : ${label}.`;
+    if (sub) sub.textContent = "Clique pour reprendre exactement au bon endroit (proposition Reprendre, sans auto-restore).";
+    if (badge && badgeText){
+      badge.classList.remove("is-good","is-warn","is-alert");
+      badge.classList.add("is-warn");
+      badgeText.textContent = "Session en cours";
+    }
+
+    // 2) Boutons “Questionnaire” existants → ajout resume=1
+    document.querySelectorAll('a[href^="questionnaire_pro.html?v=1"]').forEach(a => {
+      try{
+        if (a.href.includes("resume=1")) return;
+        a.href = "questionnaire_pro.html?v=1&resume=1";
+      }catch{}
+    });
+  }
+
+  if (document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", patchCtas);
+  } else {
+    patchCtas();
+  }
+})();
+  </script>
 </body>
 </html>
