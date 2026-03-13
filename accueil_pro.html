@@ -2645,5 +2645,52 @@
   window.addEventListener("focus", () => { try{ apply(); }catch{} });
 })();
 </script>
+  <script>
+/* PATCH ultra safe — afficher “Dernière question” + lien reprise */
+(function(){
+  const LASTQ_KEY = "vivario_pro_last_question_meta_v1";
+  const DRAFT_KEY = "vivario_pro_questionnaire_draft_v1";
+
+  function getJson(k){ try{ return JSON.parse(localStorage.getItem(k)||"null"); }catch{ return null; } }
+
+  function hasDraft(){
+    const d = getJson(DRAFT_KEY);
+    if (!d || typeof d !== "object") return false;
+    return Object.keys(d).some(k => {
+      const v = d[k];
+      if (v === true) return true;
+      if (typeof v === "string" && v.trim()) return true;
+      if (typeof v === "number" && isFinite(v)) return true;
+      return false;
+    });
+  }
+
+  const meta = getJson(LASTQ_KEY);
+  if (!meta) return;
+
+  const title = (meta.title || "Question en cours").trim();
+  const qLabel = (meta.qLabel || "Q—").trim();
+
+  // Si brouillon, on transforme doucement les liens questionnaire en "reprise"
+  if (hasDraft()){
+    document.querySelectorAll('a[href="questionnaire_pro.html?v=1"]').forEach(a => {
+      a.textContent = `↩ Reprendre (${qLabel})`;
+      a.title = `Reprendre : ${qLabel} — ${title}`;
+      a.href = "questionnaire_pro.html?v=1&from=accueil";
+    });
+
+    // Bonus : dans la sticky mobile si elle existe
+    const stickyTitle = document.getElementById("proStickyTitle");
+    const stickySub = document.getElementById("proStickySub");
+    const stickyBtn = document.getElementById("proStickyBtn");
+    if (stickyTitle && stickySub && stickyBtn){
+      stickyTitle.textContent = `Reprendre le questionnaire (${qLabel})`;
+      stickySub.textContent = title;
+      stickyBtn.href = "questionnaire_pro.html?v=1&from=accueil";
+      stickyBtn.textContent = "↩ Reprendre";
+    }
+  }
+})();
+  </script>
 </body>
 </html>
