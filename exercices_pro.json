@@ -1,0 +1,697 @@
+{
+  "version": 1,
+  "generated_at": "2026-03-15T00:00:00.000Z",
+  "meta": {
+    "title": "Vivario PRO — Catalogue Exercices (riche)",
+    "notes": [
+      "Tout est local. Les chemins media sont des exemples (à remplacer par tes fichiers).",
+      "duration_s = durée par défaut. variants permet court/long sans dupliquer les étapes."
+    ]
+  },
+  "tags_catalog": [
+    "respiration",
+    "ancrage",
+    "calme",
+    "stress",
+    "sommeil",
+    "mental",
+    "écriture",
+    "focus",
+    "mobilité",
+    "relâchement",
+    "yoga",
+    "yoga_doux",
+    "cardio",
+    "activation",
+    "énergie",
+    "fatigue",
+    "douleur",
+    "posture",
+    "confiance",
+    "rumination"
+  ],
+  "domains_catalog": [
+    "Anxiété / panique",
+    "Sommeil",
+    "Stress",
+    "Surcharge mentale",
+    "Fatigue / burnout",
+    "Douleur / tensions",
+    "Motivation / procrastination",
+    "Confiance / estime",
+    "Colère / agitation",
+    "Concentration / focus"
+  ],
+  "exercices": [
+    {
+      "id": "breath_physio_sigh",
+      "title": "Physiological sigh (double inspire + longue expire)",
+      "desc": "Technique ultra rapide pour baisser la charge : double inspire par le nez, longue expiration.",
+      "category": "respiration",
+      "level": "easy",
+      "tags": ["respiration", "calme", "stress", "ancrage"],
+      "domainHints": ["Anxiété / panique", "Stress", "Colère / agitation"],
+      "intensity": "low",
+      "contra": ["Évite de forcer si vertiges. Assis si besoin."],
+      "duration_s": 60,
+      "variants": [
+        { "id": "short", "label": "Court (30s)", "duration_s": 30 },
+        { "id": "long", "label": "Long (2 min)", "duration_s": 120 }
+      ],
+      "media": { "type": "video", "src": "media/breath_physio_sigh.mp4", "poster": "media/breath_physio_sigh.jpg" },
+      "steps": [
+        "Assieds-toi, épaules basses, regard doux.",
+        "Inspire par le nez (petit inspire).",
+        "Sans expirer, ajoute un second petit inspire pour “remplir” encore.",
+        "Expire lentement et longtemps par la bouche.",
+        "Répète jusqu’à la fin du timer."
+      ],
+      "ttsText": "Physiological sigh. Petit inspire par le nez, puis un second petit inspire. Longue expiration. Répète doucement jusqu’à la fin.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "breath_box_4_4_4_4",
+      "title": "Respiration carrée 4–4–4–4 (box breathing)",
+      "desc": "Stabilisation : inspire 4, bloque 4, expire 4, bloque 4. Refaire en boucle.",
+      "category": "respiration",
+      "level": "easy",
+      "tags": ["respiration", "calme", "focus", "stress"],
+      "domainHints": ["Stress", "Surcharge mentale", "Concentration / focus"],
+      "intensity": "low",
+      "contra": ["Si inconfort, fais 3–3–3–3."],
+      "duration_s": 120,
+      "variants": [
+        { "id": "short", "label": "Court (60s)", "duration_s": 60 },
+        { "id": "long", "label": "Long (5 min)", "duration_s": 300 }
+      ],
+      "media": { "type": "video", "src": "media/breath_box_4444.mp4", "poster": "media/breath_box_4444.jpg" },
+      "steps": [
+        "Inspire 4 secondes (nez).",
+        "Retiens 4 secondes (sans crispation).",
+        "Expire 4 secondes (bouche ou nez).",
+        "Retiens 4 secondes.",
+        "Répète."
+      ],
+      "ttsText": "Respiration carrée. Inspire quatre. Retient quatre. Expire quatre. Retient quatre. Répète.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "breath_4_6",
+      "title": "Respiration 4–6 (expire plus long)",
+      "desc": "Apaisement simple : inspire 4, expire 6. Idéal le soir ou en charge élevée.",
+      "category": "respiration",
+      "level": "easy",
+      "tags": ["respiration", "calme", "sommeil", "stress"],
+      "domainHints": ["Anxiété / panique", "Sommeil", "Stress"],
+      "intensity": "low",
+      "contra": ["Si essoufflement, fais 3–5."],
+      "duration_s": 90,
+      "variants": [
+        { "id": "short", "label": "Court (60s)", "duration_s": 60 },
+        { "id": "long", "label": "Long (3 min)", "duration_s": 180 }
+      ],
+      "media": { "type": "video", "src": "media/breath_46.mp4", "poster": "media/breath_46.jpg" },
+      "steps": [
+        "Pose une main sur le ventre.",
+        "Inspire 4 secondes (nez).",
+        "Expire 6 secondes (doucement).",
+        "Répète."
+      ],
+      "ttsText": "Respiration quatre six. Inspire quatre secondes. Expire six secondes. Répète calmement.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "ancrage_5_4_3_2_1",
+      "title": "Ancrage 5–4–3–2–1 (sens)",
+      "desc": "Revenir au présent via les 5 sens. Très utile en anxiété, rumination, panique.",
+      "category": "ancrage",
+      "level": "easy",
+      "tags": ["ancrage", "mental", "calme", "rumination"],
+      "domainHints": ["Anxiété / panique", "Surcharge mentale", "Colère / agitation"],
+      "intensity": "low",
+      "contra": ["Si surcharge, fais seulement 3–2–1."],
+      "duration_s": 120,
+      "variants": [
+        { "id": "short", "label": "Court (60s)", "duration_s": 60 },
+        { "id": "long", "label": "Long (4 min)", "duration_s": 240 }
+      ],
+      "media": { "type": "gif", "src": "media/ancrage_54321.gif" },
+      "steps": [
+        "Regarde autour de toi : 5 choses que tu vois.",
+        "4 choses que tu touches (texture, température).",
+        "3 choses que tu entends.",
+        "2 choses que tu sens (odeur).",
+        "1 chose que tu goûtes (ou une respiration)."
+      ],
+      "ttsText": "Ancrage cinq quatre trois deux un. Cinq choses que tu vois. Quatre que tu touches. Trois que tu entends. Deux que tu sens. Une que tu goûtes.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "mental_name_it",
+      "title": "Nommer → réduire (Name it to tame it)",
+      "desc": "Mettre des mots simples sur l’état du moment pour baisser l’intensité.",
+      "category": "mental",
+      "level": "easy",
+      "tags": ["mental", "calme", "focus", "rumination"],
+      "domainHints": ["Surcharge mentale", "Stress", "Anxiété / panique"],
+      "intensity": "low",
+      "contra": ["Si trop dur, décris juste 'tension' ou 'fatigue'."],
+      "duration_s": 90,
+      "variants": [
+        { "id": "short", "label": "Court (45s)", "duration_s": 45 },
+        { "id": "long", "label": "Long (3 min)", "duration_s": 180 }
+      ],
+      "media": { "type": "image", "src": "media/mental_name_it.jpg" },
+      "steps": [
+        "Termine la phrase : “Là, je ressens …” (1 mot).",
+        "Puis : “Ça se manifeste dans le corps ici …” (1 zone).",
+        "Puis : “Mon besoin maintenant = …” (1 besoin).",
+        "Respire lentement 3 cycles."
+      ],
+      "ttsText": "Nommer pour réduire. Un mot pour l’émotion. Une zone dans le corps. Un besoin. Puis trois respirations lentes.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "writing_dump_3min",
+      "title": "Écriture décharge (brain dump)",
+      "desc": "Tout sortir sans filtre pendant 3 minutes. Puis 1 phrase de synthèse.",
+      "category": "écriture",
+      "level": "easy",
+      "tags": ["écriture", "mental", "rumination", "focus"],
+      "domainHints": ["Surcharge mentale", "Stress", "Motivation / procrastination"],
+      "intensity": "low",
+      "contra": ["Si activation forte, commence par 30s respiration 4–6."],
+      "duration_s": 180,
+      "variants": [
+        { "id": "short", "label": "Court (90s)", "duration_s": 90 },
+        { "id": "long", "label": "Long (7 min)", "duration_s": 420 }
+      ],
+      "media": { "type": "image", "src": "media/writing_dump.jpg" },
+      "steps": [
+        "Lance le timer et écris sans t’arrêter (mots, phrases, listes).",
+        "Ne corrige rien. Pas de style. Juste vider.",
+        "À la fin : 1 phrase “Le vrai sujet, c’est …”",
+        "Option : 1 micro-action faisable en 2 minutes."
+      ],
+      "ttsText": "Écriture décharge. Écris sans t’arrêter jusqu’au timer. Puis une phrase : le vrai sujet c’est… Option : une micro-action de deux minutes.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "focus_1_task",
+      "title": "Focus 1 tâche (2 minutes de démarrage)",
+      "desc": "Anti-procrastination : définir une seule action minuscule et démarrer 2 minutes.",
+      "category": "focus",
+      "level": "easy",
+      "tags": ["focus", "activation", "mental", "motivation"],
+      "domainHints": ["Motivation / procrastination", "Surcharge mentale", "Concentration / focus"],
+      "intensity": "low",
+      "contra": ["Si fatigue haute, choisis une action 'alléger' (ex: ranger 3 objets)."],
+      "duration_s": 120,
+      "variants": [
+        { "id": "short", "label": "Court (60s)", "duration_s": 60 },
+        { "id": "long", "label": "Long (10 min)", "duration_s": 600 }
+      ],
+      "media": { "type": "gif", "src": "media/focus_one_task.gif" },
+      "steps": [
+        "Choisis 1 seule tâche (pas 3).",
+        "Réduis-la à 1 action de 2 minutes.",
+        "Démarre maintenant. Juste 2 minutes.",
+        "À la fin : décider “je continue 2 min” ou “stop ok”."
+      ],
+      "ttsText": "Focus une tâche. Choisis une seule action minuscule. Démarre pour deux minutes. À la fin, tu choisis de continuer ou d’arrêter sans culpabilité.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "mobility_neck_shoulders",
+      "title": "Mobilité nuque & épaules (déverrouillage)",
+      "desc": "Décoincer les tensions fréquentes (écrans, stress).",
+      "category": "mobilité",
+      "level": "easy",
+      "tags": ["mobilité", "relâchement", "douleur", "stress"],
+      "domainHints": ["Douleur / tensions", "Stress", "Surcharge mentale"],
+      "intensity": "low",
+      "contra": ["Pas de douleur vive. Mouvement doux."],
+      "duration_s": 120,
+      "variants": [
+        { "id": "short", "label": "Court (60s)", "duration_s": 60 },
+        { "id": "long", "label": "Long (5 min)", "duration_s": 300 }
+      ],
+      "media": { "type": "gif", "src": "media/mobility_neck_shoulders.gif" },
+      "steps": [
+        "Hausse les épaules 2 sec → relâche.",
+        "Rotation lente de la tête gauche/droite.",
+        "Inclinaison oreille→épaule (sans tirer).",
+        "3 respirations lentes."
+      ],
+      "ttsText": "Mobilité nuque épaules. Hausse et relâche. Tourne la tête lentement. Incline doucement. Terminer par trois respirations.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "mobility_hips_90_90",
+      "title": "Hanches 90/90 (mobilité douce)",
+      "desc": "Ouvrir les hanches en douceur. Très utile si assis longtemps.",
+      "category": "mobilité",
+      "level": "easy",
+      "tags": ["mobilité", "yoga_doux", "douleur", "relâchement"],
+      "domainHints": ["Douleur / tensions", "Fatigue / burnout"],
+      "intensity": "low",
+      "contra": ["Évite si douleur de hanche importante. Ajuste amplitude."],
+      "duration_s": 180,
+      "variants": [
+        { "id": "short", "label": "Court (90s)", "duration_s": 90 },
+        { "id": "long", "label": "Long (6 min)", "duration_s": 360 }
+      ],
+      "media": { "type": "video", "src": "media/mobility_hips_9090.mp4", "poster": "media/mobility_hips_9090.jpg" },
+      "steps": [
+        "Assis au sol, jambes pliées en 90/90 (une devant, une derrière).",
+        "Redresse le buste, respire.",
+        "Bascule doucement les genoux de l’autre côté (sans forcer).",
+        "Répète lentement."
+      ],
+      "ttsText": "Hanches quatre-vingt-dix quatre-vingt-dix. Assis, une jambe devant, une derrière. Respire. Bascule doucement de côté. Sans douleur.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "yoga_child_pose",
+      "title": "Yoga doux — posture de l’enfant",
+      "desc": "Calme le système nerveux, relâche le dos, aide au sommeil.",
+      "category": "yoga",
+      "level": "easy",
+      "tags": ["yoga_doux", "calme", "sommeil", "respiration"],
+      "domainHints": ["Sommeil", "Anxiété / panique", "Douleur / tensions"],
+      "intensity": "low",
+      "contra": ["Adapter si genoux sensibles : coussin sous les hanches."],
+      "duration_s": 120,
+      "variants": [
+        { "id": "short", "label": "Court (60s)", "duration_s": 60 },
+        { "id": "long", "label": "Long (5 min)", "duration_s": 300 }
+      ],
+      "media": { "type": "image", "src": "media/yoga_child_pose.jpg" },
+      "steps": [
+        "À genoux, fesses vers les talons.",
+        "Buste en avant, front au sol (ou sur coussin).",
+        "Respire lentement, relâche la mâchoire.",
+        "Reste jusqu’à la fin."
+      ],
+      "ttsText": "Posture de l’enfant. Fesses vers les talons. Buste en avant. Respire lentement. Relâche la mâchoire.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "yoga_legs_up_wall",
+      "title": "Yoga doux — jambes au mur",
+      "desc": "Récupération, retour au calme, jambes lourdes, sommeil.",
+      "category": "yoga",
+      "level": "easy",
+      "tags": ["yoga_doux", "calme", "sommeil", "fatigue"],
+      "domainHints": ["Sommeil", "Fatigue / burnout", "Stress"],
+      "intensity": "low",
+      "contra": ["Adapter si inconfort bas du dos : coussin sous bassin."],
+      "duration_s": 240,
+      "variants": [
+        { "id": "short", "label": "Court (2 min)", "duration_s": 120 },
+        { "id": "long", "label": "Long (10 min)", "duration_s": 600 }
+      ],
+      "media": { "type": "video", "src": "media/yoga_legs_up_wall.mp4", "poster": "media/yoga_legs_up_wall.jpg" },
+      "steps": [
+        "Allonge-toi près d’un mur, jambes vers le haut.",
+        "Bras relâchés, respiration lente.",
+        "Option : expire plus long que l’inspire.",
+        "Reste jusqu’à la fin."
+      ],
+      "ttsText": "Jambes au mur. Allonge-toi, jambes vers le haut. Respiration lente. Expire plus long. Reste tranquille.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "yoga_cat_cow",
+      "title": "Yoga — chat/vache (colonne)",
+      "desc": "Mobilité de la colonne, respiration, relâchement.",
+      "category": "yoga",
+      "level": "easy",
+      "tags": ["yoga", "mobilité", "respiration", "relâchement"],
+      "domainHints": ["Douleur / tensions", "Stress", "Fatigue / burnout"],
+      "intensity": "low",
+      "contra": ["Reste dans une amplitude confortable."],
+      "duration_s": 180,
+      "variants": [
+        { "id": "short", "label": "Court (90s)", "duration_s": 90 },
+        { "id": "long", "label": "Long (6 min)", "duration_s": 360 }
+      ],
+      "media": { "type": "gif", "src": "media/yoga_cat_cow.gif" },
+      "steps": [
+        "À quatre pattes, mains sous épaules, genoux sous hanches.",
+        "Inspire : creuse le dos (vache), ouvre le regard légèrement.",
+        "Expire : arrondis le dos (chat), rentre le menton.",
+        "Répète lentement."
+      ],
+      "ttsText": "Chat vache. Inspire, creuse le dos. Expire, arrondis le dos. Mouvement lent, respiration calme.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "cardio_walk_5",
+      "title": "Cardio doux — marche active",
+      "desc": "Marche sur place ou dehors. Objectif : activer sans exploser.",
+      "category": "cardio",
+      "level": "easy",
+      "tags": ["cardio", "activation", "énergie", "fatigue"],
+      "domainHints": ["Fatigue / burnout", "Motivation / procrastination", "Stress"],
+      "intensity": "low",
+      "contra": ["Reste à une intensité où tu peux parler."],
+      "duration_s": 300,
+      "variants": [
+        { "id": "short", "label": "Court (2 min)", "duration_s": 120 },
+        { "id": "long", "label": "Long (12 min)", "duration_s": 720 }
+      ],
+      "media": { "type": "video", "src": "media/cardio_walk_active.mp4", "poster": "media/cardio_walk_active.jpg" },
+      "steps": [
+        "Marche sur place, bras actifs.",
+        "Garde une respiration confortable.",
+        "Option : 10 sec plus rapide / 20 sec normal (répéter)."
+      ],
+      "ttsText": "Marche active. Bras actifs, respiration confortable. Option : dix secondes plus vite, vingt secondes normal, répéter.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "cardio_20_20_3",
+      "title": "Cardio micro — 20/20 × 3",
+      "desc": "Activation courte : 20 sec effort, 20 sec repos, 3 tours.",
+      "category": "cardio",
+      "level": "moderate",
+      "tags": ["cardio", "activation", "motivation", "énergie"],
+      "domainHints": ["Motivation / procrastination", "Colère / agitation"],
+      "intensity": "medium",
+      "contra": ["Adapter impact : step touch au lieu de sauts."],
+      "duration_s": 180,
+      "variants": [
+        { "id": "short", "label": "Court (2 tours)", "duration_s": 120 },
+        { "id": "long", "label": "Long (6 tours)", "duration_s": 360 }
+      ],
+      "media": { "type": "video", "src": "media/cardio_2020.mp4", "poster": "media/cardio_2020.jpg" },
+      "steps": [
+        "Choisis : montées de genoux OU jumping jacks (ou sans saut).",
+        "20 sec effort, 20 sec repos.",
+        "Répète 3 fois.",
+        "Retour au calme : 3 respirations lentes."
+      ],
+      "ttsText": "Cardio micro vingt vingt. Choisis ton mouvement. Vingt secondes effort, vingt secondes repos. Trois tours. Puis trois respirations lentes.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "grounding_feet_press",
+      "title": "Ancrage corps — pression des pieds",
+      "desc": "Revenir dans le corps : pression des pieds + posture stable.",
+      "category": "ancrage",
+      "level": "easy",
+      "tags": ["ancrage", "posture", "calme", "stress"],
+      "domainHints": ["Anxiété / panique", "Stress", "Surcharge mentale"],
+      "intensity": "low",
+      "contra": ["Assis si besoin."],
+      "duration_s": 90,
+      "variants": [
+        { "id": "short", "label": "Court (45s)", "duration_s": 45 },
+        { "id": "long", "label": "Long (3 min)", "duration_s": 180 }
+      ],
+      "media": { "type": "gif", "src": "media/grounding_feet_press.gif" },
+      "steps": [
+        "Debout ou assis, pieds au sol.",
+        "Presse doucement les pieds (3 sec) puis relâche (3 sec).",
+        "Observe 3 sensations (poids, chaleur, contact).",
+        "Respire lentement."
+      ],
+      "ttsText": "Pression des pieds. Presse trois secondes, relâche trois secondes. Observe les sensations. Respire lentement.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "posture_confidence_60",
+      "title": "Posture confiance (1 minute)",
+      "desc": "Posture ouverte + respiration lente. Utile pour confiance / estime.",
+      "category": "posture",
+      "level": "easy",
+      "tags": ["posture", "confiance", "calme", "respiration"],
+      "domainHints": ["Confiance / estime", "Anxiété / panique"],
+      "intensity": "low",
+      "contra": ["Sans cambrer. Nuque longue."],
+      "duration_s": 60,
+      "variants": [
+        { "id": "short", "label": "Court (30s)", "duration_s": 30 },
+        { "id": "long", "label": "Long (3 min)", "duration_s": 180 }
+      ],
+      "media": { "type": "image", "src": "media/posture_confidence.jpg" },
+      "steps": [
+        "Pieds ancrés, dos long, poitrine ouverte.",
+        "Menton légèrement rentré, épaules basses.",
+        "Respire lentement (expire un peu plus long).",
+        "À la fin : 1 phrase “Je fais un pas simple.”"
+      ],
+      "ttsText": "Posture confiance. Dos long, épaules basses, poitrine ouverte. Respire lentement. Puis une phrase : je fais un pas simple.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "sleep_body_scan",
+      "title": "Scan corporel sommeil (relâchement guidé)",
+      "desc": "Parcours rapide du corps : relâcher zones clés pour s’endormir plus facilement.",
+      "category": "sommeil",
+      "level": "easy",
+      "tags": ["sommeil", "calme", "relâchement", "respiration"],
+      "domainHints": ["Sommeil", "Stress", "Douleur / tensions"],
+      "intensity": "low",
+      "contra": ["Si agitation forte, commence par physiological sigh 30s."],
+      "duration_s": 240,
+      "variants": [
+        { "id": "short", "label": "Court (2 min)", "duration_s": 120 },
+        { "id": "long", "label": "Long (10 min)", "duration_s": 600 }
+      ],
+      "media": { "type": "image", "src": "media/sleep_body_scan.jpg" },
+      "steps": [
+        "Allongé, expire lentement 3 fois.",
+        "Relâche mâchoire, langue, yeux.",
+        "Relâche épaules, poitrine, ventre.",
+        "Relâche bassin, cuisses, mollets, pieds.",
+        "Si pensée : “plus tard”, et revenir au souffle."
+      ],
+      "ttsText": "Scan corporel. Trois longues expirations. Relâche la mâchoire, les yeux. Relâche les épaules, le ventre. Relâche les jambes. Si une pensée arrive : plus tard, et reviens au souffle.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "anger_release_wall_push",
+      "title": "Décharge colère — pousser le mur (isométrique)",
+      "desc": "Décharger sans violence : pousser un mur 10–20 sec, relâcher, respirer.",
+      "category": "décharge",
+      "level": "easy",
+      "tags": ["décharge", "ancrage", "stress", "cardio"],
+      "domainHints": ["Colère / agitation", "Stress"],
+      "intensity": "medium",
+      "contra": ["Évite si douleur épaule/coude. Ajuste force."],
+      "duration_s": 120,
+      "variants": [
+        { "id": "short", "label": "Court (60s)", "duration_s": 60 },
+        { "id": "long", "label": "Long (4 min)", "duration_s": 240 }
+      ],
+      "media": { "type": "gif", "src": "media/anger_wall_push.gif" },
+      "steps": [
+        "Debout face au mur, mains à hauteur poitrine.",
+        "Pousse fort 10–20 sec (sans douleur).",
+        "Relâche 10 sec. Respire.",
+        "Répète 3 fois."
+      ],
+      "ttsText": "Pousser le mur. Pousse dix à vingt secondes. Relâche dix secondes. Respire. Répète trois fois.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "mobility_ankle_calf",
+      "title": "Chevilles & mollets (mobilité anti-tension)",
+      "desc": "Relâcher bas de jambe, améliorer confort et marche.",
+      "category": "mobilité",
+      "level": "easy",
+      "tags": ["mobilité", "douleur", "fatigue", "relâchement"],
+      "domainHints": ["Douleur / tensions", "Fatigue / burnout"],
+      "intensity": "low",
+      "contra": ["Pas de douleur vive. Ajuste amplitude."],
+      "duration_s": 120,
+      "variants": [
+        { "id": "short", "label": "Court (60s)", "duration_s": 60 },
+        { "id": "long", "label": "Long (5 min)", "duration_s": 300 }
+      ],
+      "media": { "type": "video", "src": "media/mobility_ankle_calf.mp4", "poster": "media/mobility_ankle_calf.jpg" },
+      "steps": [
+        "Cercles de cheville (lent) 20 sec par côté.",
+        "Montées sur pointes 10 répétitions (douces).",
+        "Étirement mollet léger 20 sec par côté."
+      ],
+      "ttsText": "Chevilles mollets. Cercles de cheville. Montées sur pointes. Étirement mollet léger. Mouvement doux.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "yoga_sun_breathing",
+      "title": "Yoga — salutation au soleil (version douce)",
+      "desc": "Flow simple pour activer l’énergie sans surcharge.",
+      "category": "yoga",
+      "level": "moderate",
+      "tags": ["yoga", "activation", "énergie", "respiration"],
+      "domainHints": ["Fatigue / burnout", "Motivation / procrastination"],
+      "intensity": "medium",
+      "contra": ["Adapter si dos/genoux : amplitude réduite."],
+      "duration_s": 300,
+      "variants": [
+        { "id": "short", "label": "Court (3 min)", "duration_s": 180 },
+        { "id": "long", "label": "Long (10 min)", "duration_s": 600 }
+      ],
+      "media": { "type": "video", "src": "media/yoga_sun_doux.mp4", "poster": "media/yoga_sun_doux.jpg" },
+      "steps": [
+        "Debout : inspire bras au ciel.",
+        "Expire : flexion avant (genoux souples).",
+        "Inspire : dos plat (demi-étirement).",
+        "Expire : mains au sol + pas arrière (planche douce).",
+        "Reviens debout. Répète lentement."
+      ],
+      "ttsText": "Salutation au soleil douce. Inspire bras au ciel. Expire flexion avant. Inspire dos plat. Expire pas arrière. Reviens debout. Répète calmement.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "mental_reframe_3",
+      "title": "Reframe 3 questions (mini recadrage)",
+      "desc": "Sortir d’une boucle mentale : 3 questions simples.",
+      "category": "mental",
+      "level": "easy",
+      "tags": ["mental", "rumination", "focus", "calme"],
+      "domainHints": ["Surcharge mentale", "Stress", "Anxiété / panique"],
+      "intensity": "low",
+      "contra": ["Si trop chargé, fais juste question 3."],
+      "duration_s": 180,
+      "variants": [
+        { "id": "short", "label": "Court (90s)", "duration_s": 90 },
+        { "id": "long", "label": "Long (6 min)", "duration_s": 360 }
+      ],
+      "media": { "type": "image", "src": "media/mental_reframe.jpg" },
+      "steps": [
+        "1) Qu’est-ce qui est sous mon contrôle, là ? (1 chose)",
+        "2) Qu’est-ce qui n’est pas sous mon contrôle ? (le laisser)",
+        "3) Quel est mon prochain pas utile (2 minutes) ?"
+      ],
+      "ttsText": "Recadrage. Une chose sous ton contrôle. Une chose hors de ton contrôle. Puis le prochain pas utile en deux minutes.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "breath_coherent_5_5",
+      "title": "Cohérence 5–5 (rythme stable)",
+      "desc": "Inspire 5, expire 5. Rythme stable, utile pour stress et focus.",
+      "category": "respiration",
+      "level": "easy",
+      "tags": ["respiration", "stress", "focus", "calme"],
+      "domainHints": ["Stress", "Concentration / focus"],
+      "intensity": "low",
+      "contra": ["Si trop long, fais 4–4."],
+      "duration_s": 180,
+      "variants": [
+        { "id": "short", "label": "Court (90s)", "duration_s": 90 },
+        { "id": "long", "label": "Long (6 min)", "duration_s": 360 }
+      ],
+      "media": { "type": "video", "src": "media/breath_55.mp4", "poster": "media/breath_55.jpg" },
+      "steps": [
+        "Inspire 5 secondes.",
+        "Expire 5 secondes.",
+        "Reste fluide, sans forcer.",
+        "Répète."
+      ],
+      "ttsText": "Cohérence cinq cinq. Inspire cinq secondes. Expire cinq secondes. Fluide. Répète.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "cardio_stairs_4",
+      "title": "Cardio doux — escaliers ou step (4 minutes)",
+      "desc": "Activation simple : monter/descendre doucement ou step sur une marche.",
+      "category": "cardio",
+      "level": "moderate",
+      "tags": ["cardio", "activation", "énergie"],
+      "domainHints": ["Motivation / procrastination", "Fatigue / burnout"],
+      "intensity": "medium",
+      "contra": ["Adapter si genou : marche sur place bras actifs."],
+      "duration_s": 240,
+      "variants": [
+        { "id": "short", "label": "Court (2 min)", "duration_s": 120 },
+        { "id": "long", "label": "Long (8 min)", "duration_s": 480 }
+      ],
+      "media": { "type": "video", "src": "media/cardio_step.mp4", "poster": "media/cardio_step.jpg" },
+      "steps": [
+        "Choisis : step sur marche OU escaliers lents.",
+        "1 min modéré, 30 sec plus facile (répéter).",
+        "Finir par 3 respirations longues."
+      ],
+      "ttsText": "Cardio step. Une minute modérée, trente secondes facile. Répète. Termine par trois respirations longues.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "yoga_twist_supine",
+      "title": "Torsion allongée (décompression)",
+      "desc": "Relâche le dos, apaise, aide digestion et sommeil.",
+      "category": "yoga",
+      "level": "easy",
+      "tags": ["yoga_doux", "relâchement", "calme", "sommeil"],
+      "domainHints": ["Sommeil", "Douleur / tensions", "Stress"],
+      "intensity": "low",
+      "contra": ["Aller doucement si lombaires sensibles."],
+      "duration_s": 180,
+      "variants": [
+        { "id": "short", "label": "Court (90s)", "duration_s": 90 },
+        { "id": "long", "label": "Long (8 min)", "duration_s": 480 }
+      ],
+      "media": { "type": "image", "src": "media/yoga_twist_supine.jpg" },
+      "steps": [
+        "Allongé, genoux pliés.",
+        "Laisse tomber les genoux d’un côté, bras en croix.",
+        "Respire lentement.",
+        "Change de côté à mi-temps."
+      ],
+      "ttsText": "Torsion allongée. Genoux pliés, laisse tomber d’un côté. Respire. Puis change de côté à mi-temps.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "mobility_wrist_forearm",
+      "title": "Poignets & avant-bras (anti-écrans)",
+      "desc": "Décharger tension liée au téléphone/souris.",
+      "category": "mobilité",
+      "level": "easy",
+      "tags": ["mobilité", "relâchement", "douleur", "focus"],
+      "domainHints": ["Douleur / tensions", "Surcharge mentale"],
+      "intensity": "low",
+      "contra": ["Sans douleur vive. Amplitude douce."],
+      "duration_s": 120,
+      "variants": [
+        { "id": "short", "label": "Court (60s)", "duration_s": 60 },
+        { "id": "long", "label": "Long (5 min)", "duration_s": 300 }
+      ],
+      "media": { "type": "gif", "src": "media/mobility_wrist_forearm.gif" },
+      "steps": [
+        "Cercles de poignets 20 sec.",
+        "Étire avant-bras paume vers le haut 20 sec.",
+        "Étire avant-bras paume vers le bas 20 sec.",
+        "Secoue doucement les mains."
+      ],
+      "ttsText": "Poignets avant-bras. Cercles. Étire paume vers le haut. Étire paume vers le bas. Secoue doucement.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "mental_gratitude_3",
+      "title": "3 gratitudes (micro)",
+      "desc": "Réorientation douce : 3 choses ok/bonnes, même petites.",
+      "category": "mental",
+      "level": "easy",
+      "tags": ["mental", "calme", "sommeil"],
+      "domainHints": ["Sommeil", "Stress", "Fatigue / burnout"],
+      "intensity": "low",
+      "contra": ["Si ça bloque, fais 1 seule chose neutre."],
+      "duration_s": 90,
+      "variants": [
+        { "id": "short", "label": "Court (45s)", "duration_s": 45 },
+        { "id": "long", "label": "Long (3 min)", "duration_s": 180 }
+      ],
+      "media": { "type": "image", "src": "media/mental_gratitude.jpg" },
+      "steps": [
+        "Note 3 choses positives ou neutres.",
+        "Ajoute 1 détail sensoriel pour chacune.",
+        "Respire 3 cycles lents."
+      ],
+      "ttsText": "Trois gratitudes. Trois choses positives ou neutres. Un détail pour chacune. Puis trois respirations lentes.",
+      "sourceUrl": ""
+    }
+  ]
+}
