@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Vivario PRO — Diagnostic</title>
+
+  <link rel="stylesheet" href="pro_style.css?v=1" />
+  <meta name="theme-color" content="#050A18" />
+
+  <!-- PATCH existant -->
+  <link rel="stylesheet" href="questionnaire_pro_patch.css?v=1" />
+
+  <!-- ✅ Micro-étapes 18→24 (global) -->
+  <link rel="stylesheet" href="pro_microsteps_24.css?v=1" />
+</head>
+
+<body class="page-pro">
+  <main class="pro-wrap">
+    <header class="pro-top">
+      <div class="pro-brand">
+        <div class="logo-dot" aria-hidden="true"></div>
+        <div>
+          <h1 class="brand">Vivario <span class="pro-badge">PRO</span></h1>
+          <p class="muted">Questionnaire intelligent • multi-thèmes • diagnostic + plan personnalisé</p>
+        </div>
+      </div>
+
+      <div class="pro-top-right">
+        <button class="btn ghost" id="btnMode" type="button" title="Mode express">⚡ Mode express</button>
+        <button class="btn ghost" id="btnReset" type="button" title="Recommencer">↻ Refaire</button>
+      </div>
+    </header>
+
+    <section class="pro-shell">
+      <aside class="pro-side card">
+        <div class="side-block">
+          <div class="side-title">Progression</div>
+          <div class="progress">
+            <div class="bar" id="bar"></div>
+          </div>
+          <div class="side-meta">
+            <span id="counter">—</span>
+            <span class="dotsep">•</span>
+            <span id="eta">—</span>
+          </div>
+        </div>
+
+        <div class="side-block">
+          <div class="side-title">Repères</div>
+          <div class="chips" id="chips"></div>
+          <p class="tiny muted" style="margin:10px 0 0;">
+            Ces repères servent à personnaliser le diagnostic et à éviter les répétitions.
+          </p>
+        </div>
+
+        <div class="side-block">
+          <div class="side-title">Sécurité</div>
+          <p class="tiny muted" style="margin:0; line-height:1.5;">
+            Vivario PRO n’est pas un service d’urgence.
+            Si tu te sens en danger immédiat, contacte les urgences / un proche / un professionnel.
+          </p>
+        </div>
+      </aside>
+
+      <section class="pro-main">
+        <section class="card pro-card" id="cardQuestion">
+          <div class="q-head">
+            <div class="q-kicker" id="qKicker">Question</div>
+            <div class="q-title" id="qTitle">—</div>
+            <div class="q-sub" id="qSub">—</div>
+          </div>
+
+          <div class="q-hint" id="qHint" style="display:none;"></div>
+          <div class="err" id="err"></div>
+
+          <div class="options" id="options"></div>
+
+          <div class="pro-actions">
+            <button class="btn ghost" id="btnBack" type="button">← Retour</button>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-left:auto;">
+              <a class="btn ghost" id="btnSuivi" href="suivi_pro.html?v=1">📈 Suivi</a>
+              <button class="btn primary" id="btnNext" type="button">Continuer →</button>
+            </div>
+          </div>
+
+          <div class="tiny muted" id="qFoot" style="margin-top:10px;">
+            Tu peux répondre honnêtement : la qualité du plan dépend surtout de la précision, pas de la “bonne réponse”.
+          </div>
+        </section>
+
+        <section class="card pro-card" id="cardResult" style="display:none;">
+          <div class="result-head">
+            <div>
+              <h2 class="result-title" id="resTitle">Ton diagnostic PRO</h2>
+              <p class="muted" id="resSub">—</p>
+            </div>
+            <div class="result-actions">
+              <button class="btn ghost" id="btnCopy" type="button">📋 Copier</button>
+              <button class="btn ghost" id="btnSave" type="button">💾 Sauver</button>
+              <button class="btn primary" id="btnPlan" type="button">🧭 Voir le plan</button>
+            </div>
+          </div>
+
+          <div class="result-grid">
+            <div class="card inner">
+              <div class="inner-title">Résumé</div>
+              <div class="inner-text" id="resSummary"></div>
+            </div>
+            <div class="card inner">
+              <div class="inner-title">Points clés</div>
+              <ul class="bullets" id="resBullets"></ul>
+            </div>
+            <div class="card inner">
+              <div class="inner-title">Risques / vigilance</div>
+              <ul class="bullets" id="resRisks"></ul>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="card inner" id="planBox" style="display:none;">
+            <div class="inner-title">Plan personnalisé (7 jours)</div>
+            <div class="plan-grid" id="planGrid"></div>
+            <p class="tiny muted" style="margin:12px 0 0;">
+              Le plan s’ajuste selon ton historique (adhérence) et tes thèmes.
+            </p>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="card inner">
+            <div class="inner-title">Historique PRO</div>
+            <div id="history"></div>
+          </div>
+
+          <div class="pro-actions" style="margin-top:14px;">
+            <button class="btn ghost" id="btnRestart" type="button">↻ Refaire maintenant</button>
+            <a class="btn ghost" href="accueil.html?v=18">↩ Retour (gratuit)</a>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script src="pro_logic.js?v=1"></script>
+  <script src="questionnaire_pro.js?v=1"></script>
+
+  <!-- PATCH existant -->
+  <script src="questionnaire_pro_patch.js?v=1"></script>
+
+  <!-- ✅ Micro-étapes 18→24 (global) -->
+  <script src="pro_microsteps_24.js?v=1"></script>
+</body>
+</html>
