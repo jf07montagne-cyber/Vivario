@@ -1,0 +1,162 @@
+/* =========================================================
+   Vivario PRO — micro-étapes 1→17 (CSS) v1
+   - bannière reprise session
+   - toast system (fallback)
+   - chips session/progress
+   - glow pulse
+   - mode express badge
+   ========================================================= */
+
+:root{
+  --vpBg: rgba(8,14,28,.88);
+  --vpBd: rgba(255,255,255,.12);
+  --vpTxt: rgba(234,240,255,.92);
+  --vpMut: rgba(234,240,255,.72);
+  --vpAcc: rgba(120,160,255,.22);
+  --vpAccBd: rgba(120,160,255,.34);
+  --vpOk: rgba(35,240,215,.16);
+  --vpOkBd: rgba(35,240,215,.26);
+  --vpWarn: rgba(255,200,90,.14);
+  --vpWarnBd: rgba(255,200,90,.24);
+}
+
+.vp-glowPulse{
+  animation: vpGlowPulse 1.05s ease both;
+}
+@keyframes vpGlowPulse{
+  0%{ box-shadow: 0 0 0 0 rgba(120,160,255,.0); }
+  20%{ box-shadow: 0 0 0 4px rgba(120,160,255,.12), 0 18px 50px rgba(0,0,0,.18); }
+  100%{ box-shadow: 0 0 0 0 rgba(120,160,255,.0); }
+}
+
+/* Toast fallback */
+.vp-toast{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  z-index: 9999;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--vpBd);
+  background: var(--vpBg);
+  backdrop-filter: blur(14px);
+  color: var(--vpTxt);
+  box-shadow: 0 18px 44px rgba(0,0,0,.30);
+  display: none;
+  font-weight: 850;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.vp-toast.is-on{ display:block; animation: vpToastIn .18s ease both; }
+@keyframes vpToastIn{ from{opacity:0; transform: translateY(10px);} to{opacity:1; transform: translateY(0);} }
+
+/* Banner reprise session */
+.vp-resumeBar{
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--vpBd);
+  background:
+    radial-gradient(900px 240px at 20% 0%, rgba(120,160,255,.12), transparent 60%),
+    rgba(0,0,0,.10);
+  box-shadow: 0 14px 36px rgba(0,0,0,.14);
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.vp-resumeBar strong{
+  display:block;
+  font-weight: 950;
+  color: var(--vpTxt);
+}
+.vp-resumeBar span{
+  display:block;
+  margin-top: 2px;
+  color: var(--vpMut);
+  font-size: 12.5px;
+  font-weight: 800;
+}
+.vp-resumeActions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.vp-miniBtn{
+  appearance:none;
+  border: 1px solid var(--vpBd);
+  background: rgba(255,255,255,.04);
+  color: var(--vpTxt);
+  border-radius: 999px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 900;
+  cursor:pointer;
+}
+.vp-miniBtn.primary{
+  border-color: var(--vpAccBd);
+  background: var(--vpAcc);
+}
+.vp-miniBtn.danger{
+  border-color: rgba(255,120,150,.22);
+  background: rgba(255,120,150,.10);
+}
+
+/* Chip session */
+.vp-chipWrap{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin-top: 10px;
+}
+.vp-progressChip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--vpBd);
+  background: rgba(255,255,255,.04);
+  color: var(--vpTxt);
+  font-size: 12px;
+  font-weight: 900;
+}
+.vp-progressChip i{
+  width:8px; height:8px; border-radius:999px;
+  background: rgba(120,160,255,.92);
+  box-shadow: 0 0 0 4px rgba(120,160,255,.12);
+  display:block;
+}
+.vp-progressChip.good{
+  background: var(--vpOk);
+  border-color: var(--vpOkBd);
+}
+.vp-progressChip.good i{
+  background: rgba(35,240,215,.95);
+  box-shadow: 0 0 0 4px rgba(35,240,215,.12);
+}
+.vp-progressChip.warn{
+  background: var(--vpWarn);
+  border-color: var(--vpWarnBd);
+}
+.vp-progressChip.warn i{
+  background: rgba(255,200,90,.95);
+  box-shadow: 0 0 0 4px rgba(255,200,90,.12);
+}
+
+/* Mode express badge (questionnaire) */
+.vp-expressBadge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.12);
+  color: rgba(234,240,255,.90);
+  font-size: 12px;
+  font-weight: 950;
+}
