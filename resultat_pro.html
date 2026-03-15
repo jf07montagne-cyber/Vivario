@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Vivario PRO — Résultat</title>
+
+  <link rel="stylesheet" href="pro_style.css?v=1" />
+  <meta name="theme-color" content="#070a12" />
+
+  <!-- ✅ Micro-étapes 1→17 (global) -->
+  <link rel="stylesheet" href="pro_microsteps_17.css?v=1" />
+
+  <!-- ✅ Micro-étapes 18→24 (global) -->
+  <link rel="stylesheet" href="pro_microsteps_24.css?v=1" />
+
+  <style>
+    :root{
+      --proGood: rgba(35,240,215,.26);
+      --proGoodBorder: rgba(35,240,215,.36);
+      --proWarn: rgba(255,200,90,.20);
+      --proWarnBorder: rgba(255,200,90,.34);
+      --proAlert: rgba(255,120,150,.18);
+      --proAlertBorder: rgba(255,120,150,.34);
+
+      --proCardBg: rgba(255,255,255,.03);
+      --proCardBd: rgba(255,255,255,.10);
+      --proShadow: 0 12px 32px rgba(0,0,0,.14);
+    }
+
+    .pro-wrap{ padding-bottom: calc(190px + env(safe-area-inset-bottom)); }
+    .pro-top{ position:relative; z-index:2; }
+    .pro-hero{ position:relative; overflow:hidden; }
+    .pro-heroGrid{ align-items:start; gap:16px; }
+
+    .pro-reveal{
+      opacity:0;
+      transform: translateY(6px);
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .pro-reveal.is-in{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    .pro-topActions{ flex-wrap:wrap; }
+    @media (max-width: 640px){
+      .pro-topActions{ width:100%; }
+      .pro-topActions .pro-btn{ flex:1 1 auto; }
+    }
+
+    .pro-scoreStatus{
+      margin-top: 10px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .pro-scoreBadge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      font-size: 12px;
+      font-weight: 900;
+      color: rgba(234,240,255,.92);
+      white-space: nowrap;
+    }
+    .pro-scoreBadge .dot{
+      width:8px; height:8px; border-radius:999px; flex:0 0 auto;
+      background: rgba(120,160,255,.95);
+      box-shadow: 0 0 0 4px rgba(120,160,255,.14);
+    }
+    .pro-scoreBadge.is-good{ background: var(--proGood); border-color: var(--proGoodBorder); }
+    .pro-scoreBadge.is-good .dot{ background: rgba(35,240,215,.95); box-shadow: 0 0 0 4px rgba(35,240,215,.14); }
+    .pro-scoreBadge.is-warn{ background: var(--proWarn); border-color: var(--proWarnBorder); }
+    .pro-scoreBadge.is-warn .dot{ background: rgba(255,200,90,.95); box-shadow: 0 0 0 4px rgba(255,200,90,.14); }
+    .pro-scoreBadge.is-alert{ background: var(--proAlert); border-color: var(--proAlertBorder); }
+    .pro-scoreBadge.is-alert .dot{ background: rgba(255,120,150,.95); box-shadow: 0 0 0 4px rgba(255,120,150,.14); }
+
+    .pro-scoreStatusText{
+      color: rgba(234,240,255,.80);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .pro-scoreRow.is-good .name{ color: rgba(234,240,255,.92); }
+    .pro-scoreRow.is-warn .name{ color: rgba(255,236,190,.92); }
+    .pro-scoreRow.is-alert .name{ color: rgba(255,205,215,.92); }
+
+    .pro-bar i{
+      transform-origin:left center;
+      animation: proBarGrow .9s cubic-bezier(.18,.9,.2,1) both;
+    }
+    @keyframes proBarGrow{
+      from{ transform: scaleX(0); opacity:.7; }
+      to{ transform: scaleX(1); opacity:1; }
+    }
+
+    .pro-result-ctaCard{
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--proCardBd);
+      background: var(--proCardBg);
+      box-shadow: var(--proShadow);
+    }
+    .pro-result-ctaCardHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:8px;
+    }
+    .pro-result-ctaCardTitle{
+      margin:0;
+      font-weight:900;
+      letter-spacing:.15px;
+      color: rgba(234,240,255,.95);
+    }
+    .pro-result-ctaCardMeta{
+      font-size:12px;
+      color: rgba(234,240,255,.72);
+      font-weight:800;
+    }
+    .pro-result-ctaCard p{
+      margin:0;
+      color: rgba(234,240,255,.85);
+      line-height:1.45;
+    }
+    .pro-result-ctaRow{
+      margin-top: 12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    @media (max-width: 640px){
+      .pro-result-ctaRow .pro-btn{ flex:1 1 auto; }
+    }
+
+    .pro-mobileFloatBar{
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      z-index: 40;
+      display: none;
+      grid-template-columns: repeat(3,1fr);
+      gap:8px;
+      padding: 8px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(8,14,28,.78);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 14px 34px rgba(0,0,0,.25);
+    }
+    .pro-mobileFloatBar a{ text-decoration:none; }
+    .pro-mobileFloatBar .fbtn{
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(234,240,255,.92);
+      display:flex; align-items:center; justify-content:center;
+      gap:6px; font-weight: 850; font-size: 12px;
+      text-align:center; padding: 0 8px;
+    }
+    .pro-mobileFloatBar .fbtn.is-primary{
+      background: rgba(120,160,255,.14);
+      border-color: rgba(120,160,255,.28);
+    }
+    @media (max-width: 640px){
+      .pro-mobileFloatBar{ display:grid; }
+    }
+  </style>
+</head>
+
+<body class="page-pro-result">
+  <main class="pro-wrap">
+    <header class="pro-top pro-reveal">
+      <div class="pro-brandRow">
+        <div>
+          <div class="pro-brand">Vivario <span class="pro-badge">PRO</span></div>
+          <p class="pro-muted" id="proSubtitle">Diagnostic + plan + suivi — calibré sur toi.</p>
+        </div>
+
+        <div class="pro-topActions">
+          <button class="pro-btn pro-btnPrimary" id="btnCopy" type="button">📋 Copier</button>
+          <button class="pro-btn pro-btnGhost" id="btnSaveToday" type="button">💾 Sauver</button>
+          <a class="pro-btn pro-btnGhost" href="suivi_pro.html?v=1">📈 Suivi PRO</a>
+          <a class="pro-btn pro-btnGhost" href="accueil_pro.html?v=1">🏠 Accueil PRO</a>
+          <a class="pro-btn pro-btnGhost" href="accueil.html?v=18">↩ Retour</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="pro-hero pro-reveal">
+      <div class="pro-heroGlow" aria-hidden="true"></div>
+
+      <div class="pro-heroGrid">
+        <div>
+          <h1 class="pro-title" id="diagTitle">Résultat PRO</h1>
+          <p class="pro-lead" id="diagSummary">—</p>
+
+          <div class="pro-miniCards" id="miniCards"></div>
+
+          <div class="pro-chips" id="proChips" aria-label="Repères"></div>
+        </div>
+
+        <div class="pro-scoreCard pro-reveal" aria-label="Scores" id="scoreCard">
+          <div class="pro-scoreHead">
+            <div class="pro-scoreLabel">Synthèse</div>
+            <div class="pro-scoreDate" id="proDate">—</div>
+          </div>
+
+          <div class="pro-scoreBig">
+            <div class="pro-scoreNum" id="primaryScore">—</div>
+            <div class="pro-scoreTxt" id="primaryDomain">Domaine principal</div>
+          </div>
+
+          <div class="pro-scoreStatus" aria-live="polite">
+            <div class="pro-scoreBadge" id="proScoreBadge">
+              <span class="dot"></span><span id="proScoreBadgeText">En attente</span>
+            </div>
+            <div class="pro-scoreStatusText" id="proScoreStatusText">—</div>
+          </div>
+
+          <div class="pro-scoreList" id="scoreList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pro-card pro-reveal">
+      <div class="pro-tabs" id="tabs">
+        <button class="pro-tab active" data-pane="diagnostic">Diagnostic</button>
+        <button class="pro-tab" data-pane="plan">Plan</button>
+        <button class="pro-tab" data-pane="suivi">Suivi</button>
+      </div>
+
+      <div id="pane-diagnostic" class="pro-pane active"></div>
+      <div id="pane-plan" class="pro-pane"></div>
+      <div id="pane-suivi" class="pro-pane"></div>
+
+      <div class="pro-result-ctaCard pro-reveal" aria-label="Accès au suivi">
+        <div class="pro-result-ctaCardHead">
+          <p class="pro-result-ctaCardTitle">Continuer avec le Suivi PRO</p>
+          <span class="pro-result-ctaCardMeta">Local • progression</span>
+        </div>
+
+        <p>
+          Ouvre la page de suivi pour voir ta timeline locale, ton streak, le plan du jour (0/3),
+          les stats 7 jours et le calendrier mensuel.
+        </p>
+
+        <div class="pro-result-ctaRow">
+          <a class="pro-btn pro-btnPrimary" href="suivi_pro.html?v=1">📈 Ouvrir Suivi PRO</a>
+          <a class="pro-btn" href="accueil_pro.html?v=1">🏠 Accueil PRO</a>
+          <a class="pro-btn pro-btnGhost" href="questionnaire_pro.html?v=1">🚀 Refaire un check-in</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pro-card pro-reveal">
+      <div class="pro-cardHead">
+        <h3 class="pro-h3">Historique</h3>
+        <p class="pro-muted">Tes sauvegardes PRO récentes.</p>
+      </div>
+      <div id="history"></div>
+    </section>
+  </main>
+
+  <nav class="pro-mobileFloatBar" aria-label="Actions rapides mobile">
+    <a href="accueil_pro.html?v=1"><div class="fbtn">🏠 Accueil</div></a>
+    <a href="suivi_pro.html?v=1"><div class="fbtn is-primary">📈 Suivi</div></a>
+    <a href="questionnaire_pro.html?v=1"><div class="fbtn">🚀 Check-in</div></a>
+  </nav>
+
+  <script src="pro_logic.js?v=1"></script>
+  <script src="resultat_pro.js?v=1"></script>
+
+  <script>
+    (function(){
+      function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+
+      function scoreBand(score){
+        const s = Number(score || 0);
+        if (!isFinite(s)) return null;
+        if (s >= 75) return "alert";
+        if (s >= 45) return "warn";
+        return "good";
+      }
+
+      function severityLabel(score){
+        if (score >= 75) return "Élevé";
+        if (score >= 45) return "Modéré";
+        if (score >= 20) return "Léger";
+        return "Faible";
+      }
+
+      function humanHint(score){
+        const s = Number(score || 0);
+        if (!isFinite(s)) return "—";
+        if (s >= 75) return "Charge haute : vise un pas court et apaisant.";
+        if (s >= 45) return "Zone stabilité : consolide puis avance.";
+        return "Base plus stable : consolide une routine simple.";
+      }
+
+      function animateCount(el, to, duration){
+        if (!el) return;
+        const target = Number(to);
+        if (!isFinite(target)) return;
+
+        const start = performance.now();
+        const from = 0;
+
+        function frame(t){
+          const p = clamp((t - start) / duration, 0, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = String(Math.round(from + (target - from) * eased));
+          if (p < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+
+      function applyBadge(score){
+        const badge = document.getElementById("proScoreBadge");
+        const badgeText = document.getElementById("proScoreBadgeText");
+        const statusText = document.getElementById("proScoreStatusText");
+        const card = document.getElementById("scoreCard");
+        if (!badge || !badgeText || !statusText) return;
+
+        badge.classList.remove("is-good","is-warn","is-alert");
+        if (card) card.classList.remove("score-good","score-warn","score-alert");
+
+        if (score == null || !isFinite(Number(score))){
+          badgeText.textContent = "En attente";
+          statusText.textContent = "Aucun score exploitable pour le moment.";
+          return;
+        }
+
+        const band = scoreBand(score);
+        badge.classList.add("is-" + band);
+        if (card) card.classList.add("score-" + band);
+
+        if (band === "alert") badgeText.textContent = "Urgence douce";
+        else if (band === "warn") badgeText.textContent = "Stabilité";
+        else badgeText.textContent = "Consolidation";
+
+        statusText.textContent = `${severityLabel(score)} • ${humanHint(score)}`;
+      }
+
+      function colorizeScoreRows(){
+        const rows = Array.from(document.querySelectorAll("#scoreList .pro-scoreRow"));
+        rows.forEach(row => {
+          row.classList.remove("is-good","is-warn","is-alert");
+          const nameEl = row.querySelector(".name");
+          const bar = row.querySelector(".pro-bar i");
+
+          let val = null;
+          if (bar){
+            const w = (bar.style.width || "").trim();
+            const m = w.match(/(\d+)\s*%/);
+            if (m) val = Number(m[1]);
+          }
+          if (val == null && nameEl){
+            const m2 = (nameEl.textContent || "").match(/(\d{1,3})\s*\/\s*100|(\d{1,3})\s*%/);
+            if (m2) val = Number(m2[1] || m2[2]);
+          }
+          if (val == null || !isFinite(val)) return;
+
+          const band = scoreBand(val);
+          row.classList.add("is-" + band);
+        });
+      }
+
+      (function revealSafe(){
+        const els = Array.from(document.querySelectorAll(".pro-reveal"));
+        if (!els.length) return;
+
+        if (!("IntersectionObserver" in window)){
+          els.forEach((el,i) => setTimeout(() => el.classList.add("is-in"), 40*i));
+          return;
+        }
+
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting){
+              e.target.classList.add("is-in");
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.08 });
+
+        els.forEach((el,i) => {
+          el.style.transitionDelay = (i * 50) + "ms";
+          io.observe(el);
+        });
+      })();
+
+      const scoreEl = document.getElementById("primaryScore");
+      let lastVal = null;
+
+      function refreshFromDom(){
+        if (!scoreEl) return;
+        const raw = (scoreEl.textContent || "").trim();
+        const num = Number(raw);
+        if (!isFinite(num)) return;
+
+        if (lastVal === num) return;
+        lastVal = num;
+
+        animateCount(scoreEl, num, 750);
+        applyBadge(num);
+        setTimeout(colorizeScoreRows, 50);
+      }
+
+      if (scoreEl){
+        const mo = new MutationObserver(() => refreshFromDom());
+        mo.observe(scoreEl, { childList:true, subtree:true, characterData:true });
+      }
+
+      setTimeout(() => {
+        refreshFromDom();
+        colorizeScoreRows();
+      }, 120);
+
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const PRO_ACTIVITY_KEY = "vivario_pro_activity_v1";
+      const PRO_RESULT_KEY = "vivario_pro_result_v1";
+
+      function getJson(key){
+        try { return JSON.parse(localStorage.getItem(key) || "null"); } catch { return null; }
+      }
+      function setJson(key, value){
+        try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
+      }
+      function topDomains(scores, n){
+        const entries = Object.entries(scores || {});
+        entries.sort((a,b) => (b[1]||0) - (a[1]||0));
+        return entries.slice(0, n).filter(e => (e[1]||0) > 0);
+      }
+      function currentTopScore(){
+        const data = getJson(PRO_RESULT_KEY);
+        if (!data) return null;
+        return (topDomains(data.scores || {}, 1)[0] || [null, null])[1];
+      }
+      function pushActivity(type, meta){
+        const list = getJson(PRO_ACTIVITY_KEY) || [];
+        list.unshift({ type: type || "action", at: new Date().toISOString(), meta: meta || {} });
+        setJson(PRO_ACTIVITY_KEY, list.slice(0, 20));
+      }
+
+      document.querySelectorAll('a[href="suivi_pro.html?v=1"]').forEach(a => {
+        a.addEventListener("click", () => {
+          try{
+            pushActivity("home", { label:"Ouverture du Suivi PRO depuis Résultat", topScore: currentTopScore() });
+          }catch{}
+        });
+      });
+      document.querySelectorAll('a[href="accueil_pro.html?v=1"]').forEach(a => {
+        a.addEventListener("click", () => {
+          try{
+            pushActivity("home", { label:"Retour Accueil PRO depuis Résultat", topScore: currentTopScore() });
+          }catch{}
+        });
+      });
+    })();
+  </script>
+
+  <!-- =========================================================
+       ✅ PATCH v2.result.1 — Résultat → "Continuer le questionnaire (Qxx)" si session
+       - Même logique que Suivi (draft/resume/state)
+       - Patch tous les liens vers questionnaire_pro.html (boutons + barre mobile)
+       ========================================================= -->
+  <script>
+  (function(){
+    const STATE_KEY  = "vivario_pro_state_v1";
+    const DRAFT_KEY  = "vivario_pro_questionnaire_draft_v1";
+    const RESUME_KEY = "vivario_pro_questionnaire_resume_v1";
+    const TARGET = "questionnaire_pro.html?v=1&resume=1&from=resultat";
+
+    function getJson(k){ try { return JSON.parse(localStorage.getItem(k) || "null"); } catch { return null; } }
+
+    function hasDraftLike(){
+      const d = getJson(DRAFT_KEY);
+      if (d && typeof d === "object"){
+        const ok = Object.keys(d).some(k => {
+          const v = d[k];
+          if (v === true) return true;
+          if (typeof v === "string" && v.trim().length) return true;
+          if (typeof v === "number" && isFinite(v)) return true;
+          return false;
+        });
+        if (ok) return true;
+      }
+      const r = getJson(RESUME_KEY);
+      if (r && typeof r === "object" && !r.finished && (r.currentBlockId || r.currentStep)) return true;
+      return false;
+    }
+
+    function getQxx(){
+      const st = getJson(STATE_KEY);
+      const shown = Array.isArray(st?.shownBlocks) ? st.shownBlocks : [];
+      return shown.length ? shown.length : null;
+    }
+
+    function patch(){
+      const ok = hasDraftLike() || !!getQxx();
+      if (!ok) return;
+
+      const q = getQxx();
+      const label = q ? `🧩 Continuer le questionnaire (Q${q})` : "🧩 Continuer le questionnaire";
+
+      // patch tous les liens questionnaire
+      const links = Array.from(document.querySelectorAll('a[href^="questionnaire_pro.html"]'));
+      links.forEach(a => {
+        a.href = TARGET;
+
+        // barre mobile
+        const fbtn = a.querySelector(".fbtn");
+        if (fbtn){
+          fbtn.textContent = q ? `🧩 Continuer (Q${q})` : "🧩 Continuer";
+          return;
+        }
+
+        // boutons CTA
+        const t = (a.textContent || "").toLowerCase();
+        const looksLike = t.includes("check") || t.includes("questionnaire") || t.includes("refaire") || t.includes("continuer");
+        if (looksLike) a.textContent = label;
+      });
+    }
+
+    if (document.readyState === "loading"){
+      document.addEventListener("DOMContentLoaded", patch);
+    } else {
+      patch();
+    }
+    window.addEventListener("focus", () => { try { patch(); } catch {} });
+  })();
+  </script>
+
+  <!-- ✅ Micro-étapes 1→17 (global) -->
+  <script src="pro_microsteps_17.js?v=1"></script>
+
+  <!-- ✅ Micro-étapes 18→24 (global) -->
+  <script src="pro_microsteps_24.js?v=1"></script>
+</body>
+</html>
