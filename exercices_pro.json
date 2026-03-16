@@ -1,0 +1,410 @@
+{
+  "meta": {
+    "version": "1.0",
+    "title": "Vivario PRO — Catalogue Exercices",
+    "updated_at": "2026-03-15",
+    "notes": "Chemins médias recommandés: media/exercices/<id>_preview.mp4 et media/exercices/<id>_poster.jpg"
+  },
+  "taxonomies": {
+    "domains": [
+      "stress",
+      "anxiete",
+      "sommeil",
+      "surcharge_mentale",
+      "humeur",
+      "confiance",
+      "douleur",
+      "corps_mouvement",
+      "concentration",
+      "motivation"
+    ],
+    "levels": ["debutant", "intermediaire", "avance"],
+    "modalities": ["respiration", "ancrage", "mental", "yoga", "mobilite", "cardio", "relaxation", "ecriture", "posture"]
+  },
+  "exercises": [
+    {
+      "id": "breath_4_6",
+      "title": "Respiration 4–6 (apaisement)",
+      "modality": "respiration",
+      "level": "debutant",
+      "domains": ["stress", "anxiete", "surcharge_mentale", "sommeil"],
+      "tags": ["calme", "coherence", "anti-panique", "rapide"],
+      "contraindications": [
+        "Si vertiges importants: réduire l'amplitude, respirer plus naturellement.",
+        "Éviter l'apnée longue si inconfort."
+      ],
+      "equipment": [],
+      "media": {
+        "preview_mp4": "media/exercices/breath_4_6_preview.mp4",
+        "poster": "media/exercices/breath_4_6_poster.jpg"
+      },
+      "tts": {
+        "voice_hint": "fr-FR",
+        "script_short": [
+          "Assieds-toi confortablement. Épaules relâchées.",
+          "Inspire par le nez pendant 4 secondes.",
+          "Expire lentement pendant 6 secondes.",
+          "Répète. Laisse le ventre bouger doucement.",
+          "Si c'est trop, respire plus petit."
+        ],
+        "script_long": [
+          "Installe-toi. Regarde un point fixe ou ferme les yeux.",
+          "Inspire 4 secondes. Expire 6 secondes. Sans forcer.",
+          "À l'expiration, relâche la mâchoire et les épaules.",
+          "Reste sur ce rythme. Ton seul objectif: rendre l'expiration plus douce.",
+          "Si une pensée arrive, reviens à '4-6'."
+        ]
+      },
+      "variants": {
+        "short": { "duration_sec": 60, "steps": ["4s inspire", "6s expire", "Répéter 1 minute"] },
+        "long": { "duration_sec": 300, "steps": ["4s inspire", "6s expire", "Répéter 5 minutes"] }
+      }
+    },
+    {
+      "id": "breath_box_4_4_4_4",
+      "title": "Respiration carrée (box breathing)",
+      "modality": "respiration",
+      "level": "intermediaire",
+      "domains": ["stress", "concentration", "surcharge_mentale"],
+      "tags": ["focus", "regulation", "performance"],
+      "contraindications": ["Si anxiété augmente: basculer sur 4–6 sans pause."],
+      "equipment": [],
+      "media": {
+        "preview_mp4": "media/exercices/breath_box_4_4_4_4_preview.mp4",
+        "poster": "media/exercices/breath_box_4_4_4_4_poster.jpg"
+      },
+      "tts": {
+        "voice_hint": "fr-FR",
+        "script_short": [
+          "Inspire 4. Garde 4. Expire 4. Garde 4.",
+          "Fais ça calmement pendant une minute.",
+          "Si c'est trop, retire les pauses."
+        ],
+        "script_long": [
+          "On va faire un carré: inspire 4, pause 4, expire 4, pause 4.",
+          "Reste fluide. Pas de force.",
+          "Objectif: revenir au contrôle et au focus."
+        ]
+      },
+      "variants": {
+        "short": { "duration_sec": 60, "steps": ["4/4/4/4", "1 minute"] },
+        "long": { "duration_sec": 240, "steps": ["4/4/4/4", "4 minutes"] }
+      }
+    },
+    {
+      "id": "ground_5_4_3_2_1",
+      "title": "Ancrage 5–4–3–2–1 (anti-panique)",
+      "modality": "ancrage",
+      "level": "debutant",
+      "domains": ["anxiete", "stress", "surcharge_mentale"],
+      "tags": ["urgence_douce", "sensoriel", "present"],
+      "contraindications": [],
+      "equipment": [],
+      "media": {
+        "preview_mp4": "media/exercices/ground_5_4_3_2_1_preview.mp4",
+        "poster": "media/exercices/ground_5_4_3_2_1_poster.jpg"
+      },
+      "tts": {
+        "voice_hint": "fr-FR",
+        "script_short": [
+          "Regarde autour: 5 choses que tu vois.",
+          "4 choses que tu sens sur ta peau.",
+          "3 sons que tu entends.",
+          "2 odeurs.",
+          "1 chose que tu goûtes ou imagines goûter.",
+          "Respire. Tu es ici."
+        ],
+        "script_long": [
+          "On revient au présent, doucement.",
+          "5 choses que tu vois. Prends ton temps.",
+          "4 sensations physiques. Température, vêtements, appui.",
+          "3 sons. Proches ou lointains.",
+          "2 odeurs.",
+          "1 goût, ou une sensation de bouche.",
+          "Termine par une expiration longue."
+        ]
+      },
+      "variants": {
+        "short": { "duration_sec": 90, "steps": ["5-4-3-2-1", "Respiration 2 cycles"] },
+        "long": { "duration_sec": 240, "steps": ["5-4-3-2-1 lent", "Scan corps 1 minute"] }
+      }
+    },
+    {
+      "id": "mob_neck_shoulders_release",
+      "title": "Relâche nuque + épaules (mobilité douce)",
+      "modality": "mobilite",
+      "level": "debutant",
+      "domains": ["stress", "douleur", "corps_mouvement", "surcharge_mentale"],
+      "tags": ["tension", "bureau", "simple"],
+      "contraindications": [
+        "Douleur aiguë: réduire l'amplitude, éviter rotation forcée.",
+        "Si vertiges: mouvements plus lents."
+      ],
+      "equipment": ["chaise (optionnel)"],
+      "media": {
+        "preview_mp4": "media/exercices/mob_neck_shoulders_release_preview.mp4",
+        "poster": "media/exercices/mob_neck_shoulders_release_poster.jpg"
+      },
+      "tts": {
+        "voice_hint": "fr-FR",
+        "script_short": [
+          "Monte les épaules vers les oreilles… puis relâche.",
+          "Fais 3 fois.",
+          "Incline la tête à droite, respiration lente. Puis à gauche.",
+          "Termine par 2 expirations longues."
+        ],
+        "script_long": [
+          "Épaules: monte… relâche. 5 fois.",
+          "Nuque: inclinaison droite 20 secondes, puis gauche.",
+          "Ensuite, petits cercles d'épaules vers l'arrière, 10 fois.",
+          "Termine: mains sur le ventre, 4–6 pendant 1 minute."
+        ]
+      },
+      "variants": {
+        "short": { "duration_sec": 90, "steps": ["Épaules x3", "Inclinaisons 20s/20s"] },
+        "long": { "duration_sec": 300, "steps": ["Épaules x5", "Inclinaisons", "Cercles épaules", "Respiration 4–6"] }
+      }
+    },
+    {
+      "id": "yoga_child_pose_breath",
+      "title": "Yoga — Posture de l’enfant + souffle",
+      "modality": "yoga",
+      "level": "debutant",
+      "domains": ["stress", "anxiete", "sommeil", "douleur"],
+      "tags": ["relaxation", "soiree", "douceur"],
+      "contraindications": [
+        "Genoux sensibles: mettre un coussin sous les fesses ou faire assis.",
+        "Douleur lombaire: garder une posture plus haute."
+      ],
+      "equipment": ["tapis (optionnel)", "coussin (optionnel)"],
+      "media": {
+        "preview_mp4": "media/exercices/yoga_child_pose_breath_preview.mp4",
+        "poster": "media/exercices/yoga_child_pose_breath_poster.jpg"
+      },
+      "tts": {
+        "voice_hint": "fr-FR",
+        "script_short": [
+          "Genoux au sol, fesses vers les talons, buste vers l’avant.",
+          "Front au sol si possible, ou sur les mains.",
+          "Respire lentement. Expire plus long."
+        ],
+        "script_long": [
+          "Installe la posture de l’enfant, confortable.",
+          "À chaque expiration, relâche les épaules.",
+          "Si la tête ne touche pas, empile tes mains comme un coussin.",
+          "Reste ici. Objectif: sécurité et détente."
+        ]
+      },
+      "variants": {
+        "short": { "duration_sec": 120, "steps": ["Posture enfant", "Expiration longue"] },
+        "long": { "duration_sec": 420, "steps": ["Posture enfant", "Respiration 4–6", "Scan corps"] }
+      }
+    },
+    {
+      "id": "yoga_cat_cow",
+      "title": "Yoga — Chat / Vache (colonne souple)",
+      "modality": "yoga",
+      "level": "debutant",
+      "domains": ["douleur", "corps_mouvement", "stress"],
+      "tags": ["dos", "mobilite", "matin"],
+      "contraindications": ["Douleur lombaire aiguë: amplitude réduite."],
+      "equipment": ["tapis (optionnel)"],
+      "media": {
+        "preview_mp4": "media/exercices/yoga_cat_cow_preview.mp4",
+        "poster": "media/exercices/yoga_cat_cow_poster.jpg"
+      },
+      "tts": {
+        "voice_hint": "fr-FR",
+        "script_short": [
+          "À quatre pattes.",
+          "Inspire: creuse légèrement le dos (vache).",
+          "Expire: arrondis le dos (chat).",
+          "Répète 6 cycles."
+        ],
+        "script_long": [
+          "À quatre pattes, mains sous épaules, genoux sous hanches.",
+          "Inspire: ouvre la poitrine, regarde légèrement devant.",
+          "Expire: arrondis, pousse le sol, menton vers la poitrine.",
+          "Reste fluide. 10 cycles."
+        ]
+      },
+      "variants": {
+        "short": { "duration_sec": 90, "steps": ["6 cycles", "Respiration lente"] },
+        "long": { "duration_sec": 240, "steps": ["10 cycles", "Pause posture neutre 1 min"] }
+      }
+    },
+    {
+      "id": "mental_worry_dump",
+      "title": "Mental — Décharge (worry dump) 2 minutes",
+      "modality": "ecriture",
+      "level": "debutant",
+      "domains": ["surcharge_mentale", "stress", "humeur", "concentration"],
+      "tags": ["clarte", "anti-rumination", "papier"],
+      "contraindications": [],
+      "equipment": ["notes (papier ou téléphone)"],
+      "media": {
+        "preview_mp4": "media/exercices/mental_worry_dump_preview.mp4",
+        "poster": "media/exercices/mental_worry_dump_poster.jpg"
+      },
+      "tts": {
+        "voice_hint": "fr-FR",
+        "script_short": [
+          "Pendant 2 minutes, écris tout ce qui tourne en boucle.",
+          "Sans phrase parfaite. Sans trier.",
+          "Ensuite, entoure une seule chose actionnable."
+        ],
+        "script_long": [
+          "Écris tout ce qui est dans la tête. Brut.",
+          "Quand ça s'arrête, écris 'et aussi…' pour relancer.",
+          "Ensuite: choisis 1 action minuscule, faisable aujourd’hui.",
+          "Le reste: 'à revoir plus tard'."
+        ]
+      },
+      "variants": {
+        "short": { "duration_sec": 120, "steps": ["Écrire 2 min", "Entourer 1 action"] },
+        "long": { "duration_sec": 360, "steps": ["Écrire 3 min", "Trier: action / plus tard", "Choisir 1 pas"] }
+      }
+    },
+    {
+      "id": "anchor_feet_pressure",
+      "title": "Ancrage — Pression des pieds (30–90 sec)",
+      "modality": "ancrage",
+      "level": "debutant",
+      "domains": ["anxiete", "stress", "concentration"],
+      "tags": ["present", "corps", "rapide"],
+      "contraindications": [],
+      "equipment": ["chaise (optionnel)"],
+      "media": {
+        "preview_mp4": "media/exercices/anchor_feet_pressure_preview.mp4",
+        "poster": "media/exercices/anchor_feet_pressure_poster.jpg"
+      },
+      "tts": {
+        "voice_hint": "fr-FR",
+        "script_short": [
+          "Pieds au sol.",
+          "Appuie doucement, sens le contact.",
+          "Relâche. Recommence 5 fois.",
+          "Ajoute une expiration longue."
+        ],
+        "script_long": [
+          "Assis ou debout, pieds bien posés.",
+          "Appuie dans le sol 3 secondes, relâche 3 secondes.",
+          "Répète 10 fois. Ton corps revient ici."
+        ]
+      },
+      "variants": {
+        "short": { "duration_sec": 60, "steps": ["Pression/relâche x5", "2 expirations longues"] },
+        "long": { "duration_sec": 180, "steps": ["Pression/relâche x10", "Respiration 4–6"] }
+      }
+    },
+    {
+      "id": "cardio_walk_intervals",
+      "title": "Cardio — Marche fractionnée douce",
+      "modality": "cardio",
+      "level": "debutant",
+      "domains": ["motivation", "humeur", "corps_mouvement", "stress"],
+      "tags": ["energie", "routine", "facile"],
+      "contraindications": ["Adapter si douleur genou/dos: réduire vitesse, rester sur marche lente."],
+      "equipment": ["chaussures confort (optionnel)"],
+      "media": {
+        "preview_mp4": "media/exercices/cardio_walk_intervals_preview.mp4",
+        "poster": "media/exercices/cardio_walk_intervals_poster.jpg"
+      },
+      "tts": {
+        "voice_hint": "fr-FR",
+        "script_short": [
+          "Marche tranquille 30 secondes.",
+          "Marche un peu plus vite 30 secondes.",
+          "Répète jusqu'à 4 minutes."
+        ],
+        "script_long": [
+          "Échauffement 1 minute tranquille.",
+          "Puis 30 secondes un peu plus vite, 30 secondes tranquille.",
+          "Répète 8 fois. Respiration naturelle."
+        ]
+      },
+      "variants": {
+        "short": { "duration_sec": 240, "steps": ["30s normal", "30s +vite", "x4"] },
+        "long": { "duration_sec": 600, "steps": ["1 min échauff", "30/30 x8", "1 min retour calme"] }
+      }
+    },
+    {
+      "id": "cardio_step_in_place",
+      "title": "Cardio — Pas sur place + bras",
+      "modality": "cardio",
+      "level": "intermediaire",
+      "domains": ["energie", "motivation", "humeur", "corps_mouvement"],
+      "tags": ["sans_materiel", "boost", "court"],
+      "contraindications": ["Adapter impact (pas petits) si genoux sensibles."],
+      "equipment": [],
+      "media": {
+        "preview_mp4": "media/exercices/cardio_step_in_place_preview.mp4",
+        "poster": "media/exercices/cardio_step_in_place_poster.jpg"
+      },
+      "tts": {
+        "voice_hint": "fr-FR",
+        "script_short": [
+          "30 secondes pas sur place, bras actifs.",
+          "30 secondes récupération.",
+          "Répète 3 fois."
+        ],
+        "script_long": [
+          "Pas sur place 40 secondes, récupération 20 secondes.",
+          "Répète 8 cycles.",
+          "Termine par respiration lente 1 minute."
+        ]
+      },
+      "variants": {
+        "short": { "duration_sec": 180, "steps": ["30/30 x3"] },
+        "long": { "duration_sec": 480, "steps": ["40/20 x8", "1 min retour calme"] }
+      }
+    },
+    {
+      "id": "relax_body_scan",
+      "title": "Relaxation — Scan corporel guidé",
+      "modality": "relaxation",
+      "level": "debutant",
+      "domains": ["sommeil", "stress", "anxiete", "douleur"],
+      "tags": ["soiree", "detente", "lenteur"],
+      "contraindications": [],
+      "equipment": ["lit ou canapé (optionnel)"],
+      "media": {
+        "preview_mp4": "media/exercices/relax_body_scan_preview.mp4",
+        "poster": "media/exercices/relax_body_scan_poster.jpg"
+      },
+      "tts": {
+        "voice_hint": "fr-FR",
+        "script_short": [
+          "Ferme les yeux si tu veux.",
+          "Front… mâchoire… épaules… ventre… jambes.",
+          "À chaque zone, expire et relâche."
+        ],
+        "script_long": [
+          "Installe-toi. Respire naturellement.",
+          "Dirige l'attention vers le front, relâche.",
+          "Puis mâchoire, cou, épaules, poitrine, ventre, bassin.",
+          "Jambes, mollets, pieds.",
+          "Si une pensée arrive: 'je reviens au corps'."
+        ]
+      },
+      "variants": {
+        "short": { "duration_sec": 180, "steps": ["Scan rapide tête→pieds"] },
+        "long": { "duration_sec": 600, "steps": ["Scan lent", "Respiration longue"] }
+      }
+    }
+  ],
+  "recommendation_rules": {
+    "domain_to_tags": {
+      "stress": ["calme", "regulation", "detente", "tension"],
+      "anxiete": ["urgence_douce", "anti-panique", "present", "calme"],
+      "sommeil": ["soiree", "detente", "lenteur", "relaxation"],
+      "surcharge_mentale": ["clarte", "anti-rumination", "focus", "present"],
+      "humeur": ["energie", "routine", "boost", "mouvement"],
+      "concentration": ["focus", "performance", "present"],
+      "douleur": ["mobilite", "dos", "tension", "douceur"],
+      "corps_mouvement": ["mouvement", "routine", "mobilite"],
+      "motivation": ["boost", "energie", "routine"]
+    },
+    "fallback_order": ["respiration", "ancrage", "mobilite", "relaxation", "yoga", "mental", "cardio"]
+  }
+}
