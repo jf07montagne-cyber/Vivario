@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Vivario PRO — Exercices</title>
+
+  <link rel="stylesheet" href="pro_style.css?v=1" />
+  <meta name="theme-color" content="#070a12" />
+
+  <!-- ✅ Micro-étapes 18→24 (global) -->
+  <link rel="stylesheet" href="pro_microsteps_24.css?v=1" />
+
+  <style>
+    :root{
+      --bg: #070a12;
+      --card: rgba(255,255,255,.04);
+      --bd: rgba(255,255,255,.10);
+      --bd2: rgba(255,255,255,.14);
+      --ink: rgba(234,240,255,.94);
+      --muted: rgba(234,240,255,.72);
+      --muted2: rgba(234,240,255,.60);
+
+      --good: rgba(35,240,215,.22);
+      --warn: rgba(255,200,90,.18);
+      --alert: rgba(255,120,150,.16);
+
+      --accent: rgba(120,160,255,.18);
+      --accentBd: rgba(120,160,255,.30);
+
+      --shadow: 0 16px 44px rgba(0,0,0,.22);
+      --shadow2: 0 12px 32px rgba(0,0,0,.18);
+
+      --r: 18px;
+      --r2: 14px;
+    }
+
+    body.page-pro-ex{
+      background:
+        radial-gradient(900px 380px at 12% 0%, rgba(120,160,255,.12), transparent 60%),
+        radial-gradient(800px 360px at 86% 12%, rgba(35,240,215,.08), transparent 60%),
+        var(--bg);
+    }
+
+    .wrap{ padding-bottom: calc(130px + env(safe-area-inset-bottom)); }
+    .top{ position: sticky; top:0; z-index: 20; background: rgba(7,10,18,.72); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,.08); }
+    .topInner{ max-width: 1100px; margin: 0 auto; padding: 12px 12px; }
+    .brandRow{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .brandTitle{ margin:0; font-size: 18px; font-weight: 950; letter-spacing:.2px; color: var(--ink); }
+    .brandSub{ margin:6px 0 0; color: var(--muted); font-size: 13px; line-height:1.35; }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; }
+    .btn{
+      appearance:none;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-weight: 900;
+      text-decoration:none;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      transition: transform .12s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(120,160,255,.22); }
+    .btn.primary{ background: rgba(120,160,255,.16); border-color: rgba(120,160,255,.30); }
+    .btn.ghost{ background: transparent; }
+    .btn:active{ transform: translateY(0) scale(.99); }
+
+    .container{ max-width: 1100px; margin: 0 auto; padding: 14px 12px 0; }
+    .hero{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 14px;
+      align-items:start;
+    }
+    @media (max-width: 960px){
+      .heroGrid{ grid-template-columns: 1fr; }
+    }
+
+    .kpis{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      margin-top: 10px;
+    }
+    @media (max-width: 960px){ .kpis{ grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 520px){ .kpis{ grid-template-columns: 1fr; } }
+
+    .kpi{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      border-radius: 16px;
+      padding: 12px;
+      min-height: 84px;
+      box-shadow: var(--shadow2);
+    }
+    .kpi .k{ color: var(--muted); font-size: 12px; font-weight: 850; }
+    .kpi .v{ margin-top: 8px; font-size: 18px; font-weight: 950; color: var(--ink); }
+    .kpi .s{ margin-top: 6px; color: var(--muted2); font-size: 12px; line-height:1.25; }
+
+    .panel{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: var(--shadow2);
+    }
+    .panelHead{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom: 10px; }
+    .panelHead h3{ margin:0; font-size: 14px; font-weight: 950; color: var(--ink); }
+    .panelHead .meta{ color: var(--muted); font-size: 12px; font-weight: 850; }
+
+    .searchRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .inp{
+      flex: 1 1 260px;
+      min-height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--ink);
+      padding: 0 12px;
+      outline: none;
+      font-weight: 800;
+    }
+    .inp::placeholder{ color: rgba(234,240,255,.52); }
+    .select{
+      min-height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--ink);
+      padding: 0 10px;
+      outline: none;
+      font-weight: 900;
+    }
+
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
+    .chip{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 900;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .12s ease, background .15s ease, border-color .15s ease;
+    }
+    .chip:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(120,160,255,.22); }
+    .chip.is-on{ background: rgba(120,160,255,.14); border-color: rgba(120,160,255,.30); }
+
+    .section{
+      margin-top: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      border-radius: 20px;
+      padding: 12px;
+      box-shadow: var(--shadow);
+    }
+    .sectionHead{
+      display:flex; justify-content:space-between; align-items:flex-end;
+      gap:10px; flex-wrap:wrap; margin-bottom: 10px;
+    }
+    .sectionHead h3{ margin:0; font-size: 15px; font-weight: 950; color: var(--ink); }
+    .sectionHead p{ margin:0; color: var(--muted); font-size: 12.5px; line-height:1.35; max-width: 70ch; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+    @media (max-width: 960px){ .grid{ grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 560px){ .grid{ grid-template-columns: 1fr; } }
+
+    /* Carte vidéo */
+    .card{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      border-radius: 18px;
+      overflow:hidden;
+      box-shadow: var(--shadow2);
+      text-decoration:none;
+      color: inherit;
+      cursor:pointer;
+      transition: transform .12s ease, border-color .16s ease, background .16s ease;
+      display:flex;
+      flex-direction:column;
+      min-height: 280px;
+    }
+    .card:hover{ transform: translateY(-1px); border-color: rgba(120,160,255,.22); background: rgba(255,255,255,.03); }
+
+    .media{
+      position:relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background:
+        radial-gradient(500px 220px at 20% 10%, rgba(120,160,255,.14), transparent 60%),
+        radial-gradient(420px 220px at 86% 30%, rgba(35,240,215,.09), transparent 60%),
+        rgba(255,255,255,.03);
+      overflow:hidden;
+    }
+    .media video, .media img{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.05) contrast(1.02);
+    }
+    .media .ph{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(600px 220px at 15% 0%, rgba(120,160,255,.16), transparent 60%),
+        radial-gradient(520px 240px at 85% 40%, rgba(35,240,215,.10), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+    .media .shimmer{
+      position:absolute; inset:-30%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+      transform: rotate(18deg) translateX(-140%);
+      animation: shimmer 1.6s ease-in-out infinite;
+      opacity:.85;
+    }
+    @keyframes shimmer{
+      0%{ transform: rotate(18deg) translateX(-140%); }
+      100%{ transform: rotate(18deg) translateX(240%); }
+    }
+
+    .badgeRow{
+      position:absolute;
+      left: 10px; right: 10px; top: 10px;
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      pointer-events:none;
+    }
+    .pill{
+      pointer-events:none;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(7,10,18,.72);
+      backdrop-filter: blur(10px);
+      color: rgba(234,240,255,.92);
+      font-size: 11px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+    .pill.good{ background: var(--good); border-color: rgba(35,240,215,.28); }
+    .pill.warn{ background: var(--warn); border-color: rgba(255,200,90,.26); }
+    .pill.alert{ background: var(--alert); border-color: rgba(255,120,150,.26); }
+
+    .body{ padding: 12px; display:flex; flex-direction:column; gap:10px; flex: 1 1 auto; }
+    .title{ margin:0; font-size: 14px; font-weight: 950; color: var(--ink); letter-spacing:.15px; line-height:1.2; }
+    .desc{ margin:0; color: var(--muted); font-size: 12.5px; line-height:1.35; }
+    .metaRow{ display:flex; gap:8px; flex-wrap:wrap; margin-top:auto; }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(234,240,255,.90);
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .tag i{
+      width:6px; height:6px; border-radius:999px;
+      background: rgba(120,160,255,.92);
+      box-shadow: 0 0 0 3px rgba(120,160,255,.12);
+      display:inline-block;
+    }
+    .tag.done{
+      background: rgba(35,240,215,.10);
+      border-color: rgba(35,240,215,.22);
+    }
+    .tag.done i{ background: rgba(35,240,215,.92); box-shadow: 0 0 0 3px rgba(35,240,215,.12); }
+
+    .footerRow{
+      margin-top: 10px;
+      display:flex;
+      justify-content:center;
+    }
+    .loadMore{
+      width: 100%;
+      max-width: 420px;
+      min-height: 44px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--ink);
+      font-weight: 950;
+      cursor:pointer;
+      transition: transform .12s ease, background .16s ease, border-color .16s ease;
+    }
+    .loadMore:hover{ transform: translateY(-1px); border-color: rgba(120,160,255,.22); background: rgba(255,255,255,.06); }
+
+    /* MODAL */
+    .modal{
+      position: fixed;
+      inset:0;
+      z-index: 80;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 14px;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+    }
+    .modal.is-on{ display:flex; animation: modalIn .16s ease both; }
+    @keyframes modalIn{ from{opacity:0} to{opacity:1} }
+
+    .modalCard{
+      width: min(980px, 96vw);
+      max-height: min(88vh, 760px);
+      overflow:hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(8,14,28,.92);
+      box-shadow: 0 28px 110px rgba(0,0,0,.50);
+      display:flex;
+      flex-direction:column;
+    }
+
+    .modalHead{
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .modalHead strong{ font-weight: 980; color: var(--ink); letter-spacing:.15px; }
+    .modalHead .sub{ margin-top: 3px; color: var(--muted); font-size: 12px; font-weight: 850; line-height: 1.35; }
+
+    .modalBody{
+      padding: 12px;
+      overflow:auto;
+    }
+
+    .modalGrid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:12px;
+      align-items:start;
+    }
+    @media (max-width: 980px){ .modalGrid{ grid-template-columns: 1fr; } }
+
+    .modalMedia{
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      aspect-ratio: 16/9;
+      position:relative;
+    }
+    .modalMedia video, .modalMedia img{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit: cover;
+    }
+
+    .box{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: var(--shadow2);
+      margin-top: 10px;
+    }
+    .box h4{ margin:0 0 8px; font-size: 13px; font-weight: 950; color: var(--ink); }
+    .box p, .box li{ color: rgba(234,240,255,.86); line-height:1.5; font-size: 13px; }
+    .box p{ margin:0; }
+    .box ul{ margin:8px 0 0; padding-left: 18px; }
+    .muted{ color: var(--muted); }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top: 10px;
+    }
+    .controls .btn{ padding: 10px 12px; }
+    .timer{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius: 14px;
+      padding: 10px 12px;
+      margin-top: 10px;
+    }
+    .timer strong{ font-weight: 950; }
+    .timer .t{ font-variant-numeric: tabular-nums; font-weight: 980; font-size: 16px; }
+    .progress{
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      overflow:hidden;
+    }
+    .progress i{
+      display:block; height:100%; width:0%;
+      background: linear-gradient(90deg, rgba(120,160,255,.72), rgba(35,240,215,.42));
+      transition: width .2s linear;
+      box-shadow: 0 0 18px rgba(120,160,255,.14);
+    }
+
+    .variantRow{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .vbtn{
+      appearance:none;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-weight: 950;
+      cursor:pointer;
+    }
+    .vbtn.is-on{
+      background: rgba(120,160,255,.14);
+      border-color: rgba(120,160,255,.30);
+    }
+
+    .modalFoot{
+      padding: 10px 12px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .toast{
+      margin-top: 10px;
+      display:none;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      color: rgba(234,240,255,.85);
+      line-height: 1.35;
+      font-size: 12.5px;
+    }
+    .toast.is-on{ display:block; animation: toastIn .16s ease both; }
+    @keyframes toastIn{ from{opacity:0; transform: translateY(4px)} to{opacity:1; transform: translateY(0)} }
+
+    /* Bottom mobile bar */
+    .mobBar{
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      z-index: 25;
+      display:none;
+      grid-template-columns: repeat(4,1fr);
+      gap:8px;
+      padding: 8px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(8,14,28,.82);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 18px 44px rgba(0,0,0,.30);
+    }
+    .mobBar a{ text-decoration:none; }
+    .mobBar .fbtn{
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(234,240,255,.92);
+      display:flex; align-items:center; justify-content:center;
+      gap:6px; font-weight: 850; font-size: 12px;
+      text-align:center; padding: 0 8px;
+    }
+    .mobBar .fbtn.is-primary{ background: rgba(120,160,255,.14); border-color: rgba(120,160,255,.28); }
+
+    @media (max-width: 640px){
+      .mobBar{ display:grid; }
+      .wrap{ padding-bottom: calc(120px + env(safe-area-inset-bottom)); }
+    }
+  </style>
+</head>
+
+<body class="pro-page page-pro-ex">
+  <header class="top">
+    <div class="topInner">
+      <div class="brandRow">
+        <div>
+          <p class="brandTitle">Vivario <span class="pro-badge">PRO</span> — Exercices</p>
+          <p class="brandSub" id="subLine">Catalogue local + recommandations selon ton diagnostic. Rien n’est envoyé.</p>
+        </div>
+        <div class="actions">
+          <a class="btn ghost" href="accueil_pro.html?v=1">↩ Accueil PRO</a>
+          <a class="btn ghost" href="suivi_pro.html?v=1">📈 Suivi</a>
+          <a class="btn ghost" href="resultat_pro.html?v=1">📄 Résultat</a>
+          <a class="btn primary" href="questionnaire_pro.html?v=1">🚀 Check-in</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="container">
+
+      <section class="hero" aria-label="Exercices PRO">
+        <div class="heroGrid">
+          <div>
+            <h2 style="margin:0; font-size:18px; font-weight:980; letter-spacing:.15px;">Ton module d’exercices</h2>
+            <p style="margin:8px 0 0; color: var(--muted); line-height:1.55;">
+              Tu peux chercher, filtrer, lancer un timer, écouter une voix (TTS), puis valider “Terminé ✅”.
+              Les recommandations se basent automatiquement sur ton dernier diagnostic PRO (si présent).
+            </p>
+
+            <div class="kpis">
+              <div class="kpi">
+                <div class="k">Catalogue</div>
+                <div class="v" id="kpiCount">—</div>
+                <div class="s">exercices disponibles</div>
+              </div>
+              <div class="kpi">
+                <div class="k">Recommandés</div>
+                <div class="v" id="kpiReco">—</div>
+                <div class="s">selon ton état</div>
+              </div>
+              <div class="kpi">
+                <div class="k">Terminés (aujourd’hui)</div>
+                <div class="v" id="kpiDoneToday">0</div>
+                <div class="s">sur cet appareil</div>
+              </div>
+              <div class="kpi">
+                <div class="k">Mode</div>
+                <div class="v" id="kpiMode">Auto</div>
+                <div class="s" id="kpiModeSub">lecture locale</div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="panel" aria-label="Recherche et filtres">
+            <div class="panelHead">
+              <h3>Filtres rapides</h3>
+              <span class="meta" id="filtersMeta">—</span>
+            </div>
+
+            <div class="searchRow">
+              <input class="inp" id="q" placeholder="Rechercher (respiration, sommeil, stress, cardio…)" />
+              <select class="select" id="selCategory">
+                <option value="">Catégorie (toutes)</option>
+                <option value="respiration">Respiration</option>
+                <option value="ancrage">Ancrage</option>
+                <option value="mental">Mental</option>
+                <option value="mobilite">Mobilité</option>
+                <option value="yoga">Yoga</option>
+                <option value="cardio">Cardio</option>
+              </select>
+              <select class="select" id="selVariant">
+                <option value="">Variante</option>
+                <option value="court">Court</option>
+                <option value="long">Long</option>
+              </select>
+              <select class="select" id="selLevel">
+                <option value="">Niveau</option>
+                <option value="debutant">Débutant</option>
+                <option value="intermediaire">Intermédiaire</option>
+                <option value="avance">Avancé</option>
+              </select>
+            </div>
+
+            <div class="chips" id="domainChips" aria-label="Domaines (diagnostic)">
+              <!-- chips JS -->
+            </div>
+
+            <div class="toast" id="toast"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Recommandations">
+        <div class="sectionHead">
+          <div>
+            <h3>Recommandé maintenant</h3>
+            <p id="recoSub">On te propose des exercices alignés sur tes domaines les plus “chargés”.</p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn" id="btnRefreshReco" type="button">🔁 Recalculer</button>
+            <button class="btn ghost" id="btnClearDoneToday" type="button">↻ Reset “aujourd’hui”</button>
+          </div>
+        </div>
+        <div class="grid" id="recoGrid"></div>
+      </section>
+
+      <section class="section" aria-label="Catalogue">
+        <div class="sectionHead">
+          <div>
+            <h3>Catalogue</h3>
+            <p id="catalogSub">Tous les exercices. Filtre par catégorie, niveau, variante et domaines.</p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn ghost" id="btnResetFilters" type="button">🧹 Reset filtres</button>
+          </div>
+        </div>
+
+        <div class="grid" id="catalogGrid"></div>
+
+        <div class="footerRow">
+          <button class="loadMore" id="btnLoadMore" type="button">Charger plus</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <nav class="mobBar" aria-label="Navigation mobile">
+    <a href="accueil_pro.html?v=1"><div class="fbtn">🏠 Accueil</div></a>
+    <a href="exercices_pro.html?v=1"><div class="fbtn is-primary">🎬 Exercices</div></a>
+    <a href="suivi_pro.html?v=1"><div class="fbtn">📈 Suivi</div></a>
+    <a href="questionnaire_pro.html?v=1"><div class="fbtn">🚀 Check-in</div></a>
+  </nav>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Détail exercice">
+    <div class="modalCard">
+      <div class="modalHead">
+        <div>
+          <strong id="mTitle">—</strong>
+          <div class="sub" id="mSub">—</div>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <button class="btn" id="btnMarkDone" type="button">✅ Terminé</button>
+          <button class="btn ghost" id="btnClose" type="button">✕ Fermer</button>
+        </div>
+      </div>
+
+      <div class="modalBody">
+        <div class="modalGrid">
+          <div>
+            <div class="modalMedia" id="mMedia"></div>
+
+            <div class="variantRow" aria-label="Choix variante">
+              <button class="vbtn is-on" id="vbShort" type="button">Court</button>
+              <button class="vbtn" id="vbLong" type="button">Long</button>
+              <button class="vbtn" id="vbAuto" type="button">Auto</button>
+            </div>
+
+            <div class="timer" aria-label="Timer">
+              <strong>⏱️ Timer</strong>
+              <span class="t" id="tLeft">—</span>
+              <button class="btn" id="btnStart" type="button">▶</button>
+              <button class="btn ghost" id="btnPause" type="button">⏸</button>
+              <button class="btn ghost" id="btnResetTimer" type="button">↻</button>
+              <div class="progress" aria-hidden="true"><i id="tFill" style="width:0%"></i></div>
+            </div>
+
+            <div class="controls" aria-label="Voix (TTS)">
+              <button class="btn" id="btnSpeak" type="button">🗣️ Lire</button>
+              <button class="btn ghost" id="btnStopSpeak" type="button">⛔ Stop</button>
+              <select class="select" id="selRate" aria-label="Vitesse voix">
+                <option value="0.9">Vitesse 0.9</option>
+                <option value="1" selected>Vitesse 1.0</option>
+                <option value="1.1">Vitesse 1.1</option>
+                <option value="1.2">Vitesse 1.2</option>
+              </select>
+            </div>
+
+            <div class="box">
+              <h4>Résumé</h4>
+              <p id="mDesc">—</p>
+            </div>
+
+            <div class="box">
+              <h4>Étapes</h4>
+              <div id="mSteps"></div>
+            </div>
+
+            <div class="box">
+              <h4>Conseils</h4>
+              <div id="mTips"></div>
+            </div>
+
+            <div class="box">
+              <h4>Précautions</h4>
+              <div id="mSafety"></div>
+            </div>
+          </div>
+
+          <aside>
+            <div class="box">
+              <h4>Tags</h4>
+              <div id="mTags"></div>
+            </div>
+
+            <div class="box">
+              <h4>Domaines cibles</h4>
+              <div id="mDomains"></div>
+              <p class="muted" style="margin-top:10px;">
+                Les recommandations s’appuient sur <code>vivario_pro_result_v1.scores</code> si disponible.
+              </p>
+            </div>
+
+            <div class="box">
+              <h4>Proposition automatique</h4>
+              <p id="mNextHint" class="muted">—</p>
+              <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn primary" id="btnNextAuto" type="button">➡️ Prochain recommandé</button>
+                <button class="btn ghost" id="btnBackToList" type="button">📚 Retour liste</button>
+              </div>
+            </div>
+
+            <div class="toast" id="mToast"></div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="modalFoot">
+        <div class="muted" id="mFoot">—</div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn ghost" id="btnCopySteps" type="button">📋 Copier étapes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="exercices_pro.js?v=1"></script>
+
+  <!-- ✅ Micro-étapes 18→24 (global) -->
+  <script src="pro_microsteps_24.js?v=1"></script>
+</body>
+</html>
