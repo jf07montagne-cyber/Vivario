@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Vivario PRO — Exercices</title>
+
+  <link rel="stylesheet" href="pro_style.css?v=1" />
+  <meta name="theme-color" content="#070a12" />
+
+  <!-- ✅ Micro-étapes 18→24 (global) -->
+  <link rel="stylesheet" href="pro_microsteps_24.css?v=1" />
+
+  <style>
+    :root{
+      --exCardBg: rgba(255,255,255,.03);
+      --exCardBd: rgba(255,255,255,.10);
+      --exShadow: 0 14px 36px rgba(0,0,0,.16);
+
+      --exGood: rgba(35,240,215,.18);
+      --exWarn: rgba(255,200,90,.16);
+      --exAlert: rgba(255,120,150,.14);
+
+      --exInk: rgba(234,240,255,.94);
+      --exMuted: rgba(234,240,255,.74);
+
+      --r: 18px;
+      --r2: 14px;
+    }
+
+    .pro-wrap{ padding-bottom: calc(140px + env(safe-area-inset-bottom)); }
+
+    .ex-heroGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+      align-items:start;
+    }
+    @media (max-width: 920px){
+      .ex-heroGrid{ grid-template-columns: 1fr; }
+    }
+
+    .ex-card{
+      border-radius: var(--r);
+      border: 1px solid var(--exCardBd);
+      background: var(--exCardBg);
+      box-shadow: var(--exShadow);
+      padding: 12px;
+    }
+
+    .ex-topRow{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .ex-title{
+      margin:0;
+      font-weight: 950;
+      letter-spacing: .15px;
+      color: var(--exInk);
+    }
+    .ex-sub{
+      margin:6px 0 0;
+      color: var(--exMuted);
+      line-height:1.45;
+    }
+
+    .ex-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .ex-pillRow{
+      margin-top: 10px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .ex-pill{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(234,240,255,.92);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 900;
+      font-size: 12px;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .12s ease, background .15s ease, border-color .15s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      white-space: nowrap;
+    }
+    .ex-pill:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(120,160,255,.22); }
+    .ex-pill.active{
+      background: rgba(120,160,255,.14);
+      border-color: rgba(120,160,255,.28);
+    }
+
+    .ex-filters{
+      margin-top: 10px;
+      display:grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 920px){
+      .ex-filters{ grid-template-columns: 1fr; }
+    }
+
+    .ex-input, .ex-select{
+      width:100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      color: rgba(234,240,255,.92);
+      padding: 11px 12px;
+      outline:none;
+      font-weight: 850;
+    }
+    .ex-input::placeholder{ color: rgba(234,240,255,.52); }
+    .ex-select{ appearance:none; }
+
+    .ex-metaCard{
+      display:grid;
+      gap:10px;
+    }
+
+    .ex-kpi{
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+    }
+    .ex-kpi .k{ font-size:12px; font-weight:900; color: rgba(234,240,255,.70); margin-bottom:6px; }
+    .ex-kpi .v{ font-size:22px; font-weight:950; color: rgba(234,240,255,.96); line-height:1.05; }
+    .ex-kpi .s{ margin-top:6px; font-size:12px; font-weight:800; color: rgba(234,240,255,.72); }
+
+    .ex-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      font-size: 12px;
+      font-weight: 950;
+      color: rgba(234,240,255,.92);
+      white-space: nowrap;
+    }
+    .ex-badge .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: rgba(120,160,255,.95);
+      box-shadow: 0 0 0 4px rgba(120,160,255,.14);
+    }
+    .ex-badge.good{ background: var(--exGood); }
+    .ex-badge.warn{ background: var(--exWarn); }
+    .ex-badge.alert{ background: var(--exAlert); }
+
+    /* ====== GRID CARDS (grandes cartes type vidéo) ====== */
+    .ex-grid{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 1100px){ .ex-grid{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px){ .ex-grid{ grid-template-columns: 1fr; } }
+
+    .ex-cardItem{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(700px 220px at 15% 0%, rgba(120,160,255,.10), transparent 65%),
+        rgba(255,255,255,.03);
+      overflow:hidden;
+      box-shadow: 0 14px 36px rgba(0,0,0,.18);
+      cursor:pointer;
+      transition: transform .12s ease, border-color .15s ease, background .15s ease;
+      min-height: 320px;
+      display:flex;
+      flex-direction:column;
+    }
+    .ex-cardItem:hover{
+      transform: translateY(-1px);
+      border-color: rgba(120,160,255,.22);
+      background:
+        radial-gradient(700px 220px at 15% 0%, rgba(120,160,255,.14), transparent 65%),
+        rgba(255,255,255,.035);
+    }
+
+    .ex-media{
+      position:relative;
+      aspect-ratio: 16 / 9;
+      background: rgba(0,0,0,.25);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      overflow:hidden;
+    }
+    .ex-media video,
+    .ex-media img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.01);
+      filter: saturate(1.05) contrast(1.02);
+    }
+
+    .ex-media .ex-play{
+      position:absolute;
+      left: 10px;
+      bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.35);
+      color: rgba(234,240,255,.94);
+      font-weight: 950;
+      font-size: 12px;
+      backdrop-filter: blur(10px);
+    }
+
+    .ex-body{
+      padding: 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      flex: 1 1 auto;
+    }
+
+    .ex-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+    }
+    .ex-name{
+      margin:0;
+      font-weight: 950;
+      letter-spacing:.12px;
+      color: rgba(234,240,255,.96);
+      line-height: 1.2;
+      font-size: 14.5px;
+    }
+    .ex-cat{
+      font-size: 11px;
+      font-weight: 950;
+      color: rgba(234,240,255,.76);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding: 5px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .ex-desc{
+      margin:0;
+      color: rgba(234,240,255,.80);
+      font-size: 13px;
+      line-height: 1.42;
+      min-height: 38px;
+    }
+
+    .ex-chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .ex-chip{
+      font-size: 11px;
+      font-weight: 950;
+      color: rgba(234,240,255,.90);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      padding: 5px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .ex-foot{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:auto;
+    }
+    .ex-foot .left{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .ex-mini{
+      font-size: 11px;
+      font-weight: 950;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(234,240,255,.90);
+      white-space: nowrap;
+    }
+    .ex-mini.good{ background: var(--exGood); }
+    .ex-mini.warn{ background: var(--exWarn); }
+    .ex-mini.alert{ background: var(--exAlert); }
+
+    .ex-done{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-weight: 950;
+      font-size: 12px;
+      border: 1px solid rgba(35,240,215,.22);
+      background: rgba(35,240,215,.08);
+      color: rgba(234,240,255,.94);
+      white-space: nowrap;
+    }
+
+    /* ====== MODAL PLAYER ====== */
+    .ex-modal{
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 14px;
+      background: rgba(0,0,0,.56);
+      backdrop-filter: blur(10px);
+    }
+    .ex-modal.is-on{ display:flex; animation: exIn .18s ease both; }
+    @keyframes exIn{ from{opacity:0} to{opacity:1} }
+
+    .ex-modalCard{
+      width: min(920px, 96vw);
+      max-height: min(86vh, 760px);
+      overflow:hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(900px 320px at 12% 0%, rgba(120,160,255,.12), transparent 65%),
+        rgba(8,14,28,.92);
+      box-shadow: 0 24px 90px rgba(0,0,0,.44);
+      display:flex;
+      flex-direction:column;
+    }
+
+    .ex-modalHead{
+      padding: 12px 12px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .ex-modalHead strong{
+      font-weight: 950;
+      color: rgba(234,240,255,.96);
+      letter-spacing:.15px;
+      display:block;
+    }
+    .ex-modalHead .sub{
+      margin-top: 4px;
+      font-size: 12px;
+      font-weight: 800;
+      color: rgba(234,240,255,.72);
+      line-height:1.35;
+    }
+
+    .ex-modalBody{
+      padding: 12px;
+      overflow:auto;
+      display:grid;
+      gap:12px;
+    }
+
+    .ex-playerMedia{
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.20);
+      aspect-ratio: 16/9;
+    }
+    .ex-playerMedia video,
+    .ex-playerMedia img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .ex-steps{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      padding: 12px;
+    }
+    .ex-steps h4{
+      margin:0 0 8px;
+      font-size: 14px;
+      font-weight: 950;
+      color: rgba(234,240,255,.95);
+    }
+    .ex-steps ol{
+      margin:0;
+      padding-left: 18px;
+      color: rgba(234,240,255,.86);
+      line-height: 1.45;
+      font-size: 13.5px;
+    }
+    .ex-steps li{ margin: 6px 0; }
+
+    .ex-ctrls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .ex-timerBox{
+      flex: 1 1 auto;
+      min-width: 220px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      padding: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .ex-timerBox .time{
+      font-size: 22px;
+      font-weight: 950;
+      color: rgba(234,240,255,.96);
+      letter-spacing:.2px;
+    }
+    .ex-timerBox .hint{
+      font-size: 12px;
+      font-weight: 850;
+      color: rgba(234,240,255,.72);
+      line-height: 1.35;
+    }
+
+    .ex-miniBtns{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .ex-toast{
+      display:none;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      color: rgba(234,240,255,.84);
+      line-height: 1.35;
+      font-weight: 850;
+      font-size: 12.5px;
+    }
+    .ex-toast.is-on{ display:block; animation: exToastIn .18s ease both; }
+    @keyframes exToastIn{ from{opacity:0; transform: translateY(4px)} to{opacity:1; transform: translateY(0)} }
+
+    /* Mobile bottom bar */
+    .ex-mobileBar{
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      z-index: 55;
+      display:none;
+      grid-template-columns: repeat(4,1fr);
+      gap:8px;
+      padding: 8px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(8,14,28,.82);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 14px 34px rgba(0,0,0,.25);
+    }
+    .ex-mobileBar a{ text-decoration:none; }
+    .ex-mobileBar .fbtn{
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(234,240,255,.92);
+      display:flex; align-items:center; justify-content:center;
+      gap:6px; font-weight: 800; font-size: 12px;
+      text-align:center; padding: 0 8px;
+    }
+    .ex-mobileBar .fbtn.is-primary{
+      background: rgba(120,160,255,.14);
+      border-color: rgba(120,160,255,.28);
+    }
+    @media (max-width: 640px){
+      .ex-mobileBar{ display:grid; }
+      .pro-wrap{ padding-bottom: calc(160px + env(safe-area-inset-bottom)); }
+    }
+
+    /* reveal */
+    .ex-reveal{
+      opacity:0;
+      transform: translateY(6px);
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .ex-reveal.is-in{ opacity:1; transform: translateY(0); }
+  </style>
+</head>
+
+<body class="pro-page">
+  <main class="pro-wrap">
+    <header class="pro-top ex-reveal">
+      <div class="pro-brandRow">
+        <div>
+          <h1 class="pro-brand">Vivario <span class="pro-badge">PRO</span></h1>
+          <p class="pro-muted">Exercices — cartes vidéo + voix + timer + terminé ✅ (local uniquement).</p>
+        </div>
+        <div class="pro-topActions ex-actions">
+          <a class="pro-btn pro-btnGhost" href="accueil_pro.html?v=1">↩ Accueil PRO</a>
+          <a class="pro-btn pro-btnGhost" href="suivi_pro.html?v=1">📈 Suivi</a>
+          <a class="pro-btn pro-btnGhost" href="resultat_pro.html?v=1">📄 Résultat</a>
+          <a class="pro-btn pro-btnPrimary" href="questionnaire_pro.html?v=1">🚀 Questionnaire</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="pro-hero ex-reveal">
+      <div class="pro-heroGlow" aria-hidden="true"></div>
+
+      <div class="ex-heroGrid">
+        <section class="ex-card" aria-label="Catalogue exercices">
+          <div class="ex-topRow">
+            <div>
+              <h2 class="ex-title">Exercices PRO</h2>
+              <p class="ex-sub" id="exSubtitle">
+                Chargement du catalogue… (exercices_pro.json)
+              </p>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+              <span class="ex-badge" id="exBandBadge"><span class="dot"></span><span id="exBandText">—</span></span>
+              <button class="pro-btn" id="btnReload" type="button">↻ Recharger</button>
+            </div>
+          </div>
+
+          <div class="ex-pillRow" aria-label="Onglets">
+            <button class="ex-pill active" data-tab="reco" type="button">⭐ Recommandés</button>
+            <button class="ex-pill" data-tab="all" type="button">📚 Catalogue</button>
+            <button class="ex-pill" data-tab="done" type="button">✅ Terminés</button>
+          </div>
+
+          <div class="ex-filters" aria-label="Filtres">
+            <input class="ex-input" id="q" placeholder="Rechercher… (ex: sommeil, anxiété, nuque, cardio)" />
+            <select class="ex-select" id="fDomain">
+              <option value="">Domaine (auto)</option>
+            </select>
+            <select class="ex-select" id="fCategory">
+              <option value="">Catégorie</option>
+              <option value="respiration">Respiration</option>
+              <option value="yoga">Yoga</option>
+              <option value="cardio">Cardio</option>
+              <option value="ancrage">Ancrage</option>
+              <option value="mobilite">Mobilité</option>
+              <option value="mental">Mental</option>
+            </select>
+          </div>
+
+          <div class="ex-grid" id="exGrid" aria-label="Liste exercices"></div>
+
+          <div class="ex-toast" id="exToast" aria-live="polite"></div>
+        </section>
+
+        <aside class="ex-card ex-metaCard" aria-label="Etat et stats">
+          <div class="ex-kpi">
+            <div class="k">Mode recommandé</div>
+            <div class="v" id="kpiMode">—</div>
+            <div class="s" id="kpiModeSub">Basé sur ton dernier diagnostic (si présent)</div>
+          </div>
+          <div class="ex-kpi">
+            <div class="k">Exercices terminés</div>
+            <div class="v" id="kpiDone">0</div>
+            <div class="s" id="kpiDoneSub">Local • cet appareil</div>
+          </div>
+          <div class="ex-kpi">
+            <div class="k">Dernière session</div>
+            <div class="v" id="kpiLast">—</div>
+            <div class="s" id="kpiLastSub">—</div>
+          </div>
+
+          <div class="ex-kpi">
+            <div class="k">Conseil</div>
+            <div class="s" id="kpiTip" style="margin-top:0;">
+              Si tu es “en bas”, choisis une variante <b>courte</b> (1–2 min) et une respiration lente.
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal player -->
+  <div class="ex-modal" id="exModal" role="dialog" aria-modal="true" aria-label="Lecture exercice">
+    <div class="ex-modalCard">
+      <div class="ex-modalHead">
+        <div>
+          <strong id="mTitle">—</strong>
+          <div class="sub" id="mSub">—</div>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="pro-btn pro-btnGhost" id="mCloseTop" type="button">✕</button>
+        </div>
+      </div>
+
+      <div class="ex-modalBody">
+        <div class="ex-playerMedia" id="mMedia"></div>
+
+        <div class="ex-ctrls">
+          <div class="ex-timerBox">
+            <div>
+              <div class="time" id="mTime">00:00</div>
+              <div class="hint" id="mHint">Timer prêt</div>
+            </div>
+            <div class="ex-miniBtns">
+              <button class="pro-btn" id="mVariant" type="button">Variante : —</button>
+              <button class="pro-btn" id="mSpeak" type="button">🔊 Voix</button>
+              <button class="pro-btn pro-btnPrimary" id="mStart" type="button">▶ Démarrer</button>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+            <button class="pro-btn" id="mPause" type="button">⏸ Pause</button>
+            <button class="pro-btn" id="mReset" type="button">↻ Reset</button>
+            <button class="pro-btn pro-btnPrimary" id="mDone" type="button">✅ Terminé</button>
+          </div>
+        </div>
+
+        <div class="ex-steps">
+          <h4>Étapes</h4>
+          <ol id="mSteps"></ol>
+        </div>
+
+        <div class="ex-toast" id="mToast" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="ex-mobileBar" aria-label="Navigation mobile">
+    <a href="accueil_pro.html?v=1"><div class="fbtn">🏠 Accueil</div></a>
+    <a href="suivi_pro.html?v=1"><div class="fbtn">📈 Suivi</div></a>
+    <a href="resultat_pro.html?v=1"><div class="fbtn">📄 Résultat</div></a>
+    <a href="questionnaire_pro.html?v=1"><div class="fbtn is-primary">🚀 PRO</div></a>
+  </nav>
+
+  <script src="exercices_pro.js?v=1"></script>
+
+  <!-- ✅ Micro-étapes 18→24 (global) -->
+  <script src="pro_microsteps_24.js?v=1"></script>
+
+  <script>
+    (function(){
+      const els = Array.from(document.querySelectorAll(".ex-reveal"));
+      if (!els.length) return;
+      if (!("IntersectionObserver" in window)){
+        els.forEach((el,i)=> setTimeout(()=> el.classList.add("is-in"), 40*i));
+        return;
+      }
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if (e.isIntersecting){
+            e.target.classList.add("is-in");
+            io.unobserve(e.target);
+          }
+        });
+      }, {threshold:.08});
+      els.forEach((el,i)=>{
+        el.style.transitionDelay = (i*55) + "ms";
+        io.observe(el);
+      });
+    })();
+  </script>
+</body>
+</html>
