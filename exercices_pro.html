@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Vivario PRO — Exercices</title>
+
+  <link rel="stylesheet" href="pro_style.css?v=1" />
+  <meta name="theme-color" content="#070a12" />
+
+  <!-- Micro-steps (si tu veux garder ton style global) -->
+  <link rel="stylesheet" href="pro_microsteps_24.css?v=1" />
+
+  <style>
+    :root{
+      --card: rgba(255,255,255,.03);
+      --bd: rgba(255,255,255,.10);
+      --ink: rgba(234,240,255,.94);
+      --muted: rgba(234,240,255,.72);
+      --shadow: 0 14px 38px rgba(0,0,0,.16);
+      --r: 18px;
+    }
+    body{ background: #070a12; }
+    .wrap{ width:min(1120px, 94vw); margin: 0 auto; padding: 16px 0 120px; }
+
+    .top{
+      display:flex; gap:12px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
+      margin-bottom: 12px;
+    }
+    .title{
+      margin:0; font-weight: 950; letter-spacing:.15px; color: var(--ink);
+    }
+    .sub{ margin:6px 0 0; color: var(--muted); line-height:1.45; max-width: 76ch; }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; }
+    .actions a{ text-decoration:none; }
+
+    .panel{
+      margin-top: 12px;
+      border: 1px solid var(--bd);
+      background: var(--card);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding: 12px;
+    }
+
+    .row{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    }
+    .filters{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    select, input[type="search"]{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      color: var(--ink);
+      border-radius: 12px;
+      padding: 10px 10px;
+      font-weight: 800;
+      outline: none;
+      min-height: 42px;
+    }
+    input[type="search"]{ min-width: 220px; }
+
+    .chipRow{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(234,240,255,.90);
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .chip.ghost{ background: rgba(0,0,0,.10); }
+
+    .metaLine{ color: var(--muted); font-weight: 800; font-size: 12px; }
+
+    .grid{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px){ .grid{ grid-template-columns: 1fr; } }
+
+    .ex-card{
+      border-radius: var(--r);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      box-shadow: 0 14px 36px rgba(0,0,0,.16);
+      cursor:pointer;
+      position: relative;
+      transform: translateZ(0);
+      transition: transform .12s ease, border-color .15s ease, background .15s ease;
+    }
+    .ex-card:hover{ transform: translateY(-1px); border-color: rgba(120,160,255,.22); background: rgba(255,255,255,.03); }
+    .ex-media{ position:relative; aspect-ratio: 16 / 10; background: rgba(0,0,0,.25); }
+    .ex-video{ width:100%; height:100%; object-fit: cover; display:block; }
+
+    .ex-overlay{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.72));
+      padding: 12px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      gap:6px;
+    }
+    .ex-title{ font-weight: 950; color: rgba(245,248,255,.98); line-height:1.2; }
+    .ex-sub{ color: rgba(234,240,255,.78); font-weight: 800; font-size: 12px; }
+    .ex-metaRow{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center; }
+    .dur{ color: rgba(234,240,255,.86); font-weight: 950; font-size: 12px; }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:6px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      font-size: 11px;
+      font-weight: 900;
+      color: rgba(234,240,255,.92);
+      white-space: nowrap;
+    }
+    .pill.ghost{ background: rgba(0,0,0,.12); }
+    .pill.rec{ border-color: rgba(255,200,90,.22); background: rgba(255,200,90,.12); }
+    .pill.done{ border-color: rgba(35,240,215,.22); background: rgba(35,240,215,.10); }
+    .pill.alert{ border-color: rgba(255,120,150,.22); background: rgba(255,120,150,.10); }
+
+    .empty{
+      margin-top: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      border-radius: 16px;
+      padding: 12px;
+      color: rgba(234,240,255,.78);
+      display:none;
+    }
+
+    /* Drawer */
+    .drawer{
+      position: fixed; inset:0;
+      display:none;
+      align-items:flex-end;
+      justify-content:center;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      z-index: 90;
+      padding: 14px;
+    }
+    .drawer.is-on{ display:flex; }
+    .drawerCard{
+      width: min(980px, 96vw);
+      max-height: min(86vh, 780px);
+      overflow:hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(8,14,28,.92);
+      box-shadow: 0 22px 80px rgba(0,0,0,.45);
+      display:flex;
+      flex-direction:column;
+    }
+    .drawerHead{
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .drawerHead strong{ font-weight: 950; color: rgba(245,248,255,.98); }
+    .drawerMeta{ font-size: 12px; font-weight: 850; color: rgba(234,240,255,.72); margin-top: 4px; }
+    .drawerClose{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(234,240,255,.92);
+      border-radius: 12px;
+      min-height: 40px;
+      padding: 0 12px;
+      font-weight: 950;
+      cursor:pointer;
+    }
+
+    .drawerBody{ padding: 12px; overflow:auto; }
+    .drawer-video{ width:100%; border-radius: 16px; border: 1px solid rgba(255,255,255,.10); background: rgba(0,0,0,.20); }
+
+    .seg{
+      margin-top: 10px;
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .seg-btn{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(234,240,255,.92);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-weight: 900;
+      cursor:pointer;
+      font-size: 12px;
+    }
+    .seg-btn.is-on{
+      background: rgba(120,160,255,.14);
+      border-color: rgba(120,160,255,.28);
+    }
+
+    .controls{
+      margin-top: 12px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      border-radius: 16px;
+      padding: 10px;
+    }
+    .btn{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(234,240,255,.92);
+      border-radius: 14px;
+      min-height: 44px;
+      padding: 0 14px;
+      font-weight: 950;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background: rgba(120,160,255,.14);
+      border-color: rgba(120,160,255,.28);
+    }
+    .btn:disabled{ opacity:.55; cursor:default; }
+
+    .timerWrap{ display:flex; flex-direction:column; gap:6px; min-width: 180px; }
+    .timerLine{ display:flex; justify-content:space-between; gap:10px; color: rgba(234,240,255,.88); font-weight: 950; }
+    .bar{ height: 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.05); overflow:hidden; }
+    .bar i{ display:block; height:100%; width:0%; background: linear-gradient(90deg, rgba(120,160,255,.72), rgba(35,240,215,.42)); transition: width .35s ease; }
+
+    .steps{ margin: 10px 0 0; padding-left: 18px; color: rgba(234,240,255,.90); line-height:1.55; }
+    .muted{ color: rgba(234,240,255,.72); }
+
+    .pulse{ animation: pulse 1.2s ease-in-out; }
+    @keyframes pulse{
+      0%{ transform: scale(1); }
+      40%{ transform: scale(1.03); }
+      100%{ transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body class="pro-page">
+  <main class="wrap">
+    <div class="top">
+      <div>
+        <h1 class="title">Exercices PRO</h1>
+        <p class="sub">
+          Catalogue local (respiration, ancrage, mental, yoga, mobilité, cardio…). Choisis une durée, lance la voix, démarre le timer et coche “Terminé ✅”.
+        </p>
+      </div>
+      <div class="actions">
+        <a class="pro-btn pro-btnGhost" href="accueil_pro.html?v=1">↩ Accueil PRO</a>
+        <a class="pro-btn pro-btnGhost" href="resultat_pro.html?v=1">📄 Résultat</a>
+        <a class="pro-btn pro-btnGhost" href="suivi_pro.html?v=1">📈 Suivi</a>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div class="row">
+        <div class="filters">
+          <select id="filterDomain" aria-label="Domaine"></select>
+          <select id="filterModality" aria-label="Modalité"></select>
+          <select id="filterLevel" aria-label="Niveau"></select>
+          <select id="filterVariant" aria-label="Durée"></select>
+          <input id="filterSearch" type="search" placeholder="Rechercher…" aria-label="Recherche" />
+          <label class="metaLine" style="display:flex; gap:8px; align-items:center;">
+            <input id="filterOnlyReco" type="checkbox" />
+            Recommandés
+          </label>
+          <button class="btn" id="btnResetFilters" type="button">↻ Reset</button>
+        </div>
+
+        <div class="metaLine">
+          <span id="exStatus">—</span>
+          <span style="margin:0 6px;">•</span>
+          <span id="exCount">0 exercice</span>
+        </div>
+      </div>
+
+      <div class="chipRow" id="exRecoChips"></div>
+      <div class="metaLine" style="margin-top:8px;">
+        <strong id="exRecoTitle">—</strong>
+      </div>
+    </section>
+
+    <div class="empty" id="exEmpty">Aucun exercice ne correspond à tes filtres.</div>
+    <section class="grid" id="exGrid"></section>
+  </main>
+
+  <!-- Drawer -->
+  <div class="drawer" id="exDrawer" aria-label="Détail exercice" role="dialog" aria-modal="true">
+    <div class="drawerCard">
+      <div class="drawerHead">
+        <div>
+          <strong id="drawerTitle">—</strong>
+          <div class="drawerMeta" id="drawerMeta">—</div>
+        </div>
+        <button class="drawerClose" id="drawerClose" type="button">✕</button>
+      </div>
+
+      <div class="drawerBody">
+        <div id="drawerMedia"></div>
+        <div class="chipRow" id="drawerTags" style="margin-top:10px;"></div>
+
+        <div class="seg" id="variantSeg"></div>
+
+        <div class="controls">
+          <div class="timerWrap">
+            <div class="timerLine">
+              <span>⏱️ Timer</span>
+              <span id="timer">libre</span>
+            </div>
+            <div class="bar"><i id="timerBar"></i></div>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <label class="metaLine" style="display:flex; gap:8px; align-items:center;">
+              Voix x
+              <select id="ttsRate" aria-label="Vitesse voix">
+                <option value="0.85">0.85</option>
+                <option value="1" selected>1.0</option>
+                <option value="1.1">1.1</option>
+              </select>
+            </label>
+            <button class="btn" id="ttsBtn" type="button">🔊 Voix</button>
+            <button class="btn" id="ttsStop" type="button">⏹ Stop</button>
+            <button class="btn" id="btnStart" type="button">▶ Démarrer</button>
+            <button class="btn primary" id="btnDone" type="button">✅ Terminé</button>
+          </div>
+        </div>
+
+        <div id="drawerSteps" style="margin-top:10px;"></div>
+        <p class="muted" style="margin-top:10px;">
+          Tout reste local sur ton appareil. Les vidéos sont des “placeholders” tant que tu n’as pas ajouté tes fichiers media.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="exercices_pro.js?v=1"></script>
+  <script src="pro_microsteps_24.js?v=1"></script>
+</body>
+</html>
